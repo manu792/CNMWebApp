@@ -71,6 +71,18 @@ namespace CNMWebApp.Models
             Database.SetInitializer(new Initializer());
         }
 
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            //modelBuilder.Entity<IdentityUser>().ToTable("Usuarios").Property(p => p.Id).HasColumnName("UsuarioId");
+            modelBuilder.Entity<ApplicationUser>().ToTable("Usuarios").Property(p => p.Id).HasColumnName("UserId");
+            modelBuilder.Entity<IdentityUserRole>().ToTable("UsuarioRoles");
+            modelBuilder.Entity<IdentityUserLogin>().ToTable("UsuarioLogins");
+            modelBuilder.Entity<IdentityUserClaim>().ToTable("UsuarioClaims");
+            modelBuilder.Entity<IdentityRole>().ToTable("Roles");
+        }
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
