@@ -4,20 +4,59 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+<div class="w3-row-padding w3-center w3-margin-top">
+    <div class="w3-third">
+        <div class="w3-card w3-container" style="min-height:250px">
+            <a href="@Url.Action("Index", "User")">
+                <h3>Usuarios</h3><br>
+                <i class="fa fa-users w3-margin-bottom w3-text-theme" style="font-size:120px"></i>
+            </a>
+        </div>
+    </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>@ViewBag.Title</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
+    <div class="w3-third">
+        <div class="w3-card w3-container" style="min-height:250px">
+            <a href="@Url.Action("Index", "Gastos")">
+                <h3>Gastos</h3><br>
+                <i class="fa fa-cc-visa w3-margin-bottom w3-text-theme" style="font-size:120px"></i>
+            </a>
+        </div>
+    </div>
+
+    <div class="w3-third">
+        <div class="w3-card w3-container" style="min-height:250px">
+            <a href="@Url.Action("Index", "Proyeccion")">
+                <h3>Proyeccion</h3><br>
+                <i class="fa fa-bar-chart w3-margin-bottom w3-text-theme" style="font-size:120px"></i>
+            </a>
+        </div>
+    </div>
+
+    <div class="w3-third">
+        <div class="w3-card w3-container" style="min-height:250px">
+            <a href="@Url.Action("Index", "Servicio")">
+                <h3>Servicios</h3><br>
+                <i class="fa fa-lightbulb-o w3-margin-bottom w3-text-theme" style="font-size:120px"></i>
+            </a>
+        </div>
+    </div>
+
+    <div class="w3-third">
+        <div class="w3-card w3-container" style="min-height:250px">
+            <a href="@Url.Action("Index", "Fuente")">
+                <h3>Fuentes</h3><br>
+                <i class="fa fa-dollar w3-margin-bottom w3-text-theme" style="font-size:120px"></i>
+            </a>
+        </div>
+    </div>
+
+    <div class="w3-third">
+        <div class="w3-card w3-container" style="min-height:250px">
+            <a href="@Url.Action("Index", "Comparativa")">
+                <h3>Comparativa</h3><br>
+                <i class="fa fa-copy w3-margin-bottom w3-text-theme" style="font-size:120px"></i>
+            </a>
+        </div>
     </div>
 </div>
 
