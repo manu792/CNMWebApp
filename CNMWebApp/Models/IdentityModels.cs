@@ -49,7 +49,7 @@ namespace CNMWebApp.Models
             {
                 var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 
-                var user = new ApplicationUser() { UserName = "manager@manager.com" };
+                var user = new ApplicationUser() { UserName = "manager@manager.com", Email = "manager@manager.com" };
 
                 var task = userManager.CreateAsync(user, "Manager123.");
                 var result = task.Result;

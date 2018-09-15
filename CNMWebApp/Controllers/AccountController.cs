@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using CNMWebApp.Models;
+using System.Web.Security;
 
 namespace CNMWebApp.Controllers
 {
@@ -79,7 +80,7 @@ namespace CNMWebApp.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    return RedirectToLocal(returnUrl, model.Email);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -124,7 +125,7 @@ namespace CNMWebApp.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(model.ReturnUrl);
+                    return RedirectToLocal(model.ReturnUrl, "");
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.Failure:
@@ -333,7 +334,7 @@ namespace CNMWebApp.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    return RedirectToLocal(returnUrl, "");
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -375,7 +376,7 @@ namespace CNMWebApp.Controllers
                     if (result.Succeeded)
                     {
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-                        return RedirectToLocal(returnUrl);
+                        return RedirectToLocal(returnUrl, "");
                     }
                 }
                 AddErrors(result);
@@ -443,12 +444,16 @@ namespace CNMWebApp.Controllers
             }
         }
 
-        private ActionResult RedirectToLocal(string returnUrl)
+        private ActionResult RedirectToLocal(string returnUrl, string email)
         {
             if (Url.IsLocalUrl(returnUrl))
-            {
                 return Redirect(returnUrl);
-            }
+
+            var user = UserManager.FindByEmail(email);
+
+            if(UserManager.IsInRole(user.Id, "Manager"))
+                return RedirectToAction("Index", "Admin");
+
             return RedirectToAction("Index", "Home");
         }
 
