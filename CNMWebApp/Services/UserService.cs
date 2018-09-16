@@ -34,6 +34,11 @@ namespace CNMWebApp.Services
             });
         }
 
+        public async Task<ApplicationUser> GetLoggedInUser()
+        {
+            return await _userManager.FindByIdAsync(HttpContext.Current.User.Identity.GetUserId());
+        }
+
         public async Task Create(UserRolesViewModel user)
         {
             try
@@ -44,7 +49,12 @@ namespace CNMWebApp.Services
                 {
                     Email = user.Email,
                     PhoneNumber = user.PhoneNumber,
-                    UserName = user.UserName
+                    UserName = user.Email,
+                    LockoutEnabled = false,
+                    FechaIngreso = DateTime.Now,
+                    UnidadTecnicaId = 1,
+                    CategoriaId = 2,
+                    JefeCedula = "d60f8cc6-6981-42a2-ae8f-f165d72482cb"
                 }, "Test123.");
 
                 if (result.Succeeded)

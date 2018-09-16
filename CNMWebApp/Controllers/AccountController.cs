@@ -76,6 +76,7 @@ namespace CNMWebApp.Controllers
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
+            //var signedUser = UserManager.FindByEmail(model.Email);
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
@@ -453,6 +454,12 @@ namespace CNMWebApp.Controllers
 
             if(UserManager.IsInRole(user.Id, "Manager"))
                 return RedirectToAction("Index", "Admin");
+
+            if (UserManager.IsInRole(user.Id, "Jefatura"))
+                return RedirectToAction("Index", "Jefatura");
+
+            if (UserManager.IsInRole(user.Id, "RecursosHumanos"))
+                return RedirectToAction("Index", "RH");
 
             return RedirectToAction("Index", "Home");
         }

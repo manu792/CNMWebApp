@@ -9,11 +9,33 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace CNMWebApp.Models
 {
+    [Table("Estados")]
+    public class Estado
+    {
+        public int EstadoId { get; set; }
+        public string Nombre { get; set; }
+    }
+
+    [Table("SolicitudesVacaciones")]
+    public class SolicitudVacaciones
+    {
+        public int SolicitudVacacionesId { get; set; }
+        public string UsuarioId { get; set; }
+        public DateTime FechaInicio { get; set; }
+        public DateTime FechaFin { get; set; }
+        public string Comentario { get; set; }
+        public int EstadoId { get; set; }
+
+        // Virtual properties mapping to ApplicationUser and Estado
+        public virtual ApplicationUser Usuario { get; set; }
+        public virtual Estado Estado { get; set; }
+    }
+
     // Unidades Tecnicas del empleado va a ir mapeada a la tabla Unidades Tecnicas
     [Table("UnidadesTecnicas")]
     public class UnidadTecnica
     {
-        public int Id { get; set; }
+        public int UnidadTecnicaId { get; set; }
         public string Nombre { get; set; }
     }
 
@@ -21,7 +43,7 @@ namespace CNMWebApp.Models
     [Table("Categorias")]
     public class Categoria
     {
-        public int Id { get; set; }
+        public int CategoriaId { get; set; }
         public string Nombre { get; set; }
     }
 
@@ -30,6 +52,16 @@ namespace CNMWebApp.Models
     public class ApplicationUser : IdentityUser
     {
         public DateTime FechaIngreso { get; set; }
+        public string FotoRuta { get; set; }
+        public int CategoriaId { get; set; }
+        public int UnidadTecnicaId { get; set; }
+        public string JefeCedula { get; set; }
+
+        // Virtual properties, foregin keys to Categoria and UnidadTecnica
+        public virtual Categoria Categoria { get; set; }
+        public virtual UnidadTecnica UnidadTecnica { get; set; }
+        public virtual ICollection<SolicitudVacaciones> VacacionesSolicitadas { get; set; }
+
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
@@ -47,10 +79,34 @@ namespace CNMWebApp.Models
         }
         protected override void Seed(ApplicationDbContext context)
         {
+            AgregarEstados(context);
             AgregarRoles(context);
             AgregarUnidadesTecnicas(context);
             AgregarCategorias(context);
             CrearUsuarioAsignarRoles(context);
+        }
+
+        private void AgregarEstados(ApplicationDbContext context)
+        {
+            context.Estados.AddRange(new List<Estado>()
+            {
+                new Estado()
+                {
+                    EstadoId = 1,
+                    Nombre = "Por revisar"
+                },
+                new Estado()
+                {
+                    EstadoId = 2,
+                    Nombre = "Aprobado"
+                },
+                new Estado()
+                {
+                    EstadoId = 3,
+                    Nombre = "Rechazado"
+                }
+            });
+            context.SaveChanges();
         }
 
         private void AgregarUnidadesTecnicas(ApplicationDbContext context)
@@ -59,27 +115,27 @@ namespace CNMWebApp.Models
             {
                 new UnidadTecnica()
                 {
-                    Id = 1,
+                    UnidadTecnicaId = 1,
                     Nombre = "Centro Nacional de la Musica (CNM)"
                 },
                 new UnidadTecnica()
                 {
-                    Id = 2,
+                    UnidadTecnicaId = 2,
                     Nombre = "Instituto Nacional de la Musica (INM)"
                 },
                 new UnidadTecnica()
                 {
-                    Id = 3,
+                    UnidadTecnicaId = 3,
                     Nombre = "Coro Sinfonico Nacional"
                 },
                 new UnidadTecnica()
                 {
-                    Id = 4,
+                    UnidadTecnicaId = 4,
                     Nombre = "Compañia de Lirica Nacional"
                 },
                 new UnidadTecnica()
                 {
-                    Id = 5,
+                    UnidadTecnicaId = 5,
                     Nombre = "Profesores INM"
                 }
             });
@@ -92,42 +148,42 @@ namespace CNMWebApp.Models
             {
                 new Categoria()
                 {
-                    Id = 1,
+                    CategoriaId = 1,
                     Nombre = "Oficinistas"
                 },
                 new Categoria()
                 {
-                    Id = 2,
+                    CategoriaId = 2,
                     Nombre = "Tecnicos"
                 },
                 new Categoria()
                 {
-                    Id = 3,
+                    CategoriaId = 3,
                     Nombre = "Profesional"
                 },
                 new Categoria()
                 {
-                    Id = 4,
+                    CategoriaId = 4,
                     Nombre = "Jefatura"
                 },
                 new Categoria()
                 {
-                    Id = 5,
+                    CategoriaId = 5,
                     Nombre = "Director Administrativo"
                 },
                 new Categoria()
                 {
-                    Id = 6,
+                    CategoriaId = 6,
                     Nombre = "Director General"
                 },
                 new Categoria()
                 {
-                    Id = 7,
+                    CategoriaId = 7,
                     Nombre = "Miscelaneos"
                 },
                 new Categoria()
                 {
-                    Id = 8,
+                    CategoriaId = 8,
                     Nombre = "Seguridad"
                 }
             });
@@ -167,9 +223,13 @@ namespace CNMWebApp.Models
 
                 var user = new ApplicationUser()
                 {
+                    Id = "00000000",
                     UserName = "manager@manager.com",
                     Email = "manager@manager.com",
-                    FechaIngreso = DateTime.Now
+                    FechaIngreso = DateTime.Now,
+                    UnidadTecnicaId = 1,
+                    CategoriaId = 2,
+                    JefeCedula = "00000000"
                 };
 
                 var task = userManager.CreateAsync(user, "Manager123.");
@@ -188,6 +248,8 @@ namespace CNMWebApp.Models
     {
         public DbSet<Categoria> Categorias { get; set; }
         public DbSet<UnidadTecnica> UnidadesTecnicas { get; set; }
+        public DbSet<Estado> Estados { get; set; }
+        public DbSet<SolicitudVacaciones> SolicitudesVacaciones { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
@@ -202,7 +264,7 @@ namespace CNMWebApp.Models
             modelBuilder.Entity<ApplicationUser>().ToTable("Usuarios");
             modelBuilder.Entity<ApplicationUser>().Property(p => p.Id).HasColumnName("Cedula");
             modelBuilder.Entity<ApplicationUser>().Property(p => p.AccessFailedCount).HasColumnName("AccesoFallidoCantidad");
-            modelBuilder.Entity<ApplicationUser>().Property(p => p.Email).HasColumnName("Correo");
+            modelBuilder.Entity<ApplicationUser>().Property(p => p.Email).HasColumnName("Correo").IsRequired();
             modelBuilder.Entity<ApplicationUser>().Property(p => p.EmailConfirmed).HasColumnName("CorreoConfirmado");
             modelBuilder.Entity<ApplicationUser>().Property(p => p.LockoutEnabled).HasColumnName("BloqueoActivado");
             modelBuilder.Entity<ApplicationUser>().Property(p => p.LockoutEndDateUtc).HasColumnName("FechaFinBloqueoUtc");
@@ -212,6 +274,10 @@ namespace CNMWebApp.Models
             modelBuilder.Entity<ApplicationUser>().Property(p => p.SecurityStamp).HasColumnName("SelloSeguridad");
             modelBuilder.Entity<ApplicationUser>().Property(p => p.TwoFactorEnabled).HasColumnName("AutenticacionDosFactoresActivada");
             modelBuilder.Entity<ApplicationUser>().Property(p => p.UserName).HasColumnName("NombreUsuario");
+            modelBuilder.Entity<ApplicationUser>().Property(p => p.JefeCedula).IsRequired();
+
+
+            modelBuilder.Entity<SolicitudVacaciones>().Property(p => p.UsuarioId).HasColumnName("Cedula");
 
             modelBuilder.Entity<IdentityUserRole>().ToTable("UsuarioRoles");
             modelBuilder.Entity<IdentityUserLogin>().ToTable("UsuarioLogins");
