@@ -13,7 +13,7 @@
             @Html.DisplayNameFor(model => model.Estado.Nombre)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Cedula)
+            @Html.DisplayNameFor(model => model.UsuarioId)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.FechaInicio)
@@ -33,7 +33,7 @@
             @Html.DisplayFor(modelItem => item.Estado.Nombre)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Cedula)
+            @Html.DisplayFor(modelItem => item.UsuarioId)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.FechaInicio)
@@ -46,7 +46,7 @@
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.SolicitudVacacionesId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.SolicitudVacacionesId }) |
+            @Html.ActionLink("Detalles", "Detalles", new { id=item.SolicitudVacacionesId }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.SolicitudVacacionesId })
         </td>
     </tr>

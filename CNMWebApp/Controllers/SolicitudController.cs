@@ -1,7 +1,10 @@
-﻿using CNMWebApp.Services;
+﻿using CNMWebApp.Models;
+using CNMWebApp.Services;
 using Microsoft.AspNet.Identity;
+using Rotativa.Options;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -31,9 +34,37 @@ namespace CNMWebApp.Controllers
         }
 
         // GET: Solicitud/Details/5
-        public ActionResult Details(int id)
+        public async Task<ActionResult> Detalles(int id)
         {
-            return View();
+            // Generate PDF for sample purposes
+            var user = await userService.GetLoggedInUser();
+            var solicitudes = solicitudService.ObtenerSolicitudesPorUnidadTecnica(user.UnidadTecnicaId, user.Id);
+            var model = solicitudes.FirstOrDefault(x => x.SolicitudVacacionesId == id);
+
+            return View(model);
+        }
+
+        public async Task<ActionResult> GeneratePDF()
+        {
+            var user = await userService.GetLoggedInUser();
+            var solicitudes = solicitudService.ObtenerSolicitudesPorUnidadTecnica(user.UnidadTecnicaId, user.Id);
+
+            var actionPDF = new Rotativa.ViewAsPdf("Detalles", solicitudes.First())
+            {
+                PageSize = Rotativa.Options.Size.A4,
+                PageOrientation = Rotativa.Options.Orientation.Landscape,
+                PageMargins = new Margins(12, 12, 12, 12), // it’s in millimeters
+                PageWidth = 180,
+                PageHeight = 297
+                //CustomSwitches = "–outline –print-media-type –footer-center ”Confidential” –footer-right[page]/[toPage] –footer-left[date]"
+            };
+            byte[] pdf = actionPDF.BuildFile(ControllerContext);
+            using (FileStream stream = new FileStream(Server.MapPath("~/PDFs/File.pdf"), FileMode.Create, FileAccess.Write, FileShare.Read))
+            {
+                stream.Write(pdf, 0, pdf.Length);
+            }
+
+            return null;
         }
 
         // GET: Solicitud/Create
@@ -71,7 +102,6 @@ namespace CNMWebApp.Controllers
             try
             {
                 // TODO: Add update logic here
-
                 return RedirectToAction("Index");
             }
             catch
