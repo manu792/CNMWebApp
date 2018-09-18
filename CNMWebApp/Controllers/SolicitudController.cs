@@ -29,7 +29,7 @@ namespace CNMWebApp.Controllers
         {
             var user = await userService.GetLoggedInUser();
 
-            var solicitudes = solicitudService.ObtenerSolicitudesPorUnidadTecnica(user.UnidadTecnicaId, user.Id);
+            var solicitudes = solicitudService.ObtenerSolicitudesPorUnidadTecnica(Convert.ToInt32(user.UnidadTecnicaId), user.Id);
             return View(solicitudes);
         }
 
@@ -38,7 +38,7 @@ namespace CNMWebApp.Controllers
         {
             // Generate PDF for sample purposes
             var user = await userService.GetLoggedInUser();
-            var solicitudes = solicitudService.ObtenerSolicitudesPorUnidadTecnica(user.UnidadTecnicaId, user.Id);
+            var solicitudes = solicitudService.ObtenerSolicitudesPorUnidadTecnica(Convert.ToInt32(user.UnidadTecnicaId), user.Id);
             var model = solicitudes.FirstOrDefault(x => x.SolicitudVacacionesId == id);
 
             return View(model);
@@ -47,7 +47,7 @@ namespace CNMWebApp.Controllers
         public async Task<ActionResult> GeneratePDF()
         {
             var user = await userService.GetLoggedInUser();
-            var solicitudes = solicitudService.ObtenerSolicitudesPorUnidadTecnica(user.UnidadTecnicaId, user.Id);
+            var solicitudes = solicitudService.ObtenerSolicitudesPorUnidadTecnica(Convert.ToInt32(user.UnidadTecnicaId), user.Id);
 
             var actionPDF = new Rotativa.ViewAsPdf("Detalles", solicitudes.First())
             {

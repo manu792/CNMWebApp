@@ -18,14 +18,9 @@ namespace CNMWebApp.Services
             _roleManager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationRoleManager>();
         }
 
-        public UserRolesViewModel GetAllRoles()
+        public IEnumerable<IdentityRole> GetAllRoles()
         {
-            var roles = _roleManager.Roles;
-
-            return new UserRolesViewModel()
-            {
-                Roles = roles.ToList()
-            };
+            return _roleManager.Roles;
         }
     }
 }

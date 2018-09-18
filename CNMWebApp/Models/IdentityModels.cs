@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Security.Claims;
@@ -51,6 +53,11 @@ namespace CNMWebApp.Models
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit https://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
+        [Required(ErrorMessage = "El campo Nombre es requerido")]
+        public string Nombre { get; set; }
+        [Required(ErrorMessage = "El campo Primer Apellido es requerido")]
+        public string PrimerApellido { get; set; }
+        public string SegundoApellido { get; set; }
         public DateTime FechaIngreso { get; set; }
         public string FotoRuta { get; set; }
         public int CategoriaId { get; set; }
@@ -137,6 +144,11 @@ namespace CNMWebApp.Models
                 {
                     UnidadTecnicaId = 5,
                     Nombre = "Profesores INM"
+                },
+                new UnidadTecnica()
+                {
+                    UnidadTecnicaId = 6,
+                    Nombre = "Manager"
                 }
             });
             context.SaveChanges();
@@ -185,6 +197,11 @@ namespace CNMWebApp.Models
                 {
                     CategoriaId = 8,
                     Nombre = "Seguridad"
+                },
+                new Categoria()
+                {
+                    CategoriaId = 9,
+                    Nombre = "Manager"
                 }
             });
             context.SaveChanges();
@@ -224,11 +241,14 @@ namespace CNMWebApp.Models
                 var user = new ApplicationUser()
                 {
                     Id = "00000000",
+                    Nombre = "Manager",
+                    PrimerApellido = "Manager",
+                    SegundoApellido = "Manager",
                     UserName = "manager@manager.com",
                     Email = "manager@manager.com",
                     FechaIngreso = DateTime.Now,
                     UnidadTecnicaId = 1,
-                    CategoriaId = 2,
+                    CategoriaId = 1,
                     JefeCedula = "00000000"
                 };
 

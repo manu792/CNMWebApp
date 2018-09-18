@@ -14,11 +14,15 @@ namespace CNMWebApp.Controllers
     {
         private UserService _userService;
         private RoleService _roleService;
+        private CategoriaServicio _categoriaServicio;
+        private UnidadTecnicaServicio _unidadTecnicaServicio;
 
         public UserController()
         {
             _userService = new UserService();
             _roleService = new RoleService();
+            _categoriaServicio = new CategoriaServicio();
+            _unidadTecnicaServicio = new UnidadTecnicaServicio();
         }
         // GET: User
         public ActionResult Index()
@@ -30,8 +34,18 @@ namespace CNMWebApp.Controllers
         // GET: Create
         public ActionResult Create()
         {
-            var viewModel = _roleService.GetAllRoles();
-            return View(viewModel);
+            var roles = _roleService.GetAllRoles();
+            var categorias = _categoriaServicio.ObtenerCategorias();
+            var unidadesTecnicas = _unidadTecnicaServicio.ObtenerUnidadesTecnicas();
+            var jefes = _userService.ObtenerJefes();
+
+            return View(new UserRolesViewModel()
+            {
+                Roles = roles.ToList(),
+                UnidadesTecnicas = unidadesTecnicas.ToList(),
+                Categorias = categorias.ToList(),
+                Jefes = jefes.ToList()
+            });
         }
 
         // POST: Create

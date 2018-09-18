@@ -28,9 +28,31 @@ namespace CNMWebApp.Services
             return users.Select(x => new UserViewModel()
             {
                 Id = x.Id,
-                UserName = x.UserName,
+                Nombre = x.Nombre,
+                PrimerApellido = x.PrimerApellido,
+                SegundoApellido = x.SegundoApellido,
                 Email = x.Email,
-                PhoneNumber = x.PhoneNumber
+                PhoneNumber = x.PhoneNumber,
+                FechaIngreso = x.FechaIngreso
+            });
+        }
+
+        public IEnumerable<UserViewModel> ObtenerJefes()
+        {
+            var managerRol = _roleManager.FindByName("Manager");
+            var jefaturaRol = _roleManager.FindByName("Jefatura");
+
+            var users = _userManager.Users.Where(x => x.Roles.Any(r => r.RoleId == managerRol.Id || r.RoleId == jefaturaRol.Id));
+
+            return users.Select(x => new UserViewModel()
+            {
+                Id = x.Id,
+                Nombre = x.Nombre,
+                PrimerApellido = x.PrimerApellido,
+                SegundoApellido = x.SegundoApellido,
+                Email = x.Email,
+                PhoneNumber = x.PhoneNumber,
+                FechaIngreso = x.FechaIngreso
             });
         }
 
@@ -47,19 +69,21 @@ namespace CNMWebApp.Services
 
                 var result = await _userManager.CreateAsync(new ApplicationUser()
                 {
+                    Nombre = user.Nombre,
+                    PrimerApellido = user.PrimerApellido,
+                    SegundoApellido = user.SegundoApellido,
                     Email = user.Email,
                     PhoneNumber = user.PhoneNumber,
                     UserName = user.Email,
-                    LockoutEnabled = false,
-                    FechaIngreso = DateTime.Now,
-                    UnidadTecnicaId = 1,
-                    CategoriaId = 2,
-                    JefeCedula = "d60f8cc6-6981-42a2-ae8f-f165d72482cb"
+                    FechaIngreso = user.FechaIngreso,
+                    UnidadTecnicaId = Convert.ToInt32(user.SelectedUnidadTecnicaId),
+                    CategoriaId = Convert.ToInt32(user.SelectedCategoriaId),
+                    JefeCedula = user.SelectedJefeId
                 }, "Test123.");
 
                 if (result.Succeeded)
                 {
-                    var userSaved = await _userManager.FindByNameAsync(user.UserName);
+                    var userSaved = await _userManager.FindByEmailAsync(user.Email);
                     await _userManager.AddToRoleAsync(userSaved.Id.ToString(), role.Name);
                 }
             }
