@@ -48,10 +48,5 @@ namespace CNMWebApp.Models
         public string SelectedUnidadTecnicaId { get; set; }
         public List<UnidadTecnica> UnidadesTecnicas { get; set; }
         public UnidadTecnica UnidadTecnica { get; set; }
-
-        // Jefes
-        public string SelectedJefeId { get; set; }
-        public List<UserViewModel> Jefes { get; set; }
-        public UserViewModel Jefe { get; set; }
     }
 }

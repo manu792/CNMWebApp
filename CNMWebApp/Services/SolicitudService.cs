@@ -15,10 +15,10 @@ namespace CNMWebApp.Services
             context = new ApplicationDbContext();
         }
 
-        public IEnumerable<SolicitudVacaciones> ObtenerSolicitudesPorUnidadTecnica(int unidadTecnicaId, string cedula)
+        public IEnumerable<SolicitudVacaciones> ObtenerSolicitudesPorUnidadTecnica(int unidadTecnicaId)
         {
             return context.SolicitudesVacaciones
-                .Where(x => x.Usuario.UnidadTecnicaId == unidadTecnicaId && x.Usuario.JefeCedula == cedula)
+                .Where(x => x.Usuario.UnidadTecnicaId == unidadTecnicaId)
                 .ToList();
         }
     }

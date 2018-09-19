@@ -291,6 +291,7 @@
     <Content Include="Views\Jefatura\Index.cshtml" />
     <Content Include="Views\Solicitud\Index.cshtml" />
     <Content Include="Views\Solicitud\Detalles.cshtml" />
+    <Content Include="Views\User\CreateNext.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

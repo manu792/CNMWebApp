@@ -61,7 +61,7 @@ namespace CNMWebApp.Services
             return await _userManager.FindByIdAsync(HttpContext.Current.User.Identity.GetUserId());
         }
 
-        public async Task Create(UserRolesViewModel user)
+        public async Task<bool> Create(UserRolesViewModel user)
         {
             try
             {
@@ -77,15 +77,18 @@ namespace CNMWebApp.Services
                     UserName = user.Email,
                     FechaIngreso = user.FechaIngreso,
                     UnidadTecnicaId = Convert.ToInt32(user.SelectedUnidadTecnicaId),
-                    CategoriaId = Convert.ToInt32(user.SelectedCategoriaId),
-                    JefeCedula = user.SelectedJefeId
+                    CategoriaId = Convert.ToInt32(user.SelectedCategoriaId)
                 }, "Test123.");
 
                 if (result.Succeeded)
                 {
                     var userSaved = await _userManager.FindByEmailAsync(user.Email);
                     await _userManager.AddToRoleAsync(userSaved.Id.ToString(), role.Name);
+
+                    return true;
                 }
+
+                return false;
             }
             catch (Exception ex)
             {

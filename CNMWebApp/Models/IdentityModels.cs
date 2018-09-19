@@ -47,6 +47,9 @@ namespace CNMWebApp.Models
     {
         public int CategoriaId { get; set; }
         public string Nombre { get; set; }
+        public string RolId { get; set; }
+
+        public virtual IdentityRole Rol { get; set; }
     }
 
 
@@ -62,7 +65,6 @@ namespace CNMWebApp.Models
         public string FotoRuta { get; set; }
         public int CategoriaId { get; set; }
         public int UnidadTecnicaId { get; set; }
-        public string JefeCedula { get; set; }
 
         // Virtual properties, foregin keys to Categoria and UnidadTecnica
         public virtual Categoria Categoria { get; set; }
@@ -161,47 +163,56 @@ namespace CNMWebApp.Models
                 new Categoria()
                 {
                     CategoriaId = 1,
-                    Nombre = "Oficinistas"
+                    Nombre = "Oficinistas",
+                    RolId = "1"
                 },
                 new Categoria()
                 {
                     CategoriaId = 2,
-                    Nombre = "Tecnicos"
+                    Nombre = "Tecnicos",
+                    RolId = "1"
                 },
                 new Categoria()
                 {
                     CategoriaId = 3,
-                    Nombre = "Profesional"
+                    Nombre = "Profesional",
+                    RolId = "1"
                 },
                 new Categoria()
                 {
                     CategoriaId = 4,
-                    Nombre = "Jefatura"
+                    Nombre = "Jefatura",
+                    RolId = "2"
                 },
                 new Categoria()
                 {
                     CategoriaId = 5,
-                    Nombre = "Director Administrativo"
+                    Nombre = "Director Administrativo",
+                    RolId = "4"
                 },
                 new Categoria()
                 {
                     CategoriaId = 6,
-                    Nombre = "Director General"
+                    Nombre = "Director General",
+                    RolId = "4"
                 },
                 new Categoria()
                 {
                     CategoriaId = 7,
-                    Nombre = "Miscelaneos"
+                    Nombre = "Miscelaneos",
+                    RolId = "1"
                 },
                 new Categoria()
                 {
                     CategoriaId = 8,
-                    Nombre = "Seguridad"
+                    Nombre = "Seguridad",
+                    RolId = "1"
                 },
                 new Categoria()
                 {
                     CategoriaId = 9,
-                    Nombre = "Manager"
+                    Nombre = "Manager",
+                    RolId = "3"
                 }
             });
             context.SaveChanges();
@@ -227,7 +238,12 @@ namespace CNMWebApp.Models
             context.Roles.Add(new IdentityRole()
             {
                 Id = "4",
-                Name = "RecursosHumanos"
+                Name = "Director"
+            });
+            context.Roles.Add(new IdentityRole()
+            {
+                Id = "5",
+                Name = "RH"
             });
             context.SaveChanges();
         }
@@ -249,7 +265,6 @@ namespace CNMWebApp.Models
                     FechaIngreso = DateTime.Now,
                     UnidadTecnicaId = 1,
                     CategoriaId = 1,
-                    JefeCedula = "00000000"
                 };
 
                 var task = userManager.CreateAsync(user, "Manager123.");
@@ -294,7 +309,6 @@ namespace CNMWebApp.Models
             modelBuilder.Entity<ApplicationUser>().Property(p => p.SecurityStamp).HasColumnName("SelloSeguridad");
             modelBuilder.Entity<ApplicationUser>().Property(p => p.TwoFactorEnabled).HasColumnName("AutenticacionDosFactoresActivada");
             modelBuilder.Entity<ApplicationUser>().Property(p => p.UserName).HasColumnName("NombreUsuario");
-            modelBuilder.Entity<ApplicationUser>().Property(p => p.JefeCedula).IsRequired();
 
 
             modelBuilder.Entity<SolicitudVacaciones>().Property(p => p.UsuarioId).HasColumnName("Cedula");
