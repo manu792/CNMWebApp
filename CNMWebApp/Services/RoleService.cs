@@ -22,5 +22,15 @@ namespace CNMWebApp.Services
         {
             return _roleManager.Roles;
         }
+
+        public IdentityRole ObtenerRolPorId(string rolId)
+        {
+            return _roleManager.Roles.FirstOrDefault(x => x.Id == rolId);
+        }
+
+        public IdentityRole ObtenerRolPorNombre(string rolNombre)
+        {
+            return _roleManager.Roles.FirstOrDefault(x => x.Name.Equals(rolNombre, StringComparison.OrdinalIgnoreCase));
+        }
     }
 }

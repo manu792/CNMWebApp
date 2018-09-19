@@ -1,4 +1,6 @@
-﻿@model IEnumerable<CNMWebApp.Models.UserViewModel>
+﻿@model PagedList.IPagedList<CNMWebApp.Models.UserViewModel>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
     ViewBag.Title = "Usuarios";
@@ -10,13 +12,45 @@
 <p>
     @Html.ActionLink("Crear Usuario", "Create")
 </p>
+
+@using (Html.BeginForm("Index", "User", FormMethod.Get))
+{
+    <p>
+        @Html.TextBox("Filtro", "", new { @class = "form-control", placeholder = "Buscar..." })
+        <input type="submit" value="Search" />
+    </p>
+}
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Email)
+            @Html.Label("Cedula")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PhoneNumber)
+            @Html.Label("Nombre")
+        </th>
+        <th>
+            @Html.Label("Primer Apellido")
+        </th>
+        <th>
+            @Html.Label("Segundo Apellido")
+        </th>
+        <th>
+            @Html.Label("Correo")
+        </th>
+        <th>
+            @Html.Label("Telefono")
+        </th>
+        <th>
+            @Html.Label("Fecha de Ingreso")
+        </th>
+        <th>
+            @Html.Label("Rol")
+        </th>
+        <th>
+            @Html.Label("Unidad Tecnica")
+        </th>
+        <th>
+            @Html.Label("Categoria")
         </th>
         <th></th>
     </tr>
@@ -25,10 +59,34 @@
     {
         <tr>
             <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PrimerApellido)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SegundoApellido)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.PhoneNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaIngreso)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Role.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnidadTecnica.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Categoria.Nombre)
             </td>
             <td>
                 @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
@@ -37,5 +95,9 @@
             </td>
         </tr>
     }
-
 </table>
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, pagina => Url.Action("Index",
+    new { pagina }))

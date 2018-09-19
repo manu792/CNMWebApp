@@ -23,7 +23,9 @@ namespace CNMWebApp.Services
 
         public IEnumerable<UserViewModel> GetUsers()
         {
-            var users = _userManager.Users;
+            var users = _userManager.Users
+                .Where(x => !x.Email.Equals("manager@manager.com"))
+                .ToList();
 
             return users.Select(x => new UserViewModel()
             {
@@ -33,8 +35,11 @@ namespace CNMWebApp.Services
                 SegundoApellido = x.SegundoApellido,
                 Email = x.Email,
                 PhoneNumber = x.PhoneNumber,
-                FechaIngreso = x.FechaIngreso
-            });
+                FechaIngreso = x.FechaIngreso,
+                Role = _roleManager.FindById(x.Roles.First().RoleId.ToString()),
+                UnidadTecnica = x.UnidadTecnica,
+                Categoria = x.Categoria
+            }).ToList();
         }
 
         public IEnumerable<UserViewModel> ObtenerJefes()
@@ -52,7 +57,10 @@ namespace CNMWebApp.Services
                 SegundoApellido = x.SegundoApellido,
                 Email = x.Email,
                 PhoneNumber = x.PhoneNumber,
-                FechaIngreso = x.FechaIngreso
+                FechaIngreso = x.FechaIngreso,
+                Role = _roleManager.FindById(x.Roles.First().RoleId),
+                UnidadTecnica = x.UnidadTecnica,
+                Categoria = x.Categoria
             });
         }
 
@@ -61,7 +69,7 @@ namespace CNMWebApp.Services
             return await _userManager.FindByIdAsync(HttpContext.Current.User.Identity.GetUserId());
         }
 
-        public async Task<bool> Create(UserRolesViewModel user)
+        public async Task<bool> Create(UserRolesUnidadCategoria user)
         {
             try
             {
@@ -69,6 +77,7 @@ namespace CNMWebApp.Services
 
                 var result = await _userManager.CreateAsync(new ApplicationUser()
                 {
+                    Id = user.Id,
                     Nombre = user.Nombre,
                     PrimerApellido = user.PrimerApellido,
                     SegundoApellido = user.SegundoApellido,
