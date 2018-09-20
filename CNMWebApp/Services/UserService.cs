@@ -39,7 +39,8 @@ namespace CNMWebApp.Services
                 FechaIngreso = x.FechaIngreso,
                 Role = _roleManager.FindById(x.Roles.First().RoleId.ToString()),
                 UnidadTecnica = x.UnidadTecnica,
-                Categoria = x.Categoria
+                Categoria = x.Categoria,
+                EstaActivo = x.EstaActivo
             }).ToList();
         }
 
@@ -88,6 +89,7 @@ namespace CNMWebApp.Services
                     FechaIngreso = user.FechaIngreso,
                     UnidadTecnicaId = Convert.ToInt32(user.SelectedUnidadTecnicaId),
                     CategoriaId = Convert.ToInt32(user.SelectedCategoriaId),
+                    EstaActivo = true,
                     FotoRuta = user.Foto != null ? Path.Combine(System.Web.HttpContext.Current.Server.MapPath("~/Fotos"), user.Foto.FileName) : null
                 }, "Test123.");
 

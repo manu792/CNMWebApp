@@ -53,11 +53,21 @@ namespace CNMWebApp.Controllers
             }
         }
 
+        // GET: /Account/Index
+        [AllowAnonymous]
+        public ActionResult Index()
+        {
+            return RedirectToAction("Login");
+        }
+
         //
         // GET: /Account/Login
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
+            if (User.Identity.IsAuthenticated)
+                return RedirectToLocal(returnUrl, UserManager.FindById(User.Identity.GetUserId()).Email);
+
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }

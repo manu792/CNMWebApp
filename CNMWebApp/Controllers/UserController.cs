@@ -82,6 +82,9 @@ namespace CNMWebApp.Controllers
         // GET: CreateNext
         public ActionResult CreateNext()
         {
+            if (userInfo == null)
+                return RedirectToAction("Create");
+
             var user = userInfo;
 
             var categorias = _categoriaServicio.ObtenerCategoriasPorRoleId(user.SelectedRoleId).ToList();
@@ -102,6 +105,7 @@ namespace CNMWebApp.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> CreateNext(UserRolesUnidadCategoria user)
         {
             var userData = userInfo;
@@ -140,6 +144,18 @@ namespace CNMWebApp.Controllers
             userData.Categorias = categorias.ToList();
             userData.UnidadesTecnicas = unidadesTecnicas.ToList();
             return View(userData);
+        }
+
+        // GET: User/Editar
+        public ActionResult Editar()
+        {
+            return View();
+        }
+
+        // GET: User/Eliminar
+        public ActionResult Eliminar()
+        {
+            return View();
         }
 
         private List<UserViewModel> FiltrarUsuarios(IEnumerable<UserViewModel> users, string filtro)

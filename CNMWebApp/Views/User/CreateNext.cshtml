@@ -51,14 +51,13 @@
         </div>
     }
 
-    <div class="form-group">
-        Subir Foto
-        <div class="uploadfile">
-            @Html.TextBoxFor(model => model.Foto, new { type = "file", accept = ".png, .jpg, .jpeg" })
-            @Html.ValidationMessageFor(model => model.Foto)
-            <input type="submit" value="Submit" />
+        <div class="form-group">
+            @Html.LabelFor(model => model.Foto, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Foto, new { type = "file", accept = ".png, .jpg, .jpeg" })
+                @Html.ValidationMessageFor(model => model.Foto)
+            </div>
         </div>
-    </div>
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">

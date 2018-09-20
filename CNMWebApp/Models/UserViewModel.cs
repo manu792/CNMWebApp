@@ -32,6 +32,8 @@ namespace CNMWebApp.Models
         [DataType(DataType.Date)]
         public DateTime FechaIngreso { get; set; }
         public HttpPostedFileWrapper Foto { get; set; }
+        [DisplayName("Activo")]
+        public bool EstaActivo { get; set; }
 
         // Vinculan el usuario con los datos de las tablas Roles, Categoria y UnidadTecnica
         [DisplayName("Rol")]
