@@ -31,6 +31,7 @@ namespace CNMWebApp.Models
         [Required(ErrorMessage = "El campo Fecha Ingreso es requerido")]
         [DataType(DataType.Date)]
         public DateTime FechaIngreso { get; set; }
+        public HttpPostedFileWrapper Foto { get; set; }
 
         // Vinculan el usuario con los datos de las tablas Roles, Categoria y UnidadTecnica
         [DisplayName("Rol")]

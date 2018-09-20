@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using PagedList;
+using System.IO;
 
 namespace CNMWebApp.Controllers
 {
@@ -30,6 +31,11 @@ namespace CNMWebApp.Controllers
         public ActionResult Index(string filtro, int? pagina)
         {
             var users = _userServicio.GetUsers();
+
+            if (!string.IsNullOrEmpty(filtro))
+            {
+                users = FiltrarUsuarios(users, filtro);
+            }
 
             int tamanoPagina = 10;
             int numeroPagina = (pagina ?? 1);
@@ -107,6 +113,7 @@ namespace CNMWebApp.Controllers
             userData.SelectedUnidadTecnicaId = user.SelectedUnidadTecnicaId;
             userData.FechaIngreso = user.FechaIngreso;
             userData.Role = _roleServicio.ObtenerRolPorId(userData.SelectedRoleId);
+            userData.Foto = user.Foto;
             if (userData.Role.Name.Equals("manager", StringComparison.OrdinalIgnoreCase))
             {
                 // Cambiar esto por un llamado a la base de datos donde me diga el ID segun el nombre
@@ -122,7 +129,6 @@ namespace CNMWebApp.Controllers
                 userData.UnidadesTecnicas = unidadesTecnicas.ToList();
                 return View(userData);
             }
-                
 
             var succeeded = await _userServicio.Create(userData);
             if (succeeded)
@@ -134,6 +140,26 @@ namespace CNMWebApp.Controllers
             userData.Categorias = categorias.ToList();
             userData.UnidadesTecnicas = unidadesTecnicas.ToList();
             return View(userData);
+        }
+
+        private List<UserViewModel> FiltrarUsuarios(IEnumerable<UserViewModel> users, string filtro)
+        {
+            filtro = filtro.ToLower();
+
+            var usuariosFiltrados = users
+                .Where(x => x.Id.ToLower().Contains(filtro) ||
+                 x.Nombre.ToLower().Contains(filtro) ||
+                 x.PrimerApellido.ToLower().Contains(filtro) ||
+                 (!string.IsNullOrEmpty(x.SegundoApellido) ? x.SegundoApellido.ToLower().Contains(filtro) : false) ||
+                 x.Email.ToLower().Contains(filtro) ||
+                 (!string.IsNullOrEmpty(x.PhoneNumber) ? x.PhoneNumber.ToLower().Contains(filtro): false) ||
+                 x.FechaIngreso.ToString().Contains(filtro) ||
+                 x.Role.Name.ToLower().Contains(filtro) ||
+                 x.UnidadTecnica.Nombre.ToLower().Contains(filtro) ||
+                 x.Categoria.Nombre.ToLower().Contains(filtro))
+                .ToList();
+
+            return usuariosFiltrados;
         }
     }
 }

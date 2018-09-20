@@ -6,6 +6,7 @@ using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
+using System.IO;
 
 namespace CNMWebApp.Services
 {
@@ -24,8 +25,8 @@ namespace CNMWebApp.Services
         public IEnumerable<UserViewModel> GetUsers()
         {
             var users = _userManager.Users
-                .Where(x => !x.Email.Equals("manager@manager.com"))
-                .ToList();
+                    .Where(x => !x.Email.Equals("manager@manager.com"))
+                    .ToList();
 
             return users.Select(x => new UserViewModel()
             {
@@ -42,27 +43,27 @@ namespace CNMWebApp.Services
             }).ToList();
         }
 
-        public IEnumerable<UserViewModel> ObtenerJefes()
-        {
-            var managerRol = _roleManager.FindByName("Manager");
-            var jefaturaRol = _roleManager.FindByName("Jefatura");
+        //public IEnumerable<UserViewModel> ObtenerJefes()
+        //{
+        //    var managerRol = _roleManager.FindByName("Manager");
+        //    var jefaturaRol = _roleManager.FindByName("Jefatura");
 
-            var users = _userManager.Users.Where(x => x.Roles.Any(r => r.RoleId == managerRol.Id || r.RoleId == jefaturaRol.Id));
+        //    var users = _userManager.Users.Where(x => x.Roles.Any(r => r.RoleId == managerRol.Id || r.RoleId == jefaturaRol.Id));
 
-            return users.Select(x => new UserViewModel()
-            {
-                Id = x.Id,
-                Nombre = x.Nombre,
-                PrimerApellido = x.PrimerApellido,
-                SegundoApellido = x.SegundoApellido,
-                Email = x.Email,
-                PhoneNumber = x.PhoneNumber,
-                FechaIngreso = x.FechaIngreso,
-                Role = _roleManager.FindById(x.Roles.First().RoleId),
-                UnidadTecnica = x.UnidadTecnica,
-                Categoria = x.Categoria
-            });
-        }
+        //    return users.Select(x => new UserViewModel()
+        //    {
+        //        Id = x.Id,
+        //        Nombre = x.Nombre,
+        //        PrimerApellido = x.PrimerApellido,
+        //        SegundoApellido = x.SegundoApellido,
+        //        Email = x.Email,
+        //        PhoneNumber = x.PhoneNumber,
+        //        FechaIngreso = x.FechaIngreso,
+        //        Role = _roleManager.FindById(x.Roles.First().RoleId),
+        //        UnidadTecnica = x.UnidadTecnica,
+        //        Categoria = x.Categoria
+        //    });
+        //}
 
         public async Task<ApplicationUser> GetLoggedInUser()
         {
@@ -86,7 +87,8 @@ namespace CNMWebApp.Services
                     UserName = user.Email,
                     FechaIngreso = user.FechaIngreso,
                     UnidadTecnicaId = Convert.ToInt32(user.SelectedUnidadTecnicaId),
-                    CategoriaId = Convert.ToInt32(user.SelectedCategoriaId)
+                    CategoriaId = Convert.ToInt32(user.SelectedCategoriaId),
+                    FotoRuta = user.Foto != null ? Path.Combine(System.Web.HttpContext.Current.Server.MapPath("~/Fotos"), user.Foto.FileName) : null
                 }, "Test123.");
 
                 if (result.Succeeded)
@@ -94,10 +96,32 @@ namespace CNMWebApp.Services
                     var userSaved = await _userManager.FindByEmailAsync(user.Email);
                     await _userManager.AddToRoleAsync(userSaved.Id.ToString(), role.Name);
 
+                    // Guardar foto de usuario, en caso que se haya seleccionado alguna
+                    GuardarFoto(user.Foto);
+
                     return true;
                 }
 
                 return false;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        private void GuardarFoto(HttpPostedFileWrapper foto)
+        {
+            try
+            {
+                if(foto != null)
+                {
+                    if (!Directory.Exists(System.Web.HttpContext.Current.Server.MapPath("~/Fotos")))
+                        Directory.CreateDirectory(System.Web.HttpContext.Current.Server.MapPath("~/Fotos"));
+
+                    var path = Path.Combine(System.Web.HttpContext.Current.Server.MapPath("~/Fotos"), foto.FileName);
+                    foto.SaveAs(path);
+                }
             }
             catch (Exception ex)
             {
