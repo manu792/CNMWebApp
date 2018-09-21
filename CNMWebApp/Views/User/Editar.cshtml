@@ -1,4 +1,4 @@
-﻿@model CNMWebApp.Models.UserViewModel
+﻿@model CNMWebApp.Models.UserRolesUnidadCategoria
 
 @{
     ViewBag.Title = "Editar";
@@ -12,11 +12,12 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>UserViewModel</h4>
+        <h4>UserRolesUnidadCategoria</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
 
+        
         <div class="form-group">
             @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -66,20 +67,52 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Foto, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Foto, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Foto, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
             @Html.LabelFor(model => model.EstaActivo, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <div class="checkbox">
                     @Html.EditorFor(model => model.EstaActivo)
                     @Html.ValidationMessageFor(model => model.EstaActivo, "", new { @class = "text-danger" })
                 </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SelectedRoleId, "Rol", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.SelectedRoleId, new SelectList(Model.Roles, "Id", "Name", Model.Role.Id), "- Seleccione un rol -", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.SelectedRoleId)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SelectedUnidadTecnicaId, "Unidad Tecnica", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.SelectedUnidadTecnicaId, new SelectList(Model.UnidadesTecnicas, "UnidadTecnicaId", "Nombre", Model.UnidadTecnica.UnidadTecnicaId), "- Seleccione una unidad tecnica -", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.SelectedUnidadTecnicaId)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SelectedCategoriaId, "Categoria", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.SelectedCategoriaId, new SelectList(Model.Categorias, "CategoriaId", "Nombre", Model.Categoria.CategoriaId), "- Seleccione una categoria -", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.SelectedCategoriaId)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FotoRuta, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FotoRuta, new { htmlAttributes = new { @class = "form-control", @disabled = "true" } })
+                @Html.ValidationMessageFor(model => model.FotoRuta, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Cambiar Foto", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Foto, new { @type = "file", @accept = ".png, .jpg, .jpeg" })
+                @Html.ValidationMessageFor(model => model.Foto)
             </div>
         </div>
 

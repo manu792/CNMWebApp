@@ -8,6 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using PagedList;
 using System.IO;
+using System.Net;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace CNMWebApp.Controllers
 {
@@ -18,7 +20,6 @@ namespace CNMWebApp.Controllers
         private RoleService _roleServicio;
         private CategoriaServicio _categoriaServicio;
         private UnidadTecnicaServicio _unidadTecnicaServicio;
-        private static UserRolesUnidadCategoria userInfo;
 
         public UserController()
         {
@@ -27,6 +28,15 @@ namespace CNMWebApp.Controllers
             _categoriaServicio = new CategoriaServicio();
             _unidadTecnicaServicio = new UnidadTecnicaServicio();
         }
+
+        [HttpGet]
+        public JsonResult ObtenerCategoriasPorRoleId(string roleId)
+        {
+            var categorias = _categoriaServicio.ObtenerCategoriasPorRoleId(roleId).ToList();
+            var listaCategorias = new SelectList(categorias, "CategoriaId", "Nombre", 0);
+            return Json(listaCategorias, JsonRequestBehavior.AllowGet);
+        }
+
         // GET: User
         public ActionResult Index(string filtro, int? pagina)
         {
@@ -47,115 +57,160 @@ namespace CNMWebApp.Controllers
         public ActionResult Create()
         {
             var roles = _roleServicio.GetAllRoles();
-
-            return View(new UserRolesViewModel()
-            {
-                Roles = roles.ToList()
-            });
-        }
-
-        // POST: Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(UserRolesViewModel user)
-        {
-            userInfo = new UserRolesUnidadCategoria()
-            {
-                Id = user.Id,
-                Nombre = user.Nombre,
-                PrimerApellido = user.PrimerApellido,
-                SegundoApellido = user.SegundoApellido,
-                Email = user.Email,
-                SelectedRoleId = user.SelectedRoleId
-            };
-
-            if (!ModelState.IsValid)
-            {
-                user.Roles = _roleServicio.GetAllRoles().ToList();
-
-                return View(user);
-            }
-
-            return RedirectToAction("CreateNext");
-        }
-
-        // GET: CreateNext
-        public ActionResult CreateNext()
-        {
-            if (userInfo == null)
-                return RedirectToAction("Create");
-
-            var user = userInfo;
-
-            var categorias = _categoriaServicio.ObtenerCategoriasPorRoleId(user.SelectedRoleId).ToList();
+            //var categorias = _categoriaServicio.ObtenerCategorias().ToList();
             var unidadesTecnicas = _unidadTecnicaServicio.ObtenerUnidadesTecnicas().ToList();
 
             return View(new UserRolesUnidadCategoria()
             {
-                Id = user.Id,
-                Nombre = user.Nombre,
-                PrimerApellido = user.PrimerApellido,
-                SegundoApellido = user.SegundoApellido,
-                Email = user.Email,
-                SelectedRoleId = user.SelectedRoleId,
-                UnidadesTecnicas = unidadesTecnicas,
-                Categorias = categorias,
-                Role = _roleServicio.ObtenerRolPorId(user.SelectedRoleId)
+                Roles = roles.ToList(),
+                //Categorias = categorias.ToList(),
+                UnidadesTecnicas = unidadesTecnicas.ToList()
             });
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> CreateNext(UserRolesUnidadCategoria user)
+       // POST: Create
+       [HttpPost]
+       [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Create(UserRolesUnidadCategoria user)
         {
-            var userData = userInfo;
+            IEnumerable<IdentityRole> roles;
             IEnumerable<Categoria> categorias;
             IEnumerable<UnidadTecnica> unidadesTecnicas;
 
-            userData.PhoneNumber = user.PhoneNumber;
-            userData.SelectedCategoriaId = user.SelectedCategoriaId;
-            userData.SelectedUnidadTecnicaId = user.SelectedUnidadTecnicaId;
-            userData.FechaIngreso = user.FechaIngreso;
-            userData.Role = _roleServicio.ObtenerRolPorId(userData.SelectedRoleId);
-            userData.Foto = user.Foto;
-            if (userData.Role.Name.Equals("manager", StringComparison.OrdinalIgnoreCase))
+            if (!ModelState.IsValid)
             {
-                // Cambiar esto por un llamado a la base de datos donde me diga el ID segun el nombre
-                userData.SelectedUnidadTecnicaId = "6";
-                userData.SelectedCategoriaId = "9";
+                roles = _roleServicio.GetAllRoles();
+                categorias = _categoriaServicio.ObtenerCategorias().ToList();
+                unidadesTecnicas = _unidadTecnicaServicio.ObtenerUnidadesTecnicas().ToList();
+
+                user.Roles = roles.ToList();
+                user.Categorias = categorias.ToList();
+                user.UnidadesTecnicas = unidadesTecnicas.ToList();
+
+                return View(user);
             }
 
-            if (TryValidateModel(userData))
-            {
-                categorias = _categoriaServicio.ObtenerCategoriasPorRoleId(user.SelectedRoleId);
-                unidadesTecnicas = _unidadTecnicaServicio.ObtenerUnidadesTecnicas();
-                userData.Categorias = categorias.ToList();
-                userData.UnidadesTecnicas = unidadesTecnicas.ToList();
-                return View(userData);
-            }
-
-            var succeeded = await _userServicio.Create(userData);
+            var succeeded = await _userServicio.Create(user);
             if (succeeded)
                 return RedirectToAction("Index");
 
             ModelState.AddModelError("", "Hubo un problema al tratar de crear al usuario. Por favor contacte a soporte si sigue teniendo este problema.");
-            categorias = _categoriaServicio.ObtenerCategoriasPorRoleId(user.SelectedRoleId);
-            unidadesTecnicas = _unidadTecnicaServicio.ObtenerUnidadesTecnicas();
-            userData.Categorias = categorias.ToList();
-            userData.UnidadesTecnicas = unidadesTecnicas.ToList();
-            return View(userData);
+
+            roles = _roleServicio.GetAllRoles();
+            categorias = _categoriaServicio.ObtenerCategorias().ToList();
+            unidadesTecnicas = _unidadTecnicaServicio.ObtenerUnidadesTecnicas().ToList();
+
+            user.Roles = roles.ToList();
+            user.Categorias = categorias.ToList();
+            user.UnidadesTecnicas = unidadesTecnicas.ToList();
+
+            return View(user);
         }
 
-        // GET: User/Editar
-        public ActionResult Editar()
+        // GET: Editar/5
+        public ActionResult Editar(string id)
         {
-            return View();
+            var usuario = _userServicio.ObtenerUsuarioPorId(id);
+            var categorias = _categoriaServicio.ObtenerCategoriasPorRoleId(usuario.Role.Id).ToList();
+            var roles = _roleServicio.GetAllRoles().ToList();
+            var unidadesTecnicas = _unidadTecnicaServicio.ObtenerUnidadesTecnicas().ToList();
+
+            return View(new UserRolesUnidadCategoria()
+            {
+                Id = usuario.Id,
+                Nombre = usuario.Nombre,
+                PrimerApellido = usuario.PrimerApellido,
+                SegundoApellido = usuario.SegundoApellido,
+                Email = usuario.Email,
+                FechaIngreso = usuario.FechaIngreso,
+                //Foto = usuario.Foto,
+                PhoneNumber = usuario.PhoneNumber,
+                EstaActivo = usuario.EstaActivo,
+                Categorias = categorias,
+                Roles = roles,
+                UnidadesTecnicas = unidadesTecnicas,
+                Role = usuario.Role,
+                Categoria = usuario.Categoria,
+                UnidadTecnica = usuario.UnidadTecnica,
+                FotoRuta = usuario.FotoRuta
+            });
         }
 
+        // POST: User/Editar
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Editar(UserRolesUnidadCategoria usuario)
+        {
+            IEnumerable<IdentityRole> roles;
+            IEnumerable<Categoria> categorias;
+            IEnumerable<UnidadTecnica> unidadesTecnicas;
+            IdentityRole role;
+
+            if (!ModelState.IsValid)
+            {
+                roles = _roleServicio.GetAllRoles();
+                role = _roleServicio.ObtenerRolPorId(usuario.SelectedRoleId);
+                categorias = _categoriaServicio.ObtenerCategoriasPorRoleId(role.Id).ToList();
+                unidadesTecnicas = _unidadTecnicaServicio.ObtenerUnidadesTecnicas().ToList();
+
+                usuario.Roles = roles.ToList();
+                usuario.Categorias = categorias.ToList();
+                usuario.UnidadesTecnicas = unidadesTecnicas.ToList();
+                usuario.Role = _userServicio.ObtenerUsuarioPorId(usuario.Id).Role;
+
+                return View(usuario);
+            }
+
+            var resultado = _userServicio.ActualizarUsuario(usuario.Id, usuario);
+            if (resultado)
+            {
+                return RedirectToAction("Index");
+            }
+
+            roles = _roleServicio.GetAllRoles();
+            role = _roleServicio.ObtenerRolPorId(usuario.SelectedRoleId);
+            categorias = _categoriaServicio.ObtenerCategoriasPorRoleId(role.Id).ToList();
+            unidadesTecnicas = _unidadTecnicaServicio.ObtenerUnidadesTecnicas().ToList();
+
+            usuario.Roles = roles.ToList();
+            usuario.Categorias = categorias.ToList();
+            usuario.UnidadesTecnicas = unidadesTecnicas.ToList();
+            usuario.Role = _userServicio.ObtenerUsuarioPorId(usuario.Id).Role;
+
+            return View(usuario);
+        }
         // GET: User/Eliminar
-        public ActionResult Eliminar()
+        public ActionResult Eliminar(string id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var usuario = _userServicio.ObtenerUsuarioPorId(id);
+            if (usuario == null)
+            {
+                return HttpNotFound();
+            }
+            return View(usuario);
+        }
+
+        // POST: User/Eliminar
+        [HttpPost]
+        [ActionName("Eliminar")]
+        [ValidateAntiForgeryToken]
+        public ActionResult EliminarConfirmado(string id)
+        {
+            var usuario = _userServicio.ObtenerUsuarioPorId(id);
+            if (usuario == null)
+            {
+                return HttpNotFound();
+            }
+            var fueEliminado = _userServicio.EliminarUsuario(id);
+            if(fueEliminado)
+                return RedirectToAction("Index");
+
+            ModelState.AddModelError("", "Hubo un problema al tratar de eliminar el usuario. Por favor contacte a soporte si sigue ocurriendo");
+            return View(usuario);
         }
 
         private List<UserViewModel> FiltrarUsuarios(IEnumerable<UserViewModel> users, string filtro)

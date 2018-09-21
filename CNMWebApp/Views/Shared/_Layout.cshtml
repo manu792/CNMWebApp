@@ -43,5 +43,34 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+
+    <script>
+
+        $(document).ready(function () {
+
+            $("#SelectedRoleId").change(function (event) {
+                var roleId = event.target.value;
+                var url = "/User/ObtenerCategoriasPorRoleId/";
+
+                $.ajax({
+                    url: url,
+                    cache: false,
+                    data: { roleId: roleId },
+                    type: "GET",
+                    success: function (data) {
+                        var markup = "<option value='0'>- Seleccione Categoria -</option>";
+                        for (var x = 0; x < data.length; x++) {
+                            markup += "<option value=" + data[x].Value + ">" + data[x].Text + "</option>";
+                        }
+                        $("#SelectedCategoriaId").html(markup).show();
+                    },
+                    error: function (response) {
+                        console.log(response.responseText);
+                        alert("error : " + response.responseText);
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>

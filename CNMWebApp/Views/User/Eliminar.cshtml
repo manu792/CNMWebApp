@@ -9,8 +9,11 @@
 
 <h3>¿Está seguro(a) que desea eliminar este usuario?</h3>
 <div>
-    <h4>UserViewModel</h4>
+    <h4>Usuario</h4>
     <hr />
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Nombre)
@@ -78,12 +81,13 @@
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <input type="submit" value="Eliminar" class="btn btn-default" /> |
+            @Html.ActionLink("Regresar", "Index")
         </div>
     }
 </div>

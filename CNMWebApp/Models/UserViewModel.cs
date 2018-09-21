@@ -32,6 +32,8 @@ namespace CNMWebApp.Models
         [DataType(DataType.Date)]
         public DateTime FechaIngreso { get; set; }
         public HttpPostedFileWrapper Foto { get; set; }
+        [DisplayName("Foto")]
+        public string FotoRuta { get; set; }
         [DisplayName("Activo")]
         public bool EstaActivo { get; set; }
 
