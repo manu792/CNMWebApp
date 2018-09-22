@@ -90,8 +90,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.SelectedCategoriaId, "Categoria", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @*@Html.DropDownListFor(model => model.SelectedCategoriaId, new SelectList(Model.Categorias, "CategoriaId", "Nombre"), "- Seleccione una unidad categoria -", new { @class = "form-control" })*@
-                <select id="SelectedCategoriaId" name="SelectedCategoriaId" class="form-control"></select>
+                @Html.DropDownListFor(model => model.SelectedCategoriaId, new SelectList(Model.Categorias, "CategoriaId", "Nombre"), "- Seleccione una categoria -", new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.SelectedCategoriaId)
             </div>
         </div>

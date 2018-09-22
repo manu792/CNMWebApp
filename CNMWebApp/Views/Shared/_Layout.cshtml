@@ -58,11 +58,11 @@
                     data: { roleId: roleId },
                     type: "GET",
                     success: function (data) {
-                        var markup = "<option value='0'>- Seleccione Categoria -</option>";
+                        var markup = "";
                         for (var x = 0; x < data.length; x++) {
                             markup += "<option value=" + data[x].Value + ">" + data[x].Text + "</option>";
                         }
-                        $("#SelectedCategoriaId").html(markup).show();
+                        $("#SelectedCategoriaId").append(markup).show();
                     },
                     error: function (response) {
                         console.log(response.responseText);

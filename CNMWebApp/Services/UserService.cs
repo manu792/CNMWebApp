@@ -76,7 +76,7 @@ namespace CNMWebApp.Services
                 if (user == null)
                     return false;
 
-                // Remove role from user
+                // Reemplazo el rol del usuario en caso que se haya seleccionado uno diferente
                 var roleId = user.Roles.FirstOrDefault().RoleId;
                 var role = _roleManager.Roles.FirstOrDefault(r => r.Id == roleId);
                 var newRole = _roleManager.Roles.FirstOrDefault(r => r.Id == usuario.SelectedRoleId);
@@ -104,9 +104,7 @@ namespace CNMWebApp.Services
                 var resultado = _userManager.Update(user);
 
                 if (resultado.Succeeded)
-                {
                     return true;
-                }
 
                 return false;
             }

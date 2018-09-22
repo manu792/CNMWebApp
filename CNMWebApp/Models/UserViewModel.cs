@@ -25,11 +25,13 @@ namespace CNMWebApp.Models
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
         [DisplayName("Celular")]
-        [DataType(DataType.PhoneNumber)]
+        //[DataType(DataType.PhoneNumber)]
+        [Phone]
         public string PhoneNumber { get; set; }
         [DisplayName("Fecha Ingreso")]
         [Required(ErrorMessage = "El campo Fecha Ingreso es requerido")]
         [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime FechaIngreso { get; set; }
         public HttpPostedFileWrapper Foto { get; set; }
         [DisplayName("Foto")]

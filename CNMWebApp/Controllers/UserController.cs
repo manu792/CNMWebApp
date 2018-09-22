@@ -57,13 +57,12 @@ namespace CNMWebApp.Controllers
         public ActionResult Create()
         {
             var roles = _roleServicio.GetAllRoles();
-            //var categorias = _categoriaServicio.ObtenerCategorias().ToList();
             var unidadesTecnicas = _unidadTecnicaServicio.ObtenerUnidadesTecnicas().ToList();
 
             return View(new UserRolesUnidadCategoria()
             {
                 Roles = roles.ToList(),
-                //Categorias = categorias.ToList(),
+                Categorias = new List<Categoria>(),
                 UnidadesTecnicas = unidadesTecnicas.ToList()
             });
         }
@@ -73,20 +72,9 @@ namespace CNMWebApp.Controllers
        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(UserRolesUnidadCategoria user)
         {
-            IEnumerable<IdentityRole> roles;
-            IEnumerable<Categoria> categorias;
-            IEnumerable<UnidadTecnica> unidadesTecnicas;
-
             if (!ModelState.IsValid)
             {
-                roles = _roleServicio.GetAllRoles();
-                categorias = _categoriaServicio.ObtenerCategorias().ToList();
-                unidadesTecnicas = _unidadTecnicaServicio.ObtenerUnidadesTecnicas().ToList();
-
-                user.Roles = roles.ToList();
-                user.Categorias = categorias.ToList();
-                user.UnidadesTecnicas = unidadesTecnicas.ToList();
-
+                CrearObjetoUsuario(user);
                 return View(user);
             }
 
@@ -95,14 +83,7 @@ namespace CNMWebApp.Controllers
                 return RedirectToAction("Index");
 
             ModelState.AddModelError("", "Hubo un problema al tratar de crear al usuario. Por favor contacte a soporte si sigue teniendo este problema.");
-
-            roles = _roleServicio.GetAllRoles();
-            categorias = _categoriaServicio.ObtenerCategorias().ToList();
-            unidadesTecnicas = _unidadTecnicaServicio.ObtenerUnidadesTecnicas().ToList();
-
-            user.Roles = roles.ToList();
-            user.Categorias = categorias.ToList();
-            user.UnidadesTecnicas = unidadesTecnicas.ToList();
+            CrearObjetoUsuario(user);
 
             return View(user);
         }
@@ -110,6 +91,11 @@ namespace CNMWebApp.Controllers
         // GET: Editar/5
         public ActionResult Editar(string id)
         {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
             var usuario = _userServicio.ObtenerUsuarioPorId(id);
             var categorias = _categoriaServicio.ObtenerCategoriasPorRoleId(usuario.Role.Id).ToList();
             var roles = _roleServicio.GetAllRoles().ToList();
@@ -141,22 +127,9 @@ namespace CNMWebApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Editar(UserRolesUnidadCategoria usuario)
         {
-            IEnumerable<IdentityRole> roles;
-            IEnumerable<Categoria> categorias;
-            IEnumerable<UnidadTecnica> unidadesTecnicas;
-            IdentityRole role;
-
             if (!ModelState.IsValid)
             {
-                roles = _roleServicio.GetAllRoles();
-                role = _roleServicio.ObtenerRolPorId(usuario.SelectedRoleId);
-                categorias = _categoriaServicio.ObtenerCategoriasPorRoleId(role.Id).ToList();
-                unidadesTecnicas = _unidadTecnicaServicio.ObtenerUnidadesTecnicas().ToList();
-
-                usuario.Roles = roles.ToList();
-                usuario.Categorias = categorias.ToList();
-                usuario.UnidadesTecnicas = unidadesTecnicas.ToList();
-                usuario.Role = _userServicio.ObtenerUsuarioPorId(usuario.Id).Role;
+                CrearObjetoUsuario(usuario);
 
                 return View(usuario);
             }
@@ -167,15 +140,7 @@ namespace CNMWebApp.Controllers
                 return RedirectToAction("Index");
             }
 
-            roles = _roleServicio.GetAllRoles();
-            role = _roleServicio.ObtenerRolPorId(usuario.SelectedRoleId);
-            categorias = _categoriaServicio.ObtenerCategoriasPorRoleId(role.Id).ToList();
-            unidadesTecnicas = _unidadTecnicaServicio.ObtenerUnidadesTecnicas().ToList();
-
-            usuario.Roles = roles.ToList();
-            usuario.Categorias = categorias.ToList();
-            usuario.UnidadesTecnicas = unidadesTecnicas.ToList();
-            usuario.Role = _userServicio.ObtenerUsuarioPorId(usuario.Id).Role;
+            CrearObjetoUsuario(usuario);
 
             return View(usuario);
         }
@@ -231,6 +196,31 @@ namespace CNMWebApp.Controllers
                 .ToList();
 
             return usuariosFiltrados;
+        }
+
+        private void CrearObjetoUsuario(UserRolesUnidadCategoria usuario)
+        {
+            usuario.Id = usuario.Id;
+            usuario.Nombre = usuario.Nombre;
+            usuario.PrimerApellido = usuario.PrimerApellido;
+            usuario.SegundoApellido = usuario.SegundoApellido;
+            usuario.Email = usuario.Email;
+            usuario.FechaIngreso = usuario.FechaIngreso;
+            usuario.EstaActivo = usuario.EstaActivo;
+            usuario.PhoneNumber = usuario.PhoneNumber;
+            usuario.Foto = usuario.Foto;
+            usuario.FotoRuta = usuario.FotoRuta;
+            usuario.Categoria = _userServicio.ObtenerUsuarioPorId(usuario.Id).Categoria;
+            usuario.Role = _userServicio.ObtenerUsuarioPorId(usuario.Id).Role;
+            usuario.Categorias = usuario.Role != null ? 
+                _categoriaServicio.ObtenerCategoriasPorRoleId(usuario.Role.Id).ToList() 
+                : new List<Categoria>();
+            usuario.UnidadTecnica = _userServicio.ObtenerUsuarioPorId(usuario.Id).UnidadTecnica;
+            usuario.Roles = _roleServicio.GetAllRoles().ToList();
+            usuario.UnidadesTecnicas = _unidadTecnicaServicio.ObtenerUnidadesTecnicas().ToList();
+            usuario.SelectedCategoriaId = usuario.SelectedCategoriaId;
+            usuario.SelectedRoleId = usuario.SelectedRoleId;
+            usuario.SelectedUnidadTecnicaId = usuario.SelectedUnidadTecnicaId;
         }
     }
 }

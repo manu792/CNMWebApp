@@ -7,7 +7,7 @@
 
 <h2>Editar</h2>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm(Html.BeginForm("Editar", "User", FormMethod.Post, new { enctype = "multipart/form-data" })))
 {
     @Html.AntiForgeryToken()
     
@@ -112,7 +112,7 @@
             @Html.Label("Cambiar Foto", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.TextBoxFor(model => model.Foto, new { @type = "file", @accept = ".png, .jpg, .jpeg" })
-                @Html.ValidationMessageFor(model => model.Foto)
+                @Html.ValidationMessageFor(model => model.Foto, "", new { @class = "text-danger" })
             </div>
         </div>
 
