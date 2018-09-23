@@ -67,4 +67,23 @@ namespace CNMWebApp.Models
         public string SelectedUnidadTecnicaId { get; set; }
         public List<UnidadTecnica> UnidadesTecnicas { get; set; }
     }
+
+    public class VacacionViewModel : UserViewModel
+    {
+        [Required(ErrorMessage = "El campo Fecha Inicio es requerido")]
+        [DisplayName("Fecha Inicio")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime FechaInicio { get; set; }
+        [Required(ErrorMessage = "El campo Fecha Final es requerido")]
+        [DisplayName("Fecha Final")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime FechaFinal { get; set; }
+        [DisplayName("Años Laborados")]
+        public int CantidadAnnosLaborados { get; set; }
+        [DisplayName("Saldo Días Disponibles")]
+        public int SaldoDiasDisponibles { get; set; }
+        public string Comentario { get; set; }
+    }
 }

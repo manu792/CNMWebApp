@@ -471,7 +471,7 @@ namespace CNMWebApp.Controllers
             if (UserManager.IsInRole(user.Id, "RecursosHumanos"))
                 return RedirectToAction("Index", "RH");
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Funcionario");
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult

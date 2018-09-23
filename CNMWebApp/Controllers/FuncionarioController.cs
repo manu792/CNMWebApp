@@ -7,10 +7,10 @@ using System.Web.Mvc;
 
 namespace CNMWebApp.Controllers
 {
-    [Auth(Roles = "Jefatura")]
-    public class JefaturaController : Controller
+    [Auth(Roles = "Funcionario")]
+    public class FuncionarioController : Controller
     {
-        // GET: Jefatura
+        // GET: Funcionario
         public ActionResult Index()
         {
             return View();

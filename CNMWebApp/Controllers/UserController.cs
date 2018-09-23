@@ -10,10 +10,11 @@ using PagedList;
 using System.IO;
 using System.Net;
 using Microsoft.AspNet.Identity.EntityFramework;
+using CNMWebApp.Authorization;
 
 namespace CNMWebApp.Controllers
 {
-    [Authorize(Roles = "Manager")]
+    [Auth(Roles = "Manager")]
     public class UserController : Controller
     {
         private UserService _userServicio;

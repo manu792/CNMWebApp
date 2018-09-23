@@ -1,4 +1,5 @@
-﻿using CNMWebApp.Models;
+﻿using CNMWebApp.Authorization;
+using CNMWebApp.Models;
 using CNMWebApp.Services;
 using Microsoft.AspNet.Identity;
 using Rotativa.Options;
@@ -12,7 +13,7 @@ using System.Web.Mvc;
 
 namespace CNMWebApp.Controllers
 {
-    [Authorize(Roles = "Manager, Jefatura")]
+    [Auth(Roles = "Manager, Jefatura")]
     public class SolicitudController : Controller
     {
         private SolicitudService solicitudService;
