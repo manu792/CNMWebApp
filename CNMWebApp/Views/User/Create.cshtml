@@ -84,7 +84,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div id="unidades-tecnicas" class="form-group">
             @Html.LabelFor(model => model.SelectedUnidadTecnicaId, "Unidad Tecnica", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownListFor(model => model.SelectedUnidadTecnicaId, new SelectList(Model.UnidadesTecnicas, "UnidadTecnicaId", "Nombre"), "- Seleccione una unidad tecnica -", new { @class = "form-control" })
@@ -92,7 +92,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div id="categorias" class="form-group">
             @Html.LabelFor(model => model.SelectedCategoriaId, "Categoria", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownListFor(model => model.SelectedCategoriaId, new SelectList(Model.Categorias, "CategoriaId", "Nombre"), "- Seleccione una categoria -", new { @class = "form-control" })

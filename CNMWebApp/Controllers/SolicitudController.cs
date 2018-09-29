@@ -13,7 +13,7 @@ using System.Web.Mvc;
 
 namespace CNMWebApp.Controllers
 {
-    [Auth(Roles = "Manager, Jefatura")]
+    [Auth(Roles = "Director, Jefatura, Recursos Humanos, Manager")]
     public class SolicitudController : Controller
     {
         private SolicitudService solicitudService;

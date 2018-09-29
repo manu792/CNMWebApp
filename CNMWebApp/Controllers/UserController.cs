@@ -14,7 +14,7 @@ using CNMWebApp.Authorization;
 
 namespace CNMWebApp.Controllers
 {
-    [Auth(Roles = "Manager")]
+    [Auth(Roles = "Manager, Recursos Humanos")]
     public class UserController : Controller
     {
         private UserService _userServicio;
@@ -31,11 +31,14 @@ namespace CNMWebApp.Controllers
         }
 
         [HttpGet]
-        public JsonResult ObtenerCategoriasPorRoleId(string roleId)
+        public JsonResult ObtenerUnidadesCategoriasPorRoleId(string roleId)
         {
+            var unidadesTecnicas = _unidadTecnicaServicio.ObtenerUnidadesTecnicasPorRoleId(roleId);
             var categorias = _categoriaServicio.ObtenerCategoriasPorRoleId(roleId).ToList();
             var listaCategorias = new SelectList(categorias, "CategoriaId", "Nombre", 0);
-            return Json(listaCategorias, JsonRequestBehavior.AllowGet);
+            var listaUnidades = new SelectList(unidadesTecnicas, "UnidadTecnicaId", "Nombre", 0);
+
+            return Json(new { Categorias = listaCategorias, Unidades = listaUnidades }, JsonRequestBehavior.AllowGet);
         }
 
         // GET: User
@@ -58,13 +61,12 @@ namespace CNMWebApp.Controllers
         public ActionResult Create()
         {
             var roles = _roleServicio.GetAllRoles();
-            var unidadesTecnicas = _unidadTecnicaServicio.ObtenerUnidadesTecnicas().ToList();
 
             return View(new UserRolesUnidadCategoria()
             {
                 Roles = roles.ToList(),
                 Categorias = new List<Categoria>(),
-                UnidadesTecnicas = unidadesTecnicas.ToList()
+                UnidadesTecnicas = new List<UnidadTecnica>()
             });
         }
 

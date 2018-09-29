@@ -1,31 +1,91 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿@model CNMWebApp.Models.UserViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
-
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
+<div class="w3-row-padding w3-center w3-margin-top">
+    <!-- Opciones para todos los empleados, menos superusuario del sistema -->
+    @if (!Model.Role.Name.Equals("manager", StringComparison.OrdinalIgnoreCase))
+    {
+        <div class="w3-third">
+            <div class="w3-card w3-container" style="min-height:250px">
+                <a href="@Url.Action("Crear", "Vacacion")">
+                    <h3>Solicitar Vacaciones</h3><br>
+                    <i class="fa fa-hotel w3-margin-bottom w3-text-theme" style="font-size:120px"></i>
+                </a>
+            </div>
+        </div>
+        <div class="w3-third">
+            <div class="w3-card w3-container" style="min-height:250px">
+                <a href="@Url.Action("Index", "Vacacion")">
+                    <h3>Mis Solicitudes</h3><br>
+                    <i class="fa fa-check w3-margin-bottom w3-text-theme" style="font-size:120px"></i>
+                </a>
+            </div>
+        </div>
+    }
+    <!-- Fin Opciones para todos los empleados -->
+    <!-- Opciones para la Jefatura y Directores -->
+    @if (Model.Role.Name.Equals("jefatura", StringComparison.OrdinalIgnoreCase) || Model.Role.Name.Equals("director", StringComparison.OrdinalIgnoreCase))
+    {
+        <div class="w3-third">
+            <div class="w3-card w3-container" style="min-height:250px">
+                <a href="@Url.Action("Index", "Solicitud")">
+                    <h3>Aprobar/Rechazar Solicitudes</h3><br>
+                    <i class="fa fa-check w3-margin-bottom w3-text-theme" style="font-size:120px"></i>
+                </a>
+            </div>
+        </div>
+    }
+    <!-- Fin Opciones para la Jefatura y Directores -->
+    <!-- Opciones para Recursos Humanos -->
+    @if (Model.Role.Name.Equals("recursos humanos", StringComparison.OrdinalIgnoreCase))
+    {
+        <div class="w3-third">
+            <div class="w3-card w3-container" style="min-height:250px">
+                <a href="@Url.Action("Index", "User")">
+                    <h3>Empleados</h3><br>
+                    <i class="fa fa-users w3-margin-bottom w3-text-theme" style="font-size:120px"></i>
+                </a>
+            </div>
+        </div>
+        <div class="w3-third">
+            <div class="w3-card w3-container" style="min-height:250px">
+                <a href="@Url.Action("Index", "Solicitud")">
+                    <h3>Solicitudes de Empleados</h3><br>
+                    <i class="fa fa-check w3-margin-bottom w3-text-theme" style="font-size:120px"></i>
+                </a>
+            </div>
+        </div>
+    }
+    <!-- Fin Opciones para Recursos Humanos -->
+    <!-- Opciones para Manager (Superusuario del sistema) -->
+    @if (Model.Role.Name.Equals("manager", StringComparison.OrdinalIgnoreCase))
+    {
+        <div class="w3-third">
+            <div class="w3-card w3-container" style="min-height:250px">
+                <a href="@Url.Action("Index", "User")">
+                    <h3>Empleados</h3><br>
+                    <i class="fa fa-users w3-margin-bottom w3-text-theme" style="font-size:120px"></i>
+                </a>
+            </div>
+        </div>
+        <div class="w3-third">
+            <div class="w3-card w3-container" style="min-height:250px">
+                <a href="@Url.Action("CrearANombreDeEmpleado", "Vacacion")">
+                    <h3>Solicitar vacaciones a nombre de un empleado</h3><br>
+                    <i class="fa fa-hotel w3-margin-bottom w3-text-theme" style="font-size:120px"></i>
+                </a>
+            </div>
+        </div>
+        <div class="w3-third">
+            <div class="w3-card w3-container" style="min-height:250px">
+                <a href="@Url.Action("Index", "Solicitud")">
+                    <h3>Historial de Solicitudes</h3><br>
+                    <i class="fa fa-check w3-margin-bottom w3-text-theme" style="font-size:120px"></i>
+                </a>
+            </div>
+        </div>
+    }
+    <!-- Fin Opciones para Manager (Superusuario del sistema) -->
 </div>

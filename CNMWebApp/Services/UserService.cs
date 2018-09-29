@@ -76,6 +76,9 @@ namespace CNMWebApp.Services
                 if (user == null)
                     return false;
 
+                // Guardar foto de usuario, en caso que se haya seleccionado alguna
+                GuardarFoto(usuario.Foto);
+
                 // Reemplazo el rol del usuario en caso que se haya seleccionado uno diferente
                 var roleId = user.Roles.FirstOrDefault().RoleId;
                 var role = _roleManager.Roles.FirstOrDefault(r => r.Id == roleId);
@@ -99,7 +102,7 @@ namespace CNMWebApp.Services
                 user.UnidadTecnicaId = Convert.ToInt32(usuario.SelectedUnidadTecnicaId);
                 user.CategoriaId = Convert.ToInt32(usuario.SelectedCategoriaId);
                 user.EstaActivo = usuario.EstaActivo;
-                user.FotoRuta = usuario.FotoRuta;
+                user.FotoRuta = usuario.Foto != null ? Path.Combine(System.Web.HttpContext.Current.Server.MapPath("~/Fotos"), usuario.Foto.FileName) : null;
 
                 var resultado = _userManager.Update(user);
 

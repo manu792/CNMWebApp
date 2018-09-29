@@ -1,6 +1,9 @@
-﻿using System;
+﻿using CNMWebApp.Models;
+using CNMWebApp.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -8,9 +11,33 @@ namespace CNMWebApp.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        private UserService _usuarioServicio;
+        private RoleService _rolServicio;
+
+        public HomeController()
         {
-            return View();
+            _usuarioServicio = new UserService();
+            _rolServicio = new RoleService();
+        }
+
+        public async Task<ActionResult> Index()
+        {
+            var usuario = await _usuarioServicio.GetLoggedInUser();
+
+            return View(new UserViewModel()
+            {
+                Id = usuario.Id,
+                Nombre = usuario.Nombre,
+                PrimerApellido = usuario.PrimerApellido,
+                SegundoApellido = usuario.SegundoApellido,
+                Email = usuario.Email,
+                PhoneNumber = usuario.PhoneNumber,
+                Role = _rolServicio.ObtenerRolPorId(usuario.Roles.FirstOrDefault().RoleId),
+                UnidadTecnica = usuario.UnidadTecnica,
+                Categoria = usuario.Categoria,
+                FechaIngreso = usuario.FechaIngreso,
+                EstaActivo = usuario.EstaActivo
+            });
         }
 
         [Authorize]

@@ -10,7 +10,7 @@ using System.Web.Mvc;
 
 namespace CNMWebApp.Controllers
 {
-    [Auth(Roles = "Funcionario")]
+    [Auth(Roles = "Funcionario, Jefatura, Recursos Humanos, Director, Manager")]
     public class VacacionController : Controller
     {
         private UserService _userServicio;
@@ -63,6 +63,25 @@ namespace CNMWebApp.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Crear(VacacionViewModel solicitudVacaciones)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(solicitudVacaciones);
+            }
+
+            return View(solicitudVacaciones);
+        }
+
+        // GET: Vacacion/CrearANombreDeEmpleado
+        public ActionResult CrearANombreDeEmpleado()
+        {
+            return View();
+        }
+
+        // POST: Vacacion/CrearANombreDeEmpleado
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CrearANombreDeEmpleado(VacacionViewModel solicitudVacaciones)
         {
             if (!ModelState.IsValid)
             {

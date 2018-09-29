@@ -126,22 +126,22 @@ namespace CNMWebApp.Models
                 new UnidadTecnica()
                 {
                     UnidadTecnicaId = 1,
-                    Nombre = "Centro Nacional de la Musica (CNM)"
+                    Nombre = "Centro Nacional de la Música (CNM)"
                 },
                 new UnidadTecnica()
                 {
                     UnidadTecnicaId = 2,
-                    Nombre = "Instituto Nacional de la Musica (INM)"
+                    Nombre = "Instituto Nacional de la Música (INM)"
                 },
                 new UnidadTecnica()
                 {
                     UnidadTecnicaId = 3,
-                    Nombre = "Coro Sinfonico Nacional"
+                    Nombre = "Coro Sinfónico Nacional"
                 },
                 new UnidadTecnica()
                 {
                     UnidadTecnicaId = 4,
-                    Nombre = "Compañia de Lirica Nacional"
+                    Nombre = "Compañía de Lírica Nacional"
                 },
                 new UnidadTecnica()
                 {
@@ -151,7 +151,7 @@ namespace CNMWebApp.Models
                 new UnidadTecnica()
                 {
                     UnidadTecnicaId = 6,
-                    Nombre = "Manager"
+                    Nombre = "Todas las unidades técnicas"
                 }
             });
             context.SaveChanges();
@@ -170,7 +170,7 @@ namespace CNMWebApp.Models
                 new Categoria()
                 {
                     CategoriaId = 2,
-                    Nombre = "Tecnicos",
+                    Nombre = "Técnicos",
                     RolId = "1"
                 },
                 new Categoria()
@@ -214,6 +214,12 @@ namespace CNMWebApp.Models
                     CategoriaId = 9,
                     Nombre = "Manager",
                     RolId = "3"
+                },
+                new Categoria()
+                {
+                    CategoriaId = 10,
+                    Nombre = "RH",
+                    RolId = "5"
                 }
             });
             context.SaveChanges();
@@ -244,7 +250,7 @@ namespace CNMWebApp.Models
             context.Roles.Add(new IdentityRole()
             {
                 Id = "5",
-                Name = "RH"
+                Name = "Recursos Humanos"
             });
             context.SaveChanges();
         }
@@ -264,8 +270,8 @@ namespace CNMWebApp.Models
                     UserName = "manager@manager.com",
                     Email = "manager@manager.com",
                     FechaIngreso = DateTime.Now,
-                    UnidadTecnicaId = 1,
-                    CategoriaId = 1,
+                    UnidadTecnicaId = 6,
+                    CategoriaId = 9,
                 };
 
                 var task = userManager.CreateAsync(user, "Manager123.");

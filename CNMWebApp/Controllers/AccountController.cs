@@ -404,7 +404,7 @@ namespace CNMWebApp.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Login", "Account");
         }
 
         //
@@ -460,18 +460,7 @@ namespace CNMWebApp.Controllers
             if (Url.IsLocalUrl(returnUrl))
                 return Redirect(returnUrl);
 
-            var user = UserManager.FindByEmail(email);
-
-            if(UserManager.IsInRole(user.Id, "Manager"))
-                return RedirectToAction("Index", "Admin");
-
-            if (UserManager.IsInRole(user.Id, "Jefatura"))
-                return RedirectToAction("Index", "Jefatura");
-
-            if (UserManager.IsInRole(user.Id, "RecursosHumanos"))
-                return RedirectToAction("Index", "RH");
-
-            return RedirectToAction("Index", "Funcionario");
+            return RedirectToAction("Index", "Home");
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult

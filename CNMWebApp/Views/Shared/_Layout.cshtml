@@ -64,7 +64,10 @@
 
             $("#SelectedRoleId").change(function (event) {
                 var roleId = event.target.value;
-                var url = "/User/ObtenerCategoriasPorRoleId/";
+                var url = "/User/ObtenerUnidadesCategoriasPorRoleId/";
+
+                
+
 
                 $.ajax({
                     url: url,
@@ -73,10 +76,31 @@
                     type: "GET",
                     success: function (data) {
                         var markup = "";
-                        for (var x = 0; x < data.length; x++) {
-                            markup += "<option value=" + data[x].Value + ">" + data[x].Text + "</option>";
+
+                        $('#SelectedUnidadTecnicaId').html('');
+                        $('#SelectedCategoriaId').html('');
+
+                        // Lleno dropdown con datos de unidades tecnicas
+                        for (var x = 0; x < data.Unidades.length; x++) {
+                            markup += "<option value=" + data.Unidades[x].Value + ">" + data.Unidades[x].Text + "</option>";
                         }
-                        $("#SelectedCategoriaId").append(markup).show();
+                        $("#SelectedUnidadTecnicaId").append(markup);
+                        $("#unidades-tecnicas").show();
+                        if (data.Unidades.length === 1) {
+                            $("#unidades-tecnicas").hide();
+                        }
+
+                        // Lleno dropdown con datos de categorias
+                        markup = "";
+                        for (var x = 0; x < data.Categorias.length; x++) {
+                            markup += "<option value=" + data.Categorias[x].Value + ">" + data.Categorias[x].Text + "</option>";
+                        }
+                        $("#SelectedCategoriaId").append(markup);
+                        $("#categorias").show();
+                        if (data.Categorias.length === 1) {
+                            $("#categorias").hide();
+                        }
+
                     },
                     error: function (response) {
                         console.log(response.responseText);
