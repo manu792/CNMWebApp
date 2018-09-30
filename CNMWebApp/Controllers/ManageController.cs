@@ -215,8 +215,9 @@ namespace CNMWebApp.Controllers
 
         //
         // GET: /Manage/ChangePassword
-        public ActionResult ChangePassword()
+        public ActionResult ChangePassword(string returnUrl)
         {
+            TempData["returnUrl"] = returnUrl;
             return View();
         }
 
@@ -226,6 +227,8 @@ namespace CNMWebApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ChangePassword(ChangePasswordViewModel model)
         {
+            var returnUrl = TempData["returnUrl"] != null ? TempData["returnUrl"].ToString() : string.Empty;
+
             if (!ModelState.IsValid)
             {
                 return View(model);
@@ -233,12 +236,25 @@ namespace CNMWebApp.Controllers
             var result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
             if (result.Succeeded)
             {
-                var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
-                if (user != null)
+                var usuario = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+
+                if(usuario != null)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    // Actualizar EsContrasenaTemporal a false
+                    usuario.EsContrasenaTemporal = false;
+                    var resultUpdate = UserManager.Update(usuario);
+
+                    if (resultUpdate.Succeeded)
+                    {
+                        await SignInManager.SignInAsync(usuario, isPersistent: false, rememberBrowser: false);
+
+                        if (Url.IsLocalUrl(returnUrl))
+                            return Redirect(returnUrl);
+
+                        return RedirectToAction("Index", new { Message = ManageMessageId.ChangePasswordSuccess });
+                    }
+                    AddErrors(resultUpdate);
                 }
-                return RedirectToAction("Index", new { Message = ManageMessageId.ChangePasswordSuccess });
             }
             AddErrors(result);
             return View(model);

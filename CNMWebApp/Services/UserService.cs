@@ -7,6 +7,7 @@ using System;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using System.IO;
+using System.Web.Security;
 using System.Data.Entity;
 
 namespace CNMWebApp.Services
@@ -161,35 +162,40 @@ namespace CNMWebApp.Services
             return await _userManager.FindByIdAsync(HttpContext.Current.User.Identity.GetUserId());
         }
 
-        public async Task<bool> Create(UserRolesUnidadCategoria user)
+        public async Task<bool> Crear(UserRolesUnidadCategoria usuario)
         {
             try
             {
-                var role = await _roleManager.FindByIdAsync(user.SelectedRoleId);
+                var role = await _roleManager.FindByIdAsync(usuario.SelectedRoleId);
+                var contrasenaTemporal = Membership.GeneratePassword(15, 2);
 
                 var result = await _userManager.CreateAsync(new ApplicationUser()
                 {
-                    Id = user.Id,
-                    Nombre = user.Nombre,
-                    PrimerApellido = user.PrimerApellido,
-                    SegundoApellido = user.SegundoApellido,
-                    Email = user.Email,
-                    PhoneNumber = user.PhoneNumber,
-                    UserName = user.Email,
-                    FechaIngreso = user.FechaIngreso,
-                    UnidadTecnicaId = Convert.ToInt32(user.SelectedUnidadTecnicaId),
-                    CategoriaId = Convert.ToInt32(user.SelectedCategoriaId),
+                    Id = usuario.Id,
+                    Nombre = usuario.Nombre,
+                    PrimerApellido = usuario.PrimerApellido,
+                    SegundoApellido = usuario.SegundoApellido,
+                    Email = usuario.Email,
+                    PhoneNumber = usuario.PhoneNumber,
+                    UserName = usuario.Email,
+                    FechaIngreso = usuario.FechaIngreso,
+                    UnidadTecnicaId = Convert.ToInt32(usuario.SelectedUnidadTecnicaId),
+                    CategoriaId = Convert.ToInt32(usuario.SelectedCategoriaId),
                     EstaActivo = true,
-                    FotoRuta = user.Foto != null ? Path.Combine(System.Web.HttpContext.Current.Server.MapPath("~/Fotos"), user.Foto.FileName) : null
-                }, "Test123.");
+                    EsContrasenaTemporal = true,
+                    FotoRuta = usuario.Foto != null ? Path.Combine(System.Web.HttpContext.Current.Server.MapPath("~/Fotos"), usuario.Foto.FileName) : null
+                }, contrasenaTemporal);
 
                 if (result.Succeeded)
                 {
-                    var userSaved = await _userManager.FindByEmailAsync(user.Email);
+                    var userSaved = await _userManager.FindByEmailAsync(usuario.Email);
                     await _userManager.AddToRoleAsync(userSaved.Id.ToString(), role.Name);
 
                     // Guardar foto de usuario, en caso que se haya seleccionado alguna
-                    GuardarFoto(user.Foto);
+                    GuardarFoto(usuario.Foto);
+
+                    // Envio contrasena temporal al correo del usuario
+                    await _userManager.SendEmailAsync(userSaved.Id, "Contraseña Temporal", $"Su contraseña temporal para el sistema de solicitud de vacaciones es: { contrasenaTemporal }");
 
                     return true;
                 }

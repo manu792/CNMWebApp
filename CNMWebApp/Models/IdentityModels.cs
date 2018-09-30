@@ -66,6 +66,7 @@ namespace CNMWebApp.Models
         public int CategoriaId { get; set; }
         public int UnidadTecnicaId { get; set; }
         public bool EstaActivo { get; set; }
+        public bool EsContrasenaTemporal { get; set; }
 
         // Virtual properties, foregin keys to Categoria and UnidadTecnica
         public virtual Categoria Categoria { get; set; }

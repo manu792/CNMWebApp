@@ -457,6 +457,10 @@ namespace CNMWebApp.Controllers
 
         private ActionResult RedirectToLocal(string returnUrl, string email)
         {
+            var usuario = UserManager.FindByEmail(email);
+            if (usuario.EsContrasenaTemporal)
+                return RedirectToAction("ChangePassword", "Manage", new { returnUrl });
+
             if (Url.IsLocalUrl(returnUrl))
                 return Redirect(returnUrl);
 

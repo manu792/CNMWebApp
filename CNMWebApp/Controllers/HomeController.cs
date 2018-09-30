@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace CNMWebApp.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private UserService _usuarioServicio;

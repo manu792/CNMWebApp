@@ -81,7 +81,7 @@ namespace CNMWebApp.Controllers
                 return View(user);
             }
 
-            var succeeded = await _userServicio.Create(user);
+            var succeeded = await _userServicio.Crear(user);
             if (succeeded)
                 return RedirectToAction("Index");
 
