@@ -79,6 +79,8 @@ namespace CNMWebApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
+            var passwordHasher = new PasswordHasher();
+
             if (!ModelState.IsValid)
             {
                 return View(model);
@@ -86,8 +88,13 @@ namespace CNMWebApp.Controllers
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            //var signedUser = UserManager.FindByEmail(model.Email);
+            // var signedUser = UserManager.FindByEmail(model.Email);
+
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            // await SignInManager.SignInAsync(signedUser, false, false);
+
+            //return RedirectToLocal(returnUrl, model.Email);
+
             switch (result)
             {
                 case SignInStatus.Success:
