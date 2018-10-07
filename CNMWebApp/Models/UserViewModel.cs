@@ -71,20 +71,16 @@ namespace CNMWebApp.Models
 
     public class VacacionViewModel : UserViewModel
     {
-        [Required(ErrorMessage = "El campo Fecha Inicio es requerido")]
-        [DisplayName("Fecha Inicio")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime FechaInicio { get; set; }
-        [Required(ErrorMessage = "El campo Fecha Final es requerido")]
-        [DisplayName("Fecha Final")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime FechaFinal { get; set; }
+        [Required(ErrorMessage = "El campo Dias es requerido")]
+        [DisplayName("Días a solicitar")]
+        // [DataType(DataType.Date)]
+        // [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public string Dias { get; set; }
         [DisplayName("Años Laborados")]
         public int CantidadAnnosLaborados { get; set; }
         [DisplayName("Saldo Días Disponibles")]
         public int SaldoDiasDisponibles { get; set; }
+        [DisplayName("Cantidad Días Solicitados")]
         public int CantidadDiasSolicitados { get; set; }
         [DataType(DataType.MultilineText)]
         public string Comentario { get; set; }

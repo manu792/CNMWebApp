@@ -23,15 +23,33 @@ namespace CNMWebApp.Models
     {
         public int SolicitudVacacionesId { get; set; }
         public string UsuarioId { get; set; }
-        public DateTime FechaInicio { get; set; }
-        public DateTime FechaFin { get; set; }
         public int CantidadDiasSolicitados { get; set; }
         public string Comentario { get; set; }
         public int EstadoId { get; set; }
+        public DateTime FechaSolicitud { get; set; }
 
         // Virtual properties mapping to ApplicationUser and Estado
         public virtual ApplicationUser Usuario { get; set; }
         public virtual Estado Estado { get; set; }
+        public virtual ICollection<DiasPorSolicitud> DiasPorSolicitud { get; set; }
+    }
+
+    [Table("DiasPorSolicitud")]
+    public class DiasPorSolicitud
+    {
+        [Key]
+        [Column(Order = 0)]
+        public int SolicitudVacacionesId { get; set; }
+        [Key]
+        [Column(Order = 1)]
+        public string UsuarioId { get; set; }
+        [Key]
+        [Column(Order = 2)]
+        public DateTime Fecha { get; set; }
+
+        // Virtual properties mapping to ApplicationUser and Estado
+        public virtual ApplicationUser Usuario { get; set; }
+        public virtual SolicitudVacaciones Solicitud { get; set; }
     }
 
     // Unidades Tecnicas del empleado va a ir mapeada a la tabla Unidades Tecnicas
@@ -295,6 +313,7 @@ namespace CNMWebApp.Models
         public DbSet<UnidadTecnica> UnidadesTecnicas { get; set; }
         public DbSet<Estado> Estados { get; set; }
         public DbSet<SolicitudVacaciones> SolicitudesVacaciones { get; set; }
+        public DbSet<DiasPorSolicitud> DiasPorSolicitud { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

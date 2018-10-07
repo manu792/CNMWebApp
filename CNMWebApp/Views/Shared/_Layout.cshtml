@@ -62,12 +62,27 @@
                 autoclose: true
             });
 
-            $('.datepicker-vacaciones').datepicker({
+            //$('.datepicker-vacaciones').datepicker({
+            //    format: 'yyyy/mm/dd',
+            //    todayHighlight: true,
+            //    multidate: true,
+            //}).datepicker('update', new Date());
+
+            $('.select-dates').datepicker({
                 format: 'yyyy/mm/dd',
                 todayHighlight: true,
-                // autoclose: true,
                 multidate: true,
-            }).datepicker('update', new Date());
+                linkField: 'Dias',
+                linkFormat: 'yyyy/mm/dd'
+            }).datepicker();
+
+            $('.select-dates').datepicker().on('changeDate', function () {
+                var dias = $('#selected-days').val();
+                $('#Dias').val(dias);
+
+                var selectedDates = $('.select-dates').datepicker("getDates");
+                $('#CantidadDiasSolicitados').val(selectedDates.length);
+            });
 
 
             $("#SelectedRoleId").change(function (event) {

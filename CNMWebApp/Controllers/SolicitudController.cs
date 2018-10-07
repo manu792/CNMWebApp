@@ -13,7 +13,7 @@ using System.Web.Mvc;
 
 namespace CNMWebApp.Controllers
 {
-    [Auth(Roles = "Director, Jefatura, Recursos Humanos, Manager")]
+    [Auth(Roles = "Funcionario, Director, Jefatura, Recursos Humanos")]
     public class SolicitudController : Controller
     {
         private SolicitudService solicitudService;
@@ -26,11 +26,11 @@ namespace CNMWebApp.Controllers
         }
 
         // GET: Solicitud
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(bool misSolicitudes = true)
         {
             var user = await userService.GetLoggedInUser();
 
-            var solicitudes = solicitudService.ObtenerSolicitudesPorUnidadTecnica(Convert.ToInt32(user.UnidadTecnicaId));
+            var solicitudes = solicitudService.ObtenerSolicitudes(user, misSolicitudes);
             return View(solicitudes);
         }
 
@@ -39,16 +39,17 @@ namespace CNMWebApp.Controllers
         {
             // Generate PDF for sample purposes
             var user = await userService.GetLoggedInUser();
-            var solicitudes = solicitudService.ObtenerSolicitudesPorUnidadTecnica(Convert.ToInt32(user.UnidadTecnicaId));
-            var model = solicitudes.FirstOrDefault(x => x.SolicitudVacacionesId == id);
+            //var solicitudes = solicitudService.ObtenerSolicitudes(user);
+            //var model = solicitudes.FirstOrDefault(x => x.SolicitudVacacionesId == id);
 
-            return View(model);
+            return null;
+            //return View(model);
         }
 
         public async Task<ActionResult> GeneratePDF()
         {
             var user = await userService.GetLoggedInUser();
-            var solicitudes = solicitudService.ObtenerSolicitudesPorUnidadTecnica(Convert.ToInt32(user.UnidadTecnicaId));
+            var solicitudes = solicitudService.ObtenerSolicitudes(user, true);
 
             var actionPDF = new Rotativa.ViewAsPdf("Detalles", solicitudes.First())
             {

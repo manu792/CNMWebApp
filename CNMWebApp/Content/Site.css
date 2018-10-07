@@ -36,5 +36,70 @@ textarea {
 }
 
 textarea.form-control {
-    height: 100px;
+    height: 170px;
+    max-width: 60% !important;
+}
+
+.datepicker.datepicker-inline {
+    width: 70%;
+    height: 500px;
+}
+
+.datepicker-inline > .datepicker-days {
+    width: 100%;
+    height: 100%;
+}
+
+    .datepicker-inline > .datepicker-days > .table-condensed {
+        width: 100%;
+        height: 100%;
+        border: 1px solid black;
+    }
+
+.datepicker-inline > .datepicker-months {
+    width: 100%;
+    height: 100%;
+}
+
+    .datepicker-inline > .datepicker-months > .table-condensed {
+        width: 100%;
+        height: 100%;
+        border: 1px solid black;
+    }
+
+.datepicker-inline > .datepicker-years {
+    width: 100%;
+    height: 100%;
+}
+
+    .datepicker-inline > .datepicker-years > .table-condensed {
+        width: 100%;
+        height: 100%;
+        border: 1px solid black;
+    }
+
+.datepicker-inline > .datepicker-decades {
+    width: 100%;
+    height: 100%;
+}
+
+    .datepicker-inline > .datepicker-decades > .table-condensed {
+        width: 100%;
+        height: 100%;
+        border: 1px solid black;
+    }
+
+.datepicker-inline > .datepicker-centuries {
+    width: 100%;
+    height: 100%;
+}
+
+    .datepicker-inline > .datepicker-centuries > .table-condensed {
+        width: 100%;
+        height: 100%;
+        border: 1px solid black;
+    }
+
+label {
+    text-align: left !important;
 }

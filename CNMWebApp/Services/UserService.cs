@@ -170,9 +170,30 @@ namespace CNMWebApp.Services
         //    });
         //}
 
-        public async Task<ApplicationUser> GetLoggedInUser()
+        public async Task<UserViewModel> GetLoggedInUser()
         {
-            return await _userManager.FindByIdAsync(HttpContext.Current.User.Identity.GetUserId());
+            var user = await _userManager.FindByIdAsync(HttpContext.Current.User.Identity.GetUserId());
+            var role = user.Roles.Count == 1 ?
+                user.Roles.FirstOrDefault() :
+                user.Roles.FirstOrDefault(r => !_roleManager.FindById(r.RoleId).Name.Equals("manager", StringComparison.OrdinalIgnoreCase));
+                
+            return new UserViewModel()
+            {
+                Id = user.Id,
+                Nombre = user.Nombre,
+                PrimerApellido = user.PrimerApellido,
+                SegundoApellido = user.SegundoApellido,
+                Email = user.Email,
+                Categoria = user.Categoria,
+                EsSuperusuario = EsSuperusuario(user.Id),
+                EstaActivo = user.EstaActivo,
+                FechaIngreso = user.FechaIngreso,
+                //Foto = user.FotoRuta
+                FotoRuta = user.FotoRuta,
+                PhoneNumber = user.PhoneNumber,
+                UnidadTecnica = user.UnidadTecnica,
+                Role = _roleManager.FindById(role.RoleId)
+            };
         }
 
         public async Task<bool> Crear(UserRolesUnidadCategoria usuario)

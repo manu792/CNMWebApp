@@ -251,7 +251,8 @@ namespace CNMWebApp.Controllers
                         if (Url.IsLocalUrl(returnUrl))
                             return Redirect(returnUrl);
 
-                        return RedirectToAction("Index", new { Message = ManageMessageId.ChangePasswordSuccess });
+                        return RedirectToAction("Index", "Home");
+                        // return RedirectToAction("Index", new { Message = ManageMessageId.ChangePasswordSuccess });
                     }
                     AddErrors(resultUpdate);
                 }

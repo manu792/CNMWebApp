@@ -15,11 +15,13 @@ namespace CNMWebApp.Controllers
     {
         private UserService _userServicio;
         private RoleService _roleServicio;
+        private SolicitudService _solicitudServicio;
 
         public VacacionController()
         {
             _userServicio = new UserService();
             _roleServicio = new RoleService();
+            _solicitudServicio = new SolicitudService();
         }
 
         // GET: Vacacion
@@ -46,7 +48,7 @@ namespace CNMWebApp.Controllers
                 SegundoApellido = usuario.SegundoApellido,
                 Email = usuario.Email,
                 PhoneNumber = usuario.PhoneNumber,
-                Role = _roleServicio.ObtenerRolPorId(usuario.Roles.FirstOrDefault().RoleId),
+                Role = usuario.Role,
                 UnidadTecnica = usuario.UnidadTecnica,
                 Categoria = usuario.Categoria,
                 FechaIngreso = usuario.FechaIngreso,
@@ -70,7 +72,23 @@ namespace CNMWebApp.Controllers
                 return View(solicitudVacaciones);
             }
 
-            return View(solicitudVacaciones);
+            try
+            {
+                var rowsAffected = _solicitudServicio.CrearSolicitudVacaciones(solicitudVacaciones);
+
+                if (rowsAffected <= 0)
+                {
+                    ModelState.AddModelError("", "Hubo un problema al tratar de agregar la solicitud. Favor intente de nuevo más tarde.");
+                    return View(solicitudVacaciones);
+                }
+
+                return RedirectToAction("Index", "Solicitud", new { misSolicitudes = true });
+            }
+            catch(Exception ex)
+            {
+                ModelState.AddModelError("", "Hubo un problema al tratar de agregar la solicitud. Favor intente de nuevo más tarde.");
+                return View(solicitudVacaciones);
+            }
         }
 
         // GET: Vacacion/CrearANombreDeEmpleado

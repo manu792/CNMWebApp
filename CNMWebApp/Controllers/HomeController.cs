@@ -25,8 +25,8 @@ namespace CNMWebApp.Controllers
         {
             var usuario = await _usuarioServicio.GetLoggedInUser();
             
-            var role = usuario.Roles.Count == 1 ? usuario.Roles.FirstOrDefault() :
-                usuario.Roles.FirstOrDefault(x => !_rolServicio.ObtenerRolPorId(x.RoleId).Name.Equals("manager", StringComparison.OrdinalIgnoreCase));
+            //var role = usuario.Roles.Count == 1 ? usuario.Roles.FirstOrDefault() :
+            //    usuario.Roles.FirstOrDefault(x => !_rolServicio.ObtenerRolPorId(x.RoleId).Name.Equals("manager", StringComparison.OrdinalIgnoreCase));
 
             return View(new UserViewModel()
             {
@@ -36,7 +36,7 @@ namespace CNMWebApp.Controllers
                 SegundoApellido = usuario.SegundoApellido,
                 Email = usuario.Email,
                 PhoneNumber = usuario.PhoneNumber,
-                Role = _rolServicio.ObtenerRolPorId(role.RoleId),
+                Role = usuario.Role,
                 UnidadTecnica = usuario.UnidadTecnica,
                 Categoria = usuario.Categoria,
                 FechaIngreso = usuario.FechaIngreso,
