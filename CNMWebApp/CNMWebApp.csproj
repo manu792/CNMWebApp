@@ -399,7 +399,6 @@
     <Content Include="Views\Jefatura\Index.cshtml" />
     <Content Include="Views\Solicitud\Index.cshtml" />
     <Content Include="Views\Solicitud\Detalles.cshtml" />
-    <Content Include="Views\User\CreateNext.cshtml" />
     <Content Include="Views\User\Eliminar.cshtml" />
     <Content Include="Views\User\Editar.cshtml" />
     <Content Include="Views\Funcionario\Index.cshtml" />

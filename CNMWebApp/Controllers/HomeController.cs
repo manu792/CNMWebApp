@@ -24,6 +24,9 @@ namespace CNMWebApp.Controllers
         public async Task<ActionResult> Index()
         {
             var usuario = await _usuarioServicio.GetLoggedInUser();
+            
+            var role = usuario.Roles.Count == 1 ? usuario.Roles.FirstOrDefault() :
+                usuario.Roles.FirstOrDefault(x => !_rolServicio.ObtenerRolPorId(x.RoleId).Name.Equals("manager", StringComparison.OrdinalIgnoreCase));
 
             return View(new UserViewModel()
             {
@@ -33,11 +36,12 @@ namespace CNMWebApp.Controllers
                 SegundoApellido = usuario.SegundoApellido,
                 Email = usuario.Email,
                 PhoneNumber = usuario.PhoneNumber,
-                Role = _rolServicio.ObtenerRolPorId(usuario.Roles.FirstOrDefault().RoleId),
+                Role = _rolServicio.ObtenerRolPorId(role.RoleId),
                 UnidadTecnica = usuario.UnidadTecnica,
                 Categoria = usuario.Categoria,
                 FechaIngreso = usuario.FechaIngreso,
-                EstaActivo = usuario.EstaActivo
+                EstaActivo = usuario.EstaActivo,
+                EsSuperusuario = _usuarioServicio.EsSuperusuario(usuario.Id),
             });
         }
 

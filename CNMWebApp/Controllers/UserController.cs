@@ -115,6 +115,7 @@ namespace CNMWebApp.Controllers
                 //Foto = usuario.Foto,
                 PhoneNumber = usuario.PhoneNumber,
                 EstaActivo = usuario.EstaActivo,
+                EsSuperusuario = usuario.EsSuperusuario,
                 Categorias = categorias,
                 Roles = roles,
                 UnidadesTecnicas = unidadesTecnicas,

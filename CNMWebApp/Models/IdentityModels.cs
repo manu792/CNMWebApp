@@ -25,6 +25,7 @@ namespace CNMWebApp.Models
         public string UsuarioId { get; set; }
         public DateTime FechaInicio { get; set; }
         public DateTime FechaFin { get; set; }
+        public int CantidadDiasSolicitados { get; set; }
         public string Comentario { get; set; }
         public int EstadoId { get; set; }
 
@@ -272,6 +273,7 @@ namespace CNMWebApp.Models
                     Email = "manager@manager.com",
                     FechaIngreso = DateTime.Now,
                     UnidadTecnicaId = 6,
+                    EstaActivo = true,
                     CategoriaId = 9,
                 };
 

@@ -20,7 +20,7 @@ namespace CNMWebApp.Services
 
         public IEnumerable<IdentityRole> GetAllRoles()
         {
-            return _roleManager.Roles;
+            return _roleManager.Roles.Where(r => !r.Name.Equals("manager", StringComparison.OrdinalIgnoreCase));
         }
 
         public IdentityRole ObtenerRolPorId(string rolId)

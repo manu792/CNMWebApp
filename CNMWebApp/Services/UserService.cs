@@ -42,8 +42,14 @@ namespace CNMWebApp.Services
                 Role = _roleManager.FindById(x.Roles.First().RoleId.ToString()),
                 UnidadTecnica = x.UnidadTecnica,
                 Categoria = x.Categoria,
-                EstaActivo = x.EstaActivo
+                EstaActivo = x.EstaActivo,
+                EsSuperusuario = _userManager.IsInRole(x.Id, "Manager")
             }).ToList();
+        }
+
+        public bool EsSuperusuario(string id)
+        {
+            return _userManager.IsInRole(id, "Manager");
         }
 
         public UserViewModel ObtenerUsuarioPorId(string id)
@@ -65,6 +71,7 @@ namespace CNMWebApp.Services
                 UnidadTecnica = user.UnidadTecnica,
                 Categoria = user.Categoria,
                 EstaActivo = user.EstaActivo,
+                EsSuperusuario = _userManager.IsInRole(user.Id, "Manager"),
                 FotoRuta = user.FotoRuta
             };
         }
@@ -90,6 +97,12 @@ namespace CNMWebApp.Services
                     _userManager.RemoveFromRole(user.Id, role.Name);
                     _userManager.AddToRole(user.Id, newRole.Name);
                 }
+
+                if(usuario.EsSuperusuario && !_userManager.IsInRole(user.Id, "Manager"))
+                    _userManager.AddToRole(user.Id, "Manager");
+
+                if (!usuario.EsSuperusuario && _userManager.IsInRole(user.Id, "Manager"))
+                    _userManager.RemoveFromRole(user.Id, "Manager");
 
                 // Actualizo usuario con nuevos datos
                 user.Id = usuario.Id;
@@ -191,11 +204,14 @@ namespace CNMWebApp.Services
                     var userSaved = await _userManager.FindByEmailAsync(usuario.Email);
                     await _userManager.AddToRoleAsync(userSaved.Id.ToString(), role.Name);
 
+                    if (usuario.EsSuperusuario)
+                        await _userManager.AddToRoleAsync(userSaved.Id.ToString(), "Manager");
+
                     // Guardar foto de usuario, en caso que se haya seleccionado alguna
                     GuardarFoto(usuario.Foto);
 
                     // Envio contrasena temporal al correo del usuario
-                    await _userManager.SendEmailAsync(userSaved.Id, "Contraseña Temporal", $"Su contraseña temporal para el sistema de solicitud de vacaciones es: { contrasenaTemporal }");
+                    await _userManager.SendEmailAsync(userSaved.Id, "Contraseña Temporal", $"Su contraseña temporal para el sistema de solicitud de vacaciones es: <strong>{ contrasenaTemporal }</strong>");
 
                     return true;
                 }
@@ -226,13 +242,5 @@ namespace CNMWebApp.Services
                 throw;
             }
         }
-
-        //private void AddErrors(IdentityResult result)
-        //{
-        //    foreach (var error in result.Errors)
-        //    {
-        //        ModelState.AddModelError("", error);
-        //    }
-        //}
     }
 }

@@ -84,6 +84,16 @@
             </div>
         </div>
 
+        <div class="form-group">
+            @Html.LabelFor(model => model.EsSuperusuario, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.EsSuperusuario)
+                    @Html.ValidationMessageFor(model => model.EsSuperusuario, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
         <div id="unidades-tecnicas" class="form-group">
             @Html.LabelFor(model => model.SelectedUnidadTecnicaId, "Unidad Tecnica", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">

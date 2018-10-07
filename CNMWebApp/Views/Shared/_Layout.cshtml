@@ -53,7 +53,7 @@
             $('.datepicker').datepicker({
                 format: 'yyyy/mm/dd',
                 todayHighlight: true,
-                autoclose: true
+                autoclose: true,
             }).datepicker('update', new Date());
 
             $('.datepicker-edit').datepicker({
@@ -61,6 +61,14 @@
                 todayHighlight: true,
                 autoclose: true
             });
+
+            $('.datepicker-vacaciones').datepicker({
+                format: 'yyyy/mm/dd',
+                todayHighlight: true,
+                // autoclose: true,
+                multidate: true,
+            }).datepicker('update', new Date());
+
 
             $("#SelectedRoleId").change(function (event) {
                 var roleId = event.target.value;

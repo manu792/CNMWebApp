@@ -34,3 +34,7 @@ textarea {
 .input-group {
     width: 18% !important;
 }
+
+textarea.form-control {
+    height: 100px;
+}

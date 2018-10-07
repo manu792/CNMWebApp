@@ -78,9 +78,7 @@ namespace CNMWebApp.Controllers
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
-        {
-            var passwordHasher = new PasswordHasher();
-
+        { 
             if (!ModelState.IsValid)
             {
                 return View(model);

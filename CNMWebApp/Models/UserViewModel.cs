@@ -38,6 +38,7 @@ namespace CNMWebApp.Models
         public string FotoRuta { get; set; }
         [DisplayName("Activo")]
         public bool EstaActivo { get; set; }
+        public bool EsSuperusuario { get; set; }
 
         // Vinculan el usuario con los datos de las tablas Roles, Categoria y UnidadTecnica
         [DisplayName("Rol")]
@@ -84,6 +85,8 @@ namespace CNMWebApp.Models
         public int CantidadAnnosLaborados { get; set; }
         [DisplayName("Saldo Días Disponibles")]
         public int SaldoDiasDisponibles { get; set; }
+        public int CantidadDiasSolicitados { get; set; }
+        [DataType(DataType.MultilineText)]
         public string Comentario { get; set; }
     }
 }

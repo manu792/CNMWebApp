@@ -52,6 +52,7 @@ namespace CNMWebApp.Controllers
                 FechaIngreso = usuario.FechaIngreso,
                 EstaActivo = usuario.EstaActivo,
                 CantidadAnnosLaborados = annosLaborados < 0 ? 0 : annosLaborados,
+                CantidadDiasSolicitados = 0,
                 
                 // Necesito la logica para saber calcular los dias disponibles segun fecha de ingreso 
                 // y cantidad de vacaciones previamente solicitadas
