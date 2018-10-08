@@ -2,6 +2,7 @@
 using CNMWebApp.Models;
 using CNMWebApp.Services;
 using Microsoft.AspNet.Identity;
+using PagedList;
 using Rotativa.Options;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ using System.Web.Mvc;
 
 namespace CNMWebApp.Controllers
 {
-    [Auth(Roles = "Funcionario, Director, Jefatura, Recursos Humanos")]
+    [Auth(Roles = "Funcionario, Director, Jefatura, Recursos Humanos, Manager")]
     public class SolicitudController : Controller
     {
         private SolicitudService solicitudService;
@@ -26,12 +27,23 @@ namespace CNMWebApp.Controllers
         }
 
         // GET: Solicitud
-        public async Task<ActionResult> Index(bool misSolicitudes = true)
+        public async Task<ActionResult> Index(string filtro, int? pagina, bool misSolicitudes = true)
         {
+            ViewBag.MisSolicitudes = misSolicitudes;
+
             var user = await userService.GetLoggedInUser();
 
             var solicitudes = solicitudService.ObtenerSolicitudes(user, misSolicitudes);
-            return View(solicitudes);
+
+            if (!string.IsNullOrEmpty(filtro))
+            {
+                solicitudes = FiltrarSolicitudes(solicitudes, filtro);
+            }
+
+            int tamanoPagina = 10;
+            int numeroPagina = (pagina ?? 1);
+
+            return View(solicitudes.ToPagedList(numeroPagina, tamanoPagina));
         }
 
         // GET: Solicitud/Details/5
@@ -132,6 +144,19 @@ namespace CNMWebApp.Controllers
             {
                 return View();
             }
+        }
+
+        private List<SolicitudVacaciones> FiltrarSolicitudes(IEnumerable<SolicitudVacaciones> solicitudes, string filtro)
+        {
+            filtro = filtro.ToLower();
+
+            var solicitudesFiltradas = solicitudes
+                .Where(x => x.Comentario.ToLower().Contains(filtro) ||
+                 x.UsuarioId.ToLower().Contains(filtro) ||
+                 x.Estado.Nombre.ToLower().Contains(filtro))
+                .ToList();
+
+            return solicitudesFiltradas;
         }
     }
 }

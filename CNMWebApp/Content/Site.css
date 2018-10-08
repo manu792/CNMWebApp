@@ -100,6 +100,18 @@ textarea.form-control {
         border: 1px solid black;
     }
 
+.datepicker-inline table th {
+    border: 1px solid black !important;
+}
+
+.datepicker-inline table td {
+    border: 1px solid black !important;
+}
+
+.datepicker-inline table tr td span {
+    border: 1px solid black !important;
+}
+
 label {
     text-align: left !important;
 }

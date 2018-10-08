@@ -73,7 +73,11 @@
                 todayHighlight: true,
                 multidate: true,
                 linkField: 'Dias',
-                linkFormat: 'yyyy/mm/dd'
+                linkFormat: 'yyyy/mm/dd',
+                sideBySide: true,
+                toolbarPlacement: 'bottom',
+                showClear: true,
+                startDate: new Date()
             }).datepicker();
 
             $('.select-dates').datepicker().on('changeDate', function () {

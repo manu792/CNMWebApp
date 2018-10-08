@@ -20,7 +20,10 @@ namespace CNMWebApp.Services
             switch (usuario.Role.Name)
             {
                 case "Funcionario":
-                    return ObtenerSolicitudesParaFuncionario(usuario.Id);
+                    if(misSolicitudes)
+                        return ObtenerSolicitudesParaFuncionario(usuario.Id);
+                    else
+                        return ObtenerSolicitudesPorUnidadTecnica(usuario.UnidadTecnica.UnidadTecnicaId);
                 case "Jefatura":
                     if(misSolicitudes)
                         return ObtenerSolicitudesParaFuncionario(usuario.Id);

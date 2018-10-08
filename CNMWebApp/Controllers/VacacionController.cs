@@ -10,7 +10,7 @@ using System.Web.Mvc;
 
 namespace CNMWebApp.Controllers
 {
-    [Auth(Roles = "Funcionario, Jefatura, Recursos Humanos, Director, Manager")]
+    [Auth(Roles = "Funcionario, Jefatura, Recursos Humanos, Director")]
     public class VacacionController : Controller
     {
         private UserService _userServicio;

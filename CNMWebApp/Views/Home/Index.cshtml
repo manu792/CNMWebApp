@@ -4,7 +4,7 @@
 }
 
 <div class="w3-row-padding w3-center w3-margin-top">
-    <!-- Opciones para todos los empleados, menos superusuario del sistema -->
+    <!-- Opciones para todos los empleados, menos superusuario por defecto del sistema -->
     @if (!Model.Email.Equals("manager@manager.com"))
     {
         <div class="w3-third">
@@ -17,7 +17,7 @@
         </div>
         <div class="w3-third">
             <div class="w3-card w3-container" style="min-height:250px">
-                <a href="@Url.Action("Index", "Vacacion")">
+                <a href="@Url.Action("Index", "Solicitud", new { misSolicitudes = true })">
                     <h3>Mis Solicitudes</h3><br>
                     <i class="fa fa-check w3-margin-bottom w3-text-theme" style="font-size:120px"></i>
                 </a>
@@ -51,7 +51,7 @@
         </div>
         <div class="w3-third">
             <div class="w3-card w3-container" style="min-height:250px">
-                <a href="@Url.Action("Index", "Solicitud")">
+                <a href="@Url.Action("Index", "Solicitud", new { misSolicitudes = false })">
                     <h3>Solicitudes de Empleados</h3><br>
                     <i class="fa fa-check w3-margin-bottom w3-text-theme" style="font-size:120px"></i>
                 </a>
@@ -80,7 +80,7 @@
         </div>
         <div class="w3-third">
             <div class="w3-card w3-container" style="min-height:250px">
-                <a href="@Url.Action("Index", "Solicitud")">
+                <a href="@Url.Action("Index", "Solicitud", new { misSolicitudes = false })">
                     <h3>Historial de Solicitudes</h3><br>
                     <i class="fa fa-check w3-margin-bottom w3-text-theme" style="font-size:120px"></i>
                 </a>

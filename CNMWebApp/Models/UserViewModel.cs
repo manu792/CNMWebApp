@@ -38,6 +38,7 @@ namespace CNMWebApp.Models
         public string FotoRuta { get; set; }
         [DisplayName("Activo")]
         public bool EstaActivo { get; set; }
+        [DisplayName("Superusuario")]
         public bool EsSuperusuario { get; set; }
 
         // Vinculan el usuario con los datos de las tablas Roles, Categoria y UnidadTecnica
@@ -71,10 +72,10 @@ namespace CNMWebApp.Models
 
     public class VacacionViewModel : UserViewModel
     {
-        [Required(ErrorMessage = "El campo Dias es requerido")]
         [DisplayName("Días a solicitar")]
         // [DataType(DataType.Date)]
         // [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [Required(ErrorMessage = "Debe seleccionar al menos un día para solicitar sus vacaciones")]
         public string Dias { get; set; }
         [DisplayName("Años Laborados")]
         public int CantidadAnnosLaborados { get; set; }
@@ -83,6 +84,7 @@ namespace CNMWebApp.Models
         [DisplayName("Cantidad Días Solicitados")]
         public int CantidadDiasSolicitados { get; set; }
         [DataType(DataType.MultilineText)]
+        [MaxLength(500, ErrorMessage = "El comentario debe ser máximo de 500 caracteres")]
         public string Comentario { get; set; }
     }
 }
