@@ -33,7 +33,7 @@ namespace CNMWebApp.Controllers
 
             var user = await userService.GetLoggedInUser();
 
-            var solicitudes = solicitudService.ObtenerSolicitudes(user, misSolicitudes);
+            var solicitudes = solicitudService.ObtenerMisSolicitudes(user);
 
             if (!string.IsNullOrEmpty(filtro))
             {
@@ -61,7 +61,7 @@ namespace CNMWebApp.Controllers
         public async Task<ActionResult> GeneratePDF()
         {
             var user = await userService.GetLoggedInUser();
-            var solicitudes = solicitudService.ObtenerSolicitudes(user, true);
+            var solicitudes = solicitudService.ObtenerMisSolicitudes(user);
 
             var actionPDF = new Rotativa.ViewAsPdf("Detalles", solicitudes.First())
             {
@@ -81,69 +81,95 @@ namespace CNMWebApp.Controllers
             return null;
         }
 
-        // GET: Solicitud/Create
-        public ActionResult Create()
+        // GET: Solicitud/Crear
+        public async Task<ActionResult> Crear()
         {
-            return View();
+            // Consigo la informacion del usuario logeado para mostrar en el View
+            var usuario = await userService.GetLoggedInUser();
+
+            var annosLaborados = DateTime.Now.Year - usuario.FechaIngreso.Year;
+            if (usuario.FechaIngreso > DateTime.Now.AddYears(-annosLaborados)) annosLaborados--;
+
+            return View(new VacacionViewModel()
+            {
+                Id = usuario.Id,
+                Nombre = usuario.Nombre,
+                PrimerApellido = usuario.PrimerApellido,
+                SegundoApellido = usuario.SegundoApellido,
+                Email = usuario.Email,
+                PhoneNumber = usuario.PhoneNumber,
+                Role = usuario.Role,
+                UnidadTecnica = usuario.UnidadTecnica,
+                Categoria = usuario.Categoria,
+                FechaIngreso = usuario.FechaIngreso,
+                EstaActivo = usuario.EstaActivo,
+                CantidadAnnosLaborados = annosLaborados < 0 ? 0 : annosLaborados,
+                CantidadDiasSolicitados = 0,
+
+                // Necesito la logica para saber calcular los dias disponibles segun fecha de ingreso 
+                // y cantidad de vacaciones previamente solicitadas
+                SaldoDiasDisponibles = 10
+            });
         }
 
-        // POST: Solicitud/Create
+        // POST: Solicitud/Crear
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Crear(VacacionViewModel solicitudVacaciones)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(solicitudVacaciones);
+            }
+
             try
             {
-                // TODO: Add insert logic here
+                var rowsAffected = await solicitudService.CrearSolicitudVacaciones(solicitudVacaciones);
 
-                return RedirectToAction("Index");
+                if (rowsAffected <= 0)
+                {
+                    ModelState.AddModelError("", "Hubo un problema al tratar de agregar la solicitud. Favor intente de nuevo más tarde.");
+                    return View(solicitudVacaciones);
+                }
+
+                return RedirectToAction("Index", "Solicitud", new { misSolicitudes = true });
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                ModelState.AddModelError("", "Hubo un problema al tratar de agregar la solicitud. Favor intente de nuevo más tarde.");
+                return View(solicitudVacaciones);
             }
         }
-
-        // GET: Solicitud/Edit/5
-        public ActionResult Edit(int id)
+        
+        public async Task<ActionResult> SolicitudesEmpleados()
         {
-            return View();
-        }
+            // Consigo la informacion del usuario logeado para mostrar en el View
+            var jefe = await userService.GetLoggedInUser();
 
-        // POST: Solicitud/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+            //var solicitudes = solicitudService.ObtenerMisSolicitudes();
 
-        // GET: Solicitud/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
+            //return View(new VacacionViewModel()
+            //{
+            //    Id = usuario.Id,
+            //    Nombre = usuario.Nombre,
+            //    PrimerApellido = usuario.PrimerApellido,
+            //    SegundoApellido = usuario.SegundoApellido,
+            //    Email = usuario.Email,
+            //    PhoneNumber = usuario.PhoneNumber,
+            //    Role = usuario.Role,
+            //    UnidadTecnica = usuario.UnidadTecnica,
+            //    Categoria = usuario.Categoria,
+            //    FechaIngreso = usuario.FechaIngreso,
+            //    EstaActivo = usuario.EstaActivo,
+            //    CantidadAnnosLaborados = annosLaborados < 0 ? 0 : annosLaborados,
+            //    CantidadDiasSolicitados = 0,
 
-        // POST: Solicitud/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
+            //    // Necesito la logica para saber calcular los dias disponibles segun fecha de ingreso 
+            //    // y cantidad de vacaciones previamente solicitadas
+            //    SaldoDiasDisponibles = 10
+            //});
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            return null;
         }
 
         private List<SolicitudVacaciones> FiltrarSolicitudes(IEnumerable<SolicitudVacaciones> solicitudes, string filtro)

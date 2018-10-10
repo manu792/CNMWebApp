@@ -9,17 +9,9 @@
     {
         <div class="w3-third">
             <div class="w3-card w3-container" style="min-height:250px">
-                <a href="@Url.Action("Crear", "Vacacion")">
+                <a href="@Url.Action("Crear", "Solicitud")">
                     <h3>Solicitar Vacaciones</h3><br>
                     <i class="fa fa-hotel w3-margin-bottom w3-text-theme" style="font-size:120px"></i>
-                </a>
-            </div>
-        </div>
-        <div class="w3-third">
-            <div class="w3-card w3-container" style="min-height:250px">
-                <a href="@Url.Action("Index", "Solicitud", new { misSolicitudes = true })">
-                    <h3>Mis Solicitudes</h3><br>
-                    <i class="fa fa-check w3-margin-bottom w3-text-theme" style="font-size:120px"></i>
                 </a>
             </div>
         </div>
@@ -39,21 +31,13 @@
     }
     <!-- Fin Opciones para la Jefatura y Directores -->
     <!-- Opciones para Recursos Humanos -->
-    @if (Model.Role.Name.Equals("recursos humanos", StringComparison.OrdinalIgnoreCase))
+    @if (Model.EsSuperusuario || Model.Role.Name.Equals("recursos humanos", StringComparison.OrdinalIgnoreCase))
     {
         <div class="w3-third">
             <div class="w3-card w3-container" style="min-height:250px">
                 <a href="@Url.Action("Index", "User")">
                     <h3>Empleados</h3><br>
                     <i class="fa fa-users w3-margin-bottom w3-text-theme" style="font-size:120px"></i>
-                </a>
-            </div>
-        </div>
-        <div class="w3-third">
-            <div class="w3-card w3-container" style="min-height:250px">
-                <a href="@Url.Action("Index", "Solicitud", new { misSolicitudes = false })">
-                    <h3>Solicitudes de Empleados</h3><br>
-                    <i class="fa fa-check w3-margin-bottom w3-text-theme" style="font-size:120px"></i>
                 </a>
             </div>
         </div>
@@ -64,28 +48,20 @@
     {
         <div class="w3-third">
             <div class="w3-card w3-container" style="min-height:250px">
-                <a href="@Url.Action("Index", "User")">
-                    <h3>Empleados</h3><br>
-                    <i class="fa fa-users w3-margin-bottom w3-text-theme" style="font-size:120px"></i>
-                </a>
-            </div>
-        </div>
-        <div class="w3-third">
-            <div class="w3-card w3-container" style="min-height:250px">
-                <a href="@Url.Action("CrearANombreDeEmpleado", "Vacacion")">
+                <a href="@Url.Action("CrearANombreDeEmpleado", "Solicitud")">
                     <h3>Solicitar vacaciones a nombre de un empleado</h3><br>
                     <i class="fa fa-hotel w3-margin-bottom w3-text-theme" style="font-size:120px"></i>
                 </a>
             </div>
         </div>
-        <div class="w3-third">
-            <div class="w3-card w3-container" style="min-height:250px">
-                <a href="@Url.Action("Index", "Solicitud", new { misSolicitudes = false })">
-                    <h3>Historial de Solicitudes</h3><br>
-                    <i class="fa fa-check w3-margin-bottom w3-text-theme" style="font-size:120px"></i>
-                </a>
-            </div>
-        </div>
     }
+    <div class="w3-third">
+        <div class="w3-card w3-container" style="min-height:250px">
+            <a href="@Url.Action("Index", "Solicitud", new { misSolicitudes = true })">
+                <h3>Historial Solicitudes</h3><br>
+                <i class="fa fa-check w3-margin-bottom w3-text-theme" style="font-size:120px"></i>
+            </a>
+        </div>
+    </div>
     <!-- Fin Opciones para Manager (Superusuario del sistema) -->
 </div>

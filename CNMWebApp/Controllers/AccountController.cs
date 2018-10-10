@@ -88,6 +88,20 @@ namespace CNMWebApp.Controllers
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             // var signedUser = UserManager.FindByEmail(model.Email);
 
+            var usuario = UserManager.FindByEmail(model.Email);
+            if(usuario == null)
+            {
+                ModelState.AddModelError("", "Correo y/o contraseña incorrectos");
+                return View(model);
+            }
+
+
+            if (!usuario.EstaActivo)
+            {
+                ModelState.AddModelError("", "El usuario está desactivado. Contacte al administrador del sistema para más información");
+                return View(model);
+            }
+
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
             // await SignInManager.SignInAsync(signedUser, false, false);
 
@@ -103,7 +117,7 @@ namespace CNMWebApp.Controllers
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                 case SignInStatus.Failure:
                 default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
+                    ModelState.AddModelError("", "Correo y/o contraseña incorrectos");
                     return View(model);
             }
         }

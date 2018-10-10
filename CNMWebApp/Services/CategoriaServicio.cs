@@ -26,5 +26,12 @@ namespace CNMWebApp.Services
             return context.Categorias
                 .Where(x => x.RolId == roleId);
         }
+
+        public Categoria ObtenerCategoriaPorNombre(string nombre)
+        {
+            return context.Categorias
+                .Where(x => x.Nombre.ToLower() == nombre.ToLower())
+                .FirstOrDefault();
+        }
     }
 }

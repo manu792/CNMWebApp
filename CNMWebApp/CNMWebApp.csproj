@@ -222,6 +222,7 @@
     <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\CategoriaServicio.cs" />
+    <Compile Include="Services\EstadoServicio.cs" />
     <Compile Include="Services\RoleService.cs" />
     <Compile Include="Services\SolicitudService.cs" />
     <Compile Include="Services\UnidadTecnicaServicio.cs" />
@@ -403,6 +404,7 @@
     <Content Include="Views\User\Editar.cshtml" />
     <Content Include="Views\Funcionario\Index.cshtml" />
     <Content Include="Views\Vacacion\Crear.cshtml" />
+    <Content Include="Views\Solicitud\Crear.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

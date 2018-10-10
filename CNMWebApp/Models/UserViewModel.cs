@@ -10,8 +10,8 @@ namespace CNMWebApp.Models
 {
     public class UserViewModel
     {
-        [DisplayName("Cedula")]
-        [Required(ErrorMessage = "El campo Cedula es requerido")]
+        [DisplayName("Cédula")]
+        [Required(ErrorMessage = "El campo Cédula es requerido")]
         public string Id { get; set; }
         [Required(ErrorMessage = "El campo Nombre es requerido")]
         public string Nombre { get; set; }
@@ -44,8 +44,9 @@ namespace CNMWebApp.Models
         // Vinculan el usuario con los datos de las tablas Roles, Categoria y UnidadTecnica
         [DisplayName("Rol")]
         public IdentityRole Role { get; set; }
+        [DisplayName("Categoría")]
         public Categoria Categoria { get; set; }
-        [DisplayName("Unidad Tecnica")]
+        [DisplayName("Unidad Técnica")]
         public UnidadTecnica UnidadTecnica { get; set; }
     }
 
@@ -60,12 +61,12 @@ namespace CNMWebApp.Models
     public class UserRolesUnidadCategoria : UserRolesViewModel
     {
         // Categorias
-        [Required(ErrorMessage = "El campo Categoria es requerido")]
+        [Required(ErrorMessage = "El campo Categoría es requerido")]
         public string SelectedCategoriaId { get; set; }
         public List<Categoria> Categorias { get; set; }
 
         // Unidades Tecnicas
-        [Required(ErrorMessage = "El campo Unidad Tecnica es requerido")]
+        [Required(ErrorMessage = "El campo Unidad Técnica es requerido")]
         public string SelectedUnidadTecnicaId { get; set; }
         public List<UnidadTecnica> UnidadesTecnicas { get; set; }
     }

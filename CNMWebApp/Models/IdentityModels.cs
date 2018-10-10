@@ -47,6 +47,8 @@ namespace CNMWebApp.Models
         [Key]
         [Column(Order = 2)]
         public DateTime Fecha { get; set; }
+        [Required]
+        public string Periodo { get; set; }
 
         // Virtual properties mapping to ApplicationUser and Estado
         public virtual ApplicationUser Usuario { get; set; }

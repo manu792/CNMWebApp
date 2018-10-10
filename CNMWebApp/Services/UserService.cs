@@ -16,12 +16,73 @@ namespace CNMWebApp.Services
     {
         private ApplicationUserManager _userManager;
         private ApplicationRoleManager _roleManager;
+        private CategoriaServicio _categoriaServicio;
         
 
         public UserService()
         {
             _userManager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
             _roleManager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationRoleManager>();
+            _categoriaServicio = new CategoriaServicio();
+        }
+
+        public UserViewModel ObtenerJefe(int unidadTecnicaId)
+        {
+            var jefaturaRole = _roleManager.FindByName("Jefatura");
+            var jefe = _userManager.Users
+                .Where(x => x.UnidadTecnicaId == unidadTecnicaId && x.Roles.Any(r => r.RoleId == jefaturaRole.Id))
+                .FirstOrDefault();
+
+            if (jefe == null)
+                throw new Exception("No se encontró ningún jefe para la unidad técnica seleccionada");
+
+            return new UserViewModel()
+            {
+                Id = jefe.Id,
+                Nombre = jefe.Nombre,
+                PrimerApellido = jefe.PrimerApellido,
+                SegundoApellido = jefe.SegundoApellido,
+                Email = jefe.Email,
+                UnidadTecnica = jefe.UnidadTecnica,
+                Categoria = jefe.Categoria,
+                EstaActivo = jefe.EstaActivo,
+                FechaIngreso = jefe.FechaIngreso,
+                PhoneNumber = jefe.PhoneNumber
+            };
+        }
+
+        public UserViewModel ObtenerDirectorGeneral()
+        {
+            var directorRole = _roleManager.FindByName("Director");
+            var directorGeneralCategoria = _categoriaServicio.ObtenerCategoriaPorNombre("director general");
+
+            var director = _userManager.Users
+                .Where(x => x.CategoriaId == directorGeneralCategoria.CategoriaId && 
+                    x.Roles.Any(r => r.RoleId == directorRole.Id))
+                .FirstOrDefault();
+
+            if (director == null)
+                throw new Exception("No se encontró ningún director general");
+
+            return new UserViewModel()
+            {
+                Id = director.Id,
+                Nombre = director.Nombre,
+                PrimerApellido = director.PrimerApellido,
+                SegundoApellido = director.SegundoApellido,
+                Email = director.Email,
+                UnidadTecnica = director.UnidadTecnica,
+                Categoria = director.Categoria,
+                EstaActivo = director.EstaActivo,
+                FechaIngreso = director.FechaIngreso,
+                PhoneNumber = director.PhoneNumber
+            };
+        }
+
+        public bool EstaActivo(string email)
+        {
+            var usuario = _userManager.FindByEmail(email);
+            return usuario.EstaActivo;
         }
 
         public IEnumerable<UserViewModel> GetUsers()
