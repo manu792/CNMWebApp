@@ -405,6 +405,8 @@
     <Content Include="Views\Funcionario\Index.cshtml" />
     <Content Include="Views\Vacacion\Crear.cshtml" />
     <Content Include="Views\Solicitud\Crear.cshtml" />
+    <Content Include="Views\Solicitud\SolicitudesEmpleados.cshtml" />
+    <Content Include="Views\Solicitud\Revisar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

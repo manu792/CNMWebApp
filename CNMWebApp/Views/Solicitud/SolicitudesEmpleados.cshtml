@@ -65,9 +65,7 @@
                 @Html.DisplayFor(modelItem => item.FechaSolicitud)
             </td>
             <td>
-                @Html.ActionLink("Editar", "Edit", new { id = item.SolicitudVacacionesId }) |
-                @Html.ActionLink("Detalles", "Detalles", new { id = item.SolicitudVacacionesId }) |
-                @Html.ActionLink("Eliminar", "Delete", new { id = item.SolicitudVacacionesId })
+                @Html.ActionLink("Revisar", "Revisar", new { id = item.SolicitudVacacionesId })
             </td>
         </tr>
     }
@@ -76,5 +74,5 @@
 <br />
 Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
 
-@Html.PagedListPager(Model, pagina => Url.Action("Index",
+@Html.PagedListPager(Model, pagina => Url.Action("SolicitudesEmpleados",
     new { pagina }))

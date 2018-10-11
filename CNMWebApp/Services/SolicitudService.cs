@@ -28,6 +28,31 @@ namespace CNMWebApp.Services
                 .ToList();
         }
 
+        public SolicitudVacaciones ObtenerSolicitudPorId(int id)
+        {
+            return context.SolicitudesVacaciones.FirstOrDefault(x => x.SolicitudVacacionesId == id);
+        }
+
+        public IEnumerable<SolicitudVacaciones> ObtenerSolicitudesPorAprobar(UserViewModel jefe)
+        {
+            if(jefe.Role.Name.Equals("jefatura", StringComparison.OrdinalIgnoreCase))
+            {
+                return context.SolicitudesVacaciones.Where(x => x.Estado.Nombre.Equals("por revisar", StringComparison.OrdinalIgnoreCase) &&
+                    x.Usuario.UnidadTecnicaId == jefe.UnidadTecnica.UnidadTecnicaId && x.UsuarioId != jefe.Id)
+                .ToList();
+            }
+            else if(jefe.Role.Name.Equals("director", StringComparison.OrdinalIgnoreCase))
+            {
+                return context.SolicitudesVacaciones.Where(x => x.Estado.Nombre.Equals("por revisar", StringComparison.OrdinalIgnoreCase) && 
+                    x.UsuarioId != jefe.Id)
+                .ToList();
+            }
+            else
+            {
+                throw new Exception("El rol no posee permisos para aprobar/rechazar vacaciones");
+            }
+        }
+
         //public IEnumerable<SolicitudVacaciones> ObtenerSolicitudes(UserViewModel usuario, bool misSolicitudes)
         //{
         //    switch (usuario.Role.Name)
@@ -71,7 +96,7 @@ namespace CNMWebApp.Services
         //        .ToList();
         //}
 
-        public async Task<int> CrearSolicitudVacaciones(VacacionViewModel solicitud)
+        public async Task<int> CrearSolicitudVacaciones(SolicitudViewModel solicitud)
         {
             var solicitudVacaciones = new SolicitudVacaciones()
             {
@@ -85,7 +110,7 @@ namespace CNMWebApp.Services
 
             // A continuacion se envia la notificacion por correo al jefe correspondiente segun el usuario
             var callbackUrl = @"Controller\Action?parameter1=something";
-            await userManager.SendEmailAsync(ObtenerAprobadorId(solicitud.Id), $"Solicitud de Vacaciones para {solicitud.Nombre} {solicitud.PrimerApellido} {solicitud.SegundoApellido}", $"Para aprobar o rechazar la solicitud de vacaciones haga click en el siguiente link: <a href=\\ {callbackUrl} \\>here</a>");
+            await userManager.SendEmailAsync(ObtenerAprobadorId(solicitud.Id), $"Solicitud de Vacaciones para {solicitud.Nombre} {solicitud.PrimerApellido} {solicitud.SegundoApellido}", $"{solicitud.Comentario} <br /> Para aprobar o rechazar la solicitud de vacaciones haga click en el siguiente link: <a href=\\ {callbackUrl} \\>here</a>");
 
 
             context.SolicitudesVacaciones.Add(solicitudVacaciones);
@@ -119,7 +144,7 @@ namespace CNMWebApp.Services
             return aprobador.Id;
         }
 
-        private ICollection<DiasPorSolicitud> ObtenerDiasPorSolicitud(VacacionViewModel solicitud)
+        private ICollection<DiasPorSolicitud> ObtenerDiasPorSolicitud(SolicitudViewModel solicitud)
         {
             var dias = solicitud.Dias.Split(',');
             DateTime diaFecha;

@@ -27,10 +27,8 @@ namespace CNMWebApp.Controllers
         }
 
         // GET: Solicitud
-        public async Task<ActionResult> Index(string filtro, int? pagina, bool misSolicitudes = true)
+        public async Task<ActionResult> Index(string filtro, int? pagina)
         {
-            ViewBag.MisSolicitudes = misSolicitudes;
-
             var user = await userService.GetLoggedInUser();
 
             var solicitudes = solicitudService.ObtenerMisSolicitudes(user);
@@ -90,7 +88,7 @@ namespace CNMWebApp.Controllers
             var annosLaborados = DateTime.Now.Year - usuario.FechaIngreso.Year;
             if (usuario.FechaIngreso > DateTime.Now.AddYears(-annosLaborados)) annosLaborados--;
 
-            return View(new VacacionViewModel()
+            return View(new SolicitudViewModel()
             {
                 Id = usuario.Id,
                 Nombre = usuario.Nombre,
@@ -115,7 +113,7 @@ namespace CNMWebApp.Controllers
         // POST: Solicitud/Crear
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Crear(VacacionViewModel solicitudVacaciones)
+        public async Task<ActionResult> Crear(SolicitudViewModel solicitudVacaciones)
         {
             if (!ModelState.IsValid)
             {
@@ -141,35 +139,66 @@ namespace CNMWebApp.Controllers
             }
         }
         
-        public async Task<ActionResult> SolicitudesEmpleados()
+        [Auth(Roles = "Jefatura, Director")]
+        public async Task<ActionResult> SolicitudesEmpleados(string filtro, int? pagina)
         {
-            // Consigo la informacion del usuario logeado para mostrar en el View
             var jefe = await userService.GetLoggedInUser();
 
-            //var solicitudes = solicitudService.ObtenerMisSolicitudes();
+            var solicitudes = solicitudService.ObtenerSolicitudesPorAprobar(jefe);
 
-            //return View(new VacacionViewModel()
-            //{
-            //    Id = usuario.Id,
-            //    Nombre = usuario.Nombre,
-            //    PrimerApellido = usuario.PrimerApellido,
-            //    SegundoApellido = usuario.SegundoApellido,
-            //    Email = usuario.Email,
-            //    PhoneNumber = usuario.PhoneNumber,
-            //    Role = usuario.Role,
-            //    UnidadTecnica = usuario.UnidadTecnica,
-            //    Categoria = usuario.Categoria,
-            //    FechaIngreso = usuario.FechaIngreso,
-            //    EstaActivo = usuario.EstaActivo,
-            //    CantidadAnnosLaborados = annosLaborados < 0 ? 0 : annosLaborados,
-            //    CantidadDiasSolicitados = 0,
+            if (!string.IsNullOrEmpty(filtro))
+            {
+                solicitudes = FiltrarSolicitudes(solicitudes, filtro);
+            }
 
-            //    // Necesito la logica para saber calcular los dias disponibles segun fecha de ingreso 
-            //    // y cantidad de vacaciones previamente solicitadas
-            //    SaldoDiasDisponibles = 10
-            //});
+            int tamanoPagina = 10;
+            int numeroPagina = (pagina ?? 1);
 
-            return null;
+            return View(solicitudes.ToPagedList(numeroPagina, tamanoPagina));
+        }
+
+        public ActionResult Revisar(int? id)
+        {
+            if (id == null)
+                return RedirectToAction("SolicitudesEmpleados");
+
+            var solicitudId = Convert.ToInt32(id);
+
+            var solicitud = solicitudService.ObtenerSolicitudPorId(solicitudId);
+
+            if (solicitud == null)
+                return HttpNotFound($"La solicitud con id {id} no existe");
+
+            var annosLaborados = DateTime.Now.Year - solicitud.Usuario.FechaIngreso.Year;
+            if (solicitud.Usuario.FechaIngreso > DateTime.Now.AddYears(-annosLaborados)) annosLaborados--;
+
+            return View(new SolicitudViewModel()
+            {
+                SolicitudId = solicitud.SolicitudVacacionesId,
+                Id = solicitud.Usuario.Id,
+                Nombre = solicitud.Usuario.Nombre,
+                PrimerApellido = solicitud.Usuario.PrimerApellido,
+                SegundoApellido = solicitud.Usuario.SegundoApellido,
+                Email = solicitud.Usuario.Email,
+                PhoneNumber = solicitud.Usuario.PhoneNumber,
+                // Role = solicitud.Usuario.Role,
+                UnidadTecnica = solicitud.Usuario.UnidadTecnica,
+                Categoria = solicitud.Usuario.Categoria,
+                FechaIngreso = solicitud.Usuario.FechaIngreso,
+                EstaActivo = solicitud.Usuario.EstaActivo,
+                CantidadAnnosLaborados = annosLaborados < 0 ? 0 : annosLaborados,
+                CantidadDiasSolicitados = solicitud.CantidadDiasSolicitados,
+                DiasPorSolicitud = solicitud.DiasPorSolicitud.Select(s => new DiasPorSolicitudViewModel()
+                {
+                    UsuarioId = s.UsuarioId,
+                    Fecha = s.Fecha.ToString("yyyy-MM-dd"),
+                    Periodo = s.Periodo
+                }).ToList(),
+
+                // Necesito la logica para saber calcular los dias disponibles segun fecha de ingreso 
+                // y cantidad de vacaciones previamente solicitadas
+                SaldoDiasDisponibles = 10
+            });
         }
 
         private List<SolicitudVacaciones> FiltrarSolicitudes(IEnumerable<SolicitudVacaciones> solicitudes, string filtro)
@@ -179,7 +208,9 @@ namespace CNMWebApp.Controllers
             var solicitudesFiltradas = solicitudes
                 .Where(x => x.Comentario.ToLower().Contains(filtro) ||
                  x.UsuarioId.ToLower().Contains(filtro) ||
-                 x.Estado.Nombre.ToLower().Contains(filtro))
+                 x.Estado.Nombre.ToLower().Contains(filtro) ||
+                 x.Usuario.Nombre.ToLower().Contains(filtro) ||
+                 x.Usuario.PrimerApellido.ToLower().Contains(filtro))
                 .ToList();
 
             return solicitudesFiltradas;

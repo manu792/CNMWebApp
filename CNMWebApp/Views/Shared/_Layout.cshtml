@@ -62,11 +62,16 @@
                 autoclose: true
             });
 
-            //$('.datepicker-vacaciones').datepicker({
-            //    format: 'yyyy/mm/dd',
-            //    todayHighlight: true,
-            //    multidate: true,
-            //}).datepicker('update', new Date());
+            $('.selected-dates').datepicker({
+                format: 'yyyy/mm/dd',
+                todayHighlight: true,
+                multidate: true,
+                beforeShowDay: function () {
+                    return false;
+                }
+            });
+
+            $('.selected-dates').datepicker('setDates', diasPorSolicitud);
 
             $('.select-dates').datepicker({
                 format: 'yyyy/mm/dd',

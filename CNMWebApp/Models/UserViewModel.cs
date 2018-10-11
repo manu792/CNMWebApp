@@ -71,8 +71,9 @@ namespace CNMWebApp.Models
         public List<UnidadTecnica> UnidadesTecnicas { get; set; }
     }
 
-    public class VacacionViewModel : UserViewModel
+    public class SolicitudViewModel : UserViewModel
     {
+        public int SolicitudId { get; set; }
         [DisplayName("Días a solicitar")]
         // [DataType(DataType.Date)]
         // [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
@@ -87,5 +88,13 @@ namespace CNMWebApp.Models
         [DataType(DataType.MultilineText)]
         [MaxLength(500, ErrorMessage = "El comentario debe ser máximo de 500 caracteres")]
         public string Comentario { get; set; }
+        public IEnumerable<DiasPorSolicitudViewModel> DiasPorSolicitud { get; set; }
+    }
+
+    public class DiasPorSolicitudViewModel
+    {
+        public string UsuarioId { get; set; }
+        public string Fecha { get; set; }
+        public string Periodo { get; set; }
     }
 }
