@@ -27,6 +27,7 @@ namespace CNMWebApp.Models
         [MaxLength(500, ErrorMessage = "El comentario debe ser máximo de 500 caracteres")]
         public string Comentario { get; set; }
         public int EstadoId { get; set; }
+        public string AprobadorId { get; set; }
         public DateTime FechaSolicitud { get; set; }
 
         // Virtual properties mapping to ApplicationUser and Estado

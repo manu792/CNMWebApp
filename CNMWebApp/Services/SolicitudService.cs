@@ -37,22 +37,9 @@ namespace CNMWebApp.Services
 
         public IEnumerable<SolicitudVacaciones> ObtenerSolicitudesPorAprobar(UserViewModel jefe)
         {
-            if(jefe.Role.Name.Equals("jefatura", StringComparison.OrdinalIgnoreCase))
-            {
-                return context.SolicitudesVacaciones.Where(x => x.Estado.Nombre.Equals("por revisar", StringComparison.OrdinalIgnoreCase) &&
-                    x.Usuario.UnidadTecnicaId == jefe.UnidadTecnica.UnidadTecnicaId && x.UsuarioId != jefe.Id)
-                .ToList();
-            }
-            else if(jefe.Role.Name.Equals("director", StringComparison.OrdinalIgnoreCase))
-            {
-                return context.SolicitudesVacaciones.Where(x => x.Estado.Nombre.Equals("por revisar", StringComparison.OrdinalIgnoreCase) && 
-                    x.UsuarioId != jefe.Id)
-                .ToList();
-            }
-            else
-            {
-                throw new Exception("El rol no posee permisos para aprobar/rechazar vacaciones");
-            }
+            return context.SolicitudesVacaciones.Where(x => x.Estado.Nombre.Equals("por revisar", StringComparison.OrdinalIgnoreCase) &&
+                   x.AprobadorId == jefe.Id)
+            .ToList();
         }
 
         //public IEnumerable<SolicitudVacaciones> ObtenerSolicitudes(UserViewModel usuario, bool misSolicitudes)
@@ -100,6 +87,8 @@ namespace CNMWebApp.Services
 
         public async Task<int> CrearSolicitudVacaciones(SolicitudViewModel solicitud)
         {
+            var solicitante = userService.ObtenerUsuarioPorId(solicitud.UsuarioId);
+
             var solicitudVacaciones = new SolicitudVacaciones()
             {
                 UsuarioId = solicitud.Id,
@@ -107,6 +96,9 @@ namespace CNMWebApp.Services
                 EstadoId = 1,
                 Comentario = solicitud.Comentario,
                 FechaSolicitud = DateTime.Now,
+                AprobadorId = solicitante.Role.Name.Equals("funcionario", StringComparison.OrdinalIgnoreCase) ?
+                     userService.ObtenerJefe(solicitante.UnidadTecnica.UnidadTecnicaId).Id :
+                    userService.ObtenerDirectorGeneral().Id,
                 DiasPorSolicitud = ObtenerDiasPorSolicitud(solicitud)
             };
 
@@ -141,9 +133,9 @@ namespace CNMWebApp.Services
                 // Se adjunta boleta en formato PDF
                 // Verificar si el que aprobo las vacaciones es el jefe o el director, y enviar el correo a ambos si es necesario
                 if(aprobador.Id == jefe.Id)
-                    emailNotification.SendEmailAsync(solicitante.Email, $"{jefe.Email},otistestuh@gmail.com", $"Vacaciones Aprobadas para {nombreSolicitante}", $"La solicitud de vacaciones: {solicitudId} para el colaborador {nombreSolicitante} fue <strong>aprobada</strong>. <br /> Observaciones: {comentarioJefatura}");
+                    emailNotification.SendEmailAsync(solicitante.Email, $"{jefe.Email},otistestuh@gmail.com", $"Vacaciones Aprobadas para {nombreSolicitante}", $"La solicitud de vacaciones: {solicitudId} para el colaborador {nombreSolicitante} fue <strong>aprobada</strong>. <br /> <br /> Observaciones: {comentarioJefatura}");
                 else
-                    emailNotification.SendEmailAsync(solicitante.Email, $"{jefe.Email},{aprobador.Email},otistestuh@gmail.com", $"Vacaciones Aprobadas para {nombreSolicitante}", $"La solicitud de vacaciones: {solicitudId} para el colaborador {nombreSolicitante} fue <strong>aprobada</strong>. <br /> Observaciones: {comentarioJefatura}");
+                    emailNotification.SendEmailAsync(solicitante.Email, $"{jefe.Email},{aprobador.Email},otistestuh@gmail.com", $"Vacaciones Aprobadas para {nombreSolicitante}", $"La solicitud de vacaciones: {solicitudId} para el colaborador {nombreSolicitante} fue <strong>aprobada</strong>. <br /> <br /> Observaciones: {comentarioJefatura}");
             }
 
             return rowsAffected;
