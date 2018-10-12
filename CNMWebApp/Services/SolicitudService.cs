@@ -13,12 +13,14 @@ namespace CNMWebApp.Services
         private ApplicationDbContext context;
         private ApplicationUserManager userManager;
         private UserService userService;
+        private EmailNotificationService emailNotification;
 
         public SolicitudService()
         {
             context = new ApplicationDbContext();
             userManager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
             userService = new UserService();
+            emailNotification = new EmailNotificationService();
         }
 
         public IEnumerable<SolicitudVacaciones> ObtenerMisSolicitudes(UserViewModel usuario)
@@ -115,6 +117,63 @@ namespace CNMWebApp.Services
 
             context.SolicitudesVacaciones.Add(solicitudVacaciones);
             return context.SaveChanges();
+        }
+
+        public int Aprobar(int solicitudId, string comentarioJefatura, UserViewModel aprobador, string solicitanteId)
+        {
+            var solicitante = userService.ObtenerUsuarioPorId(solicitanteId);
+            var jefe = userService.ObtenerJefe(solicitante.UnidadTecnica.UnidadTecnicaId);
+
+            var nombreSolicitante = $"{solicitante.Nombre} {solicitante.PrimerApellido} {solicitante.SegundoApellido}";
+
+            var estadoAprobado = context.Estados.FirstOrDefault(x => x.Nombre.Equals("aprobado", StringComparison.OrdinalIgnoreCase));
+            var solicitud = context.SolicitudesVacaciones.FirstOrDefault(x => x.SolicitudVacacionesId == solicitudId);
+
+            solicitud.EstadoId = estadoAprobado.EstadoId;
+
+            context.SolicitudesVacaciones.Add(solicitud);
+            context.Entry(solicitud).State = System.Data.Entity.EntityState.Modified;
+            var rowsAffected = context.SaveChanges();
+
+            if(rowsAffected > 0)
+            {
+                // Envio correo de aprobacion al solicitante con copia a RH y al aprobador, asi como al jefe del solicitante. 
+                // Se adjunta boleta en formato PDF
+                // Verificar si el que aprobo las vacaciones es el jefe o el director, y enviar el correo a ambos si es necesario
+                if(aprobador.Id == jefe.Id)
+                    emailNotification.SendEmailAsync(solicitante.Email, $"{jefe.Email},otistestuh@gmail.com", $"Vacaciones Aprobadas para {nombreSolicitante}", $"La solicitud de vacaciones: {solicitudId} para el colaborador {nombreSolicitante} fue <strong>aprobada</strong>. <br /> Observaciones: {comentarioJefatura}");
+                else
+                    emailNotification.SendEmailAsync(solicitante.Email, $"{jefe.Email},{aprobador.Email},otistestuh@gmail.com", $"Vacaciones Aprobadas para {nombreSolicitante}", $"La solicitud de vacaciones: {solicitudId} para el colaborador {nombreSolicitante} fue <strong>aprobada</strong>. <br /> Observaciones: {comentarioJefatura}");
+            }
+
+            return rowsAffected;
+        }
+
+        public int Rechazar(int solicitudId, string comentarioJefatura, UserViewModel aprobador, string solicitanteId)
+        {
+            var solicitante = userService.ObtenerUsuarioPorId(solicitanteId);
+            var jefe = userService.ObtenerJefe(solicitante.UnidadTecnica.UnidadTecnicaId);
+
+            var nombreSolicitante = $"{solicitante.Nombre} {solicitante.PrimerApellido} {solicitante.SegundoApellido}";
+
+            var estadoRechazado = context.Estados.FirstOrDefault(x => x.Nombre.Equals("rechazado", StringComparison.OrdinalIgnoreCase));
+            var solicitud = context.SolicitudesVacaciones.FirstOrDefault(x => x.SolicitudVacacionesId == solicitudId);
+
+            solicitud.EstadoId = estadoRechazado.EstadoId;
+
+            context.SolicitudesVacaciones.Add(solicitud);
+            context.Entry(solicitud).State = System.Data.Entity.EntityState.Modified;
+            var rowsAffected = context.SaveChanges();
+
+            if (rowsAffected > 0)
+            {
+                if (aprobador.Id == jefe.Id)
+                    emailNotification.SendEmailAsync(solicitante.Email, $"{jefe.Email}", $"Vacaciones Denegadas para {nombreSolicitante}", $"La solicitud de vacaciones: {solicitudId} para el colaborador {nombreSolicitante} fue <strong>denegada</strong>. <br /> Observaciones: {comentarioJefatura}");
+                else
+                    emailNotification.SendEmailAsync(solicitante.Email, $"{jefe.Email},{aprobador.Email}", $"Vacaciones Denegadas para {nombreSolicitante}", $"La solicitud de vacaciones: {solicitudId} para el colaborador {nombreSolicitante} fue <strong>denegada</strong>. <br /> Observaciones: {comentarioJefatura}");
+            }
+
+            return rowsAffected;
         }
 
         private string ObtenerAprobadorId(string id)

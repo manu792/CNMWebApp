@@ -32,7 +32,6 @@ namespace CNMWebApp
                 mail.To.Add(message.Destination);
                 mail.Subject = message.Subject;
                 mail.AlternateViews.Add(AlternateView.CreateAlternateViewFromString(message.Body, null, MediaTypeNames.Text.Html));
-                //mail.Body = message.Body;
 
                 smtpServer.Port = 587;
                 smtpServer.Credentials = new NetworkCredential("otistestuh@gmail.com", "OtisTest123");
@@ -40,7 +39,6 @@ namespace CNMWebApp
 
                 smtpServer.Send(mail);
             });
-            //return Task.FromResult(0);
         }
     }
 

@@ -157,8 +157,11 @@ namespace CNMWebApp.Controllers
             return View(solicitudes.ToPagedList(numeroPagina, tamanoPagina));
         }
 
-        public ActionResult Revisar(int? id)
+        [Auth(Roles = "Jefatura, Director")]
+        public async Task<ActionResult> Revisar(int? id)
         {
+            var usuario = await userService.GetLoggedInUser();
+
             if (id == null)
                 return RedirectToAction("SolicitudesEmpleados");
 
@@ -166,7 +169,7 @@ namespace CNMWebApp.Controllers
 
             var solicitud = solicitudService.ObtenerSolicitudPorId(solicitudId);
 
-            if (solicitud == null)
+            if (solicitud == null || solicitud.UsuarioId == usuario.Id)
                 return HttpNotFound($"La solicitud con id {id} no existe");
 
             var annosLaborados = DateTime.Now.Year - solicitud.Usuario.FechaIngreso.Year;
@@ -175,7 +178,7 @@ namespace CNMWebApp.Controllers
             return View(new SolicitudViewModel()
             {
                 SolicitudId = solicitud.SolicitudVacacionesId,
-                Id = solicitud.Usuario.Id,
+                UsuarioId = solicitud.Usuario.Id,
                 Nombre = solicitud.Usuario.Nombre,
                 PrimerApellido = solicitud.Usuario.PrimerApellido,
                 SegundoApellido = solicitud.Usuario.SegundoApellido,
@@ -199,6 +202,56 @@ namespace CNMWebApp.Controllers
                 // y cantidad de vacaciones previamente solicitadas
                 SaldoDiasDisponibles = 10
             });
+        }
+
+        [HttpPost]
+        [Auth(Roles = "Jefatura, Director")]
+        [MultipleButton(Name = "action", Argument = "Aprobar")]
+        public async Task<ActionResult> Aprobar(SolicitudViewModel solicitud)
+        {
+            try
+            {
+                var usuario = await userService.GetLoggedInUser();
+
+                var rowsAffected = solicitudService.Aprobar(solicitud.SolicitudId, solicitud.ComentarioJefatura, usuario, solicitud.UsuarioId);
+                if(rowsAffected > 0)
+                {
+                    return RedirectToAction("SolicitudesEmpleados");
+                }
+
+                ModelState.AddModelError("", $"No se encontró ninguna solicitud con el id {solicitud.SolicitudId}");
+                return RedirectToAction("Revisar", new { id = solicitud.SolicitudId });
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", $"Hubo un problema al tratar de procesar la solicitud. Favor contacte a soporte si el problem persiste");
+                return RedirectToAction("Revisar", new { id = solicitud.SolicitudId });
+            }
+        }
+
+        [HttpPost]
+        [Auth(Roles = "Jefatura, Director")]
+        [MultipleButton(Name = "action", Argument = "Rechazar")]
+        public async Task<ActionResult> Rechazar(SolicitudViewModel solicitud)
+        {
+            try
+            {
+                var usuario = await userService.GetLoggedInUser();
+
+                var rowsAffected = solicitudService.Rechazar(solicitud.SolicitudId, solicitud.ComentarioJefatura, usuario, solicitud.UsuarioId);
+                if (rowsAffected > 0)
+                {
+                    return RedirectToAction("SolicitudesEmpleados");
+                }
+
+                ModelState.AddModelError("", $"No se encontró ninguna solicitud con el id {solicitud.SolicitudId}");
+                return RedirectToAction("Revisar", new { id = solicitud.SolicitudId });
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", $"Hubo un problema al tratar de procesar la solicitud. Favor contacte a soporte si el problem persiste");
+                return RedirectToAction("Revisar", new { id = solicitud.SolicitudId });
+            }
         }
 
         private List<SolicitudVacaciones> FiltrarSolicitudes(IEnumerable<SolicitudVacaciones> solicitudes, string filtro)

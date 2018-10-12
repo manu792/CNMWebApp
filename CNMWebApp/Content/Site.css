@@ -37,7 +37,11 @@ textarea {
 
 textarea.form-control {
     height: 170px;
-    max-width: 60% !important;
+    max-width: 100% !important;
+}
+
+#ComentarioJefatura {
+    max-width: 64% !important;
 }
 
 .datepicker.datepicker-inline {

@@ -74,6 +74,8 @@ namespace CNMWebApp.Models
     public class SolicitudViewModel : UserViewModel
     {
         public int SolicitudId { get; set; }
+        [DisplayName("Cédula")]
+        public string UsuarioId { get; set; }
         [DisplayName("Días a solicitar")]
         // [DataType(DataType.Date)]
         // [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
@@ -88,6 +90,10 @@ namespace CNMWebApp.Models
         [DataType(DataType.MultilineText)]
         [MaxLength(500, ErrorMessage = "El comentario debe ser máximo de 500 caracteres")]
         public string Comentario { get; set; }
+        [DataType(DataType.MultilineText)]
+        [MaxLength(500, ErrorMessage = "El comentario debe ser máximo de 500 caracteres")]
+        [DisplayName("Observaciones")]
+        public string ComentarioJefatura { get; set; }
         public IEnumerable<DiasPorSolicitudViewModel> DiasPorSolicitud { get; set; }
     }
 
