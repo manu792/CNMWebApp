@@ -38,7 +38,8 @@ namespace CNMWebApp.Services
         public IEnumerable<SolicitudVacaciones> ObtenerSolicitudesPorAprobar(UserViewModel jefe)
         {
             return context.SolicitudesVacaciones.Where(x => x.Estado.Nombre.Equals("por revisar", StringComparison.OrdinalIgnoreCase) &&
-                   x.AprobadorId == jefe.Id)
+                   x.AprobadorId == jefe.Id &&
+                   x.UsuarioId != jefe.Id)
             .ToList();
         }
 
