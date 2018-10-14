@@ -62,7 +62,35 @@ namespace CNMWebApp.Services
                 .FirstOrDefault();
 
             if (director == null)
-                throw new Exception("No se encontró ningún director general");
+                return null;
+
+            return new UserViewModel()
+            {
+                Id = director.Id,
+                Nombre = director.Nombre,
+                PrimerApellido = director.PrimerApellido,
+                SegundoApellido = director.SegundoApellido,
+                Email = director.Email,
+                UnidadTecnica = director.UnidadTecnica,
+                Categoria = director.Categoria,
+                EstaActivo = director.EstaActivo,
+                FechaIngreso = director.FechaIngreso,
+                PhoneNumber = director.PhoneNumber
+            };
+        }
+
+        public UserViewModel ObtenerDirectorAdministrativo()
+        {
+            var directorRole = _roleManager.FindByName("Director");
+            var directorAdministrativoCategoria = _categoriaServicio.ObtenerCategoriaPorNombre("director administrativo");
+
+            var director = _userManager.Users
+                .Where(x => x.CategoriaId == directorAdministrativoCategoria.CategoriaId &&
+                    x.Roles.Any(r => r.RoleId == directorRole.Id))
+                .FirstOrDefault();
+
+            if (director == null)
+                return null;
 
             return new UserViewModel()
             {
@@ -259,6 +287,8 @@ namespace CNMWebApp.Services
 
         public async Task<bool> Crear(UserRolesUnidadCategoria usuario)
         {
+            VerificarExistenciaJefaturas(usuario);
+
             try
             {
                 var role = await _roleManager.FindByIdAsync(usuario.SelectedRoleId);
@@ -303,6 +333,34 @@ namespace CNMWebApp.Services
             catch (Exception ex)
             {
                 return false;
+            }
+        }
+
+        private void VerificarExistenciaJefaturas(UserRolesUnidadCategoria usuario)
+        {
+            if (usuario.Role.Name.Equals("jefatura", StringComparison.OrdinalIgnoreCase))
+            {
+                var jefe = ObtenerJefe(Convert.ToInt32(usuario.SelectedUnidadTecnicaId));
+                if (jefe != null)
+                    throw new Exception("Ya existe el puesto de jefatura para la unidad técnica seleccionada");
+            }
+
+            if (usuario.Role.Name.Equals("director", StringComparison.OrdinalIgnoreCase))
+            {
+                var directorGeneral = ObtenerDirectorGeneral();
+                var directorAdministrativo = ObtenerDirectorAdministrativo();
+
+                if (directorGeneral != null)
+                {
+                    if (directorGeneral.Categoria.CategoriaId == Convert.ToInt32(usuario.SelectedCategoriaId))
+                        throw new Exception("Ya existe el puesto de director general");
+                }
+
+                if (directorAdministrativo != null)
+                {
+                    if (directorAdministrativo.Categoria.CategoriaId == Convert.ToInt32(usuario.SelectedCategoriaId))
+                        throw new Exception("Ya existe el puesto de director administrativo");
+                }
             }
         }
 

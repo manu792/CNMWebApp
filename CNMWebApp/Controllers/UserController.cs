@@ -81,13 +81,22 @@ namespace CNMWebApp.Controllers
                 return View(user);
             }
 
-            var succeeded = await _userServicio.Crear(user);
-            if (succeeded)
-                return RedirectToAction("Index");
+            try
+            {
+                var succeeded = await _userServicio.Crear(user);
+                if (succeeded)
+                    return RedirectToAction("Index");
 
-            ModelState.AddModelError("", "Hubo un problema al tratar de crear al usuario. Por favor contacte a soporte si sigue teniendo este problema.");
+                ModelState.AddModelError("", "Hubo un problema al tratar de crear al usuario. Por favor contacte a soporte si sigue teniendo este problema.");
+            }
+            catch(Exception ex)
+            {
+                if(ex.Message.Contains("Ya existe"))
+                    ModelState.AddModelError("", ex.Message);
+                else
+                    ModelState.AddModelError("", "Hubo un problema al tratar de crear al usuario. Por favor contacte a soporte si sigue teniendo este problema.");
+            }
             CrearObjetoUsuario(user);
-
             return View(user);
         }
 
