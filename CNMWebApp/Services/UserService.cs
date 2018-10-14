@@ -17,6 +17,7 @@ namespace CNMWebApp.Services
         private ApplicationUserManager _userManager;
         private ApplicationRoleManager _roleManager;
         private CategoriaServicio _categoriaServicio;
+        private RoleService _roleService;
         
 
         public UserService()
@@ -24,9 +25,10 @@ namespace CNMWebApp.Services
             _userManager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
             _roleManager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationRoleManager>();
             _categoriaServicio = new CategoriaServicio();
+            _roleService = new RoleService();
         }
 
-        public UserViewModel ObtenerJefe(int unidadTecnicaId)
+        public UserViewModel ObtenerJefePorUnidadTecnica(int unidadTecnicaId)
         {
             var jefaturaRole = _roleManager.FindByName("Jefatura");
             var jefe = _userManager.Users
@@ -34,7 +36,7 @@ namespace CNMWebApp.Services
                 .FirstOrDefault();
 
             if (jefe == null)
-                throw new Exception("No se encontró ningún jefe para la unidad técnica seleccionada");
+                return null;
 
             return new UserViewModel()
             {
@@ -338,14 +340,17 @@ namespace CNMWebApp.Services
 
         private void VerificarExistenciaJefaturas(UserRolesUnidadCategoria usuario)
         {
-            if (usuario.Role.Name.Equals("jefatura", StringComparison.OrdinalIgnoreCase))
+            var jefaturaRole = _roleService.ObtenerRolPorNombre("Jefatura");
+            var directorRole = _roleService.ObtenerRolPorNombre("Director");
+
+            if (usuario.SelectedRoleId == jefaturaRole.Id)
             {
-                var jefe = ObtenerJefe(Convert.ToInt32(usuario.SelectedUnidadTecnicaId));
+                var jefe = ObtenerJefePorUnidadTecnica(Convert.ToInt32(usuario.SelectedUnidadTecnicaId));
                 if (jefe != null)
                     throw new Exception("Ya existe el puesto de jefatura para la unidad técnica seleccionada");
             }
 
-            if (usuario.Role.Name.Equals("director", StringComparison.OrdinalIgnoreCase))
+            if (usuario.SelectedRoleId == directorRole.Id)
             {
                 var directorGeneral = ObtenerDirectorGeneral();
                 var directorAdministrativo = ObtenerDirectorAdministrativo();

@@ -120,6 +120,12 @@ namespace CNMWebApp.Controllers
                 return View(solicitudVacaciones);
             }
 
+            if(solicitudVacaciones.CantidadDiasSolicitados > solicitudVacaciones.SaldoDiasDisponibles)
+            {
+                ModelState.AddModelError("", "La cantidad de días solicitados no puede ser mayor al saldo de días disponibles.");
+                return View(solicitudVacaciones);
+            }
+
             try
             {
                 var rowsAffected = await solicitudService.CrearSolicitudVacaciones(solicitudVacaciones);

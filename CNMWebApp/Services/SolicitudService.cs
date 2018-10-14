@@ -88,7 +88,7 @@ namespace CNMWebApp.Services
 
         public async Task<int> CrearSolicitudVacaciones(SolicitudViewModel solicitud)
         {
-            var solicitante = userService.ObtenerUsuarioPorId(solicitud.UsuarioId);
+            var solicitante = userService.ObtenerUsuarioPorId(solicitud.Id);
 
             var solicitudVacaciones = new SolicitudVacaciones()
             {
@@ -98,7 +98,7 @@ namespace CNMWebApp.Services
                 Comentario = solicitud.Comentario,
                 FechaSolicitud = DateTime.Now,
                 AprobadorId = solicitante.Role.Name.Equals("funcionario", StringComparison.OrdinalIgnoreCase) ?
-                     userService.ObtenerJefe(solicitante.UnidadTecnica.UnidadTecnicaId).Id :
+                     userService.ObtenerJefePorUnidadTecnica(solicitante.UnidadTecnica.UnidadTecnicaId).Id :
                     userService.ObtenerDirectorGeneral().Id,
                 DiasPorSolicitud = ObtenerDiasPorSolicitud(solicitud)
             };
@@ -115,7 +115,7 @@ namespace CNMWebApp.Services
         public int Aprobar(int solicitudId, string comentarioJefatura, UserViewModel aprobador, string solicitanteId)
         {
             var solicitante = userService.ObtenerUsuarioPorId(solicitanteId);
-            var jefe = userService.ObtenerJefe(solicitante.UnidadTecnica.UnidadTecnicaId);
+            var jefe = userService.ObtenerJefePorUnidadTecnica(solicitante.UnidadTecnica.UnidadTecnicaId);
 
             var nombreSolicitante = $"{solicitante.Nombre} {solicitante.PrimerApellido} {solicitante.SegundoApellido}";
 
@@ -145,7 +145,7 @@ namespace CNMWebApp.Services
         public int Rechazar(int solicitudId, string comentarioJefatura, UserViewModel aprobador, string solicitanteId)
         {
             var solicitante = userService.ObtenerUsuarioPorId(solicitanteId);
-            var jefe = userService.ObtenerJefe(solicitante.UnidadTecnica.UnidadTecnicaId);
+            var jefe = userService.ObtenerJefePorUnidadTecnica(solicitante.UnidadTecnica.UnidadTecnicaId);
 
             var nombreSolicitante = $"{solicitante.Nombre} {solicitante.PrimerApellido} {solicitante.SegundoApellido}";
 
@@ -177,7 +177,7 @@ namespace CNMWebApp.Services
             if (empleado.Role.Name.Equals("funcionario", StringComparison.OrdinalIgnoreCase))
             {
                 // La solicitud se envia al jefe directo
-                aprobador = userService.ObtenerJefe(empleado.UnidadTecnica.UnidadTecnicaId);
+                aprobador = userService.ObtenerJefePorUnidadTecnica(empleado.UnidadTecnica.UnidadTecnicaId);
             }
             else if (empleado.Role.Name.Equals("jefatura", StringComparison.OrdinalIgnoreCase) || empleado.Role.Name.Equals("recursos humanos", StringComparison.OrdinalIgnoreCase))
             {

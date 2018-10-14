@@ -71,6 +71,7 @@
                 }
             });
 
+            var diasPorSolicitud = new Date();
             $('.selected-dates').datepicker('setDates', diasPorSolicitud);
 
             $('.select-dates').datepicker({
@@ -85,12 +86,20 @@
                 startDate: new Date()
             }).datepicker();
 
-            $('.select-dates').datepicker().on('changeDate', function () {
-                var dias = $('#selected-days').val();
-                $('#Dias').val(dias);
+            var selectedDates = [];
 
-                var selectedDates = $('.select-dates').datepicker("getDates");
-                $('#CantidadDiasSolicitados').val(selectedDates.length);
+            $('.select-dates').datepicker().on('changeDate', function (e) {
+                var saldoDias = $('#SaldoDiasDisponibles').val();
+
+                if (e.dates.length <= saldoDias) {
+                    selectedDates = e.dates;
+                    var dias = $('#selected-days').val();
+                    $('#Dias').val(dias);
+                    
+                    $('#CantidadDiasSolicitados').val(selectedDates.length);
+                } else {
+                    $('.select-dates').datepicker("setDates", selectedDates);
+                }
             });
 
 
