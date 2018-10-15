@@ -66,7 +66,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.FechaIngreso, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <div class='input-group date datepicker'>
+                <div class='input-group date fecha-ingreso'>
                     @Html.EditorFor(model => model.FechaIngreso, new { htmlAttributes = new { @type = "text", @class = "form-control" } })
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-th"></span>

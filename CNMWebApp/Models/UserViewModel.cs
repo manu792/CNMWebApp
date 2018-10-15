@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace CNMWebApp.Models
 {
@@ -73,7 +74,7 @@ namespace CNMWebApp.Models
 
     public class SolicitudViewModel : UserViewModel
     {
-        public int SolicitudId { get; set; }
+        public Guid SolicitudId { get; set; }
         [DisplayName("Cédula")]
         public string UsuarioId { get; set; }
         [DisplayName("Días a solicitar")]
@@ -95,6 +96,15 @@ namespace CNMWebApp.Models
         [DisplayName("Observaciones")]
         public string ComentarioJefatura { get; set; }
         public IEnumerable<DiasPorSolicitudViewModel> DiasPorSolicitud { get; set; }
+    }
+
+    public class SolicitudParaEmpleado : SolicitudViewModel
+    {
+        [Required(ErrorMessage = "El campo Colaborador es requerido")]
+        public string ColaboradorId { get; set; }
+        public List<UserViewModel> Colaboradores { get; set; }
+        [DisplayName("Fecha Ingreso")]
+        public string FechaIngresoEmpleado { get; set; }
     }
 
     public class DiasPorSolicitudViewModel

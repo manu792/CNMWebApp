@@ -136,7 +136,7 @@ namespace CNMWebApp.Controllers
                     return View(solicitudVacaciones);
                 }
 
-                return RedirectToAction("Index", "Solicitud", new { misSolicitudes = true });
+                return RedirectToAction("Index", "Solicitud");
             }
             catch (Exception ex)
             {
@@ -144,7 +144,58 @@ namespace CNMWebApp.Controllers
                 return View(solicitudVacaciones);
             }
         }
-        
+
+        // GET: Solicitud/CrearANombreDeEmpleado
+        [Auth(Roles = "Manager")]
+        public ActionResult CrearParaEmpleado()
+        {
+            var empleados = userService.GetUsers();
+
+            return View(new SolicitudParaEmpleado()
+            {
+                Colaboradores = empleados.ToList()
+            });
+        }
+
+        // POST: Solicitud/CrearANombreDeEmpleado
+        [HttpPost]
+        [Auth(Roles = "Manager")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> CrearParaEmpleado(SolicitudParaEmpleado solicitudVacaciones)
+        {
+            var empleados = userService.GetUsers();
+            solicitudVacaciones.Colaboradores = empleados.ToList();
+
+            if (!ModelState.IsValid)
+            {
+                return View(solicitudVacaciones);
+            }
+
+            if (solicitudVacaciones.CantidadDiasSolicitados > solicitudVacaciones.SaldoDiasDisponibles)
+            {
+                ModelState.AddModelError("", "La cantidad de días solicitados no puede ser mayor al saldo de días disponibles.");
+                return View(solicitudVacaciones);
+            }
+
+            try
+            {
+                var rowsAffected = await solicitudService.CrearSolicitudVacaciones(solicitudVacaciones);
+
+                if (rowsAffected <= 0)
+                {
+                    ModelState.AddModelError("", "Hubo un problema al tratar de agregar la solicitud. Favor intente de nuevo más tarde.");
+                    return View(solicitudVacaciones);
+                }
+
+                return View(solicitudVacaciones);
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", "Hubo un problema al tratar de agregar la solicitud. Favor intente de nuevo más tarde.");
+                return View(solicitudVacaciones);
+            }
+        }
+
         [Auth(Roles = "Jefatura, Director")]
         public async Task<ActionResult> SolicitudesEmpleados(string filtro, int? pagina)
         {
@@ -164,14 +215,16 @@ namespace CNMWebApp.Controllers
         }
 
         [Auth(Roles = "Jefatura, Director")]
-        public async Task<ActionResult> Revisar(int? id)
+        public async Task<ActionResult> Revisar(string id)
         {
+            Guid guid;
+
             var usuario = await userService.GetLoggedInUser();
 
-            if (id == null)
+            if (!Guid.TryParse(id, out guid))
                 return RedirectToAction("SolicitudesEmpleados");
 
-            var solicitudId = Convert.ToInt32(id);
+            var solicitudId = guid;
 
             var solicitud = solicitudService.ObtenerSolicitudPorId(solicitudId);
 
@@ -211,6 +264,7 @@ namespace CNMWebApp.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         [Auth(Roles = "Jefatura, Director")]
         [MultipleButton(Name = "action", Argument = "Aprobar")]
         public async Task<ActionResult> Aprobar(SolicitudViewModel solicitud)
@@ -236,6 +290,7 @@ namespace CNMWebApp.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         [Auth(Roles = "Jefatura, Director")]
         [MultipleButton(Name = "action", Argument = "Rechazar")]
         public async Task<ActionResult> Rechazar(SolicitudViewModel solicitud)

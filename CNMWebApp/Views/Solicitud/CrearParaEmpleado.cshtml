@@ -1,0 +1,200 @@
+﻿@model CNMWebApp.Models.SolicitudParaEmpleado
+
+@{
+    ViewBag.Title = "Crear a Nombre de un Colaborador";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Crear</h2>
+
+<h4>Solicitar Vacaciones a nombre de un Colaborador</h4>
+<hr />
+
+
+@using (Html.BeginForm("CrearParaEmpleado", "Solicitud", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Colaboradores, "Colaborador", htmlAttributes: new { @id = "role-dropdown", @class = "control-label col-md-4" })
+                    <div class="col-md-6">
+                        @Html.DropDownListFor(model => model.ColaboradorId, new SelectList(Model.Colaboradores, "Id", "Nombre"), "- Seleccione un colaborador -", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.ColaboradorId)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Id, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-6">
+                        @Html.EditorFor(model => model.Id, new { htmlAttributes = new { @class = "form-control", @readonly = "true" } })
+                        @Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-6">
+                        @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control", @readonly = "true" } })
+                        @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.PrimerApellido, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-6">
+                        @Html.EditorFor(model => model.PrimerApellido, new { htmlAttributes = new { @class = "form-control", @readonly = "true" } })
+                        @Html.ValidationMessageFor(model => model.PrimerApellido, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.SegundoApellido, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-6">
+                        @Html.EditorFor(model => model.SegundoApellido, new { htmlAttributes = new { @class = "form-control", @readonly = "true" } })
+                        @Html.ValidationMessageFor(model => model.SegundoApellido, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-6">
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @readonly = "true" } })
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-6">
+                        @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control", @readonly = "true" } })
+                        @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.FechaIngresoEmpleado, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-6">
+                        @Html.EditorFor(model => model.FechaIngresoEmpleado, new { htmlAttributes = new { @class = "form-control", @readonly = "true" } })
+                        @Html.ValidationMessageFor(model => model.FechaIngresoEmpleado, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CantidadAnnosLaborados, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-6">
+                        @Html.EditorFor(model => model.CantidadAnnosLaborados, new { htmlAttributes = new { @class = "form-control", @readonly = "true" } })
+                        @Html.ValidationMessageFor(model => model.CantidadAnnosLaborados, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.SaldoDiasDisponibles, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-6">
+                        @Html.EditorFor(model => model.SaldoDiasDisponibles, new { htmlAttributes = new { @class = "form-control", @readonly = "true" } })
+                        @Html.ValidationMessageFor(model => model.SaldoDiasDisponibles, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div hidden class="form-group">
+                    @Html.LabelFor(model => model.Dias, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-6">
+                        <div class='input-group date datepicker-vacaciones'>
+                            @Html.EditorFor(model => model.Dias, new { htmlAttributes = new { @type = "text", @class = "form-control" } })
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-th"></span>
+                            </span>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Dias, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CantidadDiasSolicitados, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-6">
+                        @Html.EditorFor(model => model.CantidadDiasSolicitados, new { htmlAttributes = new { @class = "form-control", @readonly = "true" } })
+                        @Html.ValidationMessageFor(model => model.CantidadDiasSolicitados, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Dias, htmlAttributes: new { @class = "control-label" })
+                        <div class="select-dates">
+                            <input style="display: none;" id="selected-days" type="text" value="" readonly />
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Dias, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Comentario, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Comentario, new { htmlAttributes = new { @class = "form-control", @cols = "1000" } })
+                            @Html.ValidationMessageFor(model => model.Comentario, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-4">
+                        <input type="submit" value="Solicitar" class="btn btn-default btn-block" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+<div>
+    @Html.ActionLink("Regresar", "Index", "Home")
+</div>
+
+@section scripts
+{
+    <script>
+        $('#ColaboradorId').change(function (event) {
+            var usuarioId = event.target.value;
+            var url = "/User/ObtenerUsuarioPorId/";
+
+            $.ajax({
+                url: url,
+                cache: false,
+                data: { usuarioId: usuarioId },
+                type: "GET",
+                success: function (data) {
+                    console.log(data);
+                    $('#Id').val(data.Usuario.Id);
+                    $('#Nombre').val(data.Usuario.Nombre);
+                    $('#PrimerApellido').val(data.Usuario.PrimerApellido);
+                    $('#SegundoApellido').val(data.Usuario.SegundoApellido);
+                    $('#Email').val(data.Usuario.Email);
+                    $('#PhoneNumber').val(data.Usuario.PhoneNumber);
+                    $('#FechaIngresoEmpleado').val(data.Usuario.FechaIngresoEmpleado);
+                    console.log(data.Usuario);
+                    $('#CantidadAnnosLaborados').val(data.Usuario.CantidadAnnosLaborados);
+                    $('#SaldoDiasDisponibles').val(data.Usuario.SaldoDiasDisponibles);
+                    $('#CantidadDiasSolicitados').val(data.Usuario.CantidadDiasSolicitados);
+                },
+                error: function (response) {
+                    console.log(response.responseText);
+                    alert("error : " + response.responseText);
+                }
+            });
+        });
+    </script>    
+}

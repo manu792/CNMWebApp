@@ -50,7 +50,7 @@
     <script>
 
         $(document).ready(function () {
-            $('.datepicker').datepicker({
+            $('.fecha-ingreso').datepicker({
                 format: 'yyyy/mm/dd',
                 todayHighlight: true,
                 autoclose: true,
@@ -62,18 +62,7 @@
                 autoclose: true
             });
 
-            $('.selected-dates').datepicker({
-                format: 'yyyy/mm/dd',
-                todayHighlight: true,
-                multidate: true,
-                beforeShowDay: function () {
-                    return false;
-                }
-            });
-
-            var diasPorSolicitud = new Date();
-            $('.selected-dates').datepicker('setDates', diasPorSolicitud);
-
+            var selectedDates = [];
             $('.select-dates').datepicker({
                 format: 'yyyy/mm/dd',
                 todayHighlight: true,
@@ -85,8 +74,6 @@
                 showClear: true,
                 startDate: new Date()
             }).datepicker();
-
-            var selectedDates = [];
 
             $('.select-dates').datepicker().on('changeDate', function (e) {
                 var saldoDias = $('#SaldoDiasDisponibles').val();
@@ -106,10 +93,7 @@
             $("#SelectedRoleId").change(function (event) {
                 var roleId = event.target.value;
                 var url = "/User/ObtenerUnidadesCategoriasPorRoleId/";
-
                 
-
-
                 $.ajax({
                     url: url,
                     cache: false,

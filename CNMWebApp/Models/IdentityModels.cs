@@ -21,7 +21,7 @@ namespace CNMWebApp.Models
     [Table("SolicitudesVacaciones")]
     public class SolicitudVacaciones
     {
-        public int SolicitudVacacionesId { get; set; }
+        public Guid SolicitudVacacionesId { get; set; }
         public string UsuarioId { get; set; }
         public int CantidadDiasSolicitados { get; set; }
         [MaxLength(500, ErrorMessage = "El comentario debe ser máximo de 500 caracteres")]

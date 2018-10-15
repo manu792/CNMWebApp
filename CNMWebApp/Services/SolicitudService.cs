@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Mvc;
 
 namespace CNMWebApp.Services
 {
@@ -30,7 +31,7 @@ namespace CNMWebApp.Services
                 .ToList();
         }
 
-        public SolicitudVacaciones ObtenerSolicitudPorId(int id)
+        public SolicitudVacaciones ObtenerSolicitudPorId(Guid id)
         {
             return context.SolicitudesVacaciones.FirstOrDefault(x => x.SolicitudVacacionesId == id);
         }
@@ -89,30 +90,38 @@ namespace CNMWebApp.Services
         public async Task<int> CrearSolicitudVacaciones(SolicitudViewModel solicitud)
         {
             var solicitante = userService.ObtenerUsuarioPorId(solicitud.Id);
+            var fechaSolicitud = DateTime.Now;
+            var guid = Guid.NewGuid();
 
             var solicitudVacaciones = new SolicitudVacaciones()
             {
+                SolicitudVacacionesId = guid,
                 UsuarioId = solicitud.Id,
                 CantidadDiasSolicitados = solicitud.CantidadDiasSolicitados,
                 EstadoId = 1,
                 Comentario = solicitud.Comentario,
-                FechaSolicitud = DateTime.Now,
+                FechaSolicitud = fechaSolicitud,
                 AprobadorId = solicitante.Role.Name.Equals("funcionario", StringComparison.OrdinalIgnoreCase) ?
                      userService.ObtenerJefePorUnidadTecnica(solicitante.UnidadTecnica.UnidadTecnicaId).Id :
                     userService.ObtenerDirectorGeneral().Id,
                 DiasPorSolicitud = ObtenerDiasPorSolicitud(solicitud)
             };
 
-            // A continuacion se envia la notificacion por correo al jefe correspondiente segun el usuario
-            var callbackUrl = @"Controller\Action?parameter1=something";
-            await userManager.SendEmailAsync(ObtenerAprobadorId(solicitud.Id), $"Solicitud de Vacaciones para {solicitud.Nombre} {solicitud.PrimerApellido} {solicitud.SegundoApellido}", $"{solicitud.Comentario} <br /> Para aprobar o rechazar la solicitud de vacaciones haga click en el siguiente link: <a href=\\ {callbackUrl} \\>here</a>");
-
-
             context.SolicitudesVacaciones.Add(solicitudVacaciones);
-            return context.SaveChanges();
+            var affectedRows = context.SaveChanges();
+
+            if(affectedRows > 0)
+            {
+                // A continuacion se envia la notificacion por correo al jefe correspondiente segun el usuario
+                var urlHelper = new UrlHelper(HttpContext.Current.Request.RequestContext);
+                var callbackUrl = urlHelper.Action("Revisar", "Solicitud", new { id = guid }, protocol: HttpContext.Current.Request.Url.Scheme);
+                await userManager.SendEmailAsync(ObtenerAprobadorId(solicitud.Id), "Solicitud de Vacaciones para " + solicitud.Nombre + " " + solicitud.PrimerApellido + " " + solicitud.SegundoApellido, solicitud.Comentario + " <br /> Para aprobar o rechazar la solicitud de vacaciones haga click en el siguiente link: <a href=\"" + callbackUrl + "\">Aquí</a>");
+            }
+            
+            return affectedRows;
         }
 
-        public int Aprobar(int solicitudId, string comentarioJefatura, UserViewModel aprobador, string solicitanteId)
+        public int Aprobar(Guid solicitudId, string comentarioJefatura, UserViewModel aprobador, string solicitanteId)
         {
             var solicitante = userService.ObtenerUsuarioPorId(solicitanteId);
             var jefe = userService.ObtenerJefePorUnidadTecnica(solicitante.UnidadTecnica.UnidadTecnicaId);
@@ -128,12 +137,12 @@ namespace CNMWebApp.Services
             context.Entry(solicitud).State = System.Data.Entity.EntityState.Modified;
             var rowsAffected = context.SaveChanges();
 
-            if(rowsAffected > 0)
+            if (rowsAffected > 0)
             {
                 // Envio correo de aprobacion al solicitante con copia a RH y al aprobador, asi como al jefe del solicitante. 
                 // Se adjunta boleta en formato PDF
                 // Verificar si el que aprobo las vacaciones es el jefe o el director, y enviar el correo a ambos si es necesario
-                if(aprobador.Id == jefe.Id)
+                if (aprobador.Id == jefe.Id)
                     emailNotification.SendEmailAsync(solicitante.Email, $"{jefe.Email},otistestuh@gmail.com", $"Vacaciones Aprobadas para {nombreSolicitante}", $"La solicitud de vacaciones: {solicitudId} para el colaborador {nombreSolicitante} fue <strong>aprobada</strong>. <br /> <br /> Observaciones: {comentarioJefatura}");
                 else
                     emailNotification.SendEmailAsync(solicitante.Email, $"{jefe.Email},{aprobador.Email},otistestuh@gmail.com", $"Vacaciones Aprobadas para {nombreSolicitante}", $"La solicitud de vacaciones: {solicitudId} para el colaborador {nombreSolicitante} fue <strong>aprobada</strong>. <br /> <br /> Observaciones: {comentarioJefatura}");
@@ -142,7 +151,7 @@ namespace CNMWebApp.Services
             return rowsAffected;
         }
 
-        public int Rechazar(int solicitudId, string comentarioJefatura, UserViewModel aprobador, string solicitanteId)
+        public int Rechazar(Guid solicitudId, string comentarioJefatura, UserViewModel aprobador, string solicitanteId)
         {
             var solicitante = userService.ObtenerUsuarioPorId(solicitanteId);
             var jefe = userService.ObtenerJefePorUnidadTecnica(solicitante.UnidadTecnica.UnidadTecnicaId);

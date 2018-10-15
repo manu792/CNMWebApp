@@ -41,6 +41,38 @@ namespace CNMWebApp.Controllers
             return Json(new { Categorias = listaCategorias, Unidades = listaUnidades }, JsonRequestBehavior.AllowGet);
         }
 
+
+        [HttpGet]
+        public JsonResult ObtenerUsuarioPorId(string usuarioId)
+        {
+            var usuario = _userServicio.ObtenerUsuarioPorId(usuarioId);
+
+            var annosLaborados = DateTime.Now.Year - usuario.FechaIngreso.Year;
+            if (usuario.FechaIngreso > DateTime.Now.AddYears(-annosLaborados)) annosLaborados--;
+
+            var empleado = new SolicitudParaEmpleado()
+            {
+                Id = usuario.Id,
+                Nombre = usuario.Nombre,
+                PrimerApellido = usuario.PrimerApellido,
+                SegundoApellido = usuario.SegundoApellido,
+                Email = usuario.Email,
+                PhoneNumber = usuario.PhoneNumber,
+                Role = usuario.Role,
+                UnidadTecnica = usuario.UnidadTecnica,
+                Categoria = usuario.Categoria,
+                FechaIngresoEmpleado = usuario.FechaIngreso.ToString("yyyy-MM-dd"),
+                EstaActivo = usuario.EstaActivo,
+                CantidadAnnosLaborados = annosLaborados < 0 ? 0 : annosLaborados,
+                CantidadDiasSolicitados = 0,
+
+                // Necesito la logica para saber calcular los dias disponibles segun fecha de ingreso 
+                // y cantidad de vacaciones previamente solicitadas
+                SaldoDiasDisponibles = 10
+            };
+            return Json(new { Usuario = empleado }, JsonRequestBehavior.AllowGet);
+        }
+
         // GET: User
         public ActionResult Index(string filtro, int? pagina)
         {

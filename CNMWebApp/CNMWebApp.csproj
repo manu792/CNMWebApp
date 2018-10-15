@@ -409,6 +409,7 @@
     <Content Include="Views\Solicitud\Crear.cshtml" />
     <Content Include="Views\Solicitud\SolicitudesEmpleados.cshtml" />
     <Content Include="Views\Solicitud\Revisar.cshtml" />
+    <Content Include="Views\Solicitud\CrearParaEmpleado.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

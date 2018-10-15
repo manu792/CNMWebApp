@@ -149,9 +149,18 @@
 { 
     <script>
         var diasPorSolicitud = @Html.Raw(Json.Encode(Model.DiasPorSolicitud));
+        diasPorSolicitud = diasPorSolicitud.map(x => x.Fecha);
 
-        $(document).ready(function () {
-            diasPorSolicitud = diasPorSolicitud.map(x => x.Fecha);
+        $('.selected-dates').datepicker({
+            format: 'yyyy/mm/dd',
+            todayHighlight: true,
+            multidate: true,
+            beforeShowDay: function () {
+                return false;
+            }
         });
+
+        // var diasPorSolicitud = new Date();
+        $('.selected-dates').datepicker('setDates', diasPorSolicitud);
     </script>
 }
