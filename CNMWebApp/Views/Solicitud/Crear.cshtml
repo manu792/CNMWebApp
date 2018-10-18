@@ -16,7 +16,7 @@
     @Html.AntiForgeryToken()
 
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-6">
             <div class="form-horizontal">
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="form-group">
@@ -114,7 +114,7 @@
             </div>
         </div>
 
-        <div class="col-md-8">
+        <div class="col-md-6">
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-group">
@@ -154,3 +154,44 @@
 <div>
     @Html.ActionLink("Regresar", "Index", "Home")
 </div>
+
+
+@section scripts
+{
+    <script>
+        var selectedDates = [];
+            $('.select-dates').datepicker({
+                format: 'yyyy/mm/dd',
+                todayHighlight: true,
+                multidate: true,
+                linkField: 'Dias',
+                linkFormat: 'yyyy/mm/dd',
+                sideBySide: true,
+                toolbarPlacement: 'bottom',
+                showClear: true,
+                startDate: new Date()
+            }).datepicker();
+
+            $('.select-dates').datepicker().on('changeDate', function (e) {
+                var saldoDias = $('#SaldoDiasDisponibles').val();
+
+                if (e.dates.length <= saldoDias) {
+                    selectedDates = e.dates;
+                    var dias = $('#selected-days').val();
+                    $('#Dias').val(dias);
+
+                    $('#CantidadDiasSolicitados').val(selectedDates.length);
+                } else {
+                    if (selectedDates.length > 0) {
+                        $('.select-dates').datepicker("setDates", selectedDates);
+                    } else {
+                        $('.select-dates').datepicker("setDates", '');
+                    }
+                }
+        });
+
+        var diasSeleccionados = $('#Dias').val();
+        var array = diasSeleccionados.split(",");
+        $('.select-dates').datepicker('setDates', array);
+    </script>
+}

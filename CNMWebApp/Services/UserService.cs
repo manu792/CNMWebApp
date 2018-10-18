@@ -49,7 +49,8 @@ namespace CNMWebApp.Services
                 Categoria = jefe.Categoria,
                 EstaActivo = jefe.EstaActivo,
                 FechaIngreso = jefe.FechaIngreso,
-                PhoneNumber = jefe.PhoneNumber
+                PhoneNumber = jefe.PhoneNumber,
+                SaldoDiasDisponibles = jefe.SaldoDiasEmpleado.SaldoDiasDisponibles
             };
         }
 
@@ -77,7 +78,8 @@ namespace CNMWebApp.Services
                 Categoria = director.Categoria,
                 EstaActivo = director.EstaActivo,
                 FechaIngreso = director.FechaIngreso,
-                PhoneNumber = director.PhoneNumber
+                PhoneNumber = director.PhoneNumber,
+                SaldoDiasDisponibles = director.SaldoDiasEmpleado.SaldoDiasDisponibles
             };
         }
 
@@ -105,7 +107,8 @@ namespace CNMWebApp.Services
                 Categoria = director.Categoria,
                 EstaActivo = director.EstaActivo,
                 FechaIngreso = director.FechaIngreso,
-                PhoneNumber = director.PhoneNumber
+                PhoneNumber = director.PhoneNumber,
+                SaldoDiasDisponibles = director.SaldoDiasEmpleado.SaldoDiasDisponibles
             };
         }
 
@@ -134,7 +137,8 @@ namespace CNMWebApp.Services
                 UnidadTecnica = x.UnidadTecnica,
                 Categoria = x.Categoria,
                 EstaActivo = x.EstaActivo,
-                EsSuperusuario = _userManager.IsInRole(x.Id, "Manager")
+                EsSuperusuario = _userManager.IsInRole(x.Id, "Manager"),
+                SaldoDiasDisponibles = x.SaldoDiasEmpleado.SaldoDiasDisponibles
             }).ToList();
         }
 
@@ -163,7 +167,8 @@ namespace CNMWebApp.Services
                 Categoria = user.Categoria,
                 EstaActivo = user.EstaActivo,
                 EsSuperusuario = _userManager.IsInRole(user.Id, "Manager"),
-                FotoRuta = user.FotoRuta
+                FotoRuta = user.FotoRuta,
+                SaldoDiasDisponibles = user.SaldoDiasEmpleado.SaldoDiasDisponibles
             };
         }
 
@@ -208,6 +213,7 @@ namespace CNMWebApp.Services
                 user.CategoriaId = Convert.ToInt32(usuario.SelectedCategoriaId);
                 user.EstaActivo = usuario.EstaActivo;
                 user.FotoRuta = usuario.Foto != null ? Path.Combine(System.Web.HttpContext.Current.Server.MapPath("~/Fotos"), usuario.Foto.FileName) : null;
+                user.SaldoDiasEmpleado.SaldoDiasDisponibles = usuario.SaldoDiasDisponibles;
 
                 var resultado = _userManager.Update(user);
 
@@ -283,7 +289,8 @@ namespace CNMWebApp.Services
                 FotoRuta = user.FotoRuta,
                 PhoneNumber = user.PhoneNumber,
                 UnidadTecnica = user.UnidadTecnica,
-                Role = _roleManager.FindById(role.RoleId)
+                Role = _roleManager.FindById(role.RoleId),
+                SaldoDiasDisponibles = user.SaldoDiasEmpleado != null ? user.SaldoDiasEmpleado.SaldoDiasDisponibles : 0
             };
         }
 
@@ -310,7 +317,13 @@ namespace CNMWebApp.Services
                     CategoriaId = Convert.ToInt32(usuario.SelectedCategoriaId),
                     EstaActivo = true,
                     EsContrasenaTemporal = true,
-                    FotoRuta = usuario.Foto != null ? Path.Combine(System.Web.HttpContext.Current.Server.MapPath("~/Fotos"), usuario.Foto.FileName) : null
+                    FotoRuta = usuario.Foto != null ? Path.Combine(System.Web.HttpContext.Current.Server.MapPath("~/Fotos"), usuario.Foto.FileName) : null,
+                    SaldoDiasEmpleado = new SaldoDiasPorEmpleado()
+                    {
+                        EmpleadoId = usuario.Id,
+                        SaldoDiasDisponibles = 0,
+                        UltimaActualizacion = DateTime.Now
+                    },
                 }, contrasenaTemporal);
 
                 if (result.Succeeded)

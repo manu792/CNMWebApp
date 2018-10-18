@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <link href="~/Contents/bootstrap-datepicker.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-select.min.css" rel="stylesheet" />
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -34,17 +35,15 @@
             </div>
         </div>
     </div>
-    <div class="container-fluid body-content">
+    <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
     </div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     <script src="~/Scripts/bootstrap-datepicker.js"></script>
+    <script src="~/Scripts/bootstrap-select.min.js"></script>
     @RenderSection("scripts", required: false)
 
     <script>
@@ -61,39 +60,11 @@
                 todayHighlight: true,
                 autoclose: true
             });
-
-            var selectedDates = [];
-            $('.select-dates').datepicker({
-                format: 'yyyy/mm/dd',
-                todayHighlight: true,
-                multidate: true,
-                linkField: 'Dias',
-                linkFormat: 'yyyy/mm/dd',
-                sideBySide: true,
-                toolbarPlacement: 'bottom',
-                showClear: true,
-                startDate: new Date()
-            }).datepicker();
-
-            $('.select-dates').datepicker().on('changeDate', function (e) {
-                var saldoDias = $('#SaldoDiasDisponibles').val();
-
-                if (e.dates.length <= saldoDias) {
-                    selectedDates = e.dates;
-                    var dias = $('#selected-days').val();
-                    $('#Dias').val(dias);
-                    
-                    $('#CantidadDiasSolicitados').val(selectedDates.length);
-                } else {
-                    $('.select-dates').datepicker("setDates", selectedDates);
-                }
-            });
-
-
+            
             $("#SelectedRoleId").change(function (event) {
                 var roleId = event.target.value;
                 var url = "/User/ObtenerUnidadesCategoriasPorRoleId/";
-                
+
                 $.ajax({
                     url: url,
                     cache: false,

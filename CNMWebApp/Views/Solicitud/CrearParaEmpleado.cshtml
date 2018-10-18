@@ -16,14 +16,14 @@
     @Html.AntiForgeryToken()
 
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-6">
             <div class="form-horizontal">
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
                 <div class="form-group">
                     @Html.LabelFor(model => model.Colaboradores, "Colaborador", htmlAttributes: new { @id = "role-dropdown", @class = "control-label col-md-4" })
                     <div class="col-md-6">
-                        @Html.DropDownListFor(model => model.ColaboradorId, new SelectList(Model.Colaboradores, "Id", "Nombre"), "- Seleccione un colaborador -", new { @class = "form-control" })
+                        @Html.DropDownListFor(model => model.ColaboradorId, new SelectList(Model.Colaboradores, "Id", "NombreCompleto"), "- Seleccione un colaborador -", new { @class = "form-control selectpicker" })
                         @Html.ValidationMessageFor(model => model.ColaboradorId)
                     </div>
                 </div>
@@ -122,36 +122,38 @@
                 </div>
             </div>
         </div>
-
-        <div class="col-md-8">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Dias, htmlAttributes: new { @class = "control-label" })
-                        <div class="select-dates">
-                            <input style="display: none;" id="selected-days" type="text" value="" readonly />
-                        </div>
-                        @Html.ValidationMessageFor(model => model.Dias, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Comentario, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.Comentario, new { htmlAttributes = new { @class = "form-control", @cols = "1000" } })
-                            @Html.ValidationMessageFor(model => model.Comentario, "", new { @class = "text-danger" })
+        
+        <div class="informacion-solicitud">
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Dias, htmlAttributes: new { @class = "control-label" })
+                            <div class="select-dates-empleado">
+                                <input style="display: none;" id="selected-days" type="text" value="" readonly />
+                            </div>
+                            @Html.ValidationMessageFor(model => model.Dias, "", new { @class = "text-danger" })
                         </div>
                     </div>
                 </div>
-            </div>
-            <br />
-            <div class="row">
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-4">
-                        <input type="submit" value="Solicitar" class="btn btn-default btn-block" />
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Comentario, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Comentario, new { htmlAttributes = new { @class = "form-control", @cols = "1000" } })
+                                @Html.ValidationMessageFor(model => model.Comentario, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-4">
+                            <input type="submit" value="Solicitar" class="btn btn-default btn-block" />
+                        </div>
                     </div>
                 </div>
             </div>
@@ -167,9 +169,53 @@
 @section scripts
 {
     <script>
+        $('.select-dates-empleado').datepicker({
+            format: 'yyyy/mm/dd',
+            todayHighlight: true,
+            multidate: true,
+            linkField: 'Dias',
+            linkFormat: 'yyyy/mm/dd',
+            sideBySide: true,
+            toolbarPlacement: 'bottom',
+            showClear: true,
+            startDate: new Date()
+        }).datepicker();
+        $('.select-dates-empleado').datepicker().on('changeDate', function (e) {
+            var colaborador = $('#ColaboradorId').val();
+            if (!colaborador) {
+                $('.select-dates-empleado').datepicker('update', '');
+            }
+
+            var dias = $('#selected-days').val();
+            $('#Dias').val(dias);
+
+            $('#CantidadDiasSolicitados').val(e.dates.length);
+        });
+
+        $('#ColaboradorId').selectpicker({
+            liveSearch: true,
+            showSubtext: true
+        });
+
         $('#ColaboradorId').change(function (event) {
             var usuarioId = event.target.value;
             var url = "/User/ObtenerUsuarioPorId/";
+
+            if (!usuarioId) {
+                $('#Id').val('');
+                $('#Nombre').val('');
+                $('#PrimerApellido').val('');
+                $('#SegundoApellido').val('');
+                $('#Email').val('');
+                $('#PhoneNumber').val('');
+                $('#FechaIngresoEmpleado').val('');
+                $('#CantidadAnnosLaborados').val(0);
+                $('#SaldoDiasDisponibles').val(0);
+                $('#CantidadDiasSolicitados').val(0);
+                $('.select-dates-empleado').datepicker('update', '');
+                $('#Comentario').val('');
+                return;
+            }
 
             $.ajax({
                 url: url,
@@ -177,7 +223,6 @@
                 data: { usuarioId: usuarioId },
                 type: "GET",
                 success: function (data) {
-                    console.log(data);
                     $('#Id').val(data.Usuario.Id);
                     $('#Nombre').val(data.Usuario.Nombre);
                     $('#PrimerApellido').val(data.Usuario.PrimerApellido);
@@ -185,7 +230,6 @@
                     $('#Email').val(data.Usuario.Email);
                     $('#PhoneNumber').val(data.Usuario.PhoneNumber);
                     $('#FechaIngresoEmpleado').val(data.Usuario.FechaIngresoEmpleado);
-                    console.log(data.Usuario);
                     $('#CantidadAnnosLaborados').val(data.Usuario.CantidadAnnosLaborados);
                     $('#SaldoDiasDisponibles').val(data.Usuario.SaldoDiasDisponibles);
                     $('#CantidadDiasSolicitados').val(data.Usuario.CantidadDiasSolicitados);
@@ -196,5 +240,9 @@
                 }
             });
         });
+
+        var diasSeleccionados = $('#Dias').val();
+        var array = diasSeleccionados.split(",");
+        $('.select-dates-empleado').datepicker('setDates', array);
     </script>    
 }

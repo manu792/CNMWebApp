@@ -66,9 +66,8 @@ namespace CNMWebApp.Controllers
                 CantidadAnnosLaborados = annosLaborados < 0 ? 0 : annosLaborados,
                 CantidadDiasSolicitados = 0,
 
-                // Necesito la logica para saber calcular los dias disponibles segun fecha de ingreso 
-                // y cantidad de vacaciones previamente solicitadas
-                SaldoDiasDisponibles = 10
+                // Saldo Dias Disponibles viene de la BD
+                SaldoDiasDisponibles = usuario.SaldoDiasDisponibles
             };
             return Json(new { Usuario = empleado }, JsonRequestBehavior.AllowGet);
         }
@@ -163,7 +162,8 @@ namespace CNMWebApp.Controllers
                 Role = usuario.Role,
                 Categoria = usuario.Categoria,
                 UnidadTecnica = usuario.UnidadTecnica,
-                FotoRuta = usuario.FotoRuta
+                FotoRuta = usuario.FotoRuta,
+                SaldoDiasDisponibles = usuario.SaldoDiasDisponibles
             });
         }
 

@@ -64,6 +64,16 @@ namespace CNMWebApp.Models
         public string Nombre { get; set; }
     }
 
+    // SaldoDisponible para cada uno de los empleados se mapea con la tabla SaldoDiasPorEmpleado
+    [Table("SaldoDiasPorEmpleado")]
+    public class SaldoDiasPorEmpleado
+    {
+        [Key]
+        public string EmpleadoId { get; set; }
+        public int SaldoDiasDisponibles { get; set; }
+        public DateTime UltimaActualizacion { get; set; }
+    }
+
     // Categorias del empleado va a ir mapeada a la tabla Categorias
     [Table("Categorias")]
     public class Categoria
@@ -74,6 +84,21 @@ namespace CNMWebApp.Models
 
         public virtual IdentityRole Rol { get; set; }
     }
+
+    //[Table("Empleado")]
+    //public class Empleado
+    //{
+    //    public string EmpleadoId { get; set; }
+    //    [Required(ErrorMessage = "El campo Nombre es requerido")]
+    //    public string Nombre { get; set; }
+    //    [Required(ErrorMessage = "El campo Primer Apellido es requerido")]
+    //    public string PrimerApellido { get; set; }
+    //    public string SegundoApellido { get; set; }
+    //    public DateTime FechaIngreso { get; set; }
+    //    public string FotoRuta { get; set; }
+    //    public int CategoriaId { get; set; }
+    //    public int UnidadTecnicaId { get; set; }
+    //}
 
 
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit https://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
@@ -95,6 +120,7 @@ namespace CNMWebApp.Models
         public virtual Categoria Categoria { get; set; }
         public virtual UnidadTecnica UnidadTecnica { get; set; }
         public virtual ICollection<SolicitudVacaciones> VacacionesSolicitadas { get; set; }
+        public virtual SaldoDiasPorEmpleado SaldoDiasEmpleado { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
@@ -297,6 +323,12 @@ namespace CNMWebApp.Models
                     UnidadTecnicaId = 6,
                     EstaActivo = true,
                     CategoriaId = 9,
+                    //SaldoDiasEmpleado = new SaldoDiasPorEmpleado()
+                    //{
+                    //    EmpleadoId = "00000000",
+                    //    SaldoDiasDisponibles = 0,
+                    //    UltimaActualizacion = DateTime.Now
+                    //}
                 };
 
                 var task = userManager.CreateAsync(user, "Manager123.");
@@ -318,6 +350,7 @@ namespace CNMWebApp.Models
         public DbSet<Estado> Estados { get; set; }
         public DbSet<SolicitudVacaciones> SolicitudesVacaciones { get; set; }
         public DbSet<DiasPorSolicitud> DiasPorSolicitud { get; set; }
+        public DbSet<SaldoDiasPorEmpleado> SaldoDiasEmpleados { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
@@ -329,7 +362,7 @@ namespace CNMWebApp.Models
         {
             base.OnModelCreating(modelBuilder);
             
-            modelBuilder.Entity<ApplicationUser>().ToTable("Usuarios");
+            modelBuilder.Entity<ApplicationUser>().ToTable("Empleados");
             modelBuilder.Entity<ApplicationUser>().Property(p => p.Id).HasColumnName("Cedula");
             // modelBuilder.Entity<ApplicationUser>().Property(p => p.AccessFailedCount).HasColumnName("AccesoFallidoCantidad");
             modelBuilder.Entity<ApplicationUser>().Property(p => p.Email).HasColumnName("Correo").IsRequired();

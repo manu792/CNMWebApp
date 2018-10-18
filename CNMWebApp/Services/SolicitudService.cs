@@ -14,6 +14,7 @@ namespace CNMWebApp.Services
         private ApplicationDbContext context;
         private ApplicationUserManager userManager;
         private UserService userService;
+        private SaldoDiasDisponiblesServicio saldoDiasService;
         private EmailNotificationService emailNotification;
 
         public SolicitudService()
@@ -21,6 +22,7 @@ namespace CNMWebApp.Services
             context = new ApplicationDbContext();
             userManager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
             userService = new UserService();
+            saldoDiasService = new SaldoDiasDisponiblesServicio();
             emailNotification = new EmailNotificationService();
         }
 
@@ -121,9 +123,10 @@ namespace CNMWebApp.Services
             return affectedRows;
         }
 
-        public int Aprobar(Guid solicitudId, string comentarioJefatura, UserViewModel aprobador, string solicitanteId)
+        public async Task<int> Aprobar(Guid solicitudId, string comentarioJefatura, UserViewModel aprobador, string solicitanteId)
         {
             var solicitante = userService.ObtenerUsuarioPorId(solicitanteId);
+            var saldoDiasInfo = saldoDiasService.ObtenerSaldoDiasPorEmpleadoId(solicitanteId);
             var jefe = userService.ObtenerJefePorUnidadTecnica(solicitante.UnidadTecnica.UnidadTecnicaId);
 
             var nombreSolicitante = $"{solicitante.Nombre} {solicitante.PrimerApellido} {solicitante.SegundoApellido}";
@@ -131,10 +134,17 @@ namespace CNMWebApp.Services
             var estadoAprobado = context.Estados.FirstOrDefault(x => x.Nombre.Equals("aprobado", StringComparison.OrdinalIgnoreCase));
             var solicitud = context.SolicitudesVacaciones.FirstOrDefault(x => x.SolicitudVacacionesId == solicitudId);
 
+            // Se actualizar el estado de la solicitud a Aprobada
             solicitud.EstadoId = estadoAprobado.EstadoId;
-
             context.SolicitudesVacaciones.Add(solicitud);
             context.Entry(solicitud).State = System.Data.Entity.EntityState.Modified;
+            
+            // Se deducen los dias solicitados a la cantidad de saldo de dias disponibles
+            saldoDiasInfo.SaldoDiasDisponibles -= solicitud.CantidadDiasSolicitados;
+            saldoDiasInfo.UltimaActualizacion = DateTime.Now;
+            context.SaldoDiasEmpleados.Add(saldoDiasInfo);
+            context.Entry(saldoDiasInfo).State = System.Data.Entity.EntityState.Modified;
+
             var rowsAffected = context.SaveChanges();
 
             if (rowsAffected > 0)
@@ -143,9 +153,9 @@ namespace CNMWebApp.Services
                 // Se adjunta boleta en formato PDF
                 // Verificar si el que aprobo las vacaciones es el jefe o el director, y enviar el correo a ambos si es necesario
                 if (aprobador.Id == jefe.Id)
-                    emailNotification.SendEmailAsync(solicitante.Email, $"{jefe.Email},otistestuh@gmail.com", $"Vacaciones Aprobadas para {nombreSolicitante}", $"La solicitud de vacaciones: {solicitudId} para el colaborador {nombreSolicitante} fue <strong>aprobada</strong>. <br /> <br /> Observaciones: {comentarioJefatura}");
+                    await emailNotification.SendEmailAsync(solicitante.Email, $"{jefe.Email},otistestuh@gmail.com", $"Vacaciones Aprobadas para {nombreSolicitante}", $"La solicitud de vacaciones: {solicitudId} para el colaborador {nombreSolicitante} fue <strong>aprobada</strong>. <br /> <br /> Observaciones: {comentarioJefatura}");
                 else
-                    emailNotification.SendEmailAsync(solicitante.Email, $"{jefe.Email},{aprobador.Email},otistestuh@gmail.com", $"Vacaciones Aprobadas para {nombreSolicitante}", $"La solicitud de vacaciones: {solicitudId} para el colaborador {nombreSolicitante} fue <strong>aprobada</strong>. <br /> <br /> Observaciones: {comentarioJefatura}");
+                    await emailNotification.SendEmailAsync(solicitante.Email, $"{jefe.Email},{aprobador.Email},otistestuh@gmail.com", $"Vacaciones Aprobadas para {nombreSolicitante}", $"La solicitud de vacaciones: {solicitudId} para el colaborador {nombreSolicitante} fue <strong>aprobada</strong>. <br /> <br /> Observaciones: {comentarioJefatura}");
             }
 
             return rowsAffected;

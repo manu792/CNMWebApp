@@ -41,6 +41,12 @@ namespace CNMWebApp.Models
         public bool EstaActivo { get; set; }
         [DisplayName("Superusuario")]
         public bool EsSuperusuario { get; set; }
+        [DisplayName("Saldo Días Disponibles")]
+        [RegularExpression(@"([0-9]+)", ErrorMessage = "Debe ser un valor numérico")]
+        [Range(0, 1000, ErrorMessage = "Debe ser un número entre 0 y 1000")]
+        [Required(ErrorMessage = "El campo Saldo Días Disponibles es requerido")]
+        [DefaultValue(0)]
+        public int SaldoDiasDisponibles { get; set; }
 
         // Vinculan el usuario con los datos de las tablas Roles, Categoria y UnidadTecnica
         [DisplayName("Rol")]
@@ -49,6 +55,13 @@ namespace CNMWebApp.Models
         public Categoria Categoria { get; set; }
         [DisplayName("Unidad Técnica")]
         public UnidadTecnica UnidadTecnica { get; set; }
+        public string NombreCompleto
+        {
+            get
+            {
+                return $"{Nombre} {PrimerApellido} {SegundoApellido}";
+            }
+        }
     }
 
     public class UserRolesViewModel : UserViewModel
@@ -84,8 +97,6 @@ namespace CNMWebApp.Models
         public string Dias { get; set; }
         [DisplayName("Años Laborados")]
         public int CantidadAnnosLaborados { get; set; }
-        [DisplayName("Saldo Días Disponibles")]
-        public int SaldoDiasDisponibles { get; set; }
         [DisplayName("Cantidad Días Solicitados")]
         public int CantidadDiasSolicitados { get; set; }
         [DataType(DataType.MultilineText)]

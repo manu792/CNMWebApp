@@ -104,9 +104,8 @@ namespace CNMWebApp.Controllers
                 CantidadAnnosLaborados = annosLaborados < 0 ? 0 : annosLaborados,
                 CantidadDiasSolicitados = 0,
 
-                // Necesito la logica para saber calcular los dias disponibles segun fecha de ingreso 
-                // y cantidad de vacaciones previamente solicitadas
-                SaldoDiasDisponibles = 10
+                // Info viene de BD
+                SaldoDiasDisponibles = usuario.SaldoDiasDisponibles
             });
         }
 
@@ -146,7 +145,7 @@ namespace CNMWebApp.Controllers
         }
 
         // GET: Solicitud/CrearANombreDeEmpleado
-        [Auth(Roles = "Manager")]
+        [Auth(Roles = "Manager, Recursos Humanos")]
         public ActionResult CrearParaEmpleado()
         {
             var empleados = userService.GetUsers();
@@ -159,7 +158,7 @@ namespace CNMWebApp.Controllers
 
         // POST: Solicitud/CrearANombreDeEmpleado
         [HttpPost]
-        [Auth(Roles = "Manager")]
+        [Auth(Roles = "Manager, Recursos Humanos")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> CrearParaEmpleado(SolicitudParaEmpleado solicitudVacaciones)
         {
@@ -171,11 +170,11 @@ namespace CNMWebApp.Controllers
                 return View(solicitudVacaciones);
             }
 
-            if (solicitudVacaciones.CantidadDiasSolicitados > solicitudVacaciones.SaldoDiasDisponibles)
-            {
-                ModelState.AddModelError("", "La cantidad de días solicitados no puede ser mayor al saldo de días disponibles.");
-                return View(solicitudVacaciones);
-            }
+            //if (solicitudVacaciones.CantidadDiasSolicitados > solicitudVacaciones.SaldoDiasDisponibles)
+            //{
+            //    ModelState.AddModelError("", "La cantidad de días solicitados no puede ser mayor al saldo de días disponibles.");
+            //    return View(solicitudVacaciones);
+            //}
 
             try
             {
@@ -257,9 +256,8 @@ namespace CNMWebApp.Controllers
                     Periodo = s.Periodo
                 }).ToList(),
 
-                // Necesito la logica para saber calcular los dias disponibles segun fecha de ingreso 
-                // y cantidad de vacaciones previamente solicitadas
-                SaldoDiasDisponibles = 10
+                // Info viene de BD
+                SaldoDiasDisponibles = solicitud.Usuario.SaldoDiasEmpleado.SaldoDiasDisponibles
             });
         }
 
@@ -273,7 +271,7 @@ namespace CNMWebApp.Controllers
             {
                 var usuario = await userService.GetLoggedInUser();
 
-                var rowsAffected = solicitudService.Aprobar(solicitud.SolicitudId, solicitud.ComentarioJefatura, usuario, solicitud.UsuarioId);
+                var rowsAffected = await solicitudService.Aprobar(solicitud.SolicitudId, solicitud.ComentarioJefatura, usuario, solicitud.UsuarioId);
                 if(rowsAffected > 0)
                 {
                     return RedirectToAction("SolicitudesEmpleados");
