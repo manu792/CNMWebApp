@@ -27,13 +27,15 @@ namespace CNMWebApp.Controllers
         }
 
         // GET: Solicitud
-        public async Task<ActionResult> Index(string filtro, int? pagina, string filtrarPor)
+        public async Task<ActionResult> Index(string filtro, int? pagina, string filtrarPor, string fechaInicio, string fechaFinal)
         {
             ViewBag.FiltradoPor = filtrarPor;
+            ViewBag.FechaInicio = fechaInicio;
+            ViewBag.FechaFinal = fechaFinal;
 
             var user = await userService.GetLoggedInUser();
 
-            var solicitudes = ObtenerSolicitudesPorFiltro(filtrarPor, user);
+            var solicitudes = ObtenerSolicitudesPorFiltro(filtrarPor, user, fechaInicio, fechaFinal);
 
             if (!string.IsNullOrEmpty(filtro))
             {
@@ -46,22 +48,24 @@ namespace CNMWebApp.Controllers
             return View(solicitudes.ToPagedList(numeroPagina, tamanoPagina));
         }
 
-        private IEnumerable<SolicitudVacaciones> ObtenerSolicitudesPorFiltro(string filtrarPor, UserViewModel user)
+        private IEnumerable<SolicitudVacaciones> ObtenerSolicitudesPorFiltro(string filtrarPor, UserViewModel user, string fechaInicio, string fechaFinal)
         {
             if (filtrarPor == null)
-                return solicitudService.ObtenerMisSolicitudes(user).ToList();
+                return solicitudService.ObtenerMisSolicitudes(user, fechaInicio, fechaFinal).ToList();
             if (filtrarPor.Equals("funcionarios", StringComparison.OrdinalIgnoreCase))
-                return solicitudService.ObtenerSolicitudesFuncionarios().ToList();
+                return solicitudService.ObtenerSolicitudesFuncionarios(fechaInicio, fechaFinal).ToList();
             if (filtrarPor.Equals("jefaturas", StringComparison.OrdinalIgnoreCase))
-                return solicitudService.ObtenerSolicitudesJefaturas().ToList();
+                return solicitudService.ObtenerSolicitudesJefaturas(fechaInicio, fechaFinal).ToList();
             if (filtrarPor.Equals("recursos humanos", StringComparison.OrdinalIgnoreCase))
-                return solicitudService.ObtenerSolicitudesRH().ToList();
+                return solicitudService.ObtenerSolicitudesRH(fechaInicio, fechaFinal).ToList();
             if (filtrarPor.Equals("directorgeneral", StringComparison.OrdinalIgnoreCase))
-                return solicitudService.ObtenerSolicitudesDirectorGeneral().ToList();
+                return solicitudService.ObtenerSolicitudesDirectorGeneral(fechaInicio, fechaFinal).ToList();
             if (filtrarPor.Equals("directoradministrativo", StringComparison.OrdinalIgnoreCase))
-                return solicitudService.ObtenerSolicitudesDirectorAdministrativo().ToList();
+                return solicitudService.ObtenerSolicitudesDirectorAdministrativo(fechaInicio, fechaFinal).ToList();
+            if (filtrarPor.Equals("todos", StringComparison.OrdinalIgnoreCase))
+                return solicitudService.ObtenerSolicitudes(fechaInicio, fechaFinal).ToList();
 
-            return solicitudService.ObtenerMisSolicitudes(user);
+            return solicitudService.ObtenerMisSolicitudes(user, fechaInicio, fechaFinal);
         }
 
         // GET Solicitud/Detalle/1
@@ -115,7 +119,7 @@ namespace CNMWebApp.Controllers
         public async Task<ActionResult> GeneratePDF()
         {
             var user = await userService.GetLoggedInUser();
-            var solicitudes = solicitudService.ObtenerMisSolicitudes(user);
+            var solicitudes = solicitudService.ObtenerMisSolicitudes(user, null, null);
 
             var actionPDF = new Rotativa.ViewAsPdf("Detalles", solicitudes.First())
             {

@@ -30,8 +30,21 @@ namespace CNMWebApp.Services
             categoriaService = new CategoriaServicio();
         }
 
-        public IEnumerable<SolicitudVacaciones> ObtenerMisSolicitudes(UserViewModel usuario)
+        public IEnumerable<SolicitudVacaciones> ObtenerMisSolicitudes(UserViewModel usuario, string fechaInicio, string fechaFinal)
         {
+            DateTime fechaI;
+            DateTime fechaF;
+
+            if(!string.IsNullOrEmpty(fechaInicio) && !string.IsNullOrEmpty(fechaFinal))
+            {
+                if(DateTime.TryParse(fechaInicio, out fechaI) && DateTime.TryParse(fechaFinal, out fechaF))
+                {
+                    return context.SolicitudesVacaciones
+                        .Where(x => x.Usuario.Id == usuario.Id && x.FechaSolicitud >= fechaI && x.FechaSolicitud <= fechaF)
+                        .ToList();
+                }
+            }
+
             return context.SolicitudesVacaciones
                 .Where(x => x.Usuario.Id == usuario.Id)
                 .ToList();
@@ -42,37 +55,127 @@ namespace CNMWebApp.Services
             return context.SolicitudesVacaciones.FirstOrDefault(x => x.SolicitudVacacionesId == id);
         }
 
-        public IEnumerable<SolicitudVacaciones> ObtenerSolicitudesFuncionarios()
+        public IEnumerable<SolicitudVacaciones> ObtenerSolicitudes(string fechaInicio, string fechaFinal)
         {
+            DateTime fechaI;
+            DateTime fechaF;
+
             var role = roleService.ObtenerRolPorNombre("Funcionario");
+
+            if (!string.IsNullOrEmpty(fechaInicio) && !string.IsNullOrEmpty(fechaFinal))
+            {
+                if (DateTime.TryParse(fechaInicio, out fechaI) && DateTime.TryParse(fechaFinal, out fechaF))
+                {
+                    return context.SolicitudesVacaciones.Where(x => x.FechaSolicitud >= fechaI &&
+                        x.FechaSolicitud <= fechaF);
+                }
+            }
+
+            return context.SolicitudesVacaciones;
+        }
+
+        public IEnumerable<SolicitudVacaciones> ObtenerSolicitudesFuncionarios(string fechaInicio, string fechaFinal)
+        {
+            DateTime fechaI;
+            DateTime fechaF;
+
+            var role = roleService.ObtenerRolPorNombre("Funcionario");
+
+            if (!string.IsNullOrEmpty(fechaInicio) && !string.IsNullOrEmpty(fechaFinal))
+            {
+                if (DateTime.TryParse(fechaInicio, out fechaI) && DateTime.TryParse(fechaFinal, out fechaF))
+                {
+                    return context.SolicitudesVacaciones.Where(x => x.Usuario.Roles.Any(r => r.RoleId == role.Id) && 
+                        x.FechaSolicitud >= fechaI && 
+                        x.FechaSolicitud <= fechaF);
+                }
+            }
+
             return context.SolicitudesVacaciones.Where(x => x.Usuario.Roles.Any(r => r.RoleId == role.Id));
         }
 
-        public IEnumerable<SolicitudVacaciones> ObtenerSolicitudesJefaturas()
+        public IEnumerable<SolicitudVacaciones> ObtenerSolicitudesJefaturas(string fechaInicio, string fechaFinal)
         {
+            DateTime fechaI;
+            DateTime fechaF;
+
             var role = roleService.ObtenerRolPorNombre("Jefatura");
+
+            if (!string.IsNullOrEmpty(fechaInicio) && !string.IsNullOrEmpty(fechaFinal))
+            {
+                if (DateTime.TryParse(fechaInicio, out fechaI) && DateTime.TryParse(fechaFinal, out fechaF))
+                {
+                    return context.SolicitudesVacaciones.Where(x => x.Usuario.Roles.Any(r => r.RoleId == role.Id) &&
+                        x.FechaSolicitud >= fechaI &&
+                        x.FechaSolicitud <= fechaF);
+                }
+            }
+
             return context.SolicitudesVacaciones.Where(x => x.Usuario.Roles.Any(r => r.RoleId == role.Id));
         }
 
-        public IEnumerable<SolicitudVacaciones> ObtenerSolicitudesRH()
+        public IEnumerable<SolicitudVacaciones> ObtenerSolicitudesRH(string fechaInicio, string fechaFinal)
         {
+            DateTime fechaI;
+            DateTime fechaF;
+
             var role = roleService.ObtenerRolPorNombre("Recursos Humanos");
+
+            if (!string.IsNullOrEmpty(fechaInicio) && !string.IsNullOrEmpty(fechaFinal))
+            {
+                if (DateTime.TryParse(fechaInicio, out fechaI) && DateTime.TryParse(fechaFinal, out fechaF))
+                {
+                    return context.SolicitudesVacaciones.Where(x => x.Usuario.Roles.Any(r => r.RoleId == role.Id) &&
+                        x.FechaSolicitud >= fechaI &&
+                        x.FechaSolicitud <= fechaF);
+                }
+            }
+
             return context.SolicitudesVacaciones.Where(x => x.Usuario.Roles.Any(r => r.RoleId == role.Id));
         }
 
-        public IEnumerable<SolicitudVacaciones> ObtenerSolicitudesDirectorGeneral()
+        public IEnumerable<SolicitudVacaciones> ObtenerSolicitudesDirectorGeneral(string fechaInicio, string fechaFinal)
         {
+            DateTime fechaI;
+            DateTime fechaF;
+
             var role = roleService.ObtenerRolPorNombre("Director");
             var categoria = categoriaService.ObtenerCategoriaPorNombre("Director General");
+
+            if (!string.IsNullOrEmpty(fechaInicio) && !string.IsNullOrEmpty(fechaFinal))
+            {
+                if (DateTime.TryParse(fechaInicio, out fechaI) && DateTime.TryParse(fechaFinal, out fechaF))
+                {
+                    return context.SolicitudesVacaciones.Where(x => x.Usuario.Roles.Any(r => r.RoleId == role.Id) &&
+                        x.Usuario.CategoriaId == categoria.CategoriaId &&
+                        x.FechaSolicitud >= fechaI &&
+                        x.FechaSolicitud <= fechaF);
+                }
+            }
 
             return context.SolicitudesVacaciones.Where(x => x.Usuario.Roles.Any(r => r.RoleId == role.Id) && 
                 x.Usuario.CategoriaId == categoria.CategoriaId);
         }
 
-        public IEnumerable<SolicitudVacaciones> ObtenerSolicitudesDirectorAdministrativo()
+        public IEnumerable<SolicitudVacaciones> ObtenerSolicitudesDirectorAdministrativo(string fechaInicio, string fechaFinal)
         {
+            DateTime fechaI;
+            DateTime fechaF;
+
             var role = roleService.ObtenerRolPorNombre("Director");
             var categoria = categoriaService.ObtenerCategoriaPorNombre("Director Administrativo");
+
+
+            if (!string.IsNullOrEmpty(fechaInicio) && !string.IsNullOrEmpty(fechaFinal))
+            {
+                if (DateTime.TryParse(fechaInicio, out fechaI) && DateTime.TryParse(fechaFinal, out fechaF))
+                {
+                    return context.SolicitudesVacaciones.Where(x => x.Usuario.Roles.Any(r => r.RoleId == role.Id) &&
+                        x.Usuario.CategoriaId == categoria.CategoriaId &&
+                        x.FechaSolicitud >= fechaI &&
+                        x.FechaSolicitud <= fechaF);
+                }
+            }
 
             return context.SolicitudesVacaciones.Where(x => x.Usuario.Roles.Any(r => r.RoleId == role.Id) &&
                 x.Usuario.CategoriaId == categoria.CategoriaId);

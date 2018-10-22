@@ -8,31 +8,32 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     var usuarioLogeado = userService.GetLoggedInUser();
     var filtradoPor = ViewBag.FiltradoPor ?? "MisSolicitudes";
+    var fechaInicio = ViewBag.FechaInicio ?? "";
+    var fechaFinal = ViewBag.FechaFinal ?? "";
 }
 
 <h2>Solicitudes de Vacaciones</h2>
 
-@{
-    if (usuarioLogeado.Result.Role.Name.Equals("jefatura", StringComparison.OrdinalIgnoreCase))
-    {
-        <div class="row">
+
+<div class="form-group">
+    @{
+        if (usuarioLogeado.Result.Role.Name.Equals("jefatura", StringComparison.OrdinalIgnoreCase))
+        {
             <form action="/Solicitud" id="submit-form" method="get">
-                <div class="form-group">
-                    @Html.Label("Ver solicitudes", htmlAttributes: new { @id = "role-dropdown", @class = "control-label col-md-2" })
-                    <div class="col-md-6">
-                        <select class="dropdownOpciones form-control">
-                            <option value="MisSolicitudes">Mis Solicitudes</option>
-                            <option value="Colaboradores">De mis colaboradores a cargo</option>
-                            <option value="Todos">Todos</option>
-                        </select>
-                    </div>
-                </div>
+               <div class="form-group">
+                   @Html.Label("Ver solicitudes", htmlAttributes: new { @id = "role-dropdown", @class = "control-label col-md-2" })
+                   <div class="col-md-6">
+                       <select class="dropdownOpciones form-control">
+                           <option value="MisSolicitudes">Mis Solicitudes</option>
+                           <option value="Funcionarios">De mis colaboradores a cargo</option>
+                           <option value="Todos">Todos</option>
+                       </select>
+                   </div>
+               </div>
             </form>
-        </div>
-    }
-    if (usuarioLogeado.Result.Role.Name.Equals("recursos humanos", StringComparison.OrdinalIgnoreCase))
-    {
-        <div class="row">
+        }
+        if (usuarioLogeado.Result.Role.Name.Equals("recursos humanos", StringComparison.OrdinalIgnoreCase))
+        {
             <form action="/Solicitud" id="submit-form" method="get">
                 <div class="form-group">
                     @Html.Label("Ver solicitudes", htmlAttributes: new { @id = "role-dropdown", @class = "control-label col-md-2" })
@@ -48,12 +49,10 @@
                     </div>
                 </div>
             </form>
-        </div>
-    }
+        }
 
-    if (usuarioLogeado.Result.Role.Name.Equals("director", StringComparison.OrdinalIgnoreCase))
-    {
-        <div class="row">
+        if (usuarioLogeado.Result.Role.Name.Equals("director", StringComparison.OrdinalIgnoreCase))
+        {
             <form action="/Solicitud" id="submit-form" method="get">
                 <div class="form-group">
                     @Html.Label("Ver solicitudes", htmlAttributes: new { @id = "role-dropdown", @class = "control-label col-md-2" })
@@ -67,10 +66,40 @@
                     </div>
                 </div>
             </form>
-        </div>
+        }
     }
-}
 
+    <br />
+    <br />
+
+    <div class="col-md-5">
+        @Html.Label("Fecha Inicio", htmlAttributes: new { @class = "control-label col-md-3" })
+        <div class="col-md-9">
+            <div class='input-group date fecha-inicio'>
+                <input id="FechaInicio" type="text" class="form-control" />
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-th"></span>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-5">
+        @Html.Label("Fecha Final", htmlAttributes: new { @class = "control-label col-md-3" })
+        <div class="col-md-9">
+            <div class='input-group date fecha-final'>
+                <input id="FechaFinal" type="text" class="form-control" />
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-th"></span>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <input id="btn-buscar" type="button" value="Buscar" class="btn btn-default" />
+    </div>
+</div>
+
+<br />
 <br />
 
 <table class="table">
@@ -140,7 +169,7 @@
 Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
 
 @Html.PagedListPager(Model, pagina => Url.Action("Index",
-    new { pagina, filtrarPor = filtradoPor }))
+    new { pagina, filtrarPor = filtradoPor, fechaInicio, fechaFinal }))
 
 @section scripts
 {
@@ -148,14 +177,39 @@ Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.P
         var url = '/Solicitud/Index';
          
         var filtradoPor = @Html.Raw(Json.Encode(filtradoPor));
+        var fechaInicio = @Html.Raw(Json.Encode(fechaInicio));
+        var fechaFinal = @Html.Raw(Json.Encode(fechaFinal));
 
         $('.dropdownOpciones').change(function () {
             var selectedOption = $('.dropdownOpciones').val();
-            location.href = url + '/?filtrarPor=' + selectedOption;
+            location.href = url + '/?filtrarPor=' + selectedOption + '&fechaInicio=' + fechaInicio + '&fechaFinal=' + fechaFinal;
+        });
+
+        $('#btn-buscar').click(function () {
+            var selectedOption = $('.dropdownOpciones').val();
+            var fechaInicio = $('#FechaInicio').val();
+            var fechaFinal = $('#FechaFinal').val();
+
+            location.href = url + '/?filtrarPor=' + selectedOption + '&fechaInicio=' + fechaInicio + '&fechaFinal=' + fechaFinal;
         });
 
         if (filtradoPor) {
             $('.dropdownOpciones').val(filtradoPor);
         }
+
+        $('#FechaInicio').datepicker({
+            format: 'yyyy/mm/dd',
+            todayHighlight: true,
+            autoclose: true,
+        }).datepicker();
+
+        $('#FechaFinal').datepicker({
+            format: 'yyyy/mm/dd',
+            todayHighlight: true,
+            autoclose: true,
+        }).datepicker();
+
+        $('#FechaInicio').datepicker('update', fechaInicio);
+        $('#FechaFinal').datepicker('update', fechaFinal);
     </script>    
 }
