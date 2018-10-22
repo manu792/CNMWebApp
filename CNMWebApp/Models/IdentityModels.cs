@@ -41,7 +41,7 @@ namespace CNMWebApp.Models
     {
         [Key]
         [Column(Order = 0)]
-        public int SolicitudVacacionesId { get; set; }
+        public Guid SolicitudVacacionesId { get; set; }
         [Key]
         [Column(Order = 1)]
         public string UsuarioId { get; set; }
@@ -50,10 +50,6 @@ namespace CNMWebApp.Models
         public DateTime Fecha { get; set; }
         [Required]
         public string Periodo { get; set; }
-
-        // Virtual properties mapping to ApplicationUser and Estado
-        public virtual ApplicationUser Usuario { get; set; }
-        public virtual SolicitudVacaciones Solicitud { get; set; }
     }
 
     // Unidades Tecnicas del empleado va a ir mapeada a la tabla Unidades Tecnicas
@@ -119,7 +115,6 @@ namespace CNMWebApp.Models
         // Virtual properties, foregin keys to Categoria and UnidadTecnica
         public virtual Categoria Categoria { get; set; }
         public virtual UnidadTecnica UnidadTecnica { get; set; }
-        public virtual ICollection<SolicitudVacaciones> VacacionesSolicitadas { get; set; }
         public virtual SaldoDiasPorEmpleado SaldoDiasEmpleado { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)

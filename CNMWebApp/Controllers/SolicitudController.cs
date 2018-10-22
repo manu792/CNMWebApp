@@ -249,6 +249,7 @@ namespace CNMWebApp.Controllers
                 EstaActivo = solicitud.Usuario.EstaActivo,
                 CantidadAnnosLaborados = annosLaborados < 0 ? 0 : annosLaborados,
                 CantidadDiasSolicitados = solicitud.CantidadDiasSolicitados,
+                Comentario = solicitud.Comentario,
                 DiasPorSolicitud = solicitud.DiasPorSolicitud.Select(s => new DiasPorSolicitudViewModel()
                 {
                     UsuarioId = s.UsuarioId,

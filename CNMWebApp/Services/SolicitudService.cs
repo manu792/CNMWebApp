@@ -95,6 +95,8 @@ namespace CNMWebApp.Services
             var fechaSolicitud = DateTime.Now;
             var guid = Guid.NewGuid();
 
+            var aprobadorId = ObtenerAprobadorId(solicitud.Id);
+
             var solicitudVacaciones = new SolicitudVacaciones()
             {
                 SolicitudVacacionesId = guid,
@@ -103,9 +105,7 @@ namespace CNMWebApp.Services
                 EstadoId = 1,
                 Comentario = solicitud.Comentario,
                 FechaSolicitud = fechaSolicitud,
-                AprobadorId = solicitante.Role.Name.Equals("funcionario", StringComparison.OrdinalIgnoreCase) ?
-                     userService.ObtenerJefePorUnidadTecnica(solicitante.UnidadTecnica.UnidadTecnicaId).Id :
-                    userService.ObtenerDirectorGeneral().Id,
+                AprobadorId = aprobadorId,
                 DiasPorSolicitud = ObtenerDiasPorSolicitud(solicitud)
             };
 
@@ -117,6 +117,10 @@ namespace CNMWebApp.Services
                 // A continuacion se envia la notificacion por correo al jefe correspondiente segun el usuario
                 var urlHelper = new UrlHelper(HttpContext.Current.Request.RequestContext);
                 var callbackUrl = urlHelper.Action("Revisar", "Solicitud", new { id = guid }, protocol: HttpContext.Current.Request.Url.Scheme);
+                
+                if (aprobadorId == solicitud.Id)
+                    return await ProcesarSolicitud(guid, solicitante);
+
                 await userManager.SendEmailAsync(ObtenerAprobadorId(solicitud.Id), "Solicitud de Vacaciones para " + solicitud.Nombre + " " + solicitud.PrimerApellido + " " + solicitud.SegundoApellido, solicitud.Comentario + " <br /> Para aprobar o rechazar la solicitud de vacaciones haga click en el siguiente link: <a href=\"" + callbackUrl + "\">Aquí</a>");
             }
             
@@ -127,14 +131,22 @@ namespace CNMWebApp.Services
         {
             var solicitante = userService.ObtenerUsuarioPorId(solicitanteId);
             var saldoDiasInfo = saldoDiasService.ObtenerSaldoDiasPorEmpleadoId(solicitanteId);
-            var jefe = userService.ObtenerJefePorUnidadTecnica(solicitante.UnidadTecnica.UnidadTecnicaId);
+            var jefe = new UserViewModel();
+
+            if(solicitante.Role.Name.Equals("funcionario", StringComparison.OrdinalIgnoreCase))
+                jefe = userService.ObtenerJefePorUnidadTecnica(solicitante.UnidadTecnica.UnidadTecnicaId);
+            if (solicitante.Role.Name.Equals("jefatura", StringComparison.OrdinalIgnoreCase) || solicitante.Role.Name.Equals("recursos humanos", StringComparison.OrdinalIgnoreCase))
+                jefe = userService.ObtenerDirectorGeneral();
+            if (solicitante.Role.Name.Equals("director", StringComparison.OrdinalIgnoreCase))
+                jefe = userService.ObtenerUsuarioPorId(solicitanteId);
+            // var jefe = userService.ObtenerJefePorUnidadTecnica(solicitante.UnidadTecnica.UnidadTecnicaId);
 
             var nombreSolicitante = $"{solicitante.Nombre} {solicitante.PrimerApellido} {solicitante.SegundoApellido}";
 
             var estadoAprobado = context.Estados.FirstOrDefault(x => x.Nombre.Equals("aprobado", StringComparison.OrdinalIgnoreCase));
             var solicitud = context.SolicitudesVacaciones.FirstOrDefault(x => x.SolicitudVacacionesId == solicitudId);
 
-            // Se actualizar el estado de la solicitud a Aprobada
+            // Se actualiza el estado de la solicitud a Aprobada
             solicitud.EstadoId = estadoAprobado.EstadoId;
             context.SolicitudesVacaciones.Add(solicitud);
             context.Entry(solicitud).State = System.Data.Entity.EntityState.Modified;
@@ -164,7 +176,14 @@ namespace CNMWebApp.Services
         public int Rechazar(Guid solicitudId, string comentarioJefatura, UserViewModel aprobador, string solicitanteId)
         {
             var solicitante = userService.ObtenerUsuarioPorId(solicitanteId);
-            var jefe = userService.ObtenerJefePorUnidadTecnica(solicitante.UnidadTecnica.UnidadTecnicaId);
+            var jefe = new UserViewModel();
+
+            if (solicitante.Role.Name.Equals("funcionario", StringComparison.OrdinalIgnoreCase))
+                jefe = userService.ObtenerJefePorUnidadTecnica(solicitante.UnidadTecnica.UnidadTecnicaId);
+            if (solicitante.Role.Name.Equals("jefatura", StringComparison.OrdinalIgnoreCase) || solicitante.Role.Name.Equals("recursos humanos", StringComparison.OrdinalIgnoreCase))
+                jefe = userService.ObtenerDirectorGeneral();
+            if (solicitante.Role.Name.Equals("director", StringComparison.OrdinalIgnoreCase))
+                jefe = userService.ObtenerUsuarioPorId(solicitanteId);
 
             var nombreSolicitante = $"{solicitante.Nombre} {solicitante.PrimerApellido} {solicitante.SegundoApellido}";
 
@@ -206,6 +225,7 @@ namespace CNMWebApp.Services
             else if (empleado.Role.Name.Equals("director", StringComparison.OrdinalIgnoreCase))
             {
                 // La solicitud se aprueba automaticamente en caso de tener dias disponibles
+                aprobador = userService.ObtenerUsuarioPorId(id);
             }
             else
             {
@@ -235,6 +255,19 @@ namespace CNMWebApp.Services
             }
 
             return diasPorSolicitud;
+        }
+
+        private async Task<int> ProcesarSolicitud(Guid guid, UserViewModel solicitante)
+        {
+            var solicitud = context.SolicitudesVacaciones.FirstOrDefault(x => x.SolicitudVacacionesId == guid);
+            if (solicitud == null)
+                throw new Exception("Id solicitud no encontrado.");
+
+            if (solicitud.CantidadDiasSolicitados <= solicitante.SaldoDiasDisponibles)
+                return await Aprobar(guid, "", solicitante, solicitante.Id);
+            else
+                return Rechazar(guid, "", solicitante, solicitante.Id);
+
         }
     }
 }
