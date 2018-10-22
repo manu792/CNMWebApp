@@ -27,11 +27,13 @@ namespace CNMWebApp.Controllers
         }
 
         // GET: Solicitud
-        public async Task<ActionResult> Index(string filtro, int? pagina)
+        public async Task<ActionResult> Index(string filtro, int? pagina, string filtrarPor)
         {
+            ViewBag.FiltradoPor = filtrarPor;
+
             var user = await userService.GetLoggedInUser();
 
-            var solicitudes = solicitudService.ObtenerMisSolicitudes(user);
+            var solicitudes = ObtenerSolicitudesPorFiltro(filtrarPor, user);
 
             if (!string.IsNullOrEmpty(filtro))
             {
@@ -42,6 +44,60 @@ namespace CNMWebApp.Controllers
             int numeroPagina = (pagina ?? 1);
 
             return View(solicitudes.ToPagedList(numeroPagina, tamanoPagina));
+        }
+
+        private IEnumerable<SolicitudVacaciones> ObtenerSolicitudesPorFiltro(string filtrarPor, UserViewModel user)
+        {
+            if (filtrarPor == null)
+                return solicitudService.ObtenerMisSolicitudes(user).ToList();
+            if (filtrarPor.Equals("funcionarios", StringComparison.OrdinalIgnoreCase))
+                return solicitudService.ObtenerSolicitudesFuncionarios().ToList();
+            if (filtrarPor.Equals("jefaturas", StringComparison.OrdinalIgnoreCase))
+                return solicitudService.ObtenerSolicitudesJefaturas().ToList();
+            if (filtrarPor.Equals("recursos humanos", StringComparison.OrdinalIgnoreCase))
+                return solicitudService.ObtenerSolicitudesRH().ToList();
+            if (filtrarPor.Equals("directorgeneral", StringComparison.OrdinalIgnoreCase))
+                return solicitudService.ObtenerSolicitudesDirectorGeneral().ToList();
+            if (filtrarPor.Equals("directoradministrativo", StringComparison.OrdinalIgnoreCase))
+                return solicitudService.ObtenerSolicitudesDirectorAdministrativo().ToList();
+
+            return solicitudService.ObtenerMisSolicitudes(user);
+        }
+
+        // GET Solicitud/Detalle/1
+        public ActionResult Detalle(Guid id)
+        {
+            var solicitud = solicitudService.ObtenerSolicitudPorId(id);
+            if (solicitud == null)
+                return HttpNotFound("ID de solicitud no encotrada.");
+
+            var annosLaborados = DateTime.Now.Year - solicitud.Usuario.FechaIngreso.Year;
+            if (solicitud.Usuario.FechaIngreso > DateTime.Now.AddYears(-annosLaborados)) annosLaborados--;
+
+            return View(new SolicitudViewModel()
+            {
+                SolicitudId = solicitud.SolicitudVacacionesId,
+                UsuarioId = solicitud.Usuario.Id,
+                Nombre = solicitud.Usuario.Nombre,
+                PrimerApellido = solicitud.Usuario.PrimerApellido,
+                SegundoApellido = solicitud.Usuario.SegundoApellido,
+                Email = solicitud.Usuario.Email,
+                PhoneNumber = solicitud.Usuario.PhoneNumber,
+                UnidadTecnica = solicitud.Usuario.UnidadTecnica,
+                Categoria = solicitud.Usuario.Categoria,
+                FechaIngreso = solicitud.Usuario.FechaIngreso,
+                EstaActivo = solicitud.Usuario.EstaActivo,
+                CantidadAnnosLaborados = annosLaborados < 0 ? 0 : annosLaborados,
+                CantidadDiasSolicitados = solicitud.CantidadDiasSolicitados,
+                Comentario = solicitud.Comentario,
+                DiasPorSolicitud = solicitud.DiasPorSolicitud.Select(s => new DiasPorSolicitudViewModel()
+                {
+                    UsuarioId = s.UsuarioId,
+                    Fecha = s.Fecha.ToString("yyyy-MM-dd"),
+                    Periodo = s.Periodo
+                }).ToList(),
+                SaldoDiasDisponibles = solicitud.Usuario.SaldoDiasEmpleado.SaldoDiasDisponibles
+            });
         }
 
         // GET: Solicitud/Details/5

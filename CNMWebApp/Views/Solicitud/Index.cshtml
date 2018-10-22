@@ -1,12 +1,77 @@
 ﻿@model PagedList.IPagedList<CNMWebApp.Models.SolicitudVacaciones>
 @using PagedList.Mvc;
+@using CNMWebApp.Services;
 
 @{
+    var userService = new UserService();
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var usuarioLogeado = userService.GetLoggedInUser();
+    var filtradoPor = ViewBag.FiltradoPor ?? "MisSolicitudes";
 }
 
 <h2>Solicitudes de Vacaciones</h2>
+
+@{
+    if (usuarioLogeado.Result.Role.Name.Equals("jefatura", StringComparison.OrdinalIgnoreCase))
+    {
+        <div class="row">
+            <form action="/Solicitud" id="submit-form" method="get">
+                <div class="form-group">
+                    @Html.Label("Ver solicitudes", htmlAttributes: new { @id = "role-dropdown", @class = "control-label col-md-2" })
+                    <div class="col-md-6">
+                        <select class="dropdownOpciones form-control">
+                            <option value="MisSolicitudes">Mis Solicitudes</option>
+                            <option value="Colaboradores">De mis colaboradores a cargo</option>
+                            <option value="Todos">Todos</option>
+                        </select>
+                    </div>
+                </div>
+            </form>
+        </div>
+    }
+    if (usuarioLogeado.Result.Role.Name.Equals("recursos humanos", StringComparison.OrdinalIgnoreCase))
+    {
+        <div class="row">
+            <form action="/Solicitud" id="submit-form" method="get">
+                <div class="form-group">
+                    @Html.Label("Ver solicitudes", htmlAttributes: new { @id = "role-dropdown", @class = "control-label col-md-2" })
+                    <div class="col-md-6">
+                        <select class="dropdownOpciones form-control">
+                            <option value="MisSolicitudes">Mis Solicitudes</option>
+                            <option value="Funcionarios">Funcionarios</option>
+                            <option value="Jefaturas">Jefaturas</option>
+                            <option value="DirectorGeneral">Director General</option>
+                            <option value="DirectorAdministrativo">Director Administrativo</option>
+                            <option value="Todos">Todos</option>
+                        </select>
+                    </div>
+                </div>
+            </form>
+        </div>
+    }
+
+    if (usuarioLogeado.Result.Role.Name.Equals("director", StringComparison.OrdinalIgnoreCase))
+    {
+        <div class="row">
+            <form action="/Solicitud" id="submit-form" method="get">
+                <div class="form-group">
+                    @Html.Label("Ver solicitudes", htmlAttributes: new { @id = "role-dropdown", @class = "control-label col-md-2" })
+                    <div class="col-md-6">
+                        <select class="dropdownOpciones form-control">
+                            <option value="MisSolicitudes">Mis Solicitudes</option>
+                            <option value="Jefaturas">De mis colaboradores a cargo (Jefaturas)</option>
+                            <option value="Funcionarios">Funcionarios</option>
+                            <option value="Todos">Todos</option>
+                        </select>
+                    </div>
+                </div>
+            </form>
+        </div>
+    }
+}
+
+<br />
 
 <table class="table">
     <tr>
@@ -65,9 +130,7 @@
                 @Html.DisplayFor(modelItem => item.FechaSolicitud)
             </td>
             <td>
-                @Html.ActionLink("Editar", "Edit", new { id = item.SolicitudVacacionesId }) |
-                @Html.ActionLink("Detalles", "Detalles", new { id = item.SolicitudVacacionesId }) |
-                @Html.ActionLink("Eliminar", "Delete", new { id = item.SolicitudVacacionesId })
+                @Html.ActionLink("Detalles", "Detalle", new { id = item.SolicitudVacacionesId })
             </td>
         </tr>
     }
@@ -77,4 +140,22 @@
 Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
 
 @Html.PagedListPager(Model, pagina => Url.Action("Index",
-    new { pagina }))
+    new { pagina, filtrarPor = filtradoPor }))
+
+@section scripts
+{
+    <script>
+        var url = '/Solicitud/Index';
+         
+        var filtradoPor = @Html.Raw(Json.Encode(filtradoPor));
+
+        $('.dropdownOpciones').change(function () {
+            var selectedOption = $('.dropdownOpciones').val();
+            location.href = url + '/?filtrarPor=' + selectedOption;
+        });
+
+        if (filtradoPor) {
+            $('.dropdownOpciones').val(filtradoPor);
+        }
+    </script>    
+}

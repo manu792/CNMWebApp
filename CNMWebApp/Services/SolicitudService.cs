@@ -16,6 +16,8 @@ namespace CNMWebApp.Services
         private UserService userService;
         private SaldoDiasDisponiblesServicio saldoDiasService;
         private EmailNotificationService emailNotification;
+        private RoleService roleService;
+        private CategoriaServicio categoriaService;
 
         public SolicitudService()
         {
@@ -24,6 +26,8 @@ namespace CNMWebApp.Services
             userService = new UserService();
             saldoDiasService = new SaldoDiasDisponiblesServicio();
             emailNotification = new EmailNotificationService();
+            roleService = new RoleService();
+            categoriaService = new CategoriaServicio();
         }
 
         public IEnumerable<SolicitudVacaciones> ObtenerMisSolicitudes(UserViewModel usuario)
@@ -36,6 +40,42 @@ namespace CNMWebApp.Services
         public SolicitudVacaciones ObtenerSolicitudPorId(Guid id)
         {
             return context.SolicitudesVacaciones.FirstOrDefault(x => x.SolicitudVacacionesId == id);
+        }
+
+        public IEnumerable<SolicitudVacaciones> ObtenerSolicitudesFuncionarios()
+        {
+            var role = roleService.ObtenerRolPorNombre("Funcionario");
+            return context.SolicitudesVacaciones.Where(x => x.Usuario.Roles.Any(r => r.RoleId == role.Id));
+        }
+
+        public IEnumerable<SolicitudVacaciones> ObtenerSolicitudesJefaturas()
+        {
+            var role = roleService.ObtenerRolPorNombre("Jefatura");
+            return context.SolicitudesVacaciones.Where(x => x.Usuario.Roles.Any(r => r.RoleId == role.Id));
+        }
+
+        public IEnumerable<SolicitudVacaciones> ObtenerSolicitudesRH()
+        {
+            var role = roleService.ObtenerRolPorNombre("Recursos Humanos");
+            return context.SolicitudesVacaciones.Where(x => x.Usuario.Roles.Any(r => r.RoleId == role.Id));
+        }
+
+        public IEnumerable<SolicitudVacaciones> ObtenerSolicitudesDirectorGeneral()
+        {
+            var role = roleService.ObtenerRolPorNombre("Director");
+            var categoria = categoriaService.ObtenerCategoriaPorNombre("Director General");
+
+            return context.SolicitudesVacaciones.Where(x => x.Usuario.Roles.Any(r => r.RoleId == role.Id) && 
+                x.Usuario.CategoriaId == categoria.CategoriaId);
+        }
+
+        public IEnumerable<SolicitudVacaciones> ObtenerSolicitudesDirectorAdministrativo()
+        {
+            var role = roleService.ObtenerRolPorNombre("Director");
+            var categoria = categoriaService.ObtenerCategoriaPorNombre("Director Administrativo");
+
+            return context.SolicitudesVacaciones.Where(x => x.Usuario.Roles.Any(r => r.RoleId == role.Id) &&
+                x.Usuario.CategoriaId == categoria.CategoriaId);
         }
 
         public IEnumerable<SolicitudVacaciones> ObtenerSolicitudesPorAprobar(UserViewModel jefe)
