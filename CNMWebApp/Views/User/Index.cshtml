@@ -20,94 +20,97 @@
         <input type="submit" value="Search" />
     </p>
 }
-<table class="table">
-    <tr>
-        <th>
-            @Html.Label("Cedula")
-        </th>
-        <th>
-            @Html.Label("Nombre")
-        </th>
-        <th>
-            @Html.Label("Primer Apellido")
-        </th>
-        <th>
-            @Html.Label("Segundo Apellido")
-        </th>
-        <th>
-            @Html.Label("Correo")
-        </th>
-        <th>
-            @Html.Label("Telefono")
-        </th>
-        <th>
-            @Html.Label("Fecha de Ingreso")
-        </th>
-        <th>
-            @Html.Label("Rol")
-        </th>
-        <th>
-            @Html.Label("Unidad Tecnica")
-        </th>
-        <th>
-            @Html.Label("Categoria")
-        </th>
-        <th>
-            @Html.Label("Activo")
-        </th>
-        <th>
-            @Html.Label("Super Usuario")
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+<div class="table-responsive">
+    <table class="table table-bordered table-striped">
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PrimerApellido)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SegundoApellido)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PhoneNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaIngreso)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Role.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UnidadTecnica.Nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Categoria.Nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EstaActivo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EsSuperusuario)
-            </td>
-            <td>
-                @Html.ActionLink("Editar", "Editar", new { id = item.Id }) |
-                @Html.ActionLink("Detalles", "Detalles", new { id = item.Id }) |
-                @Html.ActionLink("Eliminar", "Eliminar", new { id = item.Id })
-            </td>
+            <th class="thead-dark" scope="col">
+                @Html.Label("Cedula")
+            </th>
+            <th scope="col">
+                @Html.Label("Nombre")
+            </th>
+            <th scope="col">
+                @Html.Label("Primer Apellido")
+            </th>
+            <th scope="col">
+                @Html.Label("Segundo Apellido")
+            </th>
+            <th scope="col">
+                @Html.Label("Correo")
+            </th>
+            <th scope="col">
+                @Html.Label("Telefono")
+            </th>
+            <th scope="col">
+                @Html.Label("Fecha de Ingreso")
+            </th>
+            <th scope="col">
+                @Html.Label("Rol")
+            </th>
+            <th scope="col">
+                @Html.Label("Unidad Tecnica")
+            </th>
+            <th scope="col">
+                @Html.Label("Categoria")
+            </th>
+            <th scope="col">
+                @Html.Label("Activo")
+            </th>
+            <th scope="col">
+                @Html.Label("Super Usuario")
+            </th>
+            <th scope="col"></th>
         </tr>
-    }
-</table>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PrimerApellido)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SegundoApellido)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaIngreso)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Role.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UnidadTecnica.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Categoria.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EstaActivo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EsSuperusuario)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "Editar", new { id = item.Id }) |
+                    @Html.ActionLink("Detalles", "Detalles", new { id = item.Id }) |
+                    @Html.ActionLink("Eliminar", "Eliminar", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
 <br />
 Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
 
