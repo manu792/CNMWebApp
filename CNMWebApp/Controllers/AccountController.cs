@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using CNMWebApp.Models;
 using System.Web.Security;
+using CNMWebApp.Services;
 
 namespace CNMWebApp.Controllers
 {
@@ -18,12 +19,14 @@ namespace CNMWebApp.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private UserService _userService;
 
         public AccountController()
         {
+            _userService = new UserService();
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager ) : this()
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -423,6 +426,7 @@ namespace CNMWebApp.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            _userService.SignOut();
             return RedirectToAction("Login", "Account");
         }
 

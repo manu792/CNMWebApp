@@ -54,16 +54,18 @@ namespace CNMWebApp.Controllers
                 return solicitudService.ObtenerMisSolicitudes(user, fechaInicio, fechaFinal).ToList();
             if (filtrarPor.Equals("funcionarios", StringComparison.OrdinalIgnoreCase))
                 return solicitudService.ObtenerSolicitudesFuncionarios(fechaInicio, fechaFinal).ToList();
+            if (filtrarPor.Equals("funcionariosporunidadtecnica", StringComparison.OrdinalIgnoreCase))
+                return solicitudService.ObtenerSolicitudesFuncionariosPorUnidad(fechaInicio, fechaFinal, user).ToList();
             if (filtrarPor.Equals("jefaturas", StringComparison.OrdinalIgnoreCase))
                 return solicitudService.ObtenerSolicitudesJefaturas(fechaInicio, fechaFinal).ToList();
-            if (filtrarPor.Equals("recursos humanos", StringComparison.OrdinalIgnoreCase))
+            if (filtrarPor.Equals("recursoshumanos", StringComparison.OrdinalIgnoreCase))
                 return solicitudService.ObtenerSolicitudesRH(fechaInicio, fechaFinal).ToList();
             if (filtrarPor.Equals("directorgeneral", StringComparison.OrdinalIgnoreCase))
                 return solicitudService.ObtenerSolicitudesDirectorGeneral(fechaInicio, fechaFinal).ToList();
             if (filtrarPor.Equals("directoradministrativo", StringComparison.OrdinalIgnoreCase))
                 return solicitudService.ObtenerSolicitudesDirectorAdministrativo(fechaInicio, fechaFinal).ToList();
             if (filtrarPor.Equals("todos", StringComparison.OrdinalIgnoreCase))
-                return solicitudService.ObtenerSolicitudes(fechaInicio, fechaFinal).ToList();
+                return solicitudService.ObtenerTodasSolicitudesPorRol(fechaInicio, fechaFinal, user).ToList();
 
             return solicitudService.ObtenerMisSolicitudes(user, fechaInicio, fechaFinal);
         }

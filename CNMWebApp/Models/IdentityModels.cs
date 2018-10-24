@@ -22,6 +22,7 @@ namespace CNMWebApp.Models
     public class SolicitudVacaciones
     {
         public Guid SolicitudVacacionesId { get; set; }
+        [Required]
         public string UsuarioId { get; set; }
         public int CantidadDiasSolicitados { get; set; }
         [MaxLength(500, ErrorMessage = "El comentario debe ser máximo de 500 caracteres")]
@@ -309,9 +310,9 @@ namespace CNMWebApp.Models
                 var user = new ApplicationUser()
                 {
                     Id = "00000000",
-                    Nombre = "Manager",
-                    PrimerApellido = "Manager",
-                    SegundoApellido = "Manager",
+                    Nombre = "Super",
+                    PrimerApellido = "User",
+                    SegundoApellido = "",
                     UserName = "manager@manager.com",
                     Email = "manager@manager.com",
                     FechaIngreso = DateTime.Now,

@@ -18,6 +18,8 @@ namespace CNMWebApp.Services
         private ApplicationRoleManager _roleManager;
         private CategoriaServicio _categoriaServicio;
         private RoleService _roleService;
+        private ApplicationDbContext _context;
+        private static UserViewModel loggedUser;
         
 
         public UserService()
@@ -26,6 +28,7 @@ namespace CNMWebApp.Services
             _roleManager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationRoleManager>();
             _categoriaServicio = new CategoriaServicio();
             _roleService = new RoleService();
+            _context = new ApplicationDbContext();
         }
 
         public UserViewModel ObtenerJefePorUnidadTecnica(int unidadTecnicaId)
@@ -303,6 +306,44 @@ namespace CNMWebApp.Services
                 Role = _roleManager.FindById(role.RoleId),
                 SaldoDiasDisponibles = user.SaldoDiasEmpleado != null ? user.SaldoDiasEmpleado.SaldoDiasDisponibles : 0
             };
+        }
+
+        public UserViewModel ObtenerUsuarioLogueado()
+        {
+            if (loggedUser != null)
+                return loggedUser;
+
+            string currentUserId = HttpContext.Current.User.Identity.GetUserId();
+            ApplicationUser user = _context.Users.FirstOrDefault(x => x.Id == currentUserId);
+            var role = user.Roles.Count == 1 ?
+                user.Roles.FirstOrDefault() :
+                user.Roles.FirstOrDefault(r => !_roleManager.FindById(r.RoleId).Name.Equals("manager", StringComparison.OrdinalIgnoreCase));
+
+            loggedUser = new UserViewModel()
+            {
+                Id = user.Id,
+                Nombre = user.Nombre,
+                PrimerApellido = user.PrimerApellido,
+                SegundoApellido = user.SegundoApellido,
+                Email = user.Email,
+                Categoria = user.Categoria,
+                EsSuperusuario = EsSuperusuario(user.Id),
+                EstaActivo = user.EstaActivo,
+                FechaIngreso = user.FechaIngreso,
+                //Foto = user.FotoRuta
+                FotoRuta = user.FotoRuta,
+                PhoneNumber = user.PhoneNumber,
+                UnidadTecnica = user.UnidadTecnica,
+                Role = _roleManager.FindById(role.RoleId),
+                SaldoDiasDisponibles = user.SaldoDiasEmpleado != null ? user.SaldoDiasEmpleado.SaldoDiasDisponibles : 0
+            };
+
+            return loggedUser;
+        }
+
+        public void SignOut()
+        {
+            loggedUser = null;
         }
 
         public async Task<bool> Crear(UserRolesUnidadCategoria usuario)
