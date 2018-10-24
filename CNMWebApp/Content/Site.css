@@ -125,3 +125,7 @@ label {
 .input-group.date.fecha-inicio, .input-group.date.fecha-final {
     width: 80% !important;
 }
+
+.cnm-texto {
+    font-size: 0.7em;
+}

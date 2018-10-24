@@ -212,7 +212,7 @@ namespace CNMWebApp.Services
                 user.UnidadTecnicaId = Convert.ToInt32(usuario.SelectedUnidadTecnicaId);
                 user.CategoriaId = Convert.ToInt32(usuario.SelectedCategoriaId);
                 user.EstaActivo = usuario.EstaActivo;
-                user.FotoRuta = usuario.Foto != null ? Path.Combine(System.Web.HttpContext.Current.Server.MapPath("~/Fotos"), usuario.Foto.FileName) : null;
+                user.FotoRuta = usuario.Foto != null ? usuario.Foto.FileName : null;
                 user.SaldoDiasEmpleado.SaldoDiasDisponibles = usuario.SaldoDiasDisponibles;
 
                 var resultado = _userManager.Update(user);
@@ -243,6 +243,17 @@ namespace CNMWebApp.Services
             {
                 return false;
             }
+        }
+
+        public async Task<string> ObtenerFoto()
+        {
+            var usuario = await GetLoggedInUser();
+            if (string.IsNullOrEmpty(usuario.FotoRuta))
+                return "boxed-bg.jpg";
+
+            // var fotoUrl = HttpContext.Current.Request.Url.c.Content("~/Content/Images/Logo.png");
+            // var fotoUrl = Path.Combine(System.Web.HttpContext.Current.Server.MapPath("~/Fotos"), usuario.FotoRuta);
+            return usuario.FotoRuta;
         }
 
         //public IEnumerable<UserViewModel> ObtenerJefes()
@@ -317,7 +328,7 @@ namespace CNMWebApp.Services
                     CategoriaId = Convert.ToInt32(usuario.SelectedCategoriaId),
                     EstaActivo = true,
                     EsContrasenaTemporal = true,
-                    FotoRuta = usuario.Foto != null ? Path.Combine(System.Web.HttpContext.Current.Server.MapPath("~/Fotos"), usuario.Foto.FileName) : null,
+                    FotoRuta = usuario.Foto != null ? usuario.Foto.FileName : null,
                     SaldoDiasEmpleado = new SaldoDiasPorEmpleado()
                     {
                         EmpleadoId = usuario.Id,
