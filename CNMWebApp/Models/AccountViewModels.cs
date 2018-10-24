@@ -84,11 +84,11 @@ namespace CNMWebApp.Models
     public class ResetPasswordViewModel
     {
         [Required]
-        [EmailAddress]
+        [EmailAddress(ErrorMessage = "Formato de correo incorrecto")]
         [Display(Name = "Correo")]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "El campo Contraseña es requerido")]
         [StringLength(100, ErrorMessage = "La {0} debe ser de al menos {2} caracteres de longitud.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Contraseña")]

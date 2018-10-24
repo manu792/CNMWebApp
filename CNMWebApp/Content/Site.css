@@ -18,13 +18,6 @@ body {
     white-space: normal;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
-}
-
 .opciones {
     width: 100%;
 }
@@ -128,4 +121,9 @@ label {
 
 .cnm-texto {
     font-size: 0.7em;
+}
+
+.form-group.has-feedback {
+    margin-right: 0px;
+    margin-left: 0px;
 }
