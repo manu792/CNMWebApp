@@ -14,6 +14,7 @@ using CNMWebApp.Models;
 using System.Net.Mail;
 using System.Net;
 using System.Net.Mime;
+using System.Configuration;
 
 namespace CNMWebApp
 {
@@ -26,15 +27,15 @@ namespace CNMWebApp
             return Task.Run(() =>
             {
                 var mail = new MailMessage();
-                var smtpServer = new SmtpClient("smtp.gmail.com");
+                var smtpServer = new SmtpClient(ConfigurationManager.AppSettings["SmtpClient"]);
 
-                mail.From = new MailAddress("otistestuh@gmail.com");
+                mail.From = new MailAddress(ConfigurationManager.AppSettings["MailAddress"]);
                 mail.To.Add(message.Destination);
                 mail.Subject = message.Subject;
                 mail.AlternateViews.Add(AlternateView.CreateAlternateViewFromString(message.Body, null, MediaTypeNames.Text.Html));
 
-                smtpServer.Port = 587;
-                smtpServer.Credentials = new NetworkCredential("otistestuh@gmail.com", "OtisTest123");
+                smtpServer.Port = Convert.ToInt32(ConfigurationManager.AppSettings["MailPort"]);
+                smtpServer.Credentials = new NetworkCredential(ConfigurationManager.AppSettings["MailAddress"], ConfigurationManager.AppSettings["MailPassword"]);
                 smtpServer.EnableSsl = true;
 
                 smtpServer.Send(mail);

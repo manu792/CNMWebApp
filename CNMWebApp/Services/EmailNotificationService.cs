@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
@@ -21,17 +22,17 @@ namespace CNMWebApp.Services
             return Task.Run(() =>
             {
                 var mail = new MailMessage();
-                var smtpServer = new SmtpClient("smtp.gmail.com");
+                var smtpServer = new SmtpClient(ConfigurationManager.AppSettings["SmtpClient"]);
 
-                mail.From = new MailAddress("otistestuh@gmail.com");
+                mail.From = new MailAddress(ConfigurationManager.AppSettings["MailAddress"]);
                 mail.To.Add(solicitante);
                 mail.CC.Add(cc);
 
                 mail.Subject = subject;
                 mail.AlternateViews.Add(AlternateView.CreateAlternateViewFromString(body, null, MediaTypeNames.Text.Html));
 
-                smtpServer.Port = 587;
-                smtpServer.Credentials = new NetworkCredential("otistestuh@gmail.com", "OtisTest123");
+                smtpServer.Port = Convert.ToInt32(ConfigurationManager.AppSettings["MailPort"]);
+                smtpServer.Credentials = new NetworkCredential(ConfigurationManager.AppSettings["MailAddress"], ConfigurationManager.AppSettings["MailPassword"]);
                 smtpServer.EnableSsl = true;
 
                 smtpServer.Send(mail);
