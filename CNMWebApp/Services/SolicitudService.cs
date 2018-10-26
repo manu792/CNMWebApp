@@ -241,8 +241,24 @@ namespace CNMWebApp.Services
                 x.Usuario.CategoriaId == categoria.CategoriaId);
         }
 
-        public IEnumerable<SolicitudVacaciones> ObtenerSolicitudesPorAprobar(UserViewModel jefe)
+        public IEnumerable<SolicitudVacaciones> ObtenerSolicitudesPorAprobar(UserViewModel jefe, string fechaInicio, string fechaFinal)
         {
+            DateTime fechaI;
+            DateTime fechaF;
+
+            if (!string.IsNullOrEmpty(fechaInicio) && !string.IsNullOrEmpty(fechaFinal))
+            {
+                if (DateTime.TryParse(fechaInicio, out fechaI) && DateTime.TryParse(fechaFinal, out fechaF))
+                {
+                    return context.SolicitudesVacaciones.Where(x => x.Estado.Nombre.Equals("por revisar", StringComparison.OrdinalIgnoreCase) &&
+                       x.AprobadorId == jefe.Id &&
+                       x.UsuarioId != jefe.Id &&
+                       x.FechaSolicitud >= fechaI &&
+                       x.FechaSolicitud <= fechaF)
+                    .ToList();
+                }
+            }
+
             return context.SolicitudesVacaciones.Where(x => x.Estado.Nombre.Equals("por revisar", StringComparison.OrdinalIgnoreCase) &&
                    x.AprobadorId == jefe.Id &&
                    x.UsuarioId != jefe.Id)

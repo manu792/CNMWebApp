@@ -10,14 +10,14 @@
 
 <h2>Solicitudes de Vacaciones</h2>
 
-@using (Html.BeginForm("Index", "Solicitud", FormMethod.Get))
+@using (Html.BeginForm("SolicitudesEmpleados", "Solicitud", FormMethod.Get))
 {
     <div class="row">
         <div class="col-md-6">
             @Html.Label("Fecha Inicio", htmlAttributes: new { @class = "control-label col-md-3" })
             <div class="col-md-9">
                 <div class='input-group date fecha-inicio'>
-                    <input id="FechaInicio" name="FechaInicio" type="text" class="form-control" />
+                    <input id="FechaInicio" name="FechaInicio" autocomplete="off" placeholder="yyyy/mm/dd" type="text" class="form-control" />
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-th"></span>
                     </span>
@@ -28,7 +28,7 @@
             @Html.Label("Fecha Final", htmlAttributes: new { @class = "control-label col-md-3" })
             <div class="col-md-9">
                 <div class='input-group date fecha-final'>
-                    <input id="FechaFinal" name="FechaFinal" type="text" class="form-control" />
+                    <input id="FechaFinal" name="FechaFinal" autocomplete="off" placeholder="yyyy/mm/dd" type="text" class="form-control" />
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-th"></span>
                     </span>
@@ -36,6 +36,8 @@
             </div>
         </div>
     </div>
+    <br />
+
     <div class="row">
         <div class="col-md-10">
             @Html.TextBox("Filtro", "", new { @class = "form-control", placeholder = "Buscar..." })
@@ -44,6 +46,7 @@
             <input type="submit" value="Buscar" class="btn btn-default" />
         </div>
     </div>
+    <br />
 }
 
 <table class="table">
@@ -118,13 +121,22 @@ Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.P
 @section scripts
 {
     <script>
-        var url = '@Url.Action("SolicitudesEmpleados", "Solicitud")';
+        var fechaInicio = @Html.Raw(Json.Encode(fechaInicio));
+        var fechaFinal = @Html.Raw(Json.Encode(fechaFinal));
 
-        $('#btn-buscar').click(function () {
-            var fechaInicio = $('#FechaInicio').val();
-            var fechaFinal = $('#FechaFinal').val();
+        $('#FechaInicio').datepicker({
+            format: 'yyyy/mm/dd',
+            todayHighlight: true,
+            autoclose: true,
+        }).datepicker();
 
-            location.href = url + '/?fechaInicio=' + fechaInicio + '&fechaFinal=' + fechaFinal;
-        });
+        $('#FechaFinal').datepicker({
+            format: 'yyyy/mm/dd',
+            todayHighlight: true,
+            autoclose: true,
+        }).datepicker();
+
+        $('#FechaInicio').datepicker('update', fechaInicio);
+        $('#FechaFinal').datepicker('update', fechaFinal);
     </script>
 }

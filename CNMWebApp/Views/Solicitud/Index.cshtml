@@ -33,7 +33,7 @@
                         </select>
                     </div>
                 }
-                if (usuarioLogeado.Result.Role.Name.Equals("recursos humanos", StringComparison.OrdinalIgnoreCase))
+                if (usuarioLogeado.Result.Role.Name.Equals("recursos humanos", StringComparison.OrdinalIgnoreCase) || usuarioLogeado.Result.Role.Name.Equals("manager", StringComparison.OrdinalIgnoreCase))
                 {
                     @Html.Label("Ver solicitudes", htmlAttributes: new { @id = "role-dropdown", @class = "control-label col-md-2" })
                     <div class="col-md-6">
@@ -72,7 +72,7 @@
             @Html.Label("Fecha Inicio", htmlAttributes: new { @class = "control-label col-md-3" })
             <div class="col-md-9">
                 <div class='input-group date fecha-inicio'>
-                    <input id="FechaInicio" name="FechaInicio" type="text" class="form-control" />
+                    <input id="FechaInicio" name="FechaInicio" autocomplete="off" placeholder="yyyy/mm/dd" type="text" class="form-control" />
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-th"></span>
                     </span>
@@ -83,7 +83,7 @@
             @Html.Label("Fecha Final", htmlAttributes: new { @class = "control-label col-md-3" })
             <div class="col-md-9">
                 <div class='input-group date fecha-final'>
-                    <input id="FechaFinal" name="FechaFinal" type="text" class="form-control" />
+                    <input id="FechaFinal" name="FechaFinal" autocomplete="off" placeholder="yyyy/mm/dd" type="text" class="form-control" />
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-th"></span>
                     </span>

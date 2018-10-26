@@ -324,7 +324,7 @@ namespace CNMWebApp.Controllers
 
             var jefe = await userService.GetLoggedInUser();
 
-            var solicitudes = solicitudService.ObtenerSolicitudesPorAprobar(jefe);
+            var solicitudes = solicitudService.ObtenerSolicitudesPorAprobar(jefe, fechaInicio, fechaFinal);
 
             if (!string.IsNullOrEmpty(filtro))
             {
