@@ -443,14 +443,18 @@ namespace CNMWebApp.Controllers
             filtro = filtro.ToLower();
 
             var solicitudesFiltradas = solicitudes
-                .Where(x => x.Comentario.ToLower().Contains(filtro) ||
+                .Where(x => (string.IsNullOrEmpty(x.Comentario) ? false : x.Comentario.ToLower().Contains(filtro)) ||
                  x.UsuarioId.ToLower().Contains(filtro) ||
                  x.Estado.Nombre.ToLower().Contains(filtro) ||
                  x.Usuario.Nombre.ToLower().Contains(filtro) ||
                  x.Usuario.PrimerApellido.ToLower().Contains(filtro) ||
-                 x.Usuario.SegundoApellido.ToLower().Contains(filtro) ||
+                 (string.IsNullOrEmpty(x.Usuario.SegundoApellido) ? false : x.Usuario.SegundoApellido.ToLower().Contains(filtro)) ||
                  x.CantidadDiasSolicitados.ToString() == filtro ||
-                 x.FechaSolicitud.ToString("yyyy-MM-dd") == filtro)
+                 x.FechaSolicitud.ToString("yyyy-MM-dd").Contains(filtro) ||
+                 x.FechaSolicitud.ToString("yyyy/MM/dd").Contains(filtro) ||
+                 x.FechaSolicitud.ToString("dd/MM/yyyy").Contains(filtro) ||
+                 x.FechaSolicitud.ToString("dd-MM-yyyy").Contains(filtro))
+
                 .ToList();
 
             return solicitudesFiltradas;

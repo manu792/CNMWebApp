@@ -179,6 +179,11 @@ namespace CNMWebApp.Services
         {
             try
             {
+                string fotoRuta = usuario.FotoRuta;
+
+                if (usuario.Foto != null)
+                    fotoRuta = usuario.Foto.FileName;
+                
                 var user = _userManager.FindById(id);
                 if (user == null)
                     return false;
@@ -215,7 +220,7 @@ namespace CNMWebApp.Services
                 user.UnidadTecnicaId = Convert.ToInt32(usuario.SelectedUnidadTecnicaId);
                 user.CategoriaId = Convert.ToInt32(usuario.SelectedCategoriaId);
                 user.EstaActivo = usuario.EstaActivo;
-                user.FotoRuta = usuario.Foto != null ? usuario.Foto.FileName : null;
+                user.FotoRuta = string.IsNullOrEmpty(fotoRuta) ? null : fotoRuta;
                 user.SaldoDiasEmpleado.SaldoDiasDisponibles = usuario.SaldoDiasDisponibles;
 
                 var resultado = _userManager.Update(user);

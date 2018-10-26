@@ -127,3 +127,7 @@ label {
     margin-right: 0px;
     margin-left: 0px;
 }
+
+.check-box{
+    margin: 0px !important;
+}
