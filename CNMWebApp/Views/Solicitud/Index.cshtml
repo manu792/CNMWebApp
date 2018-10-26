@@ -20,16 +20,16 @@
         if (usuarioLogeado.Result.Role.Name.Equals("jefatura", StringComparison.OrdinalIgnoreCase))
         {
             <form action="/Solicitud" id="submit-form" method="get">
-               <div class="form-group">
-                   @Html.Label("Ver solicitudes", htmlAttributes: new { @id = "role-dropdown", @class = "control-label col-md-2" })
-                   <div class="col-md-6">
-                       <select class="dropdownOpciones form-control">
-                           <option value="MisSolicitudes">Mis Solicitudes</option>
-                           <option value="FuncionariosPorUnidadTecnica">De mis colaboradores a cargo</option>
-                           <option value="Todos">Todos</option>
-                       </select>
-                   </div>
-               </div>
+                <div class="form-group">
+                    @Html.Label("Ver solicitudes", htmlAttributes: new { @id = "role-dropdown", @class = "control-label col-md-2" })
+                    <div class="col-md-6">
+                        <select class="dropdownOpciones form-control">
+                            <option value="MisSolicitudes">Mis Solicitudes</option>
+                            <option value="FuncionariosPorUnidadTecnica">De mis colaboradores a cargo</option>
+                            <option value="Todos">Todos</option>
+                        </select>
+                    </div>
+                </div>
             </form>
         }
         if (usuarioLogeado.Result.Role.Name.Equals("recursos humanos", StringComparison.OrdinalIgnoreCase))
@@ -73,36 +73,46 @@
 
     <br />
     <br />
-
-    <div class="col-md-5">
-        @Html.Label("Fecha Inicio", htmlAttributes: new { @class = "control-label col-md-3" })
-        <div class="col-md-9">
-            <div class='input-group date fecha-inicio'>
-                <input id="FechaInicio" type="text" class="form-control" />
-                <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-th"></span>
-                </span>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-5">
-        @Html.Label("Fecha Final", htmlAttributes: new { @class = "control-label col-md-3" })
-        <div class="col-md-9">
-            <div class='input-group date fecha-final'>
-                <input id="FechaFinal" type="text" class="form-control" />
-                <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-th"></span>
-                </span>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-2">
-        <input id="btn-buscar" type="button" value="Buscar" class="btn btn-default" />
-    </div>
 </div>
 
 <br />
 <br />
+
+@using (Html.BeginForm("Index", "Solicitud", FormMethod.Get))
+{
+    <div class="row">
+        <div class="col-md-6">
+            @Html.Label("Fecha Inicio", htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                <div class='input-group date fecha-inicio'>
+                    <input id="FechaInicio" name="FechaInicio" type="text" class="form-control" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-th"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            @Html.Label("Fecha Final", htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                <div class='input-group date fecha-final'>
+                    <input id="FechaFinal" name="FechaFinal" type="text" class="form-control" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-th"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10">
+            @Html.TextBox("Filtro", "", new { @class = "form-control", placeholder = "Buscar..." })
+        </div>
+        <div class="col-md-2">
+            <input type="submit" value="Buscar" class="btn btn-default" />
+        </div>
+    </div>
+}
 
 <table class="table">
     <tr>
@@ -176,8 +186,8 @@ Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.P
 @section scripts
 {
     <script>
-        var url = '/Solicitud/Index';
-         
+        var url = '@Url.Action("Index", "Solicitud")';
+
         var filtradoPor = @Html.Raw(Json.Encode(filtradoPor));
         var fechaInicio = @Html.Raw(Json.Encode(fechaInicio));
         var fechaFinal = @Html.Raw(Json.Encode(fechaFinal));
@@ -213,5 +223,5 @@ Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.P
 
         $('#FechaInicio').datepicker('update', fechaInicio);
         $('#FechaFinal').datepicker('update', fechaFinal);
-    </script>    
+    </script>
 }

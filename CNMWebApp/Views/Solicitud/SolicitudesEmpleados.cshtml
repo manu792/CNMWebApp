@@ -4,9 +4,47 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var fechaInicio = ViewBag.FechaInicio ?? "";
+    var fechaFinal = ViewBag.FechaFinal ?? "";
 }
 
 <h2>Solicitudes de Vacaciones</h2>
+
+@using (Html.BeginForm("Index", "Solicitud", FormMethod.Get))
+{
+    <div class="row">
+        <div class="col-md-6">
+            @Html.Label("Fecha Inicio", htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                <div class='input-group date fecha-inicio'>
+                    <input id="FechaInicio" name="FechaInicio" type="text" class="form-control" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-th"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            @Html.Label("Fecha Final", htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                <div class='input-group date fecha-final'>
+                    <input id="FechaFinal" name="FechaFinal" type="text" class="form-control" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-th"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10">
+            @Html.TextBox("Filtro", "", new { @class = "form-control", placeholder = "Buscar..." })
+        </div>
+        <div class="col-md-2">
+            <input type="submit" value="Buscar" class="btn btn-default" />
+        </div>
+    </div>
+}
 
 <table class="table">
     <tr>
@@ -75,4 +113,18 @@
 Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
 
 @Html.PagedListPager(Model, pagina => Url.Action("SolicitudesEmpleados",
-    new { pagina }))
+    new { pagina, fechaInicio, fechaFinal }))
+
+@section scripts
+{
+    <script>
+        var url = '@Url.Action("SolicitudesEmpleados", "Solicitud")';
+
+        $('#btn-buscar').click(function () {
+            var fechaInicio = $('#FechaInicio').val();
+            var fechaFinal = $('#FechaFinal').val();
+
+            location.href = url + '/?fechaInicio=' + fechaInicio + '&fechaFinal=' + fechaFinal;
+        });
+    </script>
+}

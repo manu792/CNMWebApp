@@ -91,7 +91,9 @@ namespace CNMWebApp.Services
                 return context.SolicitudesVacaciones.Where(x => x.Usuario.UnidadTecnicaId == usuario.UnidadTecnica.UnidadTecnicaId);
             }
 
-            else if (usuario.Role.Name.Equals("recursos humanos", StringComparison.OrdinalIgnoreCase) || usuario.Role.Name.Equals("director", StringComparison.OrdinalIgnoreCase))
+            else if (usuario.Role.Name.Equals("recursos humanos", StringComparison.OrdinalIgnoreCase) || 
+                     usuario.Role.Name.Equals("director", StringComparison.OrdinalIgnoreCase) || 
+                     usuario.Role.Name.Equals("manager", StringComparison.OrdinalIgnoreCase))
             {
                 if (!string.IsNullOrEmpty(fechaInicio) && !string.IsNullOrEmpty(fechaFinal))
                 {

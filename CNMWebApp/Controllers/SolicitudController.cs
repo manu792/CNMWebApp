@@ -35,17 +35,27 @@ namespace CNMWebApp.Controllers
 
             var user = await userService.GetLoggedInUser();
 
-            var solicitudes = ObtenerSolicitudesPorFiltro(filtrarPor, user, fechaInicio, fechaFinal);
-
-            if (!string.IsNullOrEmpty(filtro))
+            try
             {
-                solicitudes = FiltrarSolicitudes(solicitudes, filtro);
+                var solicitudes = ObtenerSolicitudesPorFiltro(filtrarPor, user, fechaInicio, fechaFinal);
+
+                if (!string.IsNullOrEmpty(filtro))
+                {
+                    solicitudes = FiltrarSolicitudes(solicitudes, filtro);
+                }
+
+                int tamanoPagina = 10;
+                int numeroPagina = (pagina ?? 1);
+
+                return View(solicitudes.ToPagedList(numeroPagina, tamanoPagina));
+            }
+            catch(Exception ex)
+            {
+                if (ex.Message.Equals("Rol inválido"))
+                    return View("~/Views/Shared/Unauthorized.cshtml");
             }
 
-            int tamanoPagina = 10;
-            int numeroPagina = (pagina ?? 1);
-
-            return View(solicitudes.ToPagedList(numeroPagina, tamanoPagina));
+            return View(new List<SolicitudVacaciones>());
         }
 
         private IEnumerable<SolicitudVacaciones> ObtenerSolicitudesPorFiltro(string filtrarPor, UserViewModel user, string fechaInicio, string fechaFinal)
@@ -53,17 +63,66 @@ namespace CNMWebApp.Controllers
             if (filtrarPor == null)
                 return solicitudService.ObtenerMisSolicitudes(user, fechaInicio, fechaFinal).ToList();
             if (filtrarPor.Equals("funcionarios", StringComparison.OrdinalIgnoreCase))
+            {
+                if (!(user.Role.Name.Equals("director", StringComparison.OrdinalIgnoreCase) ||
+                    user.Role.Name.Equals("recursos humanos", StringComparison.OrdinalIgnoreCase) ||
+                    user.Role.Name.Equals("manager", StringComparison.OrdinalIgnoreCase)))
+                    throw new Exception("Rol inválido");
+                    
                 return solicitudService.ObtenerSolicitudesFuncionarios(fechaInicio, fechaFinal).ToList();
+            }
+                
             if (filtrarPor.Equals("funcionariosporunidadtecnica", StringComparison.OrdinalIgnoreCase))
+            {
+                // El rol de funcionario es el unico que no puede ver 
+                // solicitudes de funcionarios dentro de una unidad tecnica especifica
+
+                if(user.Role.Name.Equals("funcionario", StringComparison.OrdinalIgnoreCase))
+                    throw new Exception("Rol inválido");
+
                 return solicitudService.ObtenerSolicitudesFuncionariosPorUnidad(fechaInicio, fechaFinal, user).ToList();
+            }
+                
             if (filtrarPor.Equals("jefaturas", StringComparison.OrdinalIgnoreCase))
+            {
+                if (!(user.Role.Name.Equals("director", StringComparison.OrdinalIgnoreCase) ||
+                    user.Role.Name.Equals("recursos humanos", StringComparison.OrdinalIgnoreCase) ||
+                    user.Role.Name.Equals("manager", StringComparison.OrdinalIgnoreCase)))
+                    throw new Exception("Rol inválido");
+
                 return solicitudService.ObtenerSolicitudesJefaturas(fechaInicio, fechaFinal).ToList();
+            }
+                
             if (filtrarPor.Equals("recursoshumanos", StringComparison.OrdinalIgnoreCase))
+            {
+                if (!(user.Role.Name.Equals("director", StringComparison.OrdinalIgnoreCase) ||
+                    user.Role.Name.Equals("recursos humanos", StringComparison.OrdinalIgnoreCase) ||
+                    user.Role.Name.Equals("manager", StringComparison.OrdinalIgnoreCase)))
+                    throw new Exception("Rol inválido");
+
                 return solicitudService.ObtenerSolicitudesRH(fechaInicio, fechaFinal).ToList();
+            }
+                
             if (filtrarPor.Equals("directorgeneral", StringComparison.OrdinalIgnoreCase))
+            {
+                if (!(user.Role.Name.Equals("director", StringComparison.OrdinalIgnoreCase) ||
+                    user.Role.Name.Equals("recursos humanos", StringComparison.OrdinalIgnoreCase) ||
+                    user.Role.Name.Equals("manager", StringComparison.OrdinalIgnoreCase)))
+                    throw new Exception("Rol inválido");
+
                 return solicitudService.ObtenerSolicitudesDirectorGeneral(fechaInicio, fechaFinal).ToList();
+            }
+                
             if (filtrarPor.Equals("directoradministrativo", StringComparison.OrdinalIgnoreCase))
+            {
+                if (!(user.Role.Name.Equals("director", StringComparison.OrdinalIgnoreCase) ||
+                    user.Role.Name.Equals("recursos humanos", StringComparison.OrdinalIgnoreCase) ||
+                    user.Role.Name.Equals("manager", StringComparison.OrdinalIgnoreCase)))
+                    throw new Exception("Rol inválido");
+
                 return solicitudService.ObtenerSolicitudesDirectorAdministrativo(fechaInicio, fechaFinal).ToList();
+            }
+                
             if (filtrarPor.Equals("todos", StringComparison.OrdinalIgnoreCase))
                 return solicitudService.ObtenerTodasSolicitudesPorRol(fechaInicio, fechaFinal, user).ToList();
 
@@ -258,8 +317,11 @@ namespace CNMWebApp.Controllers
         }
 
         [Auth(Roles = "Jefatura, Director")]
-        public async Task<ActionResult> SolicitudesEmpleados(string filtro, int? pagina)
+        public async Task<ActionResult> SolicitudesEmpleados(string filtro, int? pagina, string fechaInicio, string fechaFinal)
         {
+            ViewBag.FechaInicio = fechaInicio;
+            ViewBag.FechaFinal = fechaFinal;
+
             var jefe = await userService.GetLoggedInUser();
 
             var solicitudes = solicitudService.ObtenerSolicitudesPorAprobar(jefe);
@@ -385,7 +447,10 @@ namespace CNMWebApp.Controllers
                  x.UsuarioId.ToLower().Contains(filtro) ||
                  x.Estado.Nombre.ToLower().Contains(filtro) ||
                  x.Usuario.Nombre.ToLower().Contains(filtro) ||
-                 x.Usuario.PrimerApellido.ToLower().Contains(filtro))
+                 x.Usuario.PrimerApellido.ToLower().Contains(filtro) ||
+                 x.Usuario.SegundoApellido.ToLower().Contains(filtro) ||
+                 x.CantidadDiasSolicitados.ToString() == filtro ||
+                 x.FechaSolicitud.ToString("yyyy-MM-dd") == filtro)
                 .ToList();
 
             return solicitudesFiltradas;

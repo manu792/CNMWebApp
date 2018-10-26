@@ -15,10 +15,14 @@
 
 @using (Html.BeginForm("Index", "User", FormMethod.Get))
 {
-    <p>
-        @Html.TextBox("Filtro", "", new { @class = "form-control", placeholder = "Buscar..." })
-        <input type="submit" value="Search" />
-    </p>
+    <div class="row">
+        <div class="col-md-10">
+            @Html.TextBox("Filtro", "", new { @class = "form-control", placeholder = "Buscar..." })
+        </div>
+        <div class="col-md-2">
+            <input type="submit" value="Buscar" class="btn btn-default" />
+        </div>
+    </div>
 }
 <div class="table-responsive">
     <table class="table table-bordered table-striped">

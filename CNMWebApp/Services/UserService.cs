@@ -238,7 +238,13 @@ namespace CNMWebApp.Services
                 var usuario = _userManager.FindById(id);
                 var resultado = _userManager.Delete(usuario);
                 if (resultado.Succeeded)
+                {
+                    var saldoDiasEmpleado = _context.SaldoDiasEmpleados.FirstOrDefault(x => x.Cedula == id);
+                    _context.SaldoDiasEmpleados.Remove(saldoDiasEmpleado);
+                    _context.SaveChanges();
+
                     return true;
+                }
 
                 return false;
             }
@@ -372,7 +378,7 @@ namespace CNMWebApp.Services
                     FotoRuta = usuario.Foto != null ? usuario.Foto.FileName : null,
                     SaldoDiasEmpleado = new SaldoDiasPorEmpleado()
                     {
-                        EmpleadoId = usuario.Id,
+                        Cedula = usuario.Id,
                         SaldoDiasDisponibles = 0,
                         UltimaActualizacion = DateTime.Now
                     },
@@ -390,7 +396,14 @@ namespace CNMWebApp.Services
                     GuardarFoto(usuario.Foto);
 
                     // Envio contrasena temporal al correo del usuario
-                    await _userManager.SendEmailAsync(userSaved.Id, "Contraseña Temporal", $"Su contraseña temporal para el sistema de solicitud de vacaciones es: <strong>{ contrasenaTemporal }</strong>");
+                    try
+                    {
+                        await _userManager.SendEmailAsync(userSaved.Id, "Contraseña Temporal", $"Su contraseña temporal para el sistema de solicitud de vacaciones es: <strong>{ contrasenaTemporal }</strong>");
+                    }
+                    catch(Exception ex)
+                    {
+                        Console.WriteLine(ex);
+                    }
 
                     return true;
                 }

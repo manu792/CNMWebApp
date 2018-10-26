@@ -17,7 +17,7 @@ namespace CNMWebApp.Services
 
         public SaldoDiasPorEmpleado ObtenerSaldoDiasPorEmpleadoId(string id)
         {
-            return context.SaldoDiasEmpleados.FirstOrDefault(x => x.EmpleadoId == id);
+            return context.SaldoDiasEmpleados.FirstOrDefault(x => x.Cedula == id);
         }
     }
 }

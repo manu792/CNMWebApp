@@ -199,7 +199,7 @@
 
         $('#ColaboradorId').change(function (event) {
             var usuarioId = event.target.value;
-            var url = "/User/ObtenerUsuarioPorId/";
+            var url = '@Url.Action("ObtenerUsuarioPorId", "User")';
 
             if (!usuarioId) {
                 $('#Id').val('');

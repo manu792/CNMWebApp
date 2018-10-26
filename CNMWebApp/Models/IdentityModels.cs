@@ -66,7 +66,7 @@ namespace CNMWebApp.Models
     public class SaldoDiasPorEmpleado
     {
         [Key]
-        public string EmpleadoId { get; set; }
+        public string Cedula { get; set; }
         public int SaldoDiasDisponibles { get; set; }
         public DateTime UltimaActualizacion { get; set; }
     }

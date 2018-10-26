@@ -3,6 +3,7 @@
 @{
     var userService = new UserService();
     var fotoUrl = "boxed-bg.jpg";
+    var usuario = userService.ObtenerUsuarioLogueado();
 }
 
 <!DOCTYPE html>
@@ -66,7 +67,7 @@ desired effect
         {
             <header class="main-header">
                 <!-- Logo -->
-                <a href="/Home" class="logo">
+                <a href="@Url.Action("Index", "Home")" class="logo">
                     <!-- mini logo for sidebar mini 50x50 pixels -->
                     <span class="logo-mini">
                         CNM
@@ -186,7 +187,6 @@ desired effect
                             <!-- User Account Menu -->
                             @if (Request.IsAuthenticated)
                             {
-                                var usuario = userService.ObtenerUsuarioLogueado();
                                 fotoUrl = usuario.FotoRuta;
                                 if (string.IsNullOrEmpty(fotoUrl))
                                 {
@@ -261,8 +261,6 @@ desired effect
                         </div>
                         @if (Request.IsAuthenticated)
                         {
-                            var usuario = userService.ObtenerUsuarioLogueado();
-
                             <div class="pull-left info">
                                 <p>@usuario.NombreCompleto</p>
                             </div>
@@ -282,10 +280,37 @@ desired effect
                     <!-- /.search form -->
                     <!-- Sidebar Menu -->
                     <ul class="sidebar-menu" data-widget="tree">
+                        @{
+                            usuario = userService.ObtenerUsuarioLogueado();
+                        }
+
                         <li class="header">Navegación</li>
-                        <!-- Optionally, you can add icons to the links -->
-                        <li><a href="/Home/Index"><i class="fa fa-home"></i> <span>Home</span></a></li>
-                        <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
+                        <li><a href="@Url.Action("Index", "Home")"><i class="fa fa-home"></i> <span>Home</span></a></li>
+
+                        @if (!usuario.Email.Equals("manager@manager.com"))
+                        {
+                            <li><a href="@Url.Action("Crear", "Solicitud")"><i class="fa fa-hotel"></i> <span>Solicitar Vacaciones</span></a></li>
+                        }
+
+                        @if (usuario.Role.Name.Equals("jefatura", StringComparison.OrdinalIgnoreCase) || usuario.Role.Name.Equals("director", StringComparison.OrdinalIgnoreCase))
+                        {
+                            <li><a href="@Url.Action("SolicitudesEmpleados", "Solicitud")"><i class="fa fa-check"></i> <span>Aprobar/Rechazar Solicitudes</span></a></li>
+                        }
+
+                        @if (usuario.EsSuperusuario || usuario.Role.Name.Equals("recursos humanos", StringComparison.OrdinalIgnoreCase))
+                        {
+                            <li><a href="@Url.Action("Index", "User")"><i class="fa fa-users"></i> <span>Empleados</span></a></li>
+                        }
+
+                        @if (usuario.EsSuperusuario)
+                        {
+                            <li><a href="@Url.Action("CrearParaEmpleado", "Solicitud")"><i class="fa fa-hotel"></i> <span>Vacaciones para empleado</span></a></li>
+                        }
+
+                        <li><a href="@Url.Action("Index", "Solicitud")"><i class="fa fa-check"></i> <span>Historial Solicitudes</span></a></li>
+
+
+                        @*<li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
                         <li class="treeview">
                             <a href="#">
                                 <i class="fa fa-link"></i> <span>Multilevel</span>
@@ -297,7 +322,7 @@ desired effect
                                 <li><a href="#">Link in level 2</a></li>
                                 <li><a href="#">Link in level 2</a></li>
                             </ul>
-                        </li>
+                        </li>*@
                     </ul>
                     <!-- /.sidebar-menu -->
                 </section>
@@ -332,7 +357,7 @@ desired effect
                 @DateTime.Now.Year
             </div>
             <!-- Default to the left -->
-            <strong>Copyright &copy; 2016 <span>Centro Nacional de la Música</span>.</strong>
+            <strong>Copyright &copy; @DateTime.Now.Year <span>Centro Nacional de la Música</span>.</strong>
         </footer>
 
         @if (Request.IsAuthenticated)
@@ -454,37 +479,6 @@ desired effect
                     </div>
                     <div id="control-sidebar-theme-demo-options-tab" class="tab-pane active">
                         <div>
-                            <h4 class="control-sidebar-heading">Layout Options</h4>
-                            <div class="form-group">
-                                <label class="control-sidebar-subheading">
-                                    <input type="checkbox" data-layout="fixed" class="pull-right"> Fixed layout
-                                </label><p>Activate the fixed layout. You can't use fixed and boxed layouts together</p>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-sidebar-subheading">
-                                    <input type="checkbox" data-layout="layout-boxed" class="pull-right"> Boxed Layout
-                                </label><p>Activate the boxed layout</p>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-sidebar-subheading">
-                                    <input type="checkbox" data-layout="sidebar-collapse" class="pull-right"> Toggle Sidebar
-                                </label><p>Toggle the left sidebar's state (open or collapse)</p>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-sidebar-subheading">
-                                    <input type="checkbox" data-enable="expandOnHover" class="pull-right"> Sidebar Expand on Hover
-                                </label><p>Let the sidebar mini expand on hover</p>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-sidebar-subheading">
-                                    <input type="checkbox" data-controlsidebar="control-sidebar-open" class="pull-right"> Toggle Right Sidebar Slide
-                                </label><p>Toggle between slide over content and push content effects</p>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-sidebar-subheading">
-                                    <input type="checkbox" data-sidebarskin="toggle" class="pull-right"> Toggle Right Sidebar Skin
-                                </label><p>Toggle between dark and light skins for the right sidebar</p>
-                            </div>
                             <h4 class="control-sidebar-heading">Skins</h4>
                             <ul class="list-unstyled clearfix">
                                 <li style="float:left; width: 33.33333%; padding: 5px;">
@@ -766,7 +760,7 @@ desired effect
 
             $("#SelectedRoleId").change(function (event) {
                 var roleId = event.target.value;
-                var url = "/User/ObtenerUnidadesCategoriasPorRoleId/";
+                var url = '@Url.Action("ObtenerUnidadesCategoriasPorRoleId", "User")';
 
                 $.ajax({
                     url: url,
