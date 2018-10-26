@@ -67,7 +67,7 @@ namespace CNMWebApp.Models
     {
         [Key]
         public string Cedula { get; set; }
-        public int SaldoDiasDisponibles { get; set; }
+        public decimal SaldoDiasDisponibles { get; set; }
         public DateTime UltimaActualizacion { get; set; }
     }
 
@@ -349,7 +349,7 @@ namespace CNMWebApp.Models
         public DbSet<SaldoDiasPorEmpleado> SaldoDiasEmpleados { get; set; }
 
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("CNMDBDev", throwIfV1Schema: false)
         {
             Database.SetInitializer(new Initializer());
         }

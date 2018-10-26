@@ -46,7 +46,7 @@ namespace CNMWebApp.Models
         [Range(0, 1000, ErrorMessage = "Debe ser un número entre 0 y 1000")]
         [Required(ErrorMessage = "El campo Saldo Días Disponibles es requerido")]
         [DefaultValue(0)]
-        public int SaldoDiasDisponibles { get; set; }
+        public decimal SaldoDiasDisponibles { get; set; }
 
         // Vinculan el usuario con los datos de las tablas Roles, Categoria y UnidadTecnica
         [DisplayName("Rol")]
