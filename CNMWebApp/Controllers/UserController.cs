@@ -106,11 +106,11 @@ namespace CNMWebApp.Controllers
        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(UserRolesUnidadCategoria user)
         {
-            if (!ModelState.IsValid)
-            {
-                CrearObjetoUsuario(user);
-                return View(user);
-            }
+            //if (!ModelState.IsValid)
+            //{
+            //    CrearObjetoUsuario(user);
+            //    return View(user);
+            //}
 
             try
             {

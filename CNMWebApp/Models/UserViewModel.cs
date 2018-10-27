@@ -45,7 +45,7 @@ namespace CNMWebApp.Models
         [RegularExpression(@"^[1-9]\d*(\.\d+)?$", ErrorMessage = "Debe ser un valor numérico")]
         [Range(0, 1000, ErrorMessage = "Debe ser un número entre 0 y 1000")]
         [Required(ErrorMessage = "El campo Saldo Días Disponibles es requerido")]
-        //[DefaultValue(0)]
+        [DefaultValue(0)]
         //[DisplayFormat(DataFormatString = "{0:n2}", ApplyFormatInEditMode = true)]
         public decimal SaldoDiasDisponibles { get; set; }
 
@@ -60,7 +60,7 @@ namespace CNMWebApp.Models
         {
             get
             {
-                return $"{Nombre} {PrimerApellido} {SegundoApellido}";
+                return $"{Nombre} {PrimerApellido}";
             }
         }
     }
