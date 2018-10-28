@@ -63,7 +63,9 @@
             <th scope="col">
                 @Html.Label("Super Usuario")
             </th>
-            <th scope="col"></th>
+            <th scope="col">
+                @Html.Label("Acciones")
+            </th>
         </tr>
 
         @foreach (var item in Model)
@@ -107,7 +109,6 @@
                 </td>
                 <td>
                     @Html.ActionLink("Editar", "Editar", new { id = item.Id }) |
-                    @Html.ActionLink("Detalles", "Detalles", new { id = item.Id }) |
                     @Html.ActionLink("Eliminar", "Eliminar", new { id = item.Id })
                 </td>
             </tr>

@@ -5,9 +5,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Crear</h2>
+<h2>Solicitar Vacaciones a nombre de un Colaborador</h2>
 
-<h4>Solicitar Vacaciones a nombre de un Colaborador</h4>
 <hr />
 
 
@@ -194,7 +193,8 @@
 
         $('#ColaboradorId').selectpicker({
             liveSearch: true,
-            showSubtext: true
+            showSubtext: true,
+            liveSearchPlaceholder: 'Buscar...'
         });
 
         $('#ColaboradorId').change(function (event) {

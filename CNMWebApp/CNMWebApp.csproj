@@ -1829,6 +1829,13 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Fotos\CNM.JPG" />
+    <Content Include="Fotos\favicon.ico" />
+    <Content Include="Fotos\god-of-war-4-2018-oo-1920x1080.jpg" />
+    <Content Include="Fotos\godofwar.jpg" />
+    <Content Include="Fotos\icon.png" />
+    <Content Include="Fotos\image.jpg" />
+    <Content Include="Fotos\Uncharted.jpg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Rotativa\help-wkhtmltoimage.txt" />
@@ -1907,6 +1914,7 @@
     <Content Include="admin-lte\plugins\fastclick\bower.json" />
     <Content Include="admin-lte\plugins\fastclick\LICENSE" />
     <Content Include="admin-lte\plugins\fastclick\README.md" />
+    <Content Include="PDFs\File.pdf" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
