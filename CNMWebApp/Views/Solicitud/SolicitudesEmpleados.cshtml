@@ -2,7 +2,7 @@
 @using PagedList.Mvc;
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Solicitudes Empleados";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var fechaInicio = ViewBag.FechaInicio ?? "";
     var fechaFinal = ViewBag.FechaFinal ?? "";
@@ -49,69 +49,70 @@
     <br />
 }
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.Label("Estado Actual")
-        </th>
-        <th>
-            @Html.Label("Cédula")
-        </th>
-        <th>
-            @Html.Label("Nombre")
-        </th>
-        <th>
-            @Html.Label("Primer Apellido")
-        </th>
-        <th>
-            @Html.Label("Segundo Apellido")
-        </th>
-        <th>
-            @Html.Label("Comentario")
-        </th>
-        <th>
-            @Html.Label("Cantidad Días Solicitados")
-        </th>
-        <th>
-            @Html.Label("Fecha Solicitud")
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+<div class="table-responsive">
+    <table class="table table-bordered table-striped">
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Estado.Nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UsuarioId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Usuario.Nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Usuario.PrimerApellido)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Usuario.SegundoApellido)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Comentario)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CantidadDiasSolicitados)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaSolicitud)
-            </td>
-            <td>
-                @Html.ActionLink("Revisar", "Revisar", new { id = item.SolicitudVacacionesId })
-            </td>
+            <th>
+                @Html.Label("Estado Actual")
+            </th>
+            <th>
+                @Html.Label("Cédula")
+            </th>
+            <th>
+                @Html.Label("Nombre")
+            </th>
+            <th>
+                @Html.Label("Primer Apellido")
+            </th>
+            <th>
+                @Html.Label("Segundo Apellido")
+            </th>
+            <th>
+                @Html.Label("Comentario")
+            </th>
+            <th>
+                @Html.Label("Cantidad Días Solicitados")
+            </th>
+            <th>
+                @Html.Label("Fecha Solicitud")
+            </th>
+            <th></th>
         </tr>
-    }
 
-</table>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Estado.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UsuarioId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Usuario.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Usuario.PrimerApellido)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Usuario.SegundoApellido)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Comentario)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CantidadDiasSolicitados)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaSolicitud)
+                </td>
+                <td>
+                    @Html.ActionLink("Revisar", "Revisar", new { id = item.SolicitudVacacionesId })
+                </td>
+            </tr>
+        }
+    </table>
+</div>
 <br />
 Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
 

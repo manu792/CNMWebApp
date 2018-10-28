@@ -285,29 +285,41 @@ desired effect
                         }
 
                         <li class="header">Navegación</li>
-                        <li><a href="@Url.Action("Index", "Home")"><i class="fa fa-home"></i> <span>Home</span></a></li>
+                        <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index" && ViewContext.RouteData.Values["Controller"].ToString() == "Home" ? "active" : "")">
+                            <a href="@Url.Action("Index", "Home")"><i class="fa fa-home"></i> <span>Home</span></a>
+                        </li>
 
                         @if (!usuario.Email.Equals("manager@manager.com"))
                         {
-                            <li><a href="@Url.Action("Crear", "Solicitud")"><i class="fa fa-hotel"></i> <span>Solicitar Vacaciones</span></a></li>
+                            <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Crear" && ViewContext.RouteData.Values["Controller"].ToString() == "Solicitud" ? "active" : "")">
+                                <a href="@Url.Action("Crear", "Solicitud")"><i class="fa fa-hotel"></i> <span>Solicitar Vacaciones</span></a>
+                            </li>
                         }
 
                         @if (usuario.Role.Name.Equals("jefatura", StringComparison.OrdinalIgnoreCase) || usuario.Role.Name.Equals("director", StringComparison.OrdinalIgnoreCase))
                         {
-                            <li><a href="@Url.Action("SolicitudesEmpleados", "Solicitud")"><i class="fa fa-check"></i> <span>Aprobar/Rechazar Solicitudes</span></a></li>
+                            <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "SolicitudesEmpleados" && ViewContext.RouteData.Values["Controller"].ToString() == "Solicitud" ? "active" : "")">
+                                <a href="@Url.Action("SolicitudesEmpleados", "Solicitud")"><i class="fa fa-check"></i> <span>Aprobar/Rechazar Solicitudes</span></a>
+                            </li>
                         }
 
                         @if (usuario.EsSuperusuario || usuario.Role.Name.Equals("recursos humanos", StringComparison.OrdinalIgnoreCase))
                         {
-                            <li><a href="@Url.Action("Index", "User")"><i class="fa fa-users"></i> <span>Empleados</span></a></li>
+                            <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index" && ViewContext.RouteData.Values["Controller"].ToString() == "User" ? "active" : "")">
+                                <a href="@Url.Action("Index", "User")"><i class="fa fa-users"></i> <span>Empleados</span></a>
+                            </li>
                         }
 
                         @if (usuario.EsSuperusuario)
                         {
-                            <li><a href="@Url.Action("CrearParaEmpleado", "Solicitud")"><i class="fa fa-hotel"></i> <span>Solicitar para empleado</span></a></li>
+                            <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "CrearParaEmpleado" && ViewContext.RouteData.Values["Controller"].ToString() == "Solicitud" ? "active" : "")">
+                                <a href="@Url.Action("CrearParaEmpleado", "Solicitud")"><i class="fa fa-hotel"></i> <span>Solicitar para empleado</span></a>
+                            </li>
                         }
 
-                        <li><a href="@Url.Action("Index", "Solicitud")"><i class="fa fa-check"></i> <span>Historial Solicitudes</span></a></li>
+                        <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index" && ViewContext.RouteData.Values["Controller"].ToString() == "Solicitud" ? "active" : "")">
+                            <a href="@Url.Action("Index", "Solicitud")"><i class="fa fa-check"></i> <span>Historial Solicitudes</span></a>
+                        </li>
 
 
                         @*<li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
