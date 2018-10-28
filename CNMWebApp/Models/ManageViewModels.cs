@@ -27,7 +27,7 @@ namespace CNMWebApp.Models
 
     public class SetPasswordViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "El campo Nueva Contraseña es requerido")]
         [StringLength(100, ErrorMessage = "La {0} debe ser de al menos {2} caracteres de longitud.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Nueva Contraseña")]
@@ -41,12 +41,12 @@ namespace CNMWebApp.Models
 
     public class ChangePasswordViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "El campo Contraseña Actual es requerido")]
         [DataType(DataType.Password)]
         [Display(Name = "Contraseña Actual")]
         public string OldPassword { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "El campo Nueva Contraseña es requerido")]
         [StringLength(100, ErrorMessage = "La {0} debe ser de al menos {2} caracteres de longitud.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Nueva Contraseña")]

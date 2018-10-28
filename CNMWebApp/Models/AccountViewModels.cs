@@ -41,19 +41,19 @@ namespace CNMWebApp.Models
 
     public class ForgotViewModel
     {
-        [Required]
-        [Display(Name = "Email")]
+        [Required(ErrorMessage = "El campo Correo es requerido")]
+        [Display(Name = "Correo")]
         public string Email { get; set; }
     }
 
     public class LoginViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "El campo Correo es requerido")]
         [Display(Name = "Correo")]
-        [EmailAddress]
+        [EmailAddress(ErrorMessage = "El formato es incorrecto")]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "El campo Contraseña es requerido")]
         [DataType(DataType.Password)]
         [Display(Name = "Contraseña")]
         public string Password { get; set; }
@@ -64,13 +64,13 @@ namespace CNMWebApp.Models
 
     public class RegisterViewModel
     {
-        [Required]
-        [EmailAddress]
+        [Required(ErrorMessage = "El campo Correo es requerido")]
         [Display(Name = "Correo")]
+        [EmailAddress(ErrorMessage = "El formato es incorrecto")]
         public string Email { get; set; }
 
-        [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [Required(ErrorMessage = "El campo Contraseña es requerido")]
+        [StringLength(100, ErrorMessage = "El campo Contraseña debe ser de al menos {2} caracteres de longitud", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Contraseña")]
         public string Password { get; set; }
@@ -83,7 +83,7 @@ namespace CNMWebApp.Models
 
     public class ResetPasswordViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "El campo Correo es requerido")]
         [EmailAddress(ErrorMessage = "Formato de correo incorrecto")]
         [Display(Name = "Correo")]
         public string Email { get; set; }
@@ -104,8 +104,8 @@ namespace CNMWebApp.Models
 
     public class ForgotPasswordViewModel
     {
-        [Required]
-        [EmailAddress]
+        [Required(ErrorMessage = "El campo Correo es requerido")]
+        [EmailAddress(ErrorMessage = "Formato de correo incorrecto")]
         [Display(Name = "Correo")]
         public string Email { get; set; }
     }
