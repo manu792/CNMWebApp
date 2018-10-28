@@ -292,7 +292,7 @@ desired effect
                         @if (!usuario.Email.Equals("manager@manager.com"))
                         {
                             <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Crear" && ViewContext.RouteData.Values["Controller"].ToString() == "Solicitud" ? "active" : "")">
-                                <a href="@Url.Action("Crear", "Solicitud")"><i class="fa fa-hotel"></i> <span>Solicitar Vacaciones</span></a>
+                                <a href="@Url.Action("Crear", "Solicitud")"><i class="fa fa-plane"></i> <span>Solicitar Vacaciones</span></a>
                             </li>
                         }
 
@@ -318,7 +318,7 @@ desired effect
                         }
 
                         <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index" && ViewContext.RouteData.Values["Controller"].ToString() == "Solicitud" ? "active" : "")">
-                            <a href="@Url.Action("Index", "Solicitud")"><i class="fa fa-check"></i> <span>Historial Solicitudes</span></a>
+                            <a href="@Url.Action("Index", "Solicitud")"><i class="fa fa-book"></i> <span>Historial Solicitudes</span></a>
                         </li>
 
 
@@ -358,6 +358,10 @@ desired effect
             <!-- Main content -->
             <section class="content container-fluid">
                 @RenderBody()
+                <br />
+                <div id="watermark">
+                    <img src="@Url.Content("~/Fotos/CNM.jpg")" alt="Image" />
+                </div>
             </section>
             <!-- /.content -->
         </div>

@@ -10,20 +10,26 @@
 <h2>@ViewBag.Title</h2>
 
 <p>
-    @Html.ActionLink("Crear Usuario", "Create")
+    @*@Html.ActionLink("Crear Usuario", "Create")*@
+    <a class="btn btn-default" href="@Url.Action("Create")">
+        Crear Usuario<br>
+        <i class="fa fa-user-plus w3-margin-bottom w3-text-theme" style="font-size:50px"></i>
+    </a>
 </p>
 
 @using (Html.BeginForm("Index", "User", FormMethod.Get))
 {
     <div class="row">
-        <div class="col-md-10">
-            @Html.TextBox("Filtro", "", new { @class = "form-control", placeholder = "Buscar..." })
+        <div class="col-md-11">
+            @Html.TextBox("Filtro", "", new { @class = "form-control", @placeholder = "Buscar..." })
         </div>
-        <div class="col-md-2">
-            <input type="submit" value="Buscar" class="btn btn-default" />
+        <div class="col-md-1">
+            <input type="submit" value="Buscar" class="btn btn-default btn-block" />
         </div>
     </div>
 }
+<br />
+
 <div class="table-responsive">
     <table class="table table-bordered table-striped">
         <tr>
