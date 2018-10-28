@@ -324,6 +324,7 @@ namespace CNMWebApp.Services
                 EstadoId = 1,
                 Comentario = solicitud.Comentario,
                 FechaSolicitud = fechaSolicitud,
+                UltimaActualizacion = fechaSolicitud,
                 AprobadorId = aprobadorId,
                 DiasPorSolicitud = ObtenerDiasPorSolicitud(solicitud)
             };

@@ -30,6 +30,7 @@ namespace CNMWebApp.Models
         public int EstadoId { get; set; }
         public string AprobadorId { get; set; }
         public DateTime FechaSolicitud { get; set; }
+        public DateTime UltimaActualizacion { get; set; }
 
         // Virtual properties mapping to ApplicationUser and Estado
         public virtual ApplicationUser Usuario { get; set; }
@@ -69,6 +70,9 @@ namespace CNMWebApp.Models
         public string Cedula { get; set; }
         public decimal SaldoDiasDisponibles { get; set; }
         public DateTime UltimaActualizacion { get; set; }
+        
+        [Required]
+        public virtual ApplicationUser Usuario { get; set; }
     }
 
     // Categorias del empleado va a ir mapeada a la tabla Categorias
@@ -318,13 +322,7 @@ namespace CNMWebApp.Models
                     FechaIngreso = DateTime.Now,
                     UnidadTecnicaId = 6,
                     EstaActivo = true,
-                    CategoriaId = 9,
-                    //SaldoDiasEmpleado = new SaldoDiasPorEmpleado()
-                    //{
-                    //    EmpleadoId = "00000000",
-                    //    SaldoDiasDisponibles = 0,
-                    //    UltimaActualizacion = DateTime.Now
-                    //}
+                    CategoriaId = 9
                 };
 
                 var task = userManager.CreateAsync(user, "Manager123.");
@@ -349,7 +347,7 @@ namespace CNMWebApp.Models
         public DbSet<SaldoDiasPorEmpleado> SaldoDiasEmpleados { get; set; }
 
         public ApplicationDbContext()
-            : base("CNMDBDev", throwIfV1Schema: false)
+            : base("DefaultConnection", throwIfV1Schema: false)
         {
             Database.SetInitializer(new Initializer());
         }
