@@ -20,6 +20,45 @@
 @using (Html.BeginForm("Index", "User", FormMethod.Get))
 {
     <div class="row">
+        <div class="col-md-6">
+            @Html.Label("Fecha Inicio", htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                <div class='input-group date fecha-inicio'>
+                    <input id="FechaInicio" name="FechaInicio" autocomplete="off" placeholder="yyyy/mm/dd" type="text" class="form-control" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-th"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            @Html.Label("Fecha Final", htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                <div class='input-group date fecha-final'>
+                    <input id="FechaFinal" name="FechaFinal" autocomplete="off" placeholder="yyyy/mm/dd" type="text" class="form-control" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-th"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            @Html.Label("Ver usuarios", htmlAttributes: new { @id = "role-dropdown", @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <select id="EstadoUsuario" name="EstadoUsuario" class="dropdownOpciones form-control">
+                    <option value="Activo">Activos</option>
+                    <option value="Inactivo">Inactivos</option>
+                    <option value="Ambos">Ambos</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
         <div class="col-md-11">
             @Html.TextBox("Filtro", "", new { @class = "form-control", @placeholder = "Buscar..." })
         </div>
@@ -34,7 +73,7 @@
     <table class="table table-bordered table-striped">
         <tr>
             <th class="thead-dark" scope="col">
-                @Html.Label("Cedula")
+                @Html.Label("Cédula")
             </th>
             <th scope="col">
                 @Html.Label("Nombre")
@@ -49,19 +88,22 @@
                 @Html.Label("Correo")
             </th>
             <th scope="col">
-                @Html.Label("Telefono")
+                @Html.Label("Teléfono")
             </th>
             <th scope="col">
                 @Html.Label("Fecha de Ingreso")
             </th>
             <th scope="col">
+                @Html.Label("Fecha de Creación")
+            </th>
+            <th scope="col">
                 @Html.Label("Rol")
             </th>
             <th scope="col">
-                @Html.Label("Unidad Tecnica")
+                @Html.Label("Unidad Técnica")
             </th>
             <th scope="col">
-                @Html.Label("Categoria")
+                @Html.Label("Categoría")
             </th>
             <th scope="col">
                 @Html.Label("Activo")
@@ -99,6 +141,9 @@
                     @Html.DisplayFor(modelItem => item.FechaIngreso)
                 </td>
                 <td>
+                    @Html.DisplayFor(modelItem => item.FechaCreacion)
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.Role.Name)
                 </td>
                 <td>
@@ -126,4 +171,33 @@
 Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
 
 @Html.PagedListPager(Model, pagina => Url.Action("Index",
-    new { pagina }))
+    new { pagina, fechaInicio = ViewBag.FechaInicio, fechaFinal = ViewBag.FechaFinal, estadoUsuario = ViewBag.EstadoUsuario }))
+
+
+@section scripts
+{
+    <script>
+        var fechaInicio = @Html.Raw(Json.Encode(ViewBag.FechaInicio ?? ""));
+        var fechaFinal = @Html.Raw(Json.Encode(ViewBag.FechaFinal ?? ""));
+        var estadoUsuario = @Html.Raw(Json.Encode(ViewBag.EstadoUsuario ?? "Ambos"));
+
+        if (estadoUsuario) {
+            $('#EstadoUsuario').val(estadoUsuario);
+        }
+
+        $('#FechaInicio').datepicker({
+            format: 'yyyy/mm/dd',
+            todayHighlight: true,
+            autoclose: true,
+        }).datepicker();
+
+        $('#FechaFinal').datepicker({
+            format: 'yyyy/mm/dd',
+            todayHighlight: true,
+            autoclose: true,
+        }).datepicker();
+
+        $('#FechaInicio').datepicker('update', fechaInicio);
+        $('#FechaFinal').datepicker('update', fechaFinal);
+    </script>    
+}

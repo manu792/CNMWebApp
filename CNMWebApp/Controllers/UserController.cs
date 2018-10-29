@@ -46,6 +46,8 @@ namespace CNMWebApp.Controllers
         public JsonResult ObtenerUsuarioPorId(string usuarioId)
         {
             var usuario = _userServicio.ObtenerUsuarioPorId(usuarioId);
+            if (usuario == null)
+                return Json(HttpNotFound());
 
             var annosLaborados = DateTime.Now.Year - usuario.FechaIngreso.Year;
             if (usuario.FechaIngreso > DateTime.Now.AddYears(-annosLaborados)) annosLaborados--;
@@ -62,6 +64,7 @@ namespace CNMWebApp.Controllers
                 UnidadTecnica = usuario.UnidadTecnica,
                 Categoria = usuario.Categoria,
                 FechaIngresoEmpleado = usuario.FechaIngreso.ToString("yyyy-MM-dd"),
+                FechaCreacionUsuario = usuario.FechaCreacion.ToString("yyyy-MM-dd"),
                 EstaActivo = usuario.EstaActivo,
                 CantidadAnnosLaborados = annosLaborados < 0 ? 0 : annosLaborados,
                 CantidadDiasSolicitados = 0,
@@ -73,14 +76,16 @@ namespace CNMWebApp.Controllers
         }
 
         // GET: User
-        public ActionResult Index(string filtro, int? pagina)
+        public ActionResult Index(string filtro, int? pagina, string estadoUsuario, string fechaInicio, string fechaFinal)
         {
+            ViewBag.EstadoUsuario = estadoUsuario;
+            ViewBag.FechaInicio = fechaInicio;
+            ViewBag.FechaFinal = fechaFinal;
+            
             var users = _userServicio.GetUsers();
 
-            if (!string.IsNullOrEmpty(filtro))
-            {
-                users = FiltrarUsuarios(users, filtro);
-            }
+            if (!string.IsNullOrEmpty(filtro) || (!string.IsNullOrEmpty(fechaInicio) && !string.IsNullOrEmpty(fechaFinal)))
+                users = FiltrarUsuarios(users, filtro, estadoUsuario, fechaInicio, fechaFinal);
 
             int tamanoPagina = 10;
             int numeroPagina = (pagina ?? 1);
@@ -106,11 +111,11 @@ namespace CNMWebApp.Controllers
        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(UserRolesUnidadCategoria user)
         {
-            //if (!ModelState.IsValid)
-            //{
-            //    CrearObjetoUsuario(user);
-            //    return View(user);
-            //}
+            if (!ModelState.IsValid)
+            {
+                CrearObjetoUsuario(user);
+                return View(user);
+            }
 
             try
             {
@@ -140,6 +145,9 @@ namespace CNMWebApp.Controllers
             }
 
             var usuario = _userServicio.ObtenerUsuarioPorId(id);
+            if (usuario == null)
+                return HttpNotFound();
+
             var categorias = _categoriaServicio.ObtenerCategoriasPorRoleId(usuario.Role.Id).ToList();
             var roles = _roleServicio.GetAllRoles().ToList();
             var unidadesTecnicas = _unidadTecnicaServicio.ObtenerUnidadesTecnicas().ToList();
@@ -152,7 +160,7 @@ namespace CNMWebApp.Controllers
                 SegundoApellido = usuario.SegundoApellido,
                 Email = usuario.Email,
                 FechaIngreso = usuario.FechaIngreso,
-                //Foto = usuario.Foto,
+                FechaCreacion = usuario.FechaCreacion,
                 PhoneNumber = usuario.PhoneNumber,
                 EstaActivo = usuario.EstaActivo,
                 EsSuperusuario = usuario.EsSuperusuario,
@@ -223,24 +231,50 @@ namespace CNMWebApp.Controllers
             return View(usuario);
         }
 
-        private List<UserViewModel> FiltrarUsuarios(IEnumerable<UserViewModel> users, string filtro)
+        private IEnumerable<UserViewModel> FiltrarUsuarios(IEnumerable<UserViewModel> users, string filtro, string estadoUsuario, string fechaInicio, string fechaFinal)
         {
+            DateTime fechaInicial;
+            DateTime fechaFin;
+            
             filtro = filtro.ToLower();
+            var usuariosFiltrados = users;
 
-            var usuariosFiltrados = users
-                .Where(x => x.Id.ToLower().Contains(filtro) ||
-                 x.Nombre.ToLower().Contains(filtro) ||
-                 x.PrimerApellido.ToLower().Contains(filtro) ||
-                 (!string.IsNullOrEmpty(x.SegundoApellido) ? x.SegundoApellido.ToLower().Contains(filtro) : false) ||
-                 x.Email.ToLower().Contains(filtro) ||
-                 (!string.IsNullOrEmpty(x.PhoneNumber) ? x.PhoneNumber.ToLower().Contains(filtro): false) ||
-                 x.FechaIngreso.ToString().Contains(filtro) ||
-                 x.Role.Name.ToLower().Contains(filtro) ||
-                 x.UnidadTecnica.Nombre.ToLower().Contains(filtro) ||
-                 x.Categoria.Nombre.ToLower().Contains(filtro))
-                .ToList();
+            if(estadoUsuario.Equals("activo", StringComparison.OrdinalIgnoreCase))
+            {
+                usuariosFiltrados = usuariosFiltrados.Where(x => x.EstaActivo);
+            }
 
-            return usuariosFiltrados;
+            if(estadoUsuario.Equals("inactivo", StringComparison.OrdinalIgnoreCase))
+            {
+                usuariosFiltrados = usuariosFiltrados.Where(x => !x.EstaActivo);
+            }
+
+            if(!string.IsNullOrEmpty(fechaInicio) && !string.IsNullOrEmpty(fechaFinal))
+            {
+                if(DateTime.TryParse(fechaInicio, out fechaInicial) && DateTime.TryParse(fechaFinal, out fechaFin))
+                {
+                    usuariosFiltrados = usuariosFiltrados.Where(x => x.FechaIngreso >= fechaInicial &&
+                        x.FechaIngreso <= fechaFin);
+                }
+            }
+
+            if(filtro != null)
+            {
+                usuariosFiltrados = usuariosFiltrados
+                    .Where(x => x.Id.ToLower().Contains(filtro) ||
+                     x.Nombre.ToLower().Contains(filtro) ||
+                     x.PrimerApellido.ToLower().Contains(filtro) ||
+                     (!string.IsNullOrEmpty(x.SegundoApellido) ? x.SegundoApellido.ToLower().Contains(filtro) : false) ||
+                     x.Email.ToLower().Contains(filtro) ||
+                     (!string.IsNullOrEmpty(x.PhoneNumber) ? x.PhoneNumber.ToLower().Contains(filtro) : false) ||
+                     x.FechaIngreso.ToString("yyyy-MM-dd").Contains(filtro) ||
+                     x.FechaCreacion.ToString("yyyy-MM-dd").Contains(filtro) ||
+                     x.Role.Name.ToLower().Contains(filtro) ||
+                     x.UnidadTecnica.Nombre.ToLower().Contains(filtro) ||
+                     x.Categoria.Nombre.ToLower().Contains(filtro));
+            }
+
+            return usuariosFiltrados.ToList();
         }
 
         private void CrearObjetoUsuario(UserRolesUnidadCategoria usuario)
@@ -251,6 +285,7 @@ namespace CNMWebApp.Controllers
             usuario.SegundoApellido = usuario.SegundoApellido;
             usuario.Email = usuario.Email;
             usuario.FechaIngreso = usuario.FechaIngreso;
+            usuario.FechaCreacion = usuario.FechaCreacion;
             usuario.EstaActivo = usuario.EstaActivo;
             usuario.PhoneNumber = usuario.PhoneNumber;
             usuario.Foto = usuario.Foto;

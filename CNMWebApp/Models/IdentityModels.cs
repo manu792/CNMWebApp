@@ -111,6 +111,7 @@ namespace CNMWebApp.Models
         public string PrimerApellido { get; set; }
         public string SegundoApellido { get; set; }
         public DateTime FechaIngreso { get; set; }
+        public DateTime FechaCreacion { get; set; }
         public string FotoRuta { get; set; }
         public int CategoriaId { get; set; }
         public int UnidadTecnicaId { get; set; }
@@ -320,6 +321,7 @@ namespace CNMWebApp.Models
                     UserName = "manager@manager.com",
                     Email = "manager@manager.com",
                     FechaIngreso = DateTime.Now,
+                    FechaCreacion = DateTime.Now,
                     UnidadTecnicaId = 6,
                     EstaActivo = true,
                     CategoriaId = 9

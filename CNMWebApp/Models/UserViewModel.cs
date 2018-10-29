@@ -34,6 +34,10 @@ namespace CNMWebApp.Models
         //[DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
         public DateTime FechaIngreso { get; set; }
+        [DisplayName("Fecha Creación Empleado")]
+        [Required(ErrorMessage = "El campo Fecha Creación Empleado es requerido")]
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
+        public DateTime FechaCreacion { get; set; }
         public HttpPostedFileWrapper Foto { get; set; }
         [DisplayName("Foto")]
         public string FotoRuta { get; set; }
@@ -117,6 +121,8 @@ namespace CNMWebApp.Models
         public List<UserViewModel> Colaboradores { get; set; }
         [DisplayName("Fecha Ingreso")]
         public string FechaIngresoEmpleado { get; set; }
+        [DisplayName("Fecha Creación Empleado")]
+        public string FechaCreacionUsuario { get; set; }
     }
 
     public class DiasPorSolicitudViewModel

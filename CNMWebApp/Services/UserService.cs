@@ -52,6 +52,7 @@ namespace CNMWebApp.Services
                 Categoria = jefe.Categoria,
                 EstaActivo = jefe.EstaActivo,
                 FechaIngreso = jefe.FechaIngreso,
+                FechaCreacion = jefe.FechaCreacion,
                 PhoneNumber = jefe.PhoneNumber,
                 SaldoDiasDisponibles = jefe.SaldoDiasEmpleado.SaldoDiasDisponibles
             };
@@ -81,6 +82,7 @@ namespace CNMWebApp.Services
                 Categoria = director.Categoria,
                 EstaActivo = director.EstaActivo,
                 FechaIngreso = director.FechaIngreso,
+                FechaCreacion = director.FechaCreacion,
                 PhoneNumber = director.PhoneNumber,
                 SaldoDiasDisponibles = director.SaldoDiasEmpleado.SaldoDiasDisponibles
             };
@@ -110,6 +112,7 @@ namespace CNMWebApp.Services
                 Categoria = director.Categoria,
                 EstaActivo = director.EstaActivo,
                 FechaIngreso = director.FechaIngreso,
+                FechaCreacion = director.FechaCreacion,
                 PhoneNumber = director.PhoneNumber,
                 SaldoDiasDisponibles = director.SaldoDiasEmpleado.SaldoDiasDisponibles
             };
@@ -136,6 +139,7 @@ namespace CNMWebApp.Services
                 Email = x.Email,
                 PhoneNumber = x.PhoneNumber,
                 FechaIngreso = x.FechaIngreso,
+                FechaCreacion = x.FechaCreacion,
                 Role = _roleManager.FindById(x.Roles.First().RoleId.ToString()),
                 UnidadTecnica = x.UnidadTecnica,
                 Categoria = x.Categoria,
@@ -154,7 +158,7 @@ namespace CNMWebApp.Services
         {
             var user = _userManager.FindById(id);
             if (user == null)
-                return new UserViewModel();
+                return null;
 
             return new UserViewModel()
             {
@@ -165,6 +169,7 @@ namespace CNMWebApp.Services
                 Email = user.Email,
                 PhoneNumber = user.PhoneNumber,
                 FechaIngreso = user.FechaIngreso,
+                FechaCreacion = user.FechaCreacion,
                 Role = _roleManager.FindById(user.Roles.First().RoleId.ToString()),
                 UnidadTecnica = user.UnidadTecnica,
                 Categoria = user.Categoria,
@@ -241,6 +246,9 @@ namespace CNMWebApp.Services
             try
             {
                 var usuario = _userManager.FindById(id);
+                if (usuario == null)
+                    return false;
+
                 var resultado = _userManager.Delete(usuario);
                 if (resultado.Succeeded)
                 {
@@ -270,28 +278,6 @@ namespace CNMWebApp.Services
             return usuario.FotoRuta;
         }
 
-        //public IEnumerable<UserViewModel> ObtenerJefes()
-        //{
-        //    var managerRol = _roleManager.FindByName("Manager");
-        //    var jefaturaRol = _roleManager.FindByName("Jefatura");
-
-        //    var users = _userManager.Users.Where(x => x.Roles.Any(r => r.RoleId == managerRol.Id || r.RoleId == jefaturaRol.Id));
-
-        //    return users.Select(x => new UserViewModel()
-        //    {
-        //        Id = x.Id,
-        //        Nombre = x.Nombre,
-        //        PrimerApellido = x.PrimerApellido,
-        //        SegundoApellido = x.SegundoApellido,
-        //        Email = x.Email,
-        //        PhoneNumber = x.PhoneNumber,
-        //        FechaIngreso = x.FechaIngreso,
-        //        Role = _roleManager.FindById(x.Roles.First().RoleId),
-        //        UnidadTecnica = x.UnidadTecnica,
-        //        Categoria = x.Categoria
-        //    });
-        //}
-
         public async Task<UserViewModel> GetLoggedInUser()
         {
             var user = await _userManager.FindByIdAsync(HttpContext.Current.User.Identity.GetUserId());
@@ -310,7 +296,7 @@ namespace CNMWebApp.Services
                 EsSuperusuario = EsSuperusuario(user.Id),
                 EstaActivo = user.EstaActivo,
                 FechaIngreso = user.FechaIngreso,
-                //Foto = user.FotoRuta
+                FechaCreacion = user.FechaCreacion,
                 FotoRuta = user.FotoRuta,
                 PhoneNumber = user.PhoneNumber,
                 UnidadTecnica = user.UnidadTecnica,
@@ -325,7 +311,7 @@ namespace CNMWebApp.Services
                 return loggedUser;
 
             string currentUserId = HttpContext.Current.User.Identity.GetUserId();
-            ApplicationUser user = _context.Users.FirstOrDefault(x => x.Id == currentUserId);
+            var user = _context.Users.FirstOrDefault(x => x.Id == currentUserId);
             var role = user.Roles.Count == 1 ?
                 user.Roles.FirstOrDefault() :
                 user.Roles.FirstOrDefault(r => !_roleManager.FindById(r.RoleId).Name.Equals("manager", StringComparison.OrdinalIgnoreCase));
@@ -341,7 +327,7 @@ namespace CNMWebApp.Services
                 EsSuperusuario = EsSuperusuario(user.Id),
                 EstaActivo = user.EstaActivo,
                 FechaIngreso = user.FechaIngreso,
-                //Foto = user.FotoRuta
+                FechaCreacion = user.FechaCreacion,
                 FotoRuta = user.FotoRuta,
                 PhoneNumber = user.PhoneNumber,
                 UnidadTecnica = user.UnidadTecnica,
@@ -365,8 +351,7 @@ namespace CNMWebApp.Services
             {
                 var role = await _roleManager.FindByIdAsync(usuario.SelectedRoleId);
                 var contrasenaTemporal = Membership.GeneratePassword(15, 2);
-
-                var result = await _userManager.CreateAsync(new ApplicationUser()
+                var newUser = new ApplicationUser()
                 {
                     Id = usuario.Id,
                     Nombre = usuario.Nombre,
@@ -376,6 +361,7 @@ namespace CNMWebApp.Services
                     PhoneNumber = usuario.PhoneNumber,
                     UserName = usuario.Email,
                     FechaIngreso = usuario.FechaIngreso,
+                    FechaCreacion = DateTime.Now,
                     UnidadTecnicaId = Convert.ToInt32(usuario.SelectedUnidadTecnicaId),
                     CategoriaId = Convert.ToInt32(usuario.SelectedCategoriaId),
                     EstaActivo = true,
@@ -386,8 +372,10 @@ namespace CNMWebApp.Services
                         Cedula = usuario.Id,
                         SaldoDiasDisponibles = 0,
                         UltimaActualizacion = DateTime.Now
-                    },
-                }, contrasenaTemporal);
+                    }
+                };
+                
+                var result = await _userManager.CreateAsync(newUser, contrasenaTemporal);
 
                 if (result.Succeeded)
                 {
@@ -408,6 +396,7 @@ namespace CNMWebApp.Services
                     catch(Exception ex)
                     {
                         Console.WriteLine(ex);
+                        throw;
                     }
 
                     return true;
