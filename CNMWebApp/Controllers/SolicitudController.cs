@@ -307,7 +307,7 @@ namespace CNMWebApp.Controllers
                     return View(solicitudVacaciones);
                 }
 
-                return View(solicitudVacaciones);
+                return RedirectToAction("Index", "Solicitud");
             }
             catch (Exception ex)
             {

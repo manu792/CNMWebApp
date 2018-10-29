@@ -150,3 +150,14 @@ label {
         opacity: 0.5; /* Firefox, Chrome, Safari, Opera, IE >= 9 (preview) */
         filter: alpha(opacity=50); /* for <= IE 8 */
     }
+
+/* For required fields */
+.required:after {
+    content: "*";
+    font-weight: bold;
+    color: red;
+}
+
+#cerrar-sesion-btn {
+    margin-right: 7px;
+}
