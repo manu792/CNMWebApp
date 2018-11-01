@@ -271,7 +271,7 @@ namespace CNMWebApp.Services
         {
             var usuario = await GetLoggedInUser();
             if (string.IsNullOrEmpty(usuario.FotoRuta))
-                return "boxed-bg.jpg";
+                return "CNM.png";
 
             // var fotoUrl = HttpContext.Current.Request.Url.c.Content("~/Content/Images/Logo.png");
             // var fotoUrl = Path.Combine(System.Web.HttpContext.Current.Server.MapPath("~/Fotos"), usuario.FotoRuta);

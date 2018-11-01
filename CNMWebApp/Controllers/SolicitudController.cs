@@ -6,6 +6,7 @@ using PagedList;
 using Rotativa.Options;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -19,11 +20,15 @@ namespace CNMWebApp.Controllers
     {
         private SolicitudService solicitudService;
         private UserService userService;
+        private EmailNotificationService emailNotification;
+        private RoleService roleService;
 
         public SolicitudController()
         {
             solicitudService = new SolicitudService();
             userService = new UserService();
+            emailNotification = new EmailNotificationService();
+            roleService = new RoleService();
         }
 
         // GET: Solicitud
@@ -165,39 +170,26 @@ namespace CNMWebApp.Controllers
             });
         }
 
-        // GET: Solicitud/Details/5
-        public async Task<ActionResult> Detalles(int id)
+        private string GeneratePDF(SolicitudViewModel solicitud)
         {
-            // Generate PDF for sample purposes
-            var user = await userService.GetLoggedInUser();
-            //var solicitudes = solicitudService.ObtenerSolicitudes(user);
-            //var model = solicitudes.FirstOrDefault(x => x.SolicitudVacacionesId == id);
+            var date = DateTime.Now.ToString("yyyyMMddHHmmss");
+            var id = solicitud.Id;
+            var fileName = $"{id}_{date}";
 
-            return null;
-            //return View(model);
-        }
-
-        public async Task<ActionResult> GeneratePDF()
-        {
-            var user = await userService.GetLoggedInUser();
-            var solicitudes = solicitudService.ObtenerMisSolicitudes(user, null, null);
-
-            var actionPDF = new Rotativa.ViewAsPdf("Detalles", solicitudes.First())
+            var actionPDF = new Rotativa.ViewAsPdf("PDFView", solicitud)
             {
                 PageSize = Rotativa.Options.Size.A4,
-                PageOrientation = Rotativa.Options.Orientation.Landscape,
-                PageMargins = new Margins(12, 12, 12, 12), // it’s in millimeters
-                PageWidth = 180,
-                PageHeight = 297
-                //CustomSwitches = "–outline –print-media-type –footer-center ”Confidential” –footer-right[page]/[toPage] –footer-left[date]"
+                PageOrientation = Rotativa.Options.Orientation.Portrait,
+                PageMargins = new Margins(12, 25, 12, 25)
             };
+
             byte[] pdf = actionPDF.BuildFile(ControllerContext);
-            using (FileStream stream = new FileStream(Server.MapPath("~/PDFs/File.pdf"), FileMode.Create, FileAccess.Write, FileShare.Read))
+            using (FileStream stream = new FileStream(Server.MapPath($"~/PDFs/{fileName}.pdf"), FileMode.Create, FileAccess.Write, FileShare.Read))
             {
                 stream.Write(pdf, 0, pdf.Length);
             }
 
-            return null;
+            return $"{fileName}.pdf";
         }
 
         // GET: Solicitud/Crear
@@ -235,6 +227,8 @@ namespace CNMWebApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Crear(SolicitudViewModel solicitudVacaciones)
         {
+            var solicitante = userService.ObtenerUsuarioPorId(solicitudVacaciones.Id);
+
             if (!ModelState.IsValid)
             {
                 return View(solicitudVacaciones);
@@ -248,12 +242,20 @@ namespace CNMWebApp.Controllers
 
             try
             {
-                var rowsAffected = await solicitudService.CrearSolicitudVacaciones(solicitudVacaciones);
+                var guid = Guid.NewGuid();
+                var rowsAffected = await solicitudService.CrearSolicitudVacaciones(solicitudVacaciones, guid);
 
                 if (rowsAffected <= 0)
                 {
                     ModelState.AddModelError("", "Hubo un problema al tratar de agregar la solicitud. Favor intente de nuevo más tarde.");
                     return View(solicitudVacaciones);
+                }
+
+                var role = roleService.ObtenerRolPorNombre("Director");
+                if(role.Id == solicitante.Role.Id)
+                {
+                    solicitudVacaciones.SolicitudId = guid;
+                    await EnviarCorreo(solicitudVacaciones, solicitante);
                 }
 
                 return RedirectToAction("Index", "Solicitud");
@@ -299,7 +301,8 @@ namespace CNMWebApp.Controllers
 
             try
             {
-                var rowsAffected = await solicitudService.CrearSolicitudVacaciones(solicitudVacaciones);
+                var guid = Guid.NewGuid();
+                var rowsAffected = await solicitudService.CrearSolicitudVacaciones(solicitudVacaciones, guid);
 
                 if (rowsAffected <= 0)
                 {
@@ -396,9 +399,11 @@ namespace CNMWebApp.Controllers
             {
                 var usuario = await userService.GetLoggedInUser();
 
-                var rowsAffected = await solicitudService.Aprobar(solicitud.SolicitudId, solicitud.ComentarioJefatura, usuario, solicitud.UsuarioId);
+                var rowsAffected = solicitudService.Aprobar(solicitud.SolicitudId, solicitud.ComentarioJefatura, usuario, solicitud.UsuarioId);
                 if(rowsAffected > 0)
                 {
+                    await EnviarCorreo(solicitud, usuario);
+
                     return RedirectToAction("SolicitudesEmpleados");
                 }
 
@@ -410,6 +415,49 @@ namespace CNMWebApp.Controllers
                 ModelState.AddModelError("", $"Hubo un problema al tratar de procesar la solicitud. Favor contacte a soporte si el problem persiste");
                 return RedirectToAction("Revisar", new { id = solicitud.SolicitudId });
             }
+        }
+
+        private async Task EnviarCorreo(SolicitudViewModel solicitudVacaciones, UserViewModel aprobador)
+        {
+            // Se genera el archivo PDF y se envia por correo
+            var solicitudAprobada = solicitudService.ObtenerSolicitudPorId(solicitudVacaciones.SolicitudId);
+            var solicitudViewModel = new SolicitudViewModel()
+            {
+                SolicitudId = solicitudAprobada.SolicitudVacacionesId,
+                Id = solicitudAprobada.UsuarioId,
+                CantidadDiasSolicitados = solicitudAprobada.CantidadDiasSolicitados,
+                Categoria = solicitudAprobada.Usuario.Categoria,
+                Comentario = solicitudAprobada.Comentario,
+                FechaSolicitud = solicitudAprobada.FechaSolicitud,
+                Nombre = solicitudAprobada.Usuario.Nombre,
+                PrimerApellido = solicitudAprobada.Usuario.PrimerApellido,
+                SegundoApellido = solicitudAprobada.Usuario.SegundoApellido,
+                SaldoDiasDisponibles = solicitudAprobada.Usuario.SaldoDiasEmpleado.SaldoDiasDisponibles,
+                UnidadTecnica = solicitudAprobada.Usuario.UnidadTecnica
+            };
+
+            var pdf = GeneratePDF(solicitudViewModel);
+            await EnviarCorreoAprobacion(solicitudVacaciones.Id, aprobador, solicitudViewModel, pdf);
+        }
+
+        private async Task EnviarCorreoAprobacion(string solicitanteId, UserViewModel aprobador, SolicitudViewModel solicitud, string fileName)
+        {
+            var solicitante = userService.ObtenerUsuarioPorId(solicitanteId);
+            var nombreSolicitante = $"{solicitante.Nombre} {solicitante.PrimerApellido} {solicitante.SegundoApellido}";
+            var jefe = new UserViewModel();
+
+            if (solicitante.Role.Name.Equals("funcionario", StringComparison.OrdinalIgnoreCase))
+                jefe = userService.ObtenerJefePorUnidadTecnica(solicitante.UnidadTecnica.UnidadTecnicaId);
+            if (solicitante.Role.Name.Equals("jefatura", StringComparison.OrdinalIgnoreCase) || solicitante.Role.Name.Equals("recursos humanos", StringComparison.OrdinalIgnoreCase))
+                jefe = userService.ObtenerDirectorGeneral();
+            if (solicitante.Role.Name.Equals("director", StringComparison.OrdinalIgnoreCase))
+                jefe = userService.ObtenerUsuarioPorId(solicitanteId);
+            // var jefe = userService.ObtenerJefePorUnidadTecnica(solicitante.UnidadTecnica.UnidadTecnicaId);
+
+            if (aprobador.Id == jefe.Id)
+                await emailNotification.SendEmailAsync(solicitante.Email, $"{jefe.Email},{ConfigurationManager.AppSettings["MailRH"]}", $"Vacaciones Aprobadas para {nombreSolicitante}", $"La solicitud de vacaciones: {solicitud.SolicitudId} para el colaborador {nombreSolicitante} fue <strong>aprobada</strong>. <br /> <br /> Observaciones: {solicitud.ComentarioJefatura}", Server.MapPath("~/PDFs/" + fileName));
+            else
+                await emailNotification.SendEmailAsync(solicitante.Email, $"{jefe.Email},{aprobador.Email},{ConfigurationManager.AppSettings["MailRH"]}", $"Vacaciones Aprobadas para {nombreSolicitante}", $"La solicitud de vacaciones: {solicitud.SolicitudId} para el colaborador {nombreSolicitante} fue <strong>aprobada</strong>. <br /> <br /> Observaciones: {solicitud.ComentarioJefatura}", Server.MapPath("~/PDFs/" + fileName));
         }
 
         [HttpPost]

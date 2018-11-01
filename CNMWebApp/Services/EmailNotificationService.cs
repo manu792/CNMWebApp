@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
@@ -17,7 +18,7 @@ namespace CNMWebApp.Services
 
         }
 
-        public Task SendEmailAsync(string solicitante, string cc, string subject, string body)
+        public Task SendEmailAsync(string solicitante, string cc, string subject, string body, string fileName = null)
         {
             return Task.Run(() =>
             {
@@ -27,6 +28,12 @@ namespace CNMWebApp.Services
                 mail.From = new MailAddress(ConfigurationManager.AppSettings["MailAddress"]);
                 mail.To.Add(solicitante);
                 mail.CC.Add(cc);
+
+                if(!string.IsNullOrEmpty(fileName))
+                {
+                    var attachment = new Attachment(fileName);
+                    mail.Attachments.Add(attachment);
+                }
 
                 mail.Subject = subject;
                 mail.AlternateViews.Add(AlternateView.CreateAlternateViewFromString(body, null, MediaTypeNames.Text.Html));

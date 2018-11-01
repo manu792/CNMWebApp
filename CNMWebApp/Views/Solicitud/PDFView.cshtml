@@ -1,0 +1,134 @@
+﻿@model CNMWebApp.Models.SolicitudViewModel
+@{
+    Layout = null;
+    var unidad = Model.UnidadTecnica != null ? Model.UnidadTecnica.Nombre : "";
+    var categoria = Model.Categoria != null ? Model.Categoria.Nombre : "";
+    var fecha = $"{Model.FechaSolicitud.Year} - {Model.FechaSolicitud.Year + 1}";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>PDFView</title>
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <img src="~/Fotos/watermark.png" />
+        </div>
+    </div>
+    <div id="titulo-pdf" class="row">
+        <div>
+            <h3>MINISTERIO DE CULTURA y JUVENTUD</h3>
+            <h3>CENTRO NACIONAL DE LA MÚSICA</h3>
+            <h3>GESTIÓN DE RECURSOS HUMANOS AUXILIAR</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <table id="pdf-view-table">
+                <tr>
+                    <td><strong>1er. Apellido</strong></td>
+                    <td><strong>2do. Apellido</strong></td>
+                    <td><strong>Nombre</strong></td>
+                    <td><strong>Cédula No.</strong></td>
+                    <td><strong>Fecha</strong></td>
+                </tr>
+                <tr>
+                    <td>@Model.PrimerApellido</td>
+                    <td>@Model.SegundoApellido</td>
+                    <td>@Model.Nombre</td>
+                    <td>@Model.Id</td>
+                    <td>@Model.FechaSolicitud.ToString("yyyy/MM/dd")</td>
+                </tr>
+                <tr>
+                    <td><strong>Departamento:</strong></td>
+                    <td colspan="2">@unidad</td>
+                    <td>
+                        <table>
+                            <tr>
+                                <td><strong>Clase de Puesto:</strong></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Especialidad:</strong></td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td>
+                        <table>
+                            <tr>
+                                <td colspan="2">N/A</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">@categoria</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td> <!-- Se queda vacio -->
+                    <td></td> <!-- Se queda vacio -->
+                    <td></td> <!-- Se queda vacio -->
+                    <td><strong>Período:</strong></td>
+                    <td>@fecha</td>
+                </tr>
+                <tr>
+                    <td><strong>DERECHO A DISFRUTAR</strong></td>
+                    <td><strong>DISFRUTADO</strong></td>
+                    <td><strong>DISPONIBLE</strong></td>
+                    <td><strong>SOLICITADO</strong></td>
+                    <td><strong>SALDO ACTUAL</strong></td>
+                </tr>
+                <tr>
+                    <td>N/A</td>
+                    <td>N/A</td>
+                    <td>N/A</td>
+                    <td>@Model.CantidadDiasSolicitados</td>
+                    <td>@Model.SaldoDiasDisponibles</td>
+                </tr>
+                <tr>
+                    <td></td> <!-- Se queda vacio -->
+                    <td></td> <!-- Se queda vacio -->
+                    <td></td> <!-- Se queda vacio -->
+                    <td></td> <!-- Se queda vacio -->
+                    <td></td> <!-- Se queda vacio -->
+                </tr>
+                <tr>
+                    <td></td> <!-- Se queda vacio -->
+                    <td></td> <!-- Se queda vacio -->
+                    <td></td> <!-- Se queda vacio -->
+                    <td></td> <!-- Se queda vacio -->
+                    <td></td> <!-- Se queda vacio -->
+                </tr>
+                <tr>
+                    <td colspan="5"><strong>Observaciones:</strong></td>
+                </tr>
+                <tr>
+                    <td colspan="5">@Model.Comentario</td>
+                </tr>
+                <tr>
+                    <td><strong>Firma del Solicitante</strong></td>
+                    <td><strong>Aprobado por Jefe</strong></td>
+                    <td><strong>SELLO</strong></td>
+                    <td><strong>Recibido por: RH</strong></td>
+                    <td><strong>Vo.Bo. Recursos Humanos</strong></td>
+                </tr>
+                <tr>
+                    <td style="height: 100px"></td> <!-- Se queda vacio -->
+                    <td style="height: 100px"></td> <!-- Se queda vacio -->
+                    <td style="height: 100px"></td> <!-- Se queda vacio -->
+                    <td style="height: 100px"><strong>Fecha: @DateTime.Now.ToString("yyyy/MM/dd")</strong></td>
+                    <td style="height: 100px"></td> <!-- Se queda vacio -->
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+</body>
+</html>

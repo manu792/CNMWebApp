@@ -1,0 +1,4062 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<DynamicHelp xmlns="http://msdn.microsoft.com/vsdata/xsd/vsdh.xsd" xmlns:xsi="http://www.w3.org/2000/10/XMLSchema-instance" xsi:schemaLocation="http://msdn.microsoft.com/vsdata/xsd/vsdh.xsd">	
+   <LINKGROUP ID="CNMWebApp" Title="CNMWebApp Reference Help" Priority="2100">
+      <GLYPH Expanded="vs:/ctxhelp_show.gif" Collapsed="vs:/ctxhelp_hide.gif"/>
+   </LINKGROUP>
+
+
+   <Context>
+      <Keywords>
+         <KItem Name="" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000019F.html" LinkGroup="CNMWebApp"><default> Namespace</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.HomeController.About" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000052.html" LinkGroup="CNMWebApp">About Method</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.AccountController.AccountController" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000023_overloads--.html" LinkGroup="CNMWebApp">AccountController Constructor</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.AccountController.AccountController" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000024_overloads--.html" LinkGroup="CNMWebApp">AccountController Constructor</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.AccountController" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000001F.html" LinkGroup="CNMWebApp">AccountController Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.UserService.ActualizarUsuario" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000194.html" LinkGroup="CNMWebApp">ActualizarUsuario Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.AccountController.AddErrors" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000003F.html" LinkGroup="CNMWebApp">AddErrors Method {CNMWebApp.Controllers.AccountController}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.ManageController.AddErrors" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000070.html" LinkGroup="CNMWebApp">AddErrors Method {CNMWebApp.Controllers.ManageController}</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.ManageController.AddPhoneNumber" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000005F_overloads--.html" LinkGroup="CNMWebApp">AddPhoneNumber Method</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.ManageController.AddPhoneNumber" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000060_overloads--.html" LinkGroup="CNMWebApp">AddPhoneNumber Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.AddPhoneNumberViewModel" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000011A.html" LinkGroup="CNMWebApp">AddPhoneNumberViewModel Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.AdminController" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000048.html" LinkGroup="CNMWebApp">AdminController Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.AdminController.AdminController" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000049.html" LinkGroup="CNMWebApp">AdminController Constructor</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.Initializer.AgregarCategorias" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000FB.html" LinkGroup="CNMWebApp">AgregarCategorias Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.Initializer.AgregarEstados" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000F9.html" LinkGroup="CNMWebApp">AgregarEstados Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.Initializer.AgregarRoles" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000FC.html" LinkGroup="CNMWebApp">AgregarRoles Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.Initializer.AgregarUnidadesTecnicas" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000FA.html" LinkGroup="CNMWebApp">AgregarUnidadesTecnicas Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.ApplicationDbContext" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000FE.html" LinkGroup="CNMWebApp">ApplicationDbContext Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.ApplicationDbContext.ApplicationDbContext" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000105.html" LinkGroup="CNMWebApp">ApplicationDbContext Constructor</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.ApplicationRoleManager" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000000C.html" LinkGroup="CNMWebApp">ApplicationRoleManager Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.ApplicationRoleManager.ApplicationRoleManager" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000000D.html" LinkGroup="CNMWebApp">ApplicationRoleManager Constructor</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.ApplicationSignInManager" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000000F.html" LinkGroup="CNMWebApp">ApplicationSignInManager Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.ApplicationSignInManager.ApplicationSignInManager" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000010.html" LinkGroup="CNMWebApp">ApplicationSignInManager Constructor</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.ApplicationUser" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000E7.html" LinkGroup="CNMWebApp">ApplicationUser Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.ApplicationUserManager" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000009.html" LinkGroup="CNMWebApp">ApplicationUserManager Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.ApplicationUserManager.ApplicationUserManager" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000000A.html" LinkGroup="CNMWebApp">ApplicationUserManager Constructor</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.MvcApplication.Application_Start" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000A4.html" LinkGroup="CNMWebApp">Application_Start Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.SolicitudVacaciones.AprobadorId" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000CF.html" LinkGroup="CNMWebApp">AprobadorId Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.SolicitudController.Aprobar" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000008A.html" LinkGroup="CNMWebApp">Aprobar Method {CNMWebApp.Controllers.SolicitudController}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.SolicitudService.Aprobar" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000017A.html" LinkGroup="CNMWebApp">Aprobar Method {CNMWebApp.Services.SolicitudService}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="MultipleButtonAttribute.Argument" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000019.html" LinkGroup="CNMWebApp">Argument Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Authorization.AuthAttribute" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000001C.html" LinkGroup="CNMWebApp">AuthAttribute Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.AccountController.AuthenticationManager" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000003E.html" LinkGroup="CNMWebApp">AuthenticationManager Property {CNMWebApp.Controllers.AccountController}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.ManageController.AuthenticationManager" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000006F.html" LinkGroup="CNMWebApp">AuthenticationManager Property {CNMWebApp.Controllers.ManageController}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.IndexViewModel.BrowserRemembered" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000010D.html" LinkGroup="CNMWebApp">BrowserRemembered Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.BundleConfig" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000001.html" LinkGroup="CNMWebApp">BundleConfig Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000000.html" LinkGroup="CNMWebApp">CNMWebApp Namespace</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp Reference" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000019E.html" LinkGroup="CNMWebApp">CNMWebApp Reference</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Authorization" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000001B.html" LinkGroup="CNMWebApp">CNMWebApp.Authorization Namespace</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000001E.html" LinkGroup="CNMWebApp">CNMWebApp.Controllers Namespace</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000A5.html" LinkGroup="CNMWebApp">CNMWebApp.Models Namespace</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000014E.html" LinkGroup="CNMWebApp">CNMWebApp.Services Namespace</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.SolicitudViewModel.CantidadAnnosLaborados" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000140.html" LinkGroup="CNMWebApp">CantidadAnnosLaborados Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.SolicitudVacaciones.CantidadDiasSolicitados" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000CC.html" LinkGroup="CNMWebApp">CantidadDiasSolicitados Property {CNMWebApp.Models.SolicitudVacaciones}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.SolicitudViewModel.CantidadDiasSolicitados" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000141.html" LinkGroup="CNMWebApp">CantidadDiasSolicitados Property {CNMWebApp.Models.SolicitudViewModel}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.Categoria" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000E2.html" LinkGroup="CNMWebApp">Categoria Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.ApplicationUser.Categoria" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000F2.html" LinkGroup="CNMWebApp">Categoria Property {CNMWebApp.Models.ApplicationUser}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.UserViewModel.Categoria" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000131.html" LinkGroup="CNMWebApp">Categoria Property {CNMWebApp.Models.UserViewModel}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.ApplicationUser.CategoriaId" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000EE.html" LinkGroup="CNMWebApp">CategoriaId Property {CNMWebApp.Models.ApplicationUser}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.Categoria.CategoriaId" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000E3.html" LinkGroup="CNMWebApp">CategoriaId Property {CNMWebApp.Models.Categoria}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.CategoriaServicio" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000014F.html" LinkGroup="CNMWebApp">CategoriaServicio Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.CategoriaServicio.CategoriaServicio" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000151.html" LinkGroup="CNMWebApp">CategoriaServicio Constructor</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.ApplicationDbContext.Categorias" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000FF.html" LinkGroup="CNMWebApp">Categorias Property {CNMWebApp.Models.ApplicationDbContext}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.UserRolesUnidadCategoria.Categorias" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000139.html" LinkGroup="CNMWebApp">Categorias Property {CNMWebApp.Models.UserRolesUnidadCategoria}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.SaldoDiasPorEmpleado.Cedula" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000DE.html" LinkGroup="CNMWebApp">Cedula Property</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.AccountController.ChallengeResult.ChallengeResult" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000042_overloads--.html" LinkGroup="CNMWebApp">ChallengeResult Constructor</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.AccountController.ChallengeResult.ChallengeResult" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000043_overloads--.html" LinkGroup="CNMWebApp">ChallengeResult Constructor</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.AccountController.ChallengeResult" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000041.html" LinkGroup="CNMWebApp">ChallengeResult Class</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.ManageController.ChangePassword" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000067_overloads--.html" LinkGroup="CNMWebApp">ChangePassword Method</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.ManageController.ChangePassword" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000066_overloads--.html" LinkGroup="CNMWebApp">ChangePassword Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.ChangePasswordViewModel" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000116.html" LinkGroup="CNMWebApp">ChangePasswordViewModel Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.ResetPasswordViewModel.Code" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000C3.html" LinkGroup="CNMWebApp">Code Property {CNMWebApp.Models.ResetPasswordViewModel}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.VerifyCodeViewModel.Code" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000B1.html" LinkGroup="CNMWebApp">Code Property {CNMWebApp.Models.VerifyCodeViewModel}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.VerifyPhoneNumberViewModel.Code" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000011D.html" LinkGroup="CNMWebApp">Code Property {CNMWebApp.Models.VerifyPhoneNumberViewModel}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.SolicitudParaEmpleado.ColaboradorId" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000146.html" LinkGroup="CNMWebApp">ColaboradorId Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.SolicitudParaEmpleado.Colaboradores" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000147.html" LinkGroup="CNMWebApp">Colaboradores Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.SolicitudVacaciones.Comentario" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000CD.html" LinkGroup="CNMWebApp">Comentario Property {CNMWebApp.Models.SolicitudVacaciones}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.SolicitudViewModel.Comentario" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000142.html" LinkGroup="CNMWebApp">Comentario Property {CNMWebApp.Models.SolicitudViewModel}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.SolicitudViewModel.ComentarioJefatura" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000143.html" LinkGroup="CNMWebApp">ComentarioJefatura Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Startup.Configuration" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000019D.html" LinkGroup="CNMWebApp">Configuration Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Startup.ConfigureAuth" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000016.html" LinkGroup="CNMWebApp">ConfigureAuth Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.ConfigureTwoFactorViewModel" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000011F.html" LinkGroup="CNMWebApp">ConfigureTwoFactorViewModel Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.AccountController.ConfirmEmail" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000002E.html" LinkGroup="CNMWebApp">ConfirmEmail Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.ChangePasswordViewModel.ConfirmPassword" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000119.html" LinkGroup="CNMWebApp">ConfirmPassword Property {CNMWebApp.Models.ChangePasswordViewModel}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.RegisterViewModel.ConfirmPassword" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000BE.html" LinkGroup="CNMWebApp">ConfirmPassword Property {CNMWebApp.Models.RegisterViewModel}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.ResetPasswordViewModel.ConfirmPassword" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000C2.html" LinkGroup="CNMWebApp">ConfirmPassword Property {CNMWebApp.Models.ResetPasswordViewModel}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.SetPasswordViewModel.ConfirmPassword" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000115.html" LinkGroup="CNMWebApp">ConfirmPassword Property {CNMWebApp.Models.SetPasswordViewModel}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.HomeController.Contact" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000053.html" LinkGroup="CNMWebApp">Contact Method</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.SolicitudController.Crear" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000084_overloads--.html" LinkGroup="CNMWebApp">Crear Method</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.SolicitudController.Crear" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000085_overloads--.html" LinkGroup="CNMWebApp">Crear Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.UserService.Crear" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000019A.html" LinkGroup="CNMWebApp">Crear Method {CNMWebApp.Services.UserService}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.UserController.CrearObjetoUsuario" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000009D.html" LinkGroup="CNMWebApp">CrearObjetoUsuario Method</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.SolicitudController.CrearParaEmpleado" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000086_overloads--.html" LinkGroup="CNMWebApp">CrearParaEmpleado Method</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.SolicitudController.CrearParaEmpleado" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000087_overloads--.html" LinkGroup="CNMWebApp">CrearParaEmpleado Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.SolicitudService.CrearSolicitudVacaciones" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000179.html" LinkGroup="CNMWebApp">CrearSolicitudVacaciones Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.Initializer.CrearUsuarioAsignarRoles" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000FD.html" LinkGroup="CNMWebApp">CrearUsuarioAsignarRoles Method</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.UserController.Create" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000096_overloads--.html" LinkGroup="CNMWebApp">Create Method</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.UserController.Create" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000097_overloads--.html" LinkGroup="CNMWebApp">Create Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.ApplicationRoleManager.Create" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000000E.html" LinkGroup="CNMWebApp">Create Method {CNMWebApp.ApplicationRoleManager}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.ApplicationSignInManager.Create" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000012.html" LinkGroup="CNMWebApp">Create Method {CNMWebApp.ApplicationSignInManager}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.ApplicationUserManager.Create" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000000B.html" LinkGroup="CNMWebApp">Create Method {CNMWebApp.ApplicationUserManager}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.ApplicationDbContext.Create" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000107.html" LinkGroup="CNMWebApp">Create Method {CNMWebApp.Models.ApplicationDbContext}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.ApplicationSignInManager.CreateUserIdentityAsync" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000011.html" LinkGroup="CNMWebApp">CreateUserIdentityAsync Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.ManageLoginsViewModel.CurrentLogins" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000010F.html" LinkGroup="CNMWebApp">CurrentLogins Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.SolicitudController.Detalle" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000081.html" LinkGroup="CNMWebApp">Detalle Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.SolicitudController.Detalles" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000082.html" LinkGroup="CNMWebApp">Detalles Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.SolicitudViewModel.Dias" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000013F.html" LinkGroup="CNMWebApp">Dias Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.DiasPorSolicitud" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000D5.html" LinkGroup="CNMWebApp">DiasPorSolicitud Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.ApplicationDbContext.DiasPorSolicitud" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000103.html" LinkGroup="CNMWebApp">DiasPorSolicitud Property {CNMWebApp.Models.ApplicationDbContext}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.SolicitudVacaciones.DiasPorSolicitud" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000D4.html" LinkGroup="CNMWebApp">DiasPorSolicitud Property {CNMWebApp.Models.SolicitudVacaciones}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.SolicitudViewModel.DiasPorSolicitud" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000144.html" LinkGroup="CNMWebApp">DiasPorSolicitud Property {CNMWebApp.Models.SolicitudViewModel}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.DiasPorSolicitudViewModel" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000014A.html" LinkGroup="CNMWebApp">DiasPorSolicitudViewModel Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.ManageController.DisableTwoFactorAuthentication" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000062.html" LinkGroup="CNMWebApp">DisableTwoFactorAuthentication Method</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.AccountController.Dispose" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000003C_overloads--.html" LinkGroup="CNMWebApp">Dispose Method</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.ManageController.Dispose" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000006D_overloads--.html" LinkGroup="CNMWebApp">Dispose Method</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.UserController.Editar" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000098_overloads--.html" LinkGroup="CNMWebApp">Editar Method</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.UserController.Editar" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000099_overloads--.html" LinkGroup="CNMWebApp">Editar Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.UserController.Eliminar" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000009A.html" LinkGroup="CNMWebApp">Eliminar Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.UserController.EliminarConfirmado" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000009B.html" LinkGroup="CNMWebApp">EliminarConfirmado Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.UserService.EliminarUsuario" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000195.html" LinkGroup="CNMWebApp">EliminarUsuario Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.ExternalLoginConfirmationViewModel.Email" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000A7.html" LinkGroup="CNMWebApp">Email Property {CNMWebApp.Models.ExternalLoginConfirmationViewModel}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.ForgotPasswordViewModel.Email" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000C5.html" LinkGroup="CNMWebApp">Email Property {CNMWebApp.Models.ForgotPasswordViewModel}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.ForgotViewModel.Email" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000B6.html" LinkGroup="CNMWebApp">Email Property {CNMWebApp.Models.ForgotViewModel}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.LoginViewModel.Email" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000B8.html" LinkGroup="CNMWebApp">Email Property {CNMWebApp.Models.LoginViewModel}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.RegisterViewModel.Email" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000BC.html" LinkGroup="CNMWebApp">Email Property {CNMWebApp.Models.RegisterViewModel}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.ResetPasswordViewModel.Email" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000C0.html" LinkGroup="CNMWebApp">Email Property {CNMWebApp.Models.ResetPasswordViewModel}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.UserViewModel.Email" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000127.html" LinkGroup="CNMWebApp">Email Property {CNMWebApp.Models.UserViewModel}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.EmailNotificationService" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000155.html" LinkGroup="CNMWebApp">EmailNotificationService Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.EmailNotificationService.EmailNotificationService" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000156.html" LinkGroup="CNMWebApp">EmailNotificationService Constructor</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.EmailService" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000005.html" LinkGroup="CNMWebApp">EmailService Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.ManageController.EnableTwoFactorAuthentication" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000061.html" LinkGroup="CNMWebApp">EnableTwoFactorAuthentication Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.ApplicationUser.EsContrasenaTemporal" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000F1.html" LinkGroup="CNMWebApp">EsContrasenaTemporal Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.UserService.EsSuperusuario" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000192.html" LinkGroup="CNMWebApp">EsSuperusuario Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.UserViewModel.EsSuperusuario" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000012E.html" LinkGroup="CNMWebApp">EsSuperusuario Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.UserService.EstaActivo" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000190.html" LinkGroup="CNMWebApp">EstaActivo Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.ApplicationUser.EstaActivo" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000F0.html" LinkGroup="CNMWebApp">EstaActivo Property {CNMWebApp.Models.ApplicationUser}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.UserViewModel.EstaActivo" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000012D.html" LinkGroup="CNMWebApp">EstaActivo Property {CNMWebApp.Models.UserViewModel}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.Estado" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000C6.html" LinkGroup="CNMWebApp">Estado Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.SolicitudVacaciones.Estado" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000D3.html" LinkGroup="CNMWebApp">Estado Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.Estado.EstadoId" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000C7.html" LinkGroup="CNMWebApp">EstadoId Property {CNMWebApp.Models.Estado}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.SolicitudVacaciones.EstadoId" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000CE.html" LinkGroup="CNMWebApp">EstadoId Property {CNMWebApp.Models.SolicitudVacaciones}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.EstadoServicio" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000158.html" LinkGroup="CNMWebApp">EstadoServicio Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.EstadoServicio.EstadoServicio" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000015A.html" LinkGroup="CNMWebApp">EstadoServicio Constructor</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.ApplicationDbContext.Estados" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000101.html" LinkGroup="CNMWebApp">Estados Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.AccountController.ChallengeResult.ExecuteResult" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000047.html" LinkGroup="CNMWebApp">ExecuteResult Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.AccountController.ExternalLogin" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000035.html" LinkGroup="CNMWebApp">ExternalLogin Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.AccountController.ExternalLoginCallback" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000038.html" LinkGroup="CNMWebApp">ExternalLoginCallback Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.AccountController.ExternalLoginConfirmation" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000039.html" LinkGroup="CNMWebApp">ExternalLoginConfirmation Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.ExternalLoginConfirmationViewModel" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000A6.html" LinkGroup="CNMWebApp">ExternalLoginConfirmationViewModel Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.AccountController.ExternalLoginFailure" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000003B.html" LinkGroup="CNMWebApp">ExternalLoginFailure Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.ExternalLoginListViewModel" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000A8.html" LinkGroup="CNMWebApp">ExternalLoginListViewModel Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.FactorViewModel" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000111.html" LinkGroup="CNMWebApp">FactorViewModel Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.DiasPorSolicitudViewModel.Fecha" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000014C.html" LinkGroup="CNMWebApp">Fecha Property {CNMWebApp.Models.DiasPorSolicitudViewModel}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.DiasPorSolicitud.Fecha" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000D8.html" LinkGroup="CNMWebApp">Fecha Property {CNMWebApp.Models.DiasPorSolicitud}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.ApplicationUser.FechaCreacion" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000EC.html" LinkGroup="CNMWebApp">FechaCreacion Property {CNMWebApp.Models.ApplicationUser}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.UserViewModel.FechaCreacion" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000012A.html" LinkGroup="CNMWebApp">FechaCreacion Property {CNMWebApp.Models.UserViewModel}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.SolicitudParaEmpleado.FechaCreacionUsuario" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000149.html" LinkGroup="CNMWebApp">FechaCreacionUsuario Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.ApplicationUser.FechaIngreso" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000EB.html" LinkGroup="CNMWebApp">FechaIngreso Property {CNMWebApp.Models.ApplicationUser}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.UserViewModel.FechaIngreso" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000129.html" LinkGroup="CNMWebApp">FechaIngreso Property {CNMWebApp.Models.UserViewModel}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.SolicitudParaEmpleado.FechaIngresoEmpleado" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000148.html" LinkGroup="CNMWebApp">FechaIngresoEmpleado Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.SolicitudVacaciones.FechaSolicitud" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000D0.html" LinkGroup="CNMWebApp">FechaSolicitud Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.FilterConfig" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000003.html" LinkGroup="CNMWebApp">FilterConfig Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.SolicitudController.FiltrarSolicitudes" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000008C.html" LinkGroup="CNMWebApp">FiltrarSolicitudes Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.UserController.FiltrarUsuarios" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000009C.html" LinkGroup="CNMWebApp">FiltrarUsuarios Method</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.AccountController.ForgotPassword" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000002F_overloads--.html" LinkGroup="CNMWebApp">ForgotPassword Method</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.AccountController.ForgotPassword" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000030_overloads--.html" LinkGroup="CNMWebApp">ForgotPassword Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.AccountController.ForgotPasswordConfirmation" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000031.html" LinkGroup="CNMWebApp">ForgotPasswordConfirmation Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.ForgotPasswordViewModel" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000C4.html" LinkGroup="CNMWebApp">ForgotPasswordViewModel Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.ForgotViewModel" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000B5.html" LinkGroup="CNMWebApp">ForgotViewModel Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.UserViewModel.Foto" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000012B.html" LinkGroup="CNMWebApp">Foto Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.ApplicationUser.FotoRuta" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000ED.html" LinkGroup="CNMWebApp">FotoRuta Property {CNMWebApp.Models.ApplicationUser}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.UserViewModel.FotoRuta" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000012C.html" LinkGroup="CNMWebApp">FotoRuta Property {CNMWebApp.Models.UserViewModel}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.FuncionarioController" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000004B.html" LinkGroup="CNMWebApp">FuncionarioController Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.SolicitudController.GeneratePDF" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000083.html" LinkGroup="CNMWebApp">GeneratePDF Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.ApplicationUser.GenerateUserIdentityAsync" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000F5.html" LinkGroup="CNMWebApp">GenerateUserIdentityAsync Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.RoleService.GetAllRoles" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000015F.html" LinkGroup="CNMWebApp">GetAllRoles Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.UserService.GetLoggedInUser" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000197.html" LinkGroup="CNMWebApp">GetLoggedInUser Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.UserService.GetUsers" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000191.html" LinkGroup="CNMWebApp">GetUsers Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.UserService.GuardarFoto" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000019C.html" LinkGroup="CNMWebApp">GuardarFoto Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Authorization.AuthAttribute.HandleUnauthorizedRequest" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000001D.html" LinkGroup="CNMWebApp">HandleUnauthorizedRequest Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.ManageController.HasPassword" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000071.html" LinkGroup="CNMWebApp">HasPassword Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.IndexViewModel.HasPassword" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000109.html" LinkGroup="CNMWebApp">HasPassword Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.ManageController.HasPhoneNumber" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000072.html" LinkGroup="CNMWebApp">HasPhoneNumber Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.HomeController" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000004D.html" LinkGroup="CNMWebApp">HomeController Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.HomeController.HomeController" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000050.html" LinkGroup="CNMWebApp">HomeController Constructor</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.UserViewModel.Id" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000123.html" LinkGroup="CNMWebApp">Id Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.AccountController.Index" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000027.html" LinkGroup="CNMWebApp">Index Method {CNMWebApp.Controllers.AccountController}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.AdminController.Index" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000004A.html" LinkGroup="CNMWebApp">Index Method {CNMWebApp.Controllers.AdminController}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.FuncionarioController.Index" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000004C.html" LinkGroup="CNMWebApp">Index Method {CNMWebApp.Controllers.FuncionarioController}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.HomeController.Index" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000051.html" LinkGroup="CNMWebApp">Index Method {CNMWebApp.Controllers.HomeController}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.JefaturaController.Index" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000055.html" LinkGroup="CNMWebApp">Index Method {CNMWebApp.Controllers.JefaturaController}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.ManageController.Index" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000005D.html" LinkGroup="CNMWebApp">Index Method {CNMWebApp.Controllers.ManageController}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.SolicitudController.Index" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000007F.html" LinkGroup="CNMWebApp">Index Method {CNMWebApp.Controllers.SolicitudController}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.UserController.Index" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000095.html" LinkGroup="CNMWebApp">Index Method {CNMWebApp.Controllers.UserController}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.IndexViewModel" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000108.html" LinkGroup="CNMWebApp">IndexViewModel Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.Initializer" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000F6.html" LinkGroup="CNMWebApp">Initializer Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.Initializer.Initializer" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000F7.html" LinkGroup="CNMWebApp">Initializer Constructor</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="MultipleButtonAttribute.IsValidName" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000001A.html" LinkGroup="CNMWebApp">IsValidName Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.JefaturaController" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000054.html" LinkGroup="CNMWebApp">JefaturaController Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.ManageController.LinkLogin" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000006B.html" LinkGroup="CNMWebApp">LinkLogin Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.ManageController.LinkLoginCallback" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000006C.html" LinkGroup="CNMWebApp">LinkLoginCallback Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.AccountController.LogOff" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000003A.html" LinkGroup="CNMWebApp">LogOff Method</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.AccountController.Login" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000029_overloads--.html" LinkGroup="CNMWebApp">Login Method</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.AccountController.Login" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000028_overloads--.html" LinkGroup="CNMWebApp">Login Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.AccountController.ChallengeResult.LoginProvider" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000044.html" LinkGroup="CNMWebApp">LoginProvider Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.LoginViewModel" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000B7.html" LinkGroup="CNMWebApp">LoginViewModel Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.IndexViewModel.Logins" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000010A.html" LinkGroup="CNMWebApp">Logins Property</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.ManageController.ManageController" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000059_overloads--.html" LinkGroup="CNMWebApp">ManageController Constructor</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.ManageController.ManageController" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000005A_overloads--.html" LinkGroup="CNMWebApp">ManageController Constructor</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.ManageController" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000056.html" LinkGroup="CNMWebApp">ManageController Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.ManageController.ManageLogins" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000006A.html" LinkGroup="CNMWebApp">ManageLogins Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.ManageLoginsViewModel" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000010E.html" LinkGroup="CNMWebApp">ManageLoginsViewModel Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.ManageController.ManageMessageId" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000073.html" LinkGroup="CNMWebApp">ManageMessageId Enumeration</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="MultipleButtonAttribute" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000017.html" LinkGroup="CNMWebApp">MultipleButtonAttribute Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.MvcApplication" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000A3.html" LinkGroup="CNMWebApp">MvcApplication Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="MultipleButtonAttribute.Name" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000018.html" LinkGroup="CNMWebApp">Name Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.ChangePasswordViewModel.NewPassword" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000118.html" LinkGroup="CNMWebApp">NewPassword Property {CNMWebApp.Models.ChangePasswordViewModel}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.SetPasswordViewModel.NewPassword" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000114.html" LinkGroup="CNMWebApp">NewPassword Property {CNMWebApp.Models.SetPasswordViewModel}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.ApplicationUser.Nombre" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000E8.html" LinkGroup="CNMWebApp">Nombre Property {CNMWebApp.Models.ApplicationUser}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.Categoria.Nombre" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000E4.html" LinkGroup="CNMWebApp">Nombre Property {CNMWebApp.Models.Categoria}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.Estado.Nombre" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000C8.html" LinkGroup="CNMWebApp">Nombre Property {CNMWebApp.Models.Estado}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.UnidadTecnica.Nombre" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000DC.html" LinkGroup="CNMWebApp">Nombre Property {CNMWebApp.Models.UnidadTecnica}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.UserViewModel.Nombre" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000124.html" LinkGroup="CNMWebApp">Nombre Property {CNMWebApp.Models.UserViewModel}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.UserViewModel.NombreCompleto" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000133.html" LinkGroup="CNMWebApp">NombreCompleto Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.AddPhoneNumberViewModel.Number" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000011B.html" LinkGroup="CNMWebApp">Number Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.SolicitudService.ObtenerAprobadorId" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000017C.html" LinkGroup="CNMWebApp">ObtenerAprobadorId Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.CategoriaServicio.ObtenerCategoriaPorNombre" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000154.html" LinkGroup="CNMWebApp">ObtenerCategoriaPorNombre Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.CategoriaServicio.ObtenerCategorias" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000152.html" LinkGroup="CNMWebApp">ObtenerCategorias Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.CategoriaServicio.ObtenerCategoriasPorRoleId" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000153.html" LinkGroup="CNMWebApp">ObtenerCategoriasPorRoleId Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.SolicitudService.ObtenerDiasPorSolicitud" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000017D.html" LinkGroup="CNMWebApp">ObtenerDiasPorSolicitud Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.UserService.ObtenerDirectorAdministrativo" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000018F.html" LinkGroup="CNMWebApp">ObtenerDirectorAdministrativo Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.UserService.ObtenerDirectorGeneral" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000018E.html" LinkGroup="CNMWebApp">ObtenerDirectorGeneral Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.EstadoServicio.ObtenerEstadoPorNombre" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000015B.html" LinkGroup="CNMWebApp">ObtenerEstadoPorNombre Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.UserService.ObtenerFoto" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000196.html" LinkGroup="CNMWebApp">ObtenerFoto Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.UserService.ObtenerJefePorUnidadTecnica" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000018D.html" LinkGroup="CNMWebApp">ObtenerJefePorUnidadTecnica Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.SolicitudService.ObtenerMisSolicitudes" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000016F.html" LinkGroup="CNMWebApp">ObtenerMisSolicitudes Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.RoleService.ObtenerRolPorId" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000160.html" LinkGroup="CNMWebApp">ObtenerRolPorId Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.RoleService.ObtenerRolPorNombre" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000161.html" LinkGroup="CNMWebApp">ObtenerRolPorNombre Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.SaldoDiasDisponiblesServicio.ObtenerSaldoDiasPorEmpleadoId" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000165.html" LinkGroup="CNMWebApp">ObtenerSaldoDiasPorEmpleadoId Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.SolicitudService.ObtenerSolicitudPorId" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000170.html" LinkGroup="CNMWebApp">ObtenerSolicitudPorId Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.SolicitudService.ObtenerSolicitudesDirectorAdministrativo" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000177.html" LinkGroup="CNMWebApp">ObtenerSolicitudesDirectorAdministrativo Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.SolicitudService.ObtenerSolicitudesDirectorGeneral" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000176.html" LinkGroup="CNMWebApp">ObtenerSolicitudesDirectorGeneral Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.SolicitudService.ObtenerSolicitudesFuncionarios" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000172.html" LinkGroup="CNMWebApp">ObtenerSolicitudesFuncionarios Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.SolicitudService.ObtenerSolicitudesFuncionariosPorUnidad" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000173.html" LinkGroup="CNMWebApp">ObtenerSolicitudesFuncionariosPorUnidad Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.SolicitudService.ObtenerSolicitudesJefaturas" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000174.html" LinkGroup="CNMWebApp">ObtenerSolicitudesJefaturas Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.SolicitudService.ObtenerSolicitudesPorAprobar" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000178.html" LinkGroup="CNMWebApp">ObtenerSolicitudesPorAprobar Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.SolicitudController.ObtenerSolicitudesPorFiltro" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000080.html" LinkGroup="CNMWebApp">ObtenerSolicitudesPorFiltro Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.SolicitudService.ObtenerSolicitudesRH" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000175.html" LinkGroup="CNMWebApp">ObtenerSolicitudesRH Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.SolicitudService.ObtenerTodasSolicitudesPorRol" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000171.html" LinkGroup="CNMWebApp">ObtenerTodasSolicitudesPorRol Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.UserController.ObtenerUnidadesCategoriasPorRoleId" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000093.html" LinkGroup="CNMWebApp">ObtenerUnidadesCategoriasPorRoleId Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.UnidadTecnicaServicio.ObtenerUnidadesTecnicas" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000183.html" LinkGroup="CNMWebApp">ObtenerUnidadesTecnicas Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.UnidadTecnicaServicio.ObtenerUnidadesTecnicasPorRoleId" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000184.html" LinkGroup="CNMWebApp">ObtenerUnidadesTecnicasPorRoleId Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.UserService.ObtenerUsuarioLogueado" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000198.html" LinkGroup="CNMWebApp">ObtenerUsuarioLogueado Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.UserController.ObtenerUsuarioPorId" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000094.html" LinkGroup="CNMWebApp">ObtenerUsuarioPorId Method {CNMWebApp.Controllers.UserController}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.UserService.ObtenerUsuarioPorId" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000193.html" LinkGroup="CNMWebApp">ObtenerUsuarioPorId Method {CNMWebApp.Services.UserService}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.ChangePasswordViewModel.OldPassword" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000117.html" LinkGroup="CNMWebApp">OldPassword Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.ApplicationDbContext.OnModelCreating" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000106.html" LinkGroup="CNMWebApp">OnModelCreating Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.ManageLoginsViewModel.OtherLogins" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000110.html" LinkGroup="CNMWebApp">OtherLogins Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.LoginViewModel.Password" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000B9.html" LinkGroup="CNMWebApp">Password Property {CNMWebApp.Models.LoginViewModel}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.RegisterViewModel.Password" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000BD.html" LinkGroup="CNMWebApp">Password Property {CNMWebApp.Models.RegisterViewModel}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.ResetPasswordViewModel.Password" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000C1.html" LinkGroup="CNMWebApp">Password Property {CNMWebApp.Models.ResetPasswordViewModel}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.DiasPorSolicitudViewModel.Periodo" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000014D.html" LinkGroup="CNMWebApp">Periodo Property {CNMWebApp.Models.DiasPorSolicitudViewModel}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.DiasPorSolicitud.Periodo" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000D9.html" LinkGroup="CNMWebApp">Periodo Property {CNMWebApp.Models.DiasPorSolicitud}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.IndexViewModel.PhoneNumber" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000010B.html" LinkGroup="CNMWebApp">PhoneNumber Property {CNMWebApp.Models.IndexViewModel}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.UserViewModel.PhoneNumber" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000128.html" LinkGroup="CNMWebApp">PhoneNumber Property {CNMWebApp.Models.UserViewModel}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.VerifyPhoneNumberViewModel.PhoneNumber" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000011E.html" LinkGroup="CNMWebApp">PhoneNumber Property {CNMWebApp.Models.VerifyPhoneNumberViewModel}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.ApplicationUser.PrimerApellido" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000E9.html" LinkGroup="CNMWebApp">PrimerApellido Property {CNMWebApp.Models.ApplicationUser}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.UserViewModel.PrimerApellido" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000125.html" LinkGroup="CNMWebApp">PrimerApellido Property {CNMWebApp.Models.UserViewModel}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.SolicitudService.ProcesarSolicitud" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000017E.html" LinkGroup="CNMWebApp">ProcesarSolicitud Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.VerifyCodeViewModel.Provider" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000B0.html" LinkGroup="CNMWebApp">Provider Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.ConfigureTwoFactorViewModel.Providers" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000121.html" LinkGroup="CNMWebApp">Providers Property {CNMWebApp.Models.ConfigureTwoFactorViewModel}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.SendCodeViewModel.Providers" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000AC.html" LinkGroup="CNMWebApp">Providers Property {CNMWebApp.Models.SendCodeViewModel}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.FactorViewModel.Purpose" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000112.html" LinkGroup="CNMWebApp">Purpose Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.SolicitudController.Rechazar" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000008B.html" LinkGroup="CNMWebApp">Rechazar Method {CNMWebApp.Controllers.SolicitudController}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.SolicitudService.Rechazar" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000017B.html" LinkGroup="CNMWebApp">Rechazar Method {CNMWebApp.Services.SolicitudService}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.AccountController.RedirectToLocal" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000040.html" LinkGroup="CNMWebApp">RedirectToLocal Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.AccountController.ChallengeResult.RedirectUri" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000045.html" LinkGroup="CNMWebApp">RedirectUri Property</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.AccountController.Register" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000002C_overloads--.html" LinkGroup="CNMWebApp">Register Method</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.AccountController.Register" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000002D_overloads--.html" LinkGroup="CNMWebApp">Register Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.BundleConfig.RegisterBundles" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000002.html" LinkGroup="CNMWebApp">RegisterBundles Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.FilterConfig.RegisterGlobalFilters" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000004.html" LinkGroup="CNMWebApp">RegisterGlobalFilters Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.RouteConfig.RegisterRoutes" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000014.html" LinkGroup="CNMWebApp">RegisterRoutes Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.RegisterViewModel" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000BB.html" LinkGroup="CNMWebApp">RegisterViewModel Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.VerifyCodeViewModel.RememberBrowser" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000B3.html" LinkGroup="CNMWebApp">RememberBrowser Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.LoginViewModel.RememberMe" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000BA.html" LinkGroup="CNMWebApp">RememberMe Property {CNMWebApp.Models.LoginViewModel}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.SendCodeViewModel.RememberMe" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000AE.html" LinkGroup="CNMWebApp">RememberMe Property {CNMWebApp.Models.SendCodeViewModel}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.VerifyCodeViewModel.RememberMe" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000B4.html" LinkGroup="CNMWebApp">RememberMe Property {CNMWebApp.Models.VerifyCodeViewModel}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.ManageController.RemoveLogin" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000005E.html" LinkGroup="CNMWebApp">RemoveLogin Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.ManageController.RemovePhoneNumber" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000065.html" LinkGroup="CNMWebApp">RemovePhoneNumber Method</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.AccountController.ResetPassword" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000033_overloads--.html" LinkGroup="CNMWebApp">ResetPassword Method</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.AccountController.ResetPassword" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000032_overloads--.html" LinkGroup="CNMWebApp">ResetPassword Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.AccountController.ResetPasswordConfirmation" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000034.html" LinkGroup="CNMWebApp">ResetPasswordConfirmation Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.ResetPasswordViewModel" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000BF.html" LinkGroup="CNMWebApp">ResetPasswordViewModel Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.ExternalLoginListViewModel.ReturnUrl" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000A9.html" LinkGroup="CNMWebApp">ReturnUrl Property {CNMWebApp.Models.ExternalLoginListViewModel}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.SendCodeViewModel.ReturnUrl" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000AD.html" LinkGroup="CNMWebApp">ReturnUrl Property {CNMWebApp.Models.SendCodeViewModel}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.VerifyCodeViewModel.ReturnUrl" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000B2.html" LinkGroup="CNMWebApp">ReturnUrl Property {CNMWebApp.Models.VerifyCodeViewModel}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.SolicitudController.Revisar" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000089.html" LinkGroup="CNMWebApp">Revisar Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.Categoria.Rol" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000E6.html" LinkGroup="CNMWebApp">Rol Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.Categoria.RolId" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000E5.html" LinkGroup="CNMWebApp">RolId Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.UserViewModel.Role" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000130.html" LinkGroup="CNMWebApp">Role Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.RoleService" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000015C.html" LinkGroup="CNMWebApp">RoleService Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.RoleService.RoleService" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000015E.html" LinkGroup="CNMWebApp">RoleService Constructor</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.UserRolesViewModel.Roles" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000136.html" LinkGroup="CNMWebApp">Roles Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.RouteConfig" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000013.html" LinkGroup="CNMWebApp">RouteConfig Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.SaldoDiasPorEmpleado.SaldoDiasDisponibles" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000DF.html" LinkGroup="CNMWebApp">SaldoDiasDisponibles Property {CNMWebApp.Models.SaldoDiasPorEmpleado}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.UserViewModel.SaldoDiasDisponibles" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000012F.html" LinkGroup="CNMWebApp">SaldoDiasDisponibles Property {CNMWebApp.Models.UserViewModel}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.SaldoDiasDisponiblesServicio" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000162.html" LinkGroup="CNMWebApp">SaldoDiasDisponiblesServicio Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.SaldoDiasDisponiblesServicio.SaldoDiasDisponiblesServicio" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000164.html" LinkGroup="CNMWebApp">SaldoDiasDisponiblesServicio Constructor</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.ApplicationUser.SaldoDiasEmpleado" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000F4.html" LinkGroup="CNMWebApp">SaldoDiasEmpleado Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.ApplicationDbContext.SaldoDiasEmpleados" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000104.html" LinkGroup="CNMWebApp">SaldoDiasEmpleados Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.SaldoDiasPorEmpleado" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000DD.html" LinkGroup="CNMWebApp">SaldoDiasPorEmpleado Class</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.Initializer.Seed" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000F8_overloads--.html" LinkGroup="CNMWebApp">Seed Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.ApplicationUser.SegundoApellido" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000EA.html" LinkGroup="CNMWebApp">SegundoApellido Property {CNMWebApp.Models.ApplicationUser}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.UserViewModel.SegundoApellido" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000126.html" LinkGroup="CNMWebApp">SegundoApellido Property {CNMWebApp.Models.UserViewModel}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.UserRolesUnidadCategoria.SelectedCategoriaId" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000138.html" LinkGroup="CNMWebApp">SelectedCategoriaId Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.ConfigureTwoFactorViewModel.SelectedProvider" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000120.html" LinkGroup="CNMWebApp">SelectedProvider Property {CNMWebApp.Models.ConfigureTwoFactorViewModel}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.SendCodeViewModel.SelectedProvider" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000AB.html" LinkGroup="CNMWebApp">SelectedProvider Property {CNMWebApp.Models.SendCodeViewModel}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.UserRolesViewModel.SelectedRoleId" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000135.html" LinkGroup="CNMWebApp">SelectedRoleId Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.UserRolesUnidadCategoria.SelectedUnidadTecnicaId" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000013A.html" LinkGroup="CNMWebApp">SelectedUnidadTecnicaId Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.EmailService.SendAsync" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000006.html" LinkGroup="CNMWebApp">SendAsync Method {CNMWebApp.EmailService}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.SmsService.SendAsync" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000008.html" LinkGroup="CNMWebApp">SendAsync Method {CNMWebApp.SmsService}</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.AccountController.SendCode" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000037_overloads--.html" LinkGroup="CNMWebApp">SendCode Method</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.AccountController.SendCode" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000036_overloads--.html" LinkGroup="CNMWebApp">SendCode Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.SendCodeViewModel" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000AA.html" LinkGroup="CNMWebApp">SendCodeViewModel Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.EmailNotificationService.SendEmailAsync" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000157.html" LinkGroup="CNMWebApp">SendEmailAsync Method</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.ManageController.SetPassword" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000068_overloads--.html" LinkGroup="CNMWebApp">SetPassword Method</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.ManageController.SetPassword" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000069_overloads--.html" LinkGroup="CNMWebApp">SetPassword Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.SetPasswordViewModel" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000113.html" LinkGroup="CNMWebApp">SetPasswordViewModel Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.AccountController.SignInManager" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000025.html" LinkGroup="CNMWebApp">SignInManager Property {CNMWebApp.Controllers.AccountController}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.ManageController.SignInManager" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000005B.html" LinkGroup="CNMWebApp">SignInManager Property {CNMWebApp.Controllers.ManageController}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.UserService.SignOut" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000199.html" LinkGroup="CNMWebApp">SignOut Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.SmsService" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000007.html" LinkGroup="CNMWebApp">SmsService Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.SolicitudController" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000007B.html" LinkGroup="CNMWebApp">SolicitudController Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.SolicitudController.SolicitudController" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000007E.html" LinkGroup="CNMWebApp">SolicitudController Constructor</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.SolicitudViewModel.SolicitudId" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000013D.html" LinkGroup="CNMWebApp">SolicitudId Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.SolicitudParaEmpleado" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000145.html" LinkGroup="CNMWebApp">SolicitudParaEmpleado Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.SolicitudService" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000166.html" LinkGroup="CNMWebApp">SolicitudService Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.SolicitudService.SolicitudService" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000016E.html" LinkGroup="CNMWebApp">SolicitudService Constructor</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.SolicitudVacaciones" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000C9.html" LinkGroup="CNMWebApp">SolicitudVacaciones Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.DiasPorSolicitud.SolicitudVacacionesId" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000D6.html" LinkGroup="CNMWebApp">SolicitudVacacionesId Property {CNMWebApp.Models.DiasPorSolicitud}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.SolicitudVacaciones.SolicitudVacacionesId" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000CA.html" LinkGroup="CNMWebApp">SolicitudVacacionesId Property {CNMWebApp.Models.SolicitudVacaciones}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.SolicitudViewModel" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000013C.html" LinkGroup="CNMWebApp">SolicitudViewModel Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.SolicitudController.SolicitudesEmpleados" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000088.html" LinkGroup="CNMWebApp">SolicitudesEmpleados Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.ApplicationDbContext.SolicitudesVacaciones" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000102.html" LinkGroup="CNMWebApp">SolicitudesVacaciones Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Startup" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000015.html" LinkGroup="CNMWebApp">Startup Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.IndexViewModel.TwoFactor" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000010C.html" LinkGroup="CNMWebApp">TwoFactor Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.SaldoDiasPorEmpleado.UltimaActualizacion" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000E0.html" LinkGroup="CNMWebApp">UltimaActualizacion Property {CNMWebApp.Models.SaldoDiasPorEmpleado}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.SolicitudVacaciones.UltimaActualizacion" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000D1.html" LinkGroup="CNMWebApp">UltimaActualizacion Property {CNMWebApp.Models.SolicitudVacaciones}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.UnidadTecnica" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000DA.html" LinkGroup="CNMWebApp">UnidadTecnica Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.ApplicationUser.UnidadTecnica" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000F3.html" LinkGroup="CNMWebApp">UnidadTecnica Property {CNMWebApp.Models.ApplicationUser}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.UserViewModel.UnidadTecnica" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000132.html" LinkGroup="CNMWebApp">UnidadTecnica Property {CNMWebApp.Models.UserViewModel}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.ApplicationUser.UnidadTecnicaId" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000EF.html" LinkGroup="CNMWebApp">UnidadTecnicaId Property {CNMWebApp.Models.ApplicationUser}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.UnidadTecnica.UnidadTecnicaId" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000DB.html" LinkGroup="CNMWebApp">UnidadTecnicaId Property {CNMWebApp.Models.UnidadTecnica}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.UnidadTecnicaServicio" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000017F.html" LinkGroup="CNMWebApp">UnidadTecnicaServicio Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.UnidadTecnicaServicio.UnidadTecnicaServicio" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000182.html" LinkGroup="CNMWebApp">UnidadTecnicaServicio Constructor</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.ApplicationDbContext.UnidadesTecnicas" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000100.html" LinkGroup="CNMWebApp">UnidadesTecnicas Property {CNMWebApp.Models.ApplicationDbContext}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.UserRolesUnidadCategoria.UnidadesTecnicas" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000013B.html" LinkGroup="CNMWebApp">UnidadesTecnicas Property {CNMWebApp.Models.UserRolesUnidadCategoria}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.UserController" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000008D.html" LinkGroup="CNMWebApp">UserController Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.UserController.UserController" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000092.html" LinkGroup="CNMWebApp">UserController Constructor</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.AccountController.ChallengeResult.UserId" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000046.html" LinkGroup="CNMWebApp">UserId Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.AccountController.UserManager" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000026.html" LinkGroup="CNMWebApp">UserManager Property {CNMWebApp.Controllers.AccountController}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.ManageController.UserManager" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000005C.html" LinkGroup="CNMWebApp">UserManager Property {CNMWebApp.Controllers.ManageController}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.UserRolesUnidadCategoria" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000137.html" LinkGroup="CNMWebApp">UserRolesUnidadCategoria Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.UserRolesViewModel" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000134.html" LinkGroup="CNMWebApp">UserRolesViewModel Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.UserService" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000185.html" LinkGroup="CNMWebApp">UserService Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.UserService.UserService" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000018C.html" LinkGroup="CNMWebApp">UserService Constructor</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.UserViewModel" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000122.html" LinkGroup="CNMWebApp">UserViewModel Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.SaldoDiasPorEmpleado.Usuario" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000E1.html" LinkGroup="CNMWebApp">Usuario Property {CNMWebApp.Models.SaldoDiasPorEmpleado}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.SolicitudVacaciones.Usuario" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000D2.html" LinkGroup="CNMWebApp">Usuario Property {CNMWebApp.Models.SolicitudVacaciones}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.DiasPorSolicitudViewModel.UsuarioId" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000014B.html" LinkGroup="CNMWebApp">UsuarioId Property {CNMWebApp.Models.DiasPorSolicitudViewModel}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.DiasPorSolicitud.UsuarioId" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000D7.html" LinkGroup="CNMWebApp">UsuarioId Property {CNMWebApp.Models.DiasPorSolicitud}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.SolicitudVacaciones.UsuarioId" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000CB.html" LinkGroup="CNMWebApp">UsuarioId Property {CNMWebApp.Models.SolicitudVacaciones}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.SolicitudViewModel.UsuarioId" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000013E.html" LinkGroup="CNMWebApp">UsuarioId Property {CNMWebApp.Models.SolicitudViewModel}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.VacacionController" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000009E.html" LinkGroup="CNMWebApp">VacacionController Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.VacacionController.VacacionController" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000A2.html" LinkGroup="CNMWebApp">VacacionController Constructor</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.UserService.VerificarExistenciaJefaturas" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000019B.html" LinkGroup="CNMWebApp">VerificarExistenciaJefaturas Method</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.AccountController.VerifyCode" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000002A_overloads--.html" LinkGroup="CNMWebApp">VerifyCode Method</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.AccountController.VerifyCode" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000002B_overloads--.html" LinkGroup="CNMWebApp">VerifyCode Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.VerifyCodeViewModel" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000AF.html" LinkGroup="CNMWebApp">VerifyCodeViewModel Class</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.ManageController.VerifyPhoneNumber" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000063_overloads--.html" LinkGroup="CNMWebApp">VerifyPhoneNumber Method</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.ManageController.VerifyPhoneNumber" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000064_overloads--.html" LinkGroup="CNMWebApp">VerifyPhoneNumber Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Models.VerifyPhoneNumberViewModel" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000011C.html" LinkGroup="CNMWebApp">VerifyPhoneNumberViewModel Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.AccountController.XsrfKey" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000003D.html" LinkGroup="CNMWebApp">XsrfKey Field {CNMWebApp.Controllers.AccountController}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.ManageController.XsrfKey" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000006E.html" LinkGroup="CNMWebApp">XsrfKey Field {CNMWebApp.Controllers.ManageController}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.UserController._categoriaServicio" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000090.html" LinkGroup="CNMWebApp">_categoriaServicio Field {CNMWebApp.Controllers.UserController}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.UserService._categoriaServicio" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000188.html" LinkGroup="CNMWebApp">_categoriaServicio Field {CNMWebApp.Services.UserService}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.UserService._context" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000018A.html" LinkGroup="CNMWebApp">_context Field</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.HomeController._rolServicio" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000004F.html" LinkGroup="CNMWebApp">_rolServicio Field</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.RoleService._roleManager" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000015D.html" LinkGroup="CNMWebApp">_roleManager Field {CNMWebApp.Services.RoleService}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.UserService._roleManager" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000187.html" LinkGroup="CNMWebApp">_roleManager Field {CNMWebApp.Services.UserService}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.UserService._roleService" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000189.html" LinkGroup="CNMWebApp">_roleService Field</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.UserController._roleServicio" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000008F.html" LinkGroup="CNMWebApp">_roleServicio Field {CNMWebApp.Controllers.UserController}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.VacacionController._roleServicio" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000A0.html" LinkGroup="CNMWebApp">_roleServicio Field {CNMWebApp.Controllers.VacacionController}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.UnidadTecnicaServicio._roleServicio" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000181.html" LinkGroup="CNMWebApp">_roleServicio Field {CNMWebApp.Services.UnidadTecnicaServicio}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.AccountController._signInManager" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000020.html" LinkGroup="CNMWebApp">_signInManager Field {CNMWebApp.Controllers.AccountController}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.ManageController._signInManager" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000057.html" LinkGroup="CNMWebApp">_signInManager Field {CNMWebApp.Controllers.ManageController}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.VacacionController._solicitudServicio" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_00000000000000A1.html" LinkGroup="CNMWebApp">_solicitudServicio Field</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.UserController._unidadTecnicaServicio" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000091.html" LinkGroup="CNMWebApp">_unidadTecnicaServicio Field</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.AccountController._userManager" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000021.html" LinkGroup="CNMWebApp">_userManager Field {CNMWebApp.Controllers.AccountController}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.ManageController._userManager" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000058.html" LinkGroup="CNMWebApp">_userManager Field {CNMWebApp.Controllers.ManageController}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.UserService._userManager" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000186.html" LinkGroup="CNMWebApp">_userManager Field {CNMWebApp.Services.UserService}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.AccountController._userService" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000022.html" LinkGroup="CNMWebApp">_userService Field</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.UserController._userServicio" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000008E.html" LinkGroup="CNMWebApp">_userServicio Field {CNMWebApp.Controllers.UserController}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.VacacionController._userServicio" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000009F.html" LinkGroup="CNMWebApp">_userServicio Field {CNMWebApp.Controllers.VacacionController}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.HomeController._usuarioServicio" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000004E.html" LinkGroup="CNMWebApp">_usuarioServicio Field</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.SolicitudService.categoriaService" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000016D.html" LinkGroup="CNMWebApp">categoriaService Field</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.CategoriaServicio.context" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000150.html" LinkGroup="CNMWebApp">context Field {CNMWebApp.Services.CategoriaServicio}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.EstadoServicio.context" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000159.html" LinkGroup="CNMWebApp">context Field {CNMWebApp.Services.EstadoServicio}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.SaldoDiasDisponiblesServicio.context" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000163.html" LinkGroup="CNMWebApp">context Field {CNMWebApp.Services.SaldoDiasDisponiblesServicio}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.SolicitudService.context" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000167.html" LinkGroup="CNMWebApp">context Field {CNMWebApp.Services.SolicitudService}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.UnidadTecnicaServicio.context" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000180.html" LinkGroup="CNMWebApp">context Field {CNMWebApp.Services.UnidadTecnicaServicio}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.SolicitudService.emailNotification" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000016B.html" LinkGroup="CNMWebApp">emailNotification Field</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.UserService.loggedUser" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000018B.html" LinkGroup="CNMWebApp">loggedUser Field</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.SolicitudService.roleService" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000016C.html" LinkGroup="CNMWebApp">roleService Field</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.SolicitudService.saldoDiasService" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000016A.html" LinkGroup="CNMWebApp">saldoDiasService Field</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.SolicitudController.solicitudService" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000007C.html" LinkGroup="CNMWebApp">solicitudService Field</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.SolicitudService.userManager" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000168.html" LinkGroup="CNMWebApp">userManager Field</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Controllers.SolicitudController.userService" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_000000000000007D.html" LinkGroup="CNMWebApp">userService Field {CNMWebApp.Controllers.SolicitudController}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="CNMWebApp.Services.SolicitudService.userService" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:CNMWebApp.chm::/topic_0000000000000169.html" LinkGroup="CNMWebApp">userService Field {CNMWebApp.Services.SolicitudService}</LItem>
+      </Links>
+   </Context>
+   
+
+</DynamicHelp>
+

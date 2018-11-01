@@ -136,7 +136,7 @@ label {
     /* the image you want to 'watermark' */
     height: 200px; /* or whatever, equal to the image you want 'watermarked' */
     width: 200px; /* as above */
-    background-image: url(../Fotos/CNM.JPG);
+    background-image: url(../Fotos/watermark.png);
     background-position: 0 0;
     background-repeat: no-repeat;
     position: relative;
@@ -160,4 +160,12 @@ label {
 
 #cerrar-sesion-btn {
     margin-right: 7px;
+}
+
+#titulo-pdf {
+    text-align: center;
+}
+
+#pdf-view-table tr td {
+    border: 2px solid black;
 }

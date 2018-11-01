@@ -206,14 +206,10 @@
     <Compile Include="Attributes\MultipleButtonAttribute.cs" />
     <Compile Include="Authorization\AuthAttribute.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\AdminController.cs" />
-    <Compile Include="Controllers\FuncionarioController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\JefaturaController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\SolicitudController.cs" />
     <Compile Include="Controllers\UserController.cs" />
-    <Compile Include="Controllers\VacacionController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1836,6 +1832,7 @@
     <Content Include="Fotos\icon.png" />
     <Content Include="Fotos\image.jpg" />
     <Content Include="Fotos\Uncharted.jpg" />
+    <Content Include="Fotos\watermark.png" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Rotativa\help-wkhtmltoimage.txt" />
@@ -2044,22 +2041,19 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Shared\Unauthorized.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\User\Create.cshtml" />
-    <Content Include="Views\Jefatura\Index.cshtml" />
     <Content Include="Views\Solicitud\Index.cshtml" />
     <Content Include="Views\Solicitud\Detalles.cshtml" />
     <Content Include="Views\User\Eliminar.cshtml" />
     <Content Include="Views\User\Editar.cshtml" />
-    <Content Include="Views\Funcionario\Index.cshtml" />
-    <Content Include="Views\Vacacion\Crear.cshtml" />
     <Content Include="Views\Solicitud\Crear.cshtml" />
     <Content Include="Views\Solicitud\SolicitudesEmpleados.cshtml" />
     <Content Include="Views\Solicitud\Revisar.cshtml" />
     <Content Include="Views\Solicitud\CrearParaEmpleado.cshtml" />
     <Content Include="Views\Solicitud\Detalle.cshtml" />
+    <Content Include="Views\Solicitud\PDFView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="admin-lte\plugins\fastclick\lib\" />

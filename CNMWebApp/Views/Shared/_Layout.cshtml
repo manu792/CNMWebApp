@@ -357,11 +357,15 @@ desired effect
             </section>
             <!-- Main content -->
             <section class="content container-fluid">
-                @RenderBody()
-                <br />
-                <div id="watermark">
-                    <img src="@Url.Content("~/Fotos/CNM.jpg")" alt="Image" />
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+                        <div id="watermark">
+                            <img src="@Url.Content("~/Fotos/watermark.png")" alt="Image" />
+                        </div>
+                    </div>
                 </div>
+                <br />
+                @RenderBody()
             </section>
             <!-- /.content -->
         </div>

@@ -181,6 +181,7 @@
             var colaborador = $('#ColaboradorId').val();
             if (!colaborador) {
                 $('.select-dates-empleado').datepicker('update', '');
+                return;
             }
 
             var dias = $('#selected-days').val();
