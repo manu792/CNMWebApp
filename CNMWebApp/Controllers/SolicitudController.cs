@@ -447,7 +447,7 @@ namespace CNMWebApp.Controllers
             };
 
             var pdf = GeneratePDF(solicitudViewModel);
-            await EnviarCorreoAprobacion(solicitudVacaciones.Id, aprobador, solicitudViewModel, pdf);
+            await EnviarCorreoAprobacion(solicitudVacaciones.UsuarioId, aprobador, solicitudViewModel, pdf);
         }
 
         private async Task EnviarCorreoAprobacion(string solicitanteId, UserViewModel aprobador, SolicitudViewModel solicitud, string fileName)
