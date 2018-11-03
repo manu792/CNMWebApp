@@ -430,6 +430,14 @@ namespace CNMWebApp.Controllers
             return RedirectToAction("Login", "Account");
         }
 
+        [HttpGet]
+        public ActionResult LogOut()
+        {
+            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            _userService.SignOut();
+            return RedirectToAction("Login", "Account");
+        }
+
         //
         // GET: /Account/ExternalLoginFailure
         [AllowAnonymous]

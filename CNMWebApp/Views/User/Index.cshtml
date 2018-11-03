@@ -20,6 +20,20 @@
 @using (Html.BeginForm("Index", "User", FormMethod.Get))
 {
     <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            @Html.Label("Ver usuarios", htmlAttributes: new { @id = "role-dropdown", @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <select id="EstadoUsuario" name="EstadoUsuario" class="dropdownOpciones form-control">
+                    <option value="Activo">Activos</option>
+                    <option value="Inactivo">Inactivos</option>
+                    <option value="Ambos">Ambos</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <br />
+
+    <div class="row">
         <div class="col-md-6">
             @Html.Label("Fecha Inicio", htmlAttributes: new { @class = "control-label col-md-3" })
             <div class="col-md-9">
@@ -46,19 +60,6 @@
     <br />
 
     <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-            @Html.Label("Ver usuarios", htmlAttributes: new { @id = "role-dropdown", @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <select id="EstadoUsuario" name="EstadoUsuario" class="dropdownOpciones form-control">
-                    <option value="Activo">Activos</option>
-                    <option value="Inactivo">Inactivos</option>
-                    <option value="Ambos">Ambos</option>
-                </select>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
         <div class="col-md-11">
             @Html.TextBox("Filtro", "", new { @class = "form-control", @placeholder = "Buscar..." })
         </div>
@@ -79,10 +80,10 @@
                 @Html.Label("Nombre")
             </th>
             <th scope="col">
-                @Html.Label("Primer Apellido")
+                @Html.Label("1er Apellido")
             </th>
             <th scope="col">
-                @Html.Label("Segundo Apellido")
+                @Html.Label("2do Apellido")
             </th>
             <th scope="col">
                 @Html.Label("Correo")
@@ -91,10 +92,10 @@
                 @Html.Label("Teléfono")
             </th>
             <th scope="col">
-                @Html.Label("Fecha de Ingreso")
+                @Html.Label("Ingreso")
             </th>
             <th scope="col">
-                @Html.Label("Fecha de Creación")
+                @Html.Label("Creación")
             </th>
             <th scope="col">
                 @Html.Label("Rol")
@@ -199,5 +200,5 @@ Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.P
 
         $('#FechaInicio').datepicker('update', fechaInicio);
         $('#FechaFinal').datepicker('update', fechaFinal);
-    </script>    
+    </script>
 }

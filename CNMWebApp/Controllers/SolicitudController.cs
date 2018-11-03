@@ -39,6 +39,8 @@ namespace CNMWebApp.Controllers
             ViewBag.FechaFinal = fechaFinal;
 
             var user = await userService.GetLoggedInUser();
+            if (user == null)
+                return RedirectToAction("LogOut", "Account");
 
             try
             {
@@ -197,6 +199,8 @@ namespace CNMWebApp.Controllers
         {
             // Consigo la informacion del usuario logeado para mostrar en el View
             var usuario = await userService.GetLoggedInUser();
+            if (usuario == null)
+                return RedirectToAction("LogOut", "Account");
 
             var annosLaborados = DateTime.Now.Year - usuario.FechaIngreso.Year;
             if (usuario.FechaIngreso > DateTime.Now.AddYears(-annosLaborados)) annosLaborados--;
@@ -326,6 +330,8 @@ namespace CNMWebApp.Controllers
             ViewBag.FechaFinal = fechaFinal;
 
             var jefe = await userService.GetLoggedInUser();
+            if (jefe == null)
+                return RedirectToAction("LogOut", "Account");
 
             var solicitudes = solicitudService.ObtenerSolicitudesPorAprobar(jefe, fechaInicio, fechaFinal);
 
@@ -346,6 +352,8 @@ namespace CNMWebApp.Controllers
             Guid guid;
 
             var usuario = await userService.GetLoggedInUser();
+            if (usuario == null)
+                return RedirectToAction("LogOut", "Account");
 
             if (!Guid.TryParse(id, out guid))
                 return RedirectToAction("SolicitudesEmpleados");
@@ -398,6 +406,8 @@ namespace CNMWebApp.Controllers
             try
             {
                 var usuario = await userService.GetLoggedInUser();
+                if(usuario == null)
+                    return RedirectToAction("LogOut", "Account");
 
                 var rowsAffected = solicitudService.Aprobar(solicitud.SolicitudId, solicitud.ComentarioJefatura, usuario, solicitud.UsuarioId);
                 if(rowsAffected > 0)
@@ -469,6 +479,8 @@ namespace CNMWebApp.Controllers
             try
             {
                 var usuario = await userService.GetLoggedInUser();
+                if (usuario == null)
+                    return RedirectToAction("LogOut", "Account");
 
                 var rowsAffected = solicitudService.Rechazar(solicitud.SolicitudId, solicitud.ComentarioJefatura, usuario, solicitud.UsuarioId);
                 if (rowsAffected > 0)

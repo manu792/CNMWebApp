@@ -251,13 +251,7 @@ namespace CNMWebApp.Services
 
                 var resultado = _userManager.Delete(usuario);
                 if (resultado.Succeeded)
-                {
-                    var saldoDiasEmpleado = _context.SaldoDiasEmpleados.FirstOrDefault(x => x.Cedula == id);
-                    _context.SaldoDiasEmpleados.Remove(saldoDiasEmpleado);
-                    _context.SaveChanges();
-
                     return true;
-                }
 
                 return false;
             }
@@ -281,6 +275,9 @@ namespace CNMWebApp.Services
         public async Task<UserViewModel> GetLoggedInUser()
         {
             var user = await _userManager.FindByIdAsync(HttpContext.Current.User.Identity.GetUserId());
+            if(user == null)
+                return null;
+
             var role = user.Roles.Count == 1 ?
                 user.Roles.FirstOrDefault() :
                 user.Roles.FirstOrDefault(r => !_roleManager.FindById(r.RoleId).Name.Equals("manager", StringComparison.OrdinalIgnoreCase));

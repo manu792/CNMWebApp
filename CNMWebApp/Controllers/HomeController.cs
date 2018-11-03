@@ -24,6 +24,8 @@ namespace CNMWebApp.Controllers
         public async Task<ActionResult> Index()
         {
             var usuario = await _usuarioServicio.GetLoggedInUser();
+            if(usuario == null)
+                return RedirectToAction("LogOut", "Account");
 
             return View(new UserViewModel()
             {

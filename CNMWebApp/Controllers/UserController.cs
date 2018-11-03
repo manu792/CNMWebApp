@@ -84,7 +84,7 @@ namespace CNMWebApp.Controllers
             
             var users = _userServicio.GetUsers();
 
-            if (!string.IsNullOrEmpty(filtro) || (!string.IsNullOrEmpty(fechaInicio) && !string.IsNullOrEmpty(fechaFinal)))
+            if (!string.IsNullOrEmpty(filtro) || !string.IsNullOrEmpty(estadoUsuario) || (!string.IsNullOrEmpty(fechaInicio) && !string.IsNullOrEmpty(fechaFinal)))
                 users = FiltrarUsuarios(users, filtro, estadoUsuario, fechaInicio, fechaFinal);
 
             int tamanoPagina = 10;
