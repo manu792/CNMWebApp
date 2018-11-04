@@ -9,6 +9,28 @@
     <div class="col-md-6 col-md-offset-3">
         <h2>Agregar Empleado</h2>
 
+        <!-- Modal -->
+        <div class="modal fade" id="confirmation-modal" tabindex="-1" role="dialog"
+             aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"
+                                aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel"></h4>
+                    </div>
+                    <div class="modal-body"></div>
+                    <div class="modal-footer">
+                        <button id="cancel-btn" type="button" class="btn" data-dismiss="modal">No</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Sí</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal End -->
+
         @using (Html.BeginForm("Create", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
             @Html.AntiForgeryToken()
@@ -18,12 +40,23 @@
 
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="form-group">
+                    @Html.LabelFor(model => model.EsSuperusuario, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <div class="checkbox">
+                            @Html.EditorFor(model => model.EsSuperusuario)
+                            @Html.ValidationMessageFor(model => model.EsSuperusuario, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
                     @Html.LabelFor(model => model.Id, htmlAttributes: new { @class = "control-label col-md-2 required" })
                     <div class="col-md-10">
                         @Html.EditorFor(model => model.Id, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger" })
                     </div>
                 </div>
+
                 <div class="form-group">
                     @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "control-label col-md-2 required" })
                     <div class="col-md-10">
@@ -85,16 +118,6 @@
                     </div>
                 </div>
 
-                <div class="form-group">
-                    @Html.LabelFor(model => model.EsSuperusuario, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        <div class="checkbox">
-                            @Html.EditorFor(model => model.EsSuperusuario)
-                            @Html.ValidationMessageFor(model => model.EsSuperusuario, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </div>
-
                 <div id="unidades-tecnicas" class="form-group">
                     @Html.LabelFor(model => model.SelectedUnidadTecnicaId, "Unidad Tecnica", htmlAttributes: new { @class = "control-label col-md-2 required" })
                     <div class="col-md-10">
@@ -135,5 +158,17 @@
 
 @section scripts
 {
-    
+    <script>
+        $('#EsSuperusuario').change(function (e) {
+            if (e.target.checked) {
+                $('.modal-title').html('<strong>Super Usuario</strong>');
+                $('.modal-body').html('<p>¿Está seguro(a) que desea convertir el empleado en un Super Usuario?');
+                $('#confirmation-modal').modal();
+            }
+        });
+
+        $('#cancel-btn').click(function () {
+            $('#EsSuperusuario').prop('checked', false);
+        });
+    </script>
 }

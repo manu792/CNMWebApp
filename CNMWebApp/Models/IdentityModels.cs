@@ -215,7 +215,7 @@ namespace CNMWebApp.Models
                 new Categoria()
                 {
                     CategoriaId = 1,
-                    Nombre = "Oficinistas",
+                    Nombre = "Administrativos",
                     RolId = "1"
                 },
                 new Categoria()
