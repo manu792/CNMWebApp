@@ -41,6 +41,11 @@
                 </a>
             </div>
         </div>
+    }
+    <!-- Fin Opciones para Recursos Humanos -->
+
+    @if(Model.Role.Name.Equals("recursos humanos", StringComparison.OrdinalIgnoreCase))
+    {
         <div class="w3-third">
             <div class="w3-card w3-container" style="min-height:250px">
                 <a href="@Url.Action("CrearParaEmpleado", "Solicitud")">
@@ -50,7 +55,7 @@
             </div>
         </div>
     }
-    <!-- Fin Opciones para Recursos Humanos -->
+
     <!-- Opciones para Manager (Superusuario del sistema) -->
     @if (Model.EsSuperusuario)
     {
