@@ -52,6 +52,9 @@ namespace CNMWebApp.Models
         [DefaultValue(0)]
         //[DisplayFormat(DataFormatString = "{0:n2}", ApplyFormatInEditMode = true)]
         public decimal SaldoDiasDisponibles { get; set; }
+        [DisplayName("Jefe")]
+        [Required(ErrorMessage = "El campo Jefe es requerido")]
+        public string JefeId { get; set; }
 
         // Vinculan el usuario con los datos de las tablas Roles, Categoria y UnidadTecnica
         [DisplayName("Rol")]
@@ -88,6 +91,12 @@ namespace CNMWebApp.Models
         [Required(ErrorMessage = "El campo Unidad Técnica es requerido")]
         public string SelectedUnidadTecnicaId { get; set; }
         public List<UnidadTecnica> UnidadesTecnicas { get; set; }
+
+
+        // Jefes
+        [Required(ErrorMessage = "El campo Jefe es requerido")]
+        public string SelectedJefeId { get; set; }
+        public List<UserViewModel> Jefes { get; set; }
     }
 
     public class SolicitudViewModel : UserViewModel

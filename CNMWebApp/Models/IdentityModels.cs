@@ -117,11 +117,14 @@ namespace CNMWebApp.Models
         public int UnidadTecnicaId { get; set; }
         public bool EstaActivo { get; set; }
         public bool EsContrasenaTemporal { get; set; }
+        public string JefeId { get; set; }
 
         // Virtual properties, foregin keys to Categoria and UnidadTecnica
         public virtual Categoria Categoria { get; set; }
         public virtual UnidadTecnica UnidadTecnica { get; set; }
         public virtual SaldoDiasPorEmpleado SaldoDiasEmpleado { get; set; }
+        public ApplicationUser Jefe { get; set; }
+        public ICollection<ApplicationUser> Personal { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
@@ -400,6 +403,13 @@ namespace CNMWebApp.Models
             // modelBuilder.Ignore<IdentityUserClaim>();
 
             modelBuilder.Entity<IdentityRole>().ToTable("Roles");
+
+            // Tabla que se referencia a ella misma para jefes
+            modelBuilder.Entity<ApplicationUser>()
+                .HasOptional(x => x.Jefe)
+                .WithMany(x => x.Personal)
+                .HasForeignKey(x => x.JefeId)
+                .WillCascadeOnDelete();
         }
 
         public static ApplicationDbContext Create()

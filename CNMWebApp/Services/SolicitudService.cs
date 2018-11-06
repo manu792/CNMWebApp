@@ -392,7 +392,7 @@ namespace CNMWebApp.Services
             var jefe = new UserViewModel();
 
             if (solicitante.Role.Name.Equals("funcionario", StringComparison.OrdinalIgnoreCase))
-                jefe = userService.ObtenerJefePorUnidadTecnica(solicitante.UnidadTecnica.UnidadTecnicaId);
+                jefe = userService.ObtenerJefePorEmpleadoId(solicitante.Id);
             if (solicitante.Role.Name.Equals("jefatura", StringComparison.OrdinalIgnoreCase) || solicitante.Role.Name.Equals("recursos humanos", StringComparison.OrdinalIgnoreCase))
                 jefe = userService.ObtenerDirectorGeneral();
             if (solicitante.Role.Name.Equals("director", StringComparison.OrdinalIgnoreCase))
@@ -428,7 +428,7 @@ namespace CNMWebApp.Services
             if (empleado.Role.Name.Equals("funcionario", StringComparison.OrdinalIgnoreCase))
             {
                 // La solicitud se envia al jefe directo
-                aprobador = userService.ObtenerJefePorUnidadTecnica(empleado.UnidadTecnica.UnidadTecnicaId);
+                aprobador = userService.ObtenerJefePorEmpleadoId(empleado.Id);
             }
             else if (empleado.Role.Name.Equals("jefatura", StringComparison.OrdinalIgnoreCase) || empleado.Role.Name.Equals("recursos humanos", StringComparison.OrdinalIgnoreCase))
             {

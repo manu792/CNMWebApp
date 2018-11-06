@@ -31,11 +31,11 @@ namespace CNMWebApp.Services
             _context = new ApplicationDbContext();
         }
 
-        public UserViewModel ObtenerJefePorUnidadTecnica(int unidadTecnicaId)
+        public UserViewModel ObtenerJefePorEmpleadoId(string empleadoId)
         {
             var jefaturaRole = _roleManager.FindByName("Jefatura");
             var jefe = _userManager.Users
-                .Where(x => x.UnidadTecnicaId == unidadTecnicaId && x.Roles.Any(r => r.RoleId == jefaturaRole.Id))
+                .Where(x => x.Id == empleadoId && x.Roles.Any(r => r.RoleId == jefaturaRole.Id))
                 .FirstOrDefault();
 
             if (jefe == null)
@@ -56,6 +56,28 @@ namespace CNMWebApp.Services
                 PhoneNumber = jefe.PhoneNumber,
                 SaldoDiasDisponibles = jefe.SaldoDiasEmpleado.SaldoDiasDisponibles
             };
+        }
+        public IEnumerable<UserViewModel> ObtenerJefesPorUnidadTecnica(int unidadTecnicaId)
+        {
+            var jefaturaRole = _roleManager.FindByName("Jefatura");
+            var jefes = _userManager.Users
+                .Where(x => x.UnidadTecnicaId == unidadTecnicaId && x.Roles.Any(r => r.RoleId == jefaturaRole.Id));
+
+            return jefes.Select(x => new UserViewModel()
+            {
+                Id = x.Id,
+                Nombre = x.Nombre,
+                PrimerApellido = x.PrimerApellido,
+                SegundoApellido = x.SegundoApellido,
+                Email = x.Email,
+                UnidadTecnica = x.UnidadTecnica,
+                Categoria = x.Categoria,
+                EstaActivo = x.EstaActivo,
+                FechaIngreso = x.FechaIngreso,
+                FechaCreacion = x.FechaCreacion,
+                PhoneNumber = x.PhoneNumber,
+                SaldoDiasDisponibles = x.SaldoDiasEmpleado.SaldoDiasDisponibles
+            });
         }
 
         public UserViewModel ObtenerDirectorGeneral()
@@ -145,7 +167,8 @@ namespace CNMWebApp.Services
                 Categoria = x.Categoria,
                 EstaActivo = x.EstaActivo,
                 EsSuperusuario = _userManager.IsInRole(x.Id, "Manager"),
-                SaldoDiasDisponibles = x.SaldoDiasEmpleado.SaldoDiasDisponibles
+                SaldoDiasDisponibles = x.SaldoDiasEmpleado.SaldoDiasDisponibles,
+                JefeId = x.JefeId
             }).ToList();
         }
 
@@ -176,7 +199,8 @@ namespace CNMWebApp.Services
                 EstaActivo = user.EstaActivo,
                 EsSuperusuario = _userManager.IsInRole(user.Id, "Manager"),
                 FotoRuta = user.FotoRuta,
-                SaldoDiasDisponibles = user.SaldoDiasEmpleado.SaldoDiasDisponibles
+                SaldoDiasDisponibles = user.SaldoDiasEmpleado.SaldoDiasDisponibles,
+                JefeId = user.JefeId
             };
         }
 
@@ -227,6 +251,7 @@ namespace CNMWebApp.Services
                 user.EstaActivo = usuario.EstaActivo;
                 user.FotoRuta = string.IsNullOrEmpty(fotoRuta) ? null : fotoRuta;
                 user.SaldoDiasEmpleado.SaldoDiasDisponibles = usuario.SaldoDiasDisponibles;
+                user.JefeId = usuario.JefeId;
 
                 var resultado = _userManager.Update(user);
 
@@ -369,7 +394,8 @@ namespace CNMWebApp.Services
                         Cedula = usuario.Id,
                         SaldoDiasDisponibles = 0,
                         UltimaActualizacion = DateTime.Now
-                    }
+                    },
+                    JefeId = usuario.JefeId
                 };
                 
                 var result = await _userManager.CreateAsync(newUser, contrasenaTemporal);
@@ -412,12 +438,12 @@ namespace CNMWebApp.Services
             var jefaturaRole = _roleService.ObtenerRolPorNombre("Jefatura");
             var directorRole = _roleService.ObtenerRolPorNombre("Director");
 
-            if (usuario.SelectedRoleId == jefaturaRole.Id)
-            {
-                var jefe = ObtenerJefePorUnidadTecnica(Convert.ToInt32(usuario.SelectedUnidadTecnicaId));
-                if (jefe != null)
-                    throw new Exception("Ya existe el puesto de jefatura para la unidad técnica seleccionada");
-            }
+            //if (usuario.SelectedRoleId == jefaturaRole.Id)
+            //{
+            //    var jefe = ObtenerJefePorUnidadTecnica(usuario.Id);
+            //    if (jefe != null)
+            //        throw new Exception("Ya existe el puesto de jefatura para la unidad técnica seleccionada");
+            //}
 
             if (usuario.SelectedRoleId == directorRole.Id)
             {

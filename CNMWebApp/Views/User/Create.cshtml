@@ -135,6 +135,14 @@
                 </div>
 
                 <div class="form-group">
+                    @Html.LabelFor(model => model.Jefes, "Jefe", htmlAttributes: new { @id = "role-dropdown", @class = "control-label col-md-4" })
+                    <div class="col-md-6">
+                        @Html.DropDownListFor(model => model.JefeId, new SelectList(Model.Jefes, "Id", "NombreCompleto"), "- Seleccione un jefe -", new { @class = "form-control selectpicker" })
+                        @Html.ValidationMessageFor(model => model.JefeId)
+                    </div>
+                </div>
+
+                <div class="form-group">
                     @Html.LabelFor(model => model.Foto, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         @Html.TextBoxFor(model => model.Foto, new { type = "file", accept = ".png, .jpg, .jpeg", @class = "btn btn-info" })
@@ -169,6 +177,10 @@
 
         $('#cancel-btn').click(function () {
             $('#EsSuperusuario').prop('checked', false);
+        });
+
+        ('#JefeId').change(function () {
+
         });
     </script>
 }

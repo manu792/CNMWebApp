@@ -41,6 +41,15 @@ namespace CNMWebApp.Controllers
             return Json(new { Categorias = listaCategorias, Unidades = listaUnidades }, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
+        public JsonResult ObtenerJefesPorUnidadTecnica(int unidadTecnicaId)
+        {
+            var jefes = _userServicio.ObtenerJefesPorUnidadTecnica(unidadTecnicaId);
+            var listaJefes = new SelectList(jefes, "Id", "NombreCompleto", 0);
+
+            return Json(new { Jefes = listaJefes }, JsonRequestBehavior.AllowGet);
+        }
+
 
         [HttpGet]
         public JsonResult ObtenerUsuarioPorId(string usuarioId)
@@ -102,7 +111,8 @@ namespace CNMWebApp.Controllers
             {
                 Roles = roles.ToList(),
                 Categorias = new List<Categoria>(),
-                UnidadesTecnicas = new List<UnidadTecnica>()
+                UnidadesTecnicas = new List<UnidadTecnica>(),
+                Jefes = new List<UserViewModel>()
             });
         }
 

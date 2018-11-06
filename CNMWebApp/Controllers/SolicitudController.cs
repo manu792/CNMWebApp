@@ -457,7 +457,7 @@ namespace CNMWebApp.Controllers
             var jefe = new UserViewModel();
 
             if (solicitante.Role.Name.Equals("funcionario", StringComparison.OrdinalIgnoreCase))
-                jefe = userService.ObtenerJefePorUnidadTecnica(solicitante.UnidadTecnica.UnidadTecnicaId);
+                jefe = userService.ObtenerJefePorEmpleadoId(solicitante.Id);
             if (solicitante.Role.Name.Equals("jefatura", StringComparison.OrdinalIgnoreCase) || solicitante.Role.Name.Equals("recursos humanos", StringComparison.OrdinalIgnoreCase))
                 jefe = userService.ObtenerDirectorGeneral();
             if (solicitante.Role.Name.Equals("director", StringComparison.OrdinalIgnoreCase))
