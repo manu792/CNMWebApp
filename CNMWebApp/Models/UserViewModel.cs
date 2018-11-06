@@ -53,7 +53,6 @@ namespace CNMWebApp.Models
         //[DisplayFormat(DataFormatString = "{0:n2}", ApplyFormatInEditMode = true)]
         public decimal SaldoDiasDisponibles { get; set; }
         [DisplayName("Jefe")]
-        [Required(ErrorMessage = "El campo Jefe es requerido")]
         public string JefeId { get; set; }
 
         // Vinculan el usuario con los datos de las tablas Roles, Categoria y UnidadTecnica

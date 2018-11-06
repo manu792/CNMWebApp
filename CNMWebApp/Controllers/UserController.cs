@@ -45,9 +45,14 @@ namespace CNMWebApp.Controllers
         public JsonResult ObtenerJefesPorUnidadTecnica(int unidadTecnicaId)
         {
             var jefes = _userServicio.ObtenerJefesPorUnidadTecnica(unidadTecnicaId);
-            var listaJefes = new SelectList(jefes, "Id", "NombreCompleto", 0);
+            return Json(new { Jefes = jefes.ToList() }, JsonRequestBehavior.AllowGet);
+        }
 
-            return Json(new { Jefes = listaJefes }, JsonRequestBehavior.AllowGet);
+        [HttpGet]
+        public JsonResult ObtenerDirectorGeneral()
+        {
+            var director = _userServicio.ObtenerDirectorGeneral();
+            return Json(new { Jefe = director }, JsonRequestBehavior.AllowGet);
         }
 
 
@@ -124,6 +129,7 @@ namespace CNMWebApp.Controllers
             if (!ModelState.IsValid)
             {
                 CrearObjetoUsuario(user);
+
                 return View(user);
             }
 
@@ -161,6 +167,7 @@ namespace CNMWebApp.Controllers
             var categorias = _categoriaServicio.ObtenerCategoriasPorRoleId(usuario.Role.Id).ToList();
             var roles = _roleServicio.GetAllRoles().ToList();
             var unidadesTecnicas = _unidadTecnicaServicio.ObtenerUnidadesTecnicas().ToList();
+            var jefes = _userServicio.ObtenerJefesPorUnidadTecnica(usuario.UnidadTecnica.UnidadTecnicaId);
 
             return View(new UserRolesUnidadCategoria()
             {
@@ -181,7 +188,9 @@ namespace CNMWebApp.Controllers
                 Categoria = usuario.Categoria,
                 UnidadTecnica = usuario.UnidadTecnica,
                 FotoRuta = usuario.FotoRuta,
-                SaldoDiasDisponibles = usuario.SaldoDiasDisponibles
+                SaldoDiasDisponibles = usuario.SaldoDiasDisponibles,
+                Jefes = jefes.ToList(),
+                SelectedJefeId = usuario.JefeId
             });
         }
 
@@ -311,6 +320,7 @@ namespace CNMWebApp.Controllers
             usuario.SelectedCategoriaId = usuario.SelectedCategoriaId;
             usuario.SelectedRoleId = usuario.SelectedRoleId;
             usuario.SelectedUnidadTecnicaId = usuario.SelectedUnidadTecnicaId;
+            usuario.Jefes = _userServicio.ObtenerJefesPorUnidadTecnica(Convert.ToInt32(usuario.SelectedUnidadTecnicaId)).ToList();
         }
     }
 }

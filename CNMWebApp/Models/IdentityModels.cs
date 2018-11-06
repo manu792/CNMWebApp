@@ -409,7 +409,7 @@ namespace CNMWebApp.Models
                 .HasOptional(x => x.Jefe)
                 .WithMany(x => x.Personal)
                 .HasForeignKey(x => x.JefeId)
-                .WillCascadeOnDelete();
+                .WillCascadeOnDelete(false);
         }
 
         public static ApplicationDbContext Create()

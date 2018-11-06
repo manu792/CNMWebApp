@@ -621,6 +621,10 @@ desired effect
                             }
                             $("#SelectedUnidadTecnicaId").append(markup);
                             $("#unidades-tecnicas").show();
+                            if (data.Unidades.length > 1) {
+                                var val = $("#SelectedUnidadTecnicaId option:first").val();
+                                $("#SelectedUnidadTecnicaId").val(val).trigger('change');
+                            }
                             if (data.Unidades.length === 1) {
                                 $("#unidades-tecnicas").hide();
                             }

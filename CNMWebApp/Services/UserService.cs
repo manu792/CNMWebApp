@@ -61,7 +61,8 @@ namespace CNMWebApp.Services
         {
             var jefaturaRole = _roleManager.FindByName("Jefatura");
             var jefes = _userManager.Users
-                .Where(x => x.UnidadTecnicaId == unidadTecnicaId && x.Roles.Any(r => r.RoleId == jefaturaRole.Id));
+                .Where(x => x.UnidadTecnicaId == unidadTecnicaId && x.Roles.Any(r => r.RoleId == jefaturaRole.Id))
+                .ToList();
 
             return jefes.Select(x => new UserViewModel()
             {
@@ -77,7 +78,7 @@ namespace CNMWebApp.Services
                 FechaCreacion = x.FechaCreacion,
                 PhoneNumber = x.PhoneNumber,
                 SaldoDiasDisponibles = x.SaldoDiasEmpleado.SaldoDiasDisponibles
-            });
+            }).ToList();
         }
 
         public UserViewModel ObtenerDirectorGeneral()
@@ -395,7 +396,7 @@ namespace CNMWebApp.Services
                         SaldoDiasDisponibles = 0,
                         UltimaActualizacion = DateTime.Now
                     },
-                    JefeId = usuario.JefeId
+                    JefeId = usuario.SelectedJefeId
                 };
                 
                 var result = await _userManager.CreateAsync(newUser, contrasenaTemporal);
@@ -418,7 +419,7 @@ namespace CNMWebApp.Services
                     }
                     catch(Exception ex)
                     {
-                        Console.WriteLine(ex);
+                         Console.WriteLine(ex);
                         throw;
                     }
 
