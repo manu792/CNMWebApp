@@ -21,6 +21,11 @@ namespace CNMWebApp.Services
                 .Where(x => !x.Nombre.ToLower().Equals("manager"));
         }
 
+        public Categoria ObtenerCategoriaPorId(int id)
+        {
+            return context.Categorias.FirstOrDefault(x => x.CategoriaId == id);
+        }
+
         public IEnumerable<Categoria> ObtenerCategoriasPorRoleId(string roleId)
         {
             return context.Categorias

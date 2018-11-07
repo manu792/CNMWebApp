@@ -309,12 +309,12 @@ namespace CNMWebApp.Controllers
             usuario.PhoneNumber = usuario.PhoneNumber;
             usuario.Foto = usuario.Foto;
             usuario.FotoRuta = usuario.FotoRuta;
-            usuario.Categoria = _userServicio.ObtenerUsuarioPorId(usuario.Id).Categoria;
-            usuario.Role = _userServicio.ObtenerUsuarioPorId(usuario.Id).Role;
+            usuario.Categoria = usuario.SelectedCategoriaId != null ? _categoriaServicio.ObtenerCategoriaPorId(Convert.ToInt32(usuario.SelectedCategoriaId)) : _userServicio.ObtenerUsuarioPorId(usuario.Id).Categoria;
+            usuario.Role = usuario.SelectedRoleId != null ? _roleServicio.ObtenerRolPorId(usuario.SelectedRoleId) : _userServicio.ObtenerUsuarioPorId(usuario.Id).Role;
             usuario.Categorias = usuario.Role != null ? 
                 _categoriaServicio.ObtenerCategoriasPorRoleId(usuario.Role.Id).ToList() 
                 : new List<Categoria>();
-            usuario.UnidadTecnica = _userServicio.ObtenerUsuarioPorId(usuario.Id).UnidadTecnica;
+            usuario.UnidadTecnica = usuario.SelectedUnidadTecnicaId != null ? _unidadTecnicaServicio.ObtenerUnidadTecnicaPorId(Convert.ToInt32(usuario.SelectedUnidadTecnicaId)) : _userServicio.ObtenerUsuarioPorId(usuario.Id).UnidadTecnica;
             usuario.Roles = _roleServicio.GetAllRoles().ToList();
             usuario.UnidadesTecnicas = _unidadTecnicaServicio.ObtenerUnidadesTecnicas().ToList();
             usuario.SelectedCategoriaId = usuario.SelectedCategoriaId;

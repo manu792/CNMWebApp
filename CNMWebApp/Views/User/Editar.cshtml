@@ -319,7 +319,11 @@
         });
 
         $('#SelectedRoleId').change(function (e) {
-            var roleId = e.target.value;
+            GetSelectedRoleId(e.target.value);
+        });
+
+        var GetSelectedRoleId = function (role) {
+            var roleId = role;
             var url = '@Url.Action("ObtenerUnidadesCategoriasPorRoleId", "User")';
             $('#SelectedJefeId').html('');
 
@@ -359,6 +363,7 @@
             else {
                 $('#jefes').show();
             }
-        });
+        }
+        GetSelectedRoleId(roleId);
     </script>
 }

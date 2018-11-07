@@ -24,6 +24,12 @@ namespace CNMWebApp.Services
                   .Equals("todas las unidades técnicas", StringComparison.OrdinalIgnoreCase));
         }
 
+        public UnidadTecnica ObtenerUnidadTecnicaPorId(int id)
+        {
+            return context.UnidadesTecnicas
+                .FirstOrDefault(x => x.UnidadTecnicaId == id);
+        }
+
         public IEnumerable<UnidadTecnica> ObtenerUnidadesTecnicasPorRoleId(string roleId)
         {
             var unidades = context.UnidadesTecnicas.ToList();
