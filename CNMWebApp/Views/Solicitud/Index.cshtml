@@ -10,6 +10,7 @@
     var filtradoPor = ViewBag.FiltradoPor ?? "MisSolicitudes";
     var fechaInicio = ViewBag.FechaInicio ?? "";
     var fechaFinal = ViewBag.FechaFinal ?? "";
+    var columna = "col-md-6";
 }
 
 <h2>Solicitudes de Vacaciones</h2>
@@ -20,23 +21,29 @@
 @using (Html.BeginForm("Index", "Solicitud", FormMethod.Get))
 {
     <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-            @{
-                if (usuarioLogeado.Result.Role.Name.Equals("jefatura", StringComparison.OrdinalIgnoreCase))
-                {
-                    @Html.Label("Ver solicitudes", htmlAttributes: new { @id = "role-dropdown", @class = "control-label col-md-2" })
-                    <div class="col-md-6">
+        @{
+            if (usuarioLogeado.Result.Role.Name.Equals("jefatura", StringComparison.OrdinalIgnoreCase))
+            {
+                columna = "col-md-4";
+
+                <div class="col-md-4">
+                    @Html.Label("Ver solicitudes", htmlAttributes: new { @id = "role-dropdown", @class = "control-label" })
+                    <div>
                         <select id="FiltrarPor" name="FiltrarPor" class="dropdownOpciones form-control">
                             <option value="MisSolicitudes">Mis Solicitudes</option>
                             <option value="FuncionariosPorUnidadTecnica">De mis colaboradores a cargo</option>
                             <option value="Todos">Todos</option>
                         </select>
                     </div>
-                }
-                if (usuarioLogeado.Result.Role.Name.Equals("recursos humanos", StringComparison.OrdinalIgnoreCase) || usuarioLogeado.Result.Role.Name.Equals("manager", StringComparison.OrdinalIgnoreCase))
-                {
-                    @Html.Label("Ver solicitudes", htmlAttributes: new { @id = "role-dropdown", @class = "control-label col-md-2" })
-                    <div class="col-md-6">
+                </div>
+            }
+            if (usuarioLogeado.Result.Role.Name.Equals("recursos humanos", StringComparison.OrdinalIgnoreCase) || usuarioLogeado.Result.Role.Name.Equals("manager", StringComparison.OrdinalIgnoreCase))
+            {
+                columna = "col-md-4";
+
+                <div class="col-md-4">
+                    @Html.Label("Ver solicitudes", htmlAttributes: new { @id = "role-dropdown", @class = "control-label" })
+                    <div>
                         <select id="FiltrarPor" name="FiltrarPor" class="dropdownOpciones form-control">
                             <option value="MisSolicitudes">Mis Solicitudes</option>
                             <option value="Funcionarios">Funcionarios</option>
@@ -46,12 +53,16 @@
                             <option value="Todos">Todos</option>
                         </select>
                     </div>
-                }
+                </div>
+            }
 
-                if (usuarioLogeado.Result.Role.Name.Equals("director", StringComparison.OrdinalIgnoreCase))
-                {
-                    @Html.Label("Ver solicitudes", htmlAttributes: new { @id = "role-dropdown", @class = "control-label col-md-2" })
-                    <div class="col-md-6">
+            if (usuarioLogeado.Result.Role.Name.Equals("director", StringComparison.OrdinalIgnoreCase))
+            {
+                columna = "col-md-4";
+
+                <div class="col-md-4">
+                    @Html.Label("Ver solicitudes", htmlAttributes: new { @id = "role-dropdown", @class = "control-label" })
+                    <div>
                         <select id="FiltrarPor" name="FiltrarPor" class="dropdownOpciones form-control">
                             <option value="MisSolicitudes">Mis Solicitudes</option>
                             <option value="Jefaturas">De mis colaboradores a cargo (Jefaturas)</option>
@@ -61,16 +72,13 @@
                             <option value="Todos">Todos</option>
                         </select>
                     </div>
-                }
+                </div>
             }
-        </div>
-    </div>
-    <br />
+        }
 
-    <div class="row">
-        <div class="col-md-6">
-            @Html.Label("Fecha Inicio", htmlAttributes: new { @class = "control-label col-md-3" })
-            <div class="col-md-9">
+        <div class="@columna">
+            @Html.Label("Fecha Inicio", htmlAttributes: new { @class = "control-label" })
+            <div>
                 <div class='input-group date fecha-inicio'>
                     <input id="FechaInicio" name="FechaInicio" autocomplete="off" placeholder="yyyy/mm/dd" type="text" class="form-control" />
                     <span class="input-group-addon">
@@ -79,9 +87,9 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
-            @Html.Label("Fecha Final", htmlAttributes: new { @class = "control-label col-md-3" })
-            <div class="col-md-9">
+        <div class="@columna">
+            @Html.Label("Fecha Final", htmlAttributes: new { @class = "control-label" })
+            <div>
                 <div class='input-group date fecha-final'>
                     <input id="FechaFinal" name="FechaFinal" autocomplete="off" placeholder="yyyy/mm/dd" type="text" class="form-control" />
                     <span class="input-group-addon">

@@ -23,7 +23,7 @@ body {
 }
 
 .input-group-addon, .input-group-btn {
-    width: 0% !important;
+    /*width: 0% !important;*/
 }
 
 .input-group {
@@ -52,7 +52,7 @@ textarea.form-control {
     .datepicker-inline > .datepicker-days > .table-condensed {
         width: 100%;
         height: 100%;
-        border: 1px solid black;
+        /*border: 1px solid black;*/
     }
 
 .datepicker-inline > .datepicker-months {
@@ -63,7 +63,7 @@ textarea.form-control {
     .datepicker-inline > .datepicker-months > .table-condensed {
         width: 100%;
         height: 100%;
-        border: 1px solid black;
+        /*border: 1px solid black;*/
     }
 
 .datepicker-inline > .datepicker-years {
@@ -74,7 +74,7 @@ textarea.form-control {
     .datepicker-inline > .datepicker-years > .table-condensed {
         width: 100%;
         height: 100%;
-        border: 1px solid black;
+        /*border: 1px solid black;*/
     }
 
 .datepicker-inline > .datepicker-decades {
@@ -85,7 +85,7 @@ textarea.form-control {
     .datepicker-inline > .datepicker-decades > .table-condensed {
         width: 100%;
         height: 100%;
-        border: 1px solid black;
+        /*border: 1px solid black;*/
     }
 
 .datepicker-inline > .datepicker-centuries {
@@ -96,19 +96,19 @@ textarea.form-control {
     .datepicker-inline > .datepicker-centuries > .table-condensed {
         width: 100%;
         height: 100%;
-        border: 1px solid black;
+        /*border: 1px solid black;*/
     }
 
 .datepicker-inline table th {
-    border: 1px solid black !important;
+    /*border: 1px solid black !important;*/
 }
 
 .datepicker-inline table td {
-    border: 1px solid black !important;
+    /*border: 1px solid black !important;*/
 }
 
 .datepicker-inline table tr td span {
-    border: 1px solid black !important;
+    /*border: 1px solid black !important;*/
 }
 
 label {
@@ -116,7 +116,11 @@ label {
 }
 
 .input-group.date.fecha-inicio, .input-group.date.fecha-final {
-    width: 80% !important;
+    width: 100% !important;
+}
+
+.datepicker-inline {
+    background-color: white;
 }
 
 .cnm-texto {
@@ -136,7 +140,7 @@ label {
     /* the image you want to 'watermark' */
     height: 200px; /* or whatever, equal to the image you want 'watermarked' */
     width: 200px; /* as above */
-    background-image: url(../Fotos/watermark.png);
+    /*background-image: url(../Fotos/cnmheaderlogo.gif);*/
     background-position: 0 0;
     background-repeat: no-repeat;
     position: relative;
@@ -149,6 +153,7 @@ label {
         left: 0; /* or whatever, position according to taste */
         opacity: 0.5; /* Firefox, Chrome, Safari, Opera, IE >= 9 (preview) */
         filter: alpha(opacity=50); /* for <= IE 8 */
+        height: 120%;
     }
 
 /* For required fields */
@@ -168,4 +173,15 @@ label {
 
 #pdf-view-table tr td {
     border: 2px solid black;
+}
+
+.login-page {
+    background-image: url(../Fotos/csn.jpg) !important;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
+}
+
+.login-logo {
+    color: white !important;
 }

@@ -12,7 +12,7 @@
 <p>
     @*@Html.ActionLink("Crear Usuario", "Create")*@
     <a class="btn btn-default" href="@Url.Action("Create")">
-        Agregar Empleado<br>
+        Agregar<br>
         <i class="fa fa-user-plus w3-margin-bottom w3-text-theme" style="font-size:50px"></i>
     </a>
 </p>
@@ -20,9 +20,9 @@
 @using (Html.BeginForm("Index", "User", FormMethod.Get))
 {
     <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-            @Html.Label("Ver usuarios", htmlAttributes: new { @id = "role-dropdown", @class = "control-label col-md-2" })
-            <div class="col-md-10">
+        <div class="col-md-4">
+            @Html.Label("Ver usuarios", htmlAttributes: new { @id = "role-dropdown", @class = "control-label" })
+            <div>
                 <select id="EstadoUsuario" name="EstadoUsuario" class="dropdownOpciones form-control">
                     <option value="Activo">Activos</option>
                     <option value="Inactivo">Inactivos</option>
@@ -30,13 +30,9 @@
                 </select>
             </div>
         </div>
-    </div>
-    <br />
-
-    <div class="row">
-        <div class="col-md-6">
-            @Html.Label("Fecha Inicio", htmlAttributes: new { @class = "control-label col-md-3" })
-            <div class="col-md-9">
+        <div class="col-md-4">
+            @Html.Label("Fecha Inicio", htmlAttributes: new { @class = "control-label" })
+            <div>
                 <div class='input-group date fecha-inicio'>
                     <input id="FechaInicio" name="FechaInicio" autocomplete="off" placeholder="yyyy/mm/dd" type="text" class="form-control" />
                     <span class="input-group-addon">
@@ -45,9 +41,9 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
-            @Html.Label("Fecha Final", htmlAttributes: new { @class = "control-label col-md-3" })
-            <div class="col-md-9">
+        <div class="col-md-4">
+            @Html.Label("Fecha Final", htmlAttributes: new { @class = "control-label" })
+            <div>
                 <div class='input-group date fecha-final'>
                     <input id="FechaFinal" name="FechaFinal" autocomplete="off" placeholder="yyyy/mm/dd" type="text" class="form-control" />
                     <span class="input-group-addon">
