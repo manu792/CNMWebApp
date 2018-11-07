@@ -52,7 +52,7 @@
     }
     <!-- Fin Opciones para Recursos Humanos -->
     <!-- Opciones para Manager (Superusuario del sistema) -->
-    @if (Model.EsSuperusuario)
+    @*@if (Model.EsSuperusuario)
     {
         <div class="w3-third">
             <div class="w3-card w3-container" style="min-height:250px">
@@ -62,7 +62,7 @@
                 </a>
             </div>
         </div>
-    }
+    }*@
     <div class="w3-third">
         <div class="w3-card w3-container" style="min-height:250px">
             <a href="@Url.Action("Index", "Solicitud")">

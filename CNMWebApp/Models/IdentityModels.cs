@@ -404,6 +404,11 @@ namespace CNMWebApp.Models
 
             modelBuilder.Entity<IdentityRole>().ToTable("Roles");
 
+            modelBuilder.Entity<ApplicationUser>()
+                .HasOptional(x => x.SaldoDiasEmpleado)
+                .WithRequired(x => x.Usuario)
+                .WillCascadeOnDelete(false);
+
             // Tabla que se referencia a ella misma para jefes
             modelBuilder.Entity<ApplicationUser>()
                 .HasOptional(x => x.Jefe)

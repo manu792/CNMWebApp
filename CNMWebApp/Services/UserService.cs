@@ -61,8 +61,9 @@ namespace CNMWebApp.Services
         {
             var jefaturaRole = _roleManager.FindByName("Jefatura");
             var jefes = _userManager.Users
-                .Where(x => x.UnidadTecnicaId == unidadTecnicaId && x.Roles.Any(r => r.RoleId == jefaturaRole.Id))
-                .ToList();
+                .Where(x => x.Roles.Any(r => r.RoleId == jefaturaRole.Id));
+
+            jefes = jefes.Where(x => x.UnidadTecnicaId == unidadTecnicaId);
 
             return jefes.Select(x => new UserViewModel()
             {
@@ -252,7 +253,7 @@ namespace CNMWebApp.Services
                 user.EstaActivo = usuario.EstaActivo;
                 user.FotoRuta = string.IsNullOrEmpty(fotoRuta) ? null : fotoRuta;
                 user.SaldoDiasEmpleado.SaldoDiasDisponibles = usuario.SaldoDiasDisponibles;
-                user.JefeId = usuario.JefeId;
+                user.JefeId = usuario.SelectedJefeId;
 
                 var resultado = _userManager.Update(user);
 

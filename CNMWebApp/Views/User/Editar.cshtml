@@ -187,6 +187,12 @@
 @section scripts
 {
     <script>
+        var role = $('#SelectedRoleId option:selected').text();
+        var roleId = $('#SelectedRoleId').val();
+        var checkbox = '';
+
+        alert(selectedJefeId);
+
         $('#submit-btn').click(function () {
             var roleId = $('#SelectedRoleId').val();
 
@@ -204,9 +210,6 @@
             liveSearchPlaceholder: 'Buscar...',
             noneSelectedText: 'No se encontraron jefes para la unidad técnica'
         });
-        var role = $('#SelectedRoleId option:selected').text();
-        var roleId = $('#SelectedRoleId').val();
-        var checkbox = '';
 
         if (role.toLowerCase() === 'director') {
             var url = '@Url.Action("ObtenerUnidadesCategoriasPorRoleId", "User")';
@@ -325,9 +328,10 @@
         var GetSelectedRoleId = function (role) {
             var roleId = role;
             var url = '@Url.Action("ObtenerUnidadesCategoriasPorRoleId", "User")';
-            $('#SelectedJefeId').html('');
 
             if (roleId == 4) { // Director
+                $('#SelectedJefeId').html('');
+
                 var id = $('#Id').val();
                 var nombre = $('#Nombre').val();
                 var primerApellido = $('#PrimerApellido').val();
@@ -340,6 +344,8 @@
             }
 
             else if (roleId == 2 || roleId == 5) { // Jefatura o Recursos Humanos
+                $('#SelectedJefeId').html('');
+
                 var url = '@Url.Action("ObtenerDirectorGeneral", "User")';
 
                 $.ajax({
