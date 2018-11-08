@@ -54,18 +54,12 @@
                     <td class="inner-td-pdf">
                         <table class="inner-table-pdf">
                             <tr>
-                                <td><strong>Clase de Puesto:</strong></td>
-                            </tr>
-                            <tr>
                                 <td class="no-bottom-border"><strong>Especialidad:</strong></td>
                             </tr>
                         </table>
                     </td>
                     <td class="inner-td-pdf">
                         <table class="inner-table-pdf">
-                            <tr>
-                                <td>N/A</td>
-                            </tr>
                             <tr>
                                 <td class="no-bottom-border">@categoria</td>
                             </tr>
@@ -89,7 +83,7 @@
                 <tr>
                     <td>@Model.DiasSegunAntiguedad</td>
                     <td>@Model.CantidadDiasDisfrutadosPeriodo</td>
-                    <td>@{Model.SaldoDiasDisponibles + Model.CantidadDiasSolicitados}</td>
+                    <td>@Model.DiasDisponibles</td>
                     <td>@Model.CantidadDiasSolicitados</td>
                     <td>@Model.SaldoDiasDisponibles</td>
                 </tr>
@@ -100,19 +94,45 @@
                     <td colspan="5" style="height: 100px">@Model.Comentario</td>
                 </tr>
                 <tr>
-                    <td><strong>Firma del Solicitante</strong></td>
+                    <td style="height: 180px" colspan="5">
+                        <div class="row firmas-pdf">
+                            <div class="col-md-4">
+                                <div class="row">
+                                    <p><strong>_________________________</strong></p>
+                                </div>
+                                <div class="row">
+                                    <p><strong>Firma del Solicitante</strong></p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="row">
+                                    <p><strong>_________________________</strong></p>
+                                </div>
+                                <div class="row">
+                                    <p><strong>Aprobado por Jefe</strong></p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="row">
+                                    <p><strong>_________________________</strong></p>
+                                </div>
+                                <div class="row">
+                                    <p><strong>Vo.Bo. Recursos Humanos</strong></p>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    @*<td><strong>Firma del Solicitante</strong></td>
                     <td><strong>Aprobado por Jefe</strong></td>
-                    <td><strong>SELLO</strong></td>
-                    <td><strong>Recibido por: RH</strong></td>
                     <td><strong>Vo.Bo. Recursos Humanos</strong></td>
+                    <td><strong>SELLO</strong></td>*@
                 </tr>
-                <tr>
+                @*<tr>
                     <td style="height: 100px"></td> <!-- Se queda vacio -->
                     <td style="height: 100px"></td> <!-- Se queda vacio -->
                     <td style="height: 100px"></td> <!-- Se queda vacio -->
-                    <td style="height: 100px"><strong>Fecha: @DateTime.Now.ToString("yyyy/MM/dd")</strong></td>
                     <td style="height: 100px"></td> <!-- Se queda vacio -->
-                </tr>
+                </tr>*@
             </table>
         </div>
     </div>

@@ -125,6 +125,8 @@ namespace CNMWebApp.Models
         public int DiasSegunAntiguedad { get; set; }
         [DisplayName("Disfrutados")]
         public int CantidadDiasDisfrutadosPeriodo { get; set; }
+        [DisplayName("Disponibles")]
+        public int DiasDisponibles { get; set; }
     }
 
     public class SolicitudParaEmpleado : SolicitudViewModel

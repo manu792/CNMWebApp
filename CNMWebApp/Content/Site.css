@@ -182,7 +182,7 @@ label {
 
     #pdf-view-table th, td {
         border: 2px solid black;
-        padding: 5px !important;
+        padding: 10px !important;
     }
 
 .inner-table-pdf {
@@ -213,4 +213,8 @@ label {
 
 .login-logo {
     color: white !important;
+}
+
+.firmas-pdf {
+    margin-top: 5%;
 }

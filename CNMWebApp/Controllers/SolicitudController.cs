@@ -146,7 +146,7 @@ namespace CNMWebApp.Controllers
             var annosLaborados = DateTime.Now.Year - solicitud.Usuario.FechaIngreso.Year;
             if (solicitud.Usuario.FechaIngreso > DateTime.Now.AddYears(-annosLaborados)) annosLaborados--;
 
-            return View(new SolicitudViewModel()
+            return View("PDFView", new SolicitudViewModel()
             {
                 SolicitudId = solicitud.SolicitudVacacionesId,
                 UsuarioId = solicitud.Usuario.Id,
@@ -445,7 +445,8 @@ namespace CNMWebApp.Controllers
                 SaldoDiasDisponibles = solicitudAprobada.Usuario.SaldoDiasEmpleado.SaldoDiasDisponibles,
                 UnidadTecnica = solicitudAprobada.Usuario.UnidadTecnica,
                 DiasSegunAntiguedad = userService.CalcularDiasPorAntiguedad(solicitudAprobada.Usuario.FechaIngreso),
-                CantidadDiasDisfrutadosPeriodo = solicitudService.ObtenerCantidadDiasDisfrutadosPeriodoPorEmpleado(solicitudAprobada.UsuarioId)
+                CantidadDiasDisfrutadosPeriodo = solicitudService.ObtenerCantidadDiasDisfrutadosPeriodoPorEmpleado(solicitudAprobada.UsuarioId),
+                DiasDisponibles = (int)solicitudAprobada.Usuario.SaldoDiasEmpleado.SaldoDiasDisponibles + solicitudAprobada.CantidadDiasSolicitados
             };
 
             var pdf = GeneratePDF(solicitudViewModel);
