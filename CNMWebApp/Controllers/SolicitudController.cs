@@ -443,7 +443,9 @@ namespace CNMWebApp.Controllers
                 PrimerApellido = solicitudAprobada.Usuario.PrimerApellido,
                 SegundoApellido = solicitudAprobada.Usuario.SegundoApellido,
                 SaldoDiasDisponibles = solicitudAprobada.Usuario.SaldoDiasEmpleado.SaldoDiasDisponibles,
-                UnidadTecnica = solicitudAprobada.Usuario.UnidadTecnica
+                UnidadTecnica = solicitudAprobada.Usuario.UnidadTecnica,
+                DiasSegunAntiguedad = userService.CalcularDiasPorAntiguedad(solicitudAprobada.Usuario.FechaIngreso),
+                CantidadDiasDisfrutadosPeriodo = solicitudService.ObtenerCantidadDiasDisfrutadosPeriodoPorEmpleado(solicitudAprobada.UsuarioId)
             };
 
             var pdf = GeneratePDF(solicitudViewModel);

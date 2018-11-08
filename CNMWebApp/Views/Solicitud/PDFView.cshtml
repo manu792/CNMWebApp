@@ -87,9 +87,9 @@
                     <td><strong>SALDO ACTUAL</strong></td>
                 </tr>
                 <tr>
-                    <td>N/A</td>
-                    <td>N/A</td>
-                    <td>N/A</td>
+                    <td>@Model.DiasSegunAntiguedad</td>
+                    <td>@Model.CantidadDiasDisfrutadosPeriodo</td>
+                    <td>@{Model.SaldoDiasDisponibles + Model.CantidadDiasSolicitados}</td>
                     <td>@Model.CantidadDiasSolicitados</td>
                     <td>@Model.SaldoDiasDisponibles</td>
                 </tr>

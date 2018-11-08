@@ -121,6 +121,10 @@ namespace CNMWebApp.Models
         public string ComentarioJefatura { get; set; }
         public IEnumerable<DiasPorSolicitudViewModel> DiasPorSolicitud { get; set; }
         public DateTime FechaSolicitud { get; set; }
+        [DisplayName("Derecho a disfrutar")]
+        public int DiasSegunAntiguedad { get; set; }
+        [DisplayName("Disfrutados")]
+        public int CantidadDiasDisfrutadosPeriodo { get; set; }
     }
 
     public class SolicitudParaEmpleado : SolicitudViewModel

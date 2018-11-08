@@ -435,6 +435,34 @@ namespace CNMWebApp.Services
             }
         }
 
+        public int CalcularDiasPorAntiguedad(DateTime fechaIngreso)
+        {
+            var annosLaborados = DateTime.Now.Year - fechaIngreso.Year;
+            if (fechaIngreso > DateTime.Now.AddYears(-annosLaborados)) annosLaborados--;
+
+            if (annosLaborados >= 11)
+                return 26;
+
+            switch (annosLaborados)
+            {
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                    return 15;
+                case 6:
+                case 7:
+                case 8:
+                case 9:
+                case 10:
+                    return 20;
+                default:
+                    return 0;
+            }
+        }
+
         private void VerificarExistenciaJefaturas(UserRolesUnidadCategoria usuario)
         {
             var jefaturaRole = _roleService.ObtenerRolPorNombre("Jefatura");
