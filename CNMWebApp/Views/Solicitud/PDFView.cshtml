@@ -18,16 +18,19 @@
 <body>
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
-            <img src="~/Fotos/watermark.png" />
+            <img id="pdf-img" src="~/Fotos/watermark.png" />
         </div>
     </div>
     <div id="titulo-pdf" class="row">
         <div>
-            <h3>MINISTERIO DE CULTURA y JUVENTUD</h3>
-            <h3>CENTRO NACIONAL DE LA MÚSICA</h3>
-            <h3>GESTIÓN DE RECURSOS HUMANOS AUXILIAR</h3>
+            <h3>Ministerio de Cultura y Juventud</h3>
+            <h3>Centro Nacional de la Música</h3>
+            <h3>Gestión de Recursos Humanos Auxiliar</h3>
         </div>
     </div>
+    <br />
+    <br />
+
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
             <table id="pdf-view-table">
@@ -48,23 +51,23 @@
                 <tr>
                     <td><strong>Departamento:</strong></td>
                     <td colspan="2">@unidad</td>
-                    <td>
-                        <table>
+                    <td class="inner-td-pdf">
+                        <table class="inner-table-pdf">
                             <tr>
                                 <td><strong>Clase de Puesto:</strong></td>
                             </tr>
                             <tr>
-                                <td><strong>Especialidad:</strong></td>
+                                <td class="no-bottom-border"><strong>Especialidad:</strong></td>
                             </tr>
                         </table>
                     </td>
-                    <td>
-                        <table>
+                    <td class="inner-td-pdf">
+                        <table class="inner-table-pdf">
                             <tr>
-                                <td colspan="2">N/A</td>
+                                <td>N/A</td>
                             </tr>
                             <tr>
-                                <td colspan="2">@categoria</td>
+                                <td class="no-bottom-border">@categoria</td>
                             </tr>
                         </table>
                     </td>
@@ -91,24 +94,10 @@
                     <td>@Model.SaldoDiasDisponibles</td>
                 </tr>
                 <tr>
-                    <td></td> <!-- Se queda vacio -->
-                    <td></td> <!-- Se queda vacio -->
-                    <td></td> <!-- Se queda vacio -->
-                    <td></td> <!-- Se queda vacio -->
-                    <td></td> <!-- Se queda vacio -->
-                </tr>
-                <tr>
-                    <td></td> <!-- Se queda vacio -->
-                    <td></td> <!-- Se queda vacio -->
-                    <td></td> <!-- Se queda vacio -->
-                    <td></td> <!-- Se queda vacio -->
-                    <td></td> <!-- Se queda vacio -->
-                </tr>
-                <tr>
                     <td colspan="5"><strong>Observaciones:</strong></td>
                 </tr>
                 <tr>
-                    <td colspan="5">@Model.Comentario</td>
+                    <td colspan="5" style="height: 100px">@Model.Comentario</td>
                 </tr>
                 <tr>
                     <td><strong>Firma del Solicitante</strong></td>

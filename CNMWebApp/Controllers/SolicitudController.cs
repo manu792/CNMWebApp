@@ -182,7 +182,7 @@ namespace CNMWebApp.Controllers
             {
                 PageSize = Rotativa.Options.Size.A4,
                 PageOrientation = Rotativa.Options.Orientation.Portrait,
-                PageMargins = new Margins(12, 25, 12, 25)
+                PageMargins = new Margins(12, 12, 12, 12)
             };
 
             byte[] pdf = actionPDF.BuildFile(ControllerContext);
@@ -457,7 +457,7 @@ namespace CNMWebApp.Controllers
             var jefe = new UserViewModel();
 
             if (solicitante.Role.Name.Equals("funcionario", StringComparison.OrdinalIgnoreCase))
-                jefe = userService.ObtenerJefePorEmpleadoId(solicitante.Id);
+                jefe = userService.ObtenerJefePorEmpleadoId(solicitante.JefeId);
             if (solicitante.Role.Name.Equals("jefatura", StringComparison.OrdinalIgnoreCase) || solicitante.Role.Name.Equals("recursos humanos", StringComparison.OrdinalIgnoreCase))
                 jefe = userService.ObtenerDirectorGeneral();
             if (solicitante.Role.Name.Equals("director", StringComparison.OrdinalIgnoreCase))

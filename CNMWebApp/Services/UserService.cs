@@ -31,11 +31,11 @@ namespace CNMWebApp.Services
             _context = new ApplicationDbContext();
         }
 
-        public UserViewModel ObtenerJefePorEmpleadoId(string empleadoId)
+        public UserViewModel ObtenerJefePorEmpleadoId(string jefeId)
         {
             var jefaturaRole = _roleManager.FindByName("Jefatura");
             var jefe = _userManager.Users
-                .Where(x => x.Id == empleadoId && x.Roles.Any(r => r.RoleId == jefaturaRole.Id))
+                .Where(x => x.Id == jefeId && x.Roles.Any(r => r.RoleId == jefaturaRole.Id))
                 .FirstOrDefault();
 
             if (jefe == null)

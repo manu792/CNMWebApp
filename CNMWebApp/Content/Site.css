@@ -171,15 +171,44 @@ label {
     text-align: center;
 }
 
-#pdf-view-table tr td {
-    border: 2px solid black;
+#pdf-img {
+    width: 100%;
+}
+
+#pdf-view-table {
+    width: 100%;
+    text-align: center;
+}
+
+    #pdf-view-table th, td {
+        border: 2px solid black;
+        padding: 5px !important;
+    }
+
+.inner-table-pdf {
+    width: 100%;
+}
+
+.inner-td-pdf td {
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}
+
+.inner-td-pdf .no-bottom-border {
+    border-bottom: none;
+}
+
+.inner-td-pdf {
+    padding: 0px !important;
 }
 
 .login-page {
-    background-image: url(../Fotos/csn.jpg) !important;
-    background-size: cover !important;
+    max-height: 100% !important;
+    background-image: url(../Fotos/csn.jpg), url(../Fotos/penta.png) !important;
+    /*background-size: cover !important;*/
     background-repeat: no-repeat !important;
-    background-position: center center !important;
+    /*background-position: center !important;*/
 }
 
 .login-logo {
