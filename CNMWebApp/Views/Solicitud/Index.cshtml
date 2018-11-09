@@ -37,7 +37,7 @@
                     </div>
                 </div>
             }
-            if (usuarioLogeado.Result.Role.Name.Equals("recursos humanos", StringComparison.OrdinalIgnoreCase) || usuarioLogeado.Result.Role.Name.Equals("manager", StringComparison.OrdinalIgnoreCase))
+            if (usuarioLogeado.Result.Role.Name.Equals("recursos humanos", StringComparison.OrdinalIgnoreCase) || usuarioLogeado.Result.Role.Name.Equals("manager", StringComparison.OrdinalIgnoreCase) || (usuarioLogeado.Result.EsSuperusuario && usuarioLogeado.Result.Role.Name.Equals("funcionario", StringComparison.OrdinalIgnoreCase)))
             {
                 columna = "col-md-4";
 
