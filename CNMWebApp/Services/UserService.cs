@@ -154,6 +154,8 @@ namespace CNMWebApp.Services
                     .Where(x => !x.Email.Equals("manager@manager.com"))
                     .ToList();
 
+            var roleManager = _roleManager.FindByName("Manager");
+
             return users.Select(x => new UserViewModel()
             {
                 Id = x.Id,
@@ -164,7 +166,7 @@ namespace CNMWebApp.Services
                 PhoneNumber = x.PhoneNumber,
                 FechaIngreso = x.FechaIngreso,
                 FechaCreacion = x.FechaCreacion,
-                Role = _roleManager.FindById(x.Roles.First().RoleId.ToString()),
+                Role = _roleManager.FindById(x.Roles.First(r => r.RoleId != roleManager.Id).RoleId.ToString()),
                 UnidadTecnica = x.UnidadTecnica,
                 Categoria = x.Categoria,
                 EstaActivo = x.EstaActivo,
@@ -185,6 +187,10 @@ namespace CNMWebApp.Services
             if (user == null)
                 return null;
 
+            var managerRole = _roleManager.FindByName("Manager");
+
+            var roleId = _roleManager.FindById(user.Roles.First(x => x.RoleId != managerRole.Id).RoleId.ToString());
+
             return new UserViewModel()
             {
                 Id = user.Id,
@@ -195,7 +201,7 @@ namespace CNMWebApp.Services
                 PhoneNumber = user.PhoneNumber,
                 FechaIngreso = user.FechaIngreso,
                 FechaCreacion = user.FechaCreacion,
-                Role = _roleManager.FindById(user.Roles.First().RoleId.ToString()),
+                Role = roleId,
                 UnidadTecnica = user.UnidadTecnica,
                 Categoria = user.Categoria,
                 EstaActivo = user.EstaActivo,
@@ -223,7 +229,8 @@ namespace CNMWebApp.Services
                 GuardarFoto(usuario.Foto);
 
                 // Reemplazo el rol del usuario en caso que se haya seleccionado uno diferente
-                var roleId = user.Roles.FirstOrDefault().RoleId;
+                var roleManager = _roleManager.FindByName("Manager");
+                var roleId = user.Roles.First(x => x.RoleId != roleManager.Id).RoleId;
                 var role = _roleManager.Roles.FirstOrDefault(r => r.Id == roleId);
                 var newRole = _roleManager.Roles.FirstOrDefault(r => r.Id == usuario.SelectedRoleId);
 

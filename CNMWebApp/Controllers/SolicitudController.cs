@@ -146,7 +146,7 @@ namespace CNMWebApp.Controllers
             var annosLaborados = DateTime.Now.Year - solicitud.Usuario.FechaIngreso.Year;
             if (solicitud.Usuario.FechaIngreso > DateTime.Now.AddYears(-annosLaborados)) annosLaborados--;
 
-            return View("PDFView", new SolicitudViewModel()
+            return View(new SolicitudViewModel()
             {
                 SolicitudId = solicitud.SolicitudVacacionesId,
                 UsuarioId = solicitud.Usuario.Id,

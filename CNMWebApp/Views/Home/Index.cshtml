@@ -1,75 +1,113 @@
 ﻿@model CNMWebApp.Models.UserViewModel
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var col = "col-md-4";
+    var count = 3;
+    var paddingClass = "";
+
+    if(Model.Role.Name.Equals("jefatura", StringComparison.OrdinalIgnoreCase) || Model.Role.Name.Equals("director", StringComparison.OrdinalIgnoreCase))
+    {
+        count = 3;
+    }
+
+    if (Model.Role.Name.Equals("recursos humanos", StringComparison.OrdinalIgnoreCase))
+    {
+        count = 4;
+    }
+
+    if (Model.Role.Name.Equals("funcionario", StringComparison.OrdinalIgnoreCase))
+    {
+        count = 2;
+    }
+
+    if(Model.EsSuperusuario && !Model.Email.Equals("manager@manager.com") && !Model.Role.Name.Equals("recursos humanos", StringComparison.OrdinalIgnoreCase))
+    {
+        count += 2;
+    }
+
+    if(count == 2 || count >= 4)
+    {
+        col = "col-md-6";
+    }
 }
 
-<div class="w3-row-padding w3-center w3-margin-top">
-    <!-- Opciones para todos los empleados, menos superusuario por defecto del sistema -->
-    @if (!Model.Email.Equals("manager@manager.com"))
-    {
-        <div class="w3-third">
-            <div class="w3-card w3-container" style="min-height:250px">
-                <a href="@Url.Action("Crear", "Solicitud")">
-                    <h3>Solicitar Vacaciones</h3><br>
-                    <i class="fa fa-plane w3-margin-bottom w3-text-theme" style="font-size:120px"></i>
-                </a>
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <div class="w3-row-padding w3-center w3-margin-top">
+            <div class="row">
+                <!-- Opciones para todos los empleados, menos superusuario por defecto del sistema -->
+                @if (!Model.Email.Equals("manager@manager.com"))
+                {
+                    <div class="@col">
+                        <div class="w3-third icono">
+                            <div class="w3-card w3-container" style="min-height:250px">
+                                <a href="@Url.Action("Crear", "Solicitud")">
+                                    <h3>Solicitar Vacaciones</h3><br>
+                                    <i class="fa fa-plane w3-margin-bottom w3-text-theme" style="font-size:120px"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                }
+                <!-- Fin Opciones para todos los empleados -->
+                <!-- Opciones para la Jefatura y Directores -->
+                @if (Model.Role.Name.Equals("jefatura", StringComparison.OrdinalIgnoreCase) || Model.Role.Name.Equals("director", StringComparison.OrdinalIgnoreCase))
+                {
+                    <div class="@col">
+                        <div class="w3-third icono">
+                            <div class="w3-card w3-container" style="min-height:250px">
+                                <a href="@Url.Action("SolicitudesEmpleados", "Solicitud")">
+                                    <h3>Aprobar/Rechazar Solicitudes</h3><br>
+                                    <i class="fa fa-check w3-margin-bottom w3-text-theme" style="font-size:120px"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                }
+                <!-- Fin Opciones para la Jefatura y Directores -->
+                <!-- Opciones para Recursos Humanos -->
+                @if (Model.EsSuperusuario || Model.Role.Name.Equals("recursos humanos", StringComparison.OrdinalIgnoreCase))
+                {
+                    <div class="@col">
+                        <div class="w3-third icono">
+                            <div class="w3-card w3-container" style="min-height:250px">
+                                <a href="@Url.Action("Index", "User")">
+                                    <h3>Empleados</h3><br>
+                                    <i class="fa fa-users w3-margin-bottom w3-text-theme" style="font-size:120px"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="@col">
+                        <div class="w3-third icono">
+                            <div class="w3-card w3-container" style="min-height:250px">
+                                <a href="@Url.Action("CrearParaEmpleado", "Solicitud")">
+                                    <h3>Vacaciones Empleado</h3><br>
+                                    <i class="fa fa-hotel w3-margin-bottom w3-text-theme" style="font-size:120px"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                }
+                <!-- Fin Opciones para Recursos Humanos -->
+                <!-- Opciones para Manager (Superusuario del sistema) -->
+                @if(count > 4)
+                {
+                    paddingClass = "new-row";
+                }
+                <div class="@col @paddingClass">
+                    <div class="w3-third icono">
+                        <div class="w3-card w3-container" style="min-height:250px">
+                            <a href="@Url.Action("Index", "Solicitud")">
+                                <h3>Historial Solicitudes</h3><br>
+                                <i class="fa fa-book w3-margin-bottom w3-text-theme" style="font-size:120px"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Fin Opciones para Manager (Superusuario del sistema) -->
             </div>
-        </div>
-    }
-    <!-- Fin Opciones para todos los empleados -->
-    <!-- Opciones para la Jefatura y Directores -->
-    @if (Model.Role.Name.Equals("jefatura", StringComparison.OrdinalIgnoreCase) || Model.Role.Name.Equals("director", StringComparison.OrdinalIgnoreCase))
-    {
-        <div class="w3-third">
-            <div class="w3-card w3-container" style="min-height:250px">
-                <a href="@Url.Action("SolicitudesEmpleados", "Solicitud")">
-                    <h3>Aprobar/Rechazar Solicitudes</h3><br>
-                    <i class="fa fa-check w3-margin-bottom w3-text-theme" style="font-size:120px"></i>
-                </a>
-            </div>
-        </div>
-    }
-    <!-- Fin Opciones para la Jefatura y Directores -->
-    <!-- Opciones para Recursos Humanos -->
-    @if (Model.EsSuperusuario || Model.Role.Name.Equals("recursos humanos", StringComparison.OrdinalIgnoreCase))
-    {
-        <div class="w3-third">
-            <div class="w3-card w3-container" style="min-height:250px">
-                <a href="@Url.Action("Index", "User")">
-                    <h3>Empleados</h3><br>
-                    <i class="fa fa-users w3-margin-bottom w3-text-theme" style="font-size:120px"></i>
-                </a>
-            </div>
-        </div>
-        <div class="w3-third">
-            <div class="w3-card w3-container" style="min-height:250px">
-                <a href="@Url.Action("CrearParaEmpleado", "Solicitud")">
-                    <h3>Vacaciones Empleado</h3><br>
-                    <i class="fa fa-hotel w3-margin-bottom w3-text-theme" style="font-size:120px"></i>
-                </a>
-            </div>
-        </div>
-    }
-    <!-- Fin Opciones para Recursos Humanos -->
-    <!-- Opciones para Manager (Superusuario del sistema) -->
-    @*@if (Model.EsSuperusuario)
-    {
-        <div class="w3-third">
-            <div class="w3-card w3-container" style="min-height:250px">
-                <a href="@Url.Action("CrearParaEmpleado", "Solicitud")">
-                    <h3>Vacaciones Empleado</h3><br>
-                    <i class="fa fa-hotel w3-margin-bottom w3-text-theme" style="font-size:120px"></i>
-                </a>
-            </div>
-        </div>
-    }*@
-    <div class="w3-third">
-        <div class="w3-card w3-container" style="min-height:250px">
-            <a href="@Url.Action("Index", "Solicitud")">
-                <h3>Historial Solicitudes</h3><br>
-                <i class="fa fa-book w3-margin-bottom w3-text-theme" style="font-size:120px"></i>
-            </a>
         </div>
     </div>
-    <!-- Fin Opciones para Manager (Superusuario del sistema) -->
 </div>
