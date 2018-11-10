@@ -352,7 +352,7 @@ namespace CNMWebApp.Models
         public DbSet<SaldoDiasPorEmpleado> SaldoDiasEmpleados { get; set; }
 
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("CNMDBDev", throwIfV1Schema: false)
         {
             Database.SetInitializer(new Initializer());
         }

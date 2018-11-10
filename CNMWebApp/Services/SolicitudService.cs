@@ -61,7 +61,21 @@ namespace CNMWebApp.Services
             DateTime fechaI;
             DateTime fechaF;
 
-            if(usuario.Role.Name.Equals("funcionario", StringComparison.OrdinalIgnoreCase))
+            if(usuario.Role.Name.Equals("funcionario", StringComparison.OrdinalIgnoreCase) && usuario.EsSuperusuario)
+            {
+                if (!string.IsNullOrEmpty(fechaInicio) && !string.IsNullOrEmpty(fechaFinal))
+                {
+                    if (DateTime.TryParse(fechaInicio, out fechaI) && DateTime.TryParse(fechaFinal, out fechaF))
+                    {
+                        return context.SolicitudesVacaciones.Where(x => x.FechaSolicitud >= fechaI &&
+                            x.FechaSolicitud <= fechaF);
+                    }
+                }
+
+                return context.SolicitudesVacaciones;
+            }
+
+            else if(usuario.Role.Name.Equals("funcionario", StringComparison.OrdinalIgnoreCase))
             {
                 if (!string.IsNullOrEmpty(fechaInicio) && !string.IsNullOrEmpty(fechaFinal))
                 {

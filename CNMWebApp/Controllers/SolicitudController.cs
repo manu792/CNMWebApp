@@ -71,7 +71,8 @@ namespace CNMWebApp.Controllers
                 return solicitudService.ObtenerMisSolicitudes(user, fechaInicio, fechaFinal).ToList();
             if (filtrarPor.Equals("funcionarios", StringComparison.OrdinalIgnoreCase))
             {
-                if (!(user.Role.Name.Equals("director", StringComparison.OrdinalIgnoreCase) ||
+                if (!(user.Role.Name.Equals("funcionario", StringComparison.OrdinalIgnoreCase) && user.EsSuperusuario) && 
+                    !(user.Role.Name.Equals("director", StringComparison.OrdinalIgnoreCase) ||
                     user.Role.Name.Equals("recursos humanos", StringComparison.OrdinalIgnoreCase) ||
                     user.Role.Name.Equals("manager", StringComparison.OrdinalIgnoreCase)))
                     throw new Exception("Rol inválido");
@@ -84,7 +85,8 @@ namespace CNMWebApp.Controllers
                 // El rol de funcionario es el unico que no puede ver 
                 // solicitudes de funcionarios dentro de una unidad tecnica especifica
 
-                if(user.Role.Name.Equals("funcionario", StringComparison.OrdinalIgnoreCase))
+                if(!(user.Role.Name.Equals("funcionario", StringComparison.OrdinalIgnoreCase) && user.EsSuperusuario) && 
+                    user.Role.Name.Equals("funcionario", StringComparison.OrdinalIgnoreCase))
                     throw new Exception("Rol inválido");
 
                 return solicitudService.ObtenerSolicitudesFuncionariosPorUnidad(fechaInicio, fechaFinal, user).ToList();
@@ -92,7 +94,8 @@ namespace CNMWebApp.Controllers
                 
             if (filtrarPor.Equals("jefaturas", StringComparison.OrdinalIgnoreCase))
             {
-                if (!(user.Role.Name.Equals("director", StringComparison.OrdinalIgnoreCase) ||
+                if (!(user.Role.Name.Equals("funcionario", StringComparison.OrdinalIgnoreCase) && user.EsSuperusuario) && 
+                    !(user.Role.Name.Equals("director", StringComparison.OrdinalIgnoreCase) ||
                     user.Role.Name.Equals("recursos humanos", StringComparison.OrdinalIgnoreCase) ||
                     user.Role.Name.Equals("manager", StringComparison.OrdinalIgnoreCase)))
                     throw new Exception("Rol inválido");
@@ -102,7 +105,8 @@ namespace CNMWebApp.Controllers
                 
             if (filtrarPor.Equals("recursoshumanos", StringComparison.OrdinalIgnoreCase))
             {
-                if (!(user.Role.Name.Equals("director", StringComparison.OrdinalIgnoreCase) ||
+                if (!(user.Role.Name.Equals("funcionario", StringComparison.OrdinalIgnoreCase) && user.EsSuperusuario) && 
+                    !(user.Role.Name.Equals("director", StringComparison.OrdinalIgnoreCase) ||
                     user.Role.Name.Equals("recursos humanos", StringComparison.OrdinalIgnoreCase) ||
                     user.Role.Name.Equals("manager", StringComparison.OrdinalIgnoreCase)))
                     throw new Exception("Rol inválido");
@@ -112,7 +116,8 @@ namespace CNMWebApp.Controllers
                 
             if (filtrarPor.Equals("directorgeneral", StringComparison.OrdinalIgnoreCase))
             {
-                if (!(user.Role.Name.Equals("director", StringComparison.OrdinalIgnoreCase) ||
+                if (!(user.Role.Name.Equals("funcionario", StringComparison.OrdinalIgnoreCase) && user.EsSuperusuario) && 
+                    !(user.Role.Name.Equals("director", StringComparison.OrdinalIgnoreCase) ||
                     user.Role.Name.Equals("recursos humanos", StringComparison.OrdinalIgnoreCase) ||
                     user.Role.Name.Equals("manager", StringComparison.OrdinalIgnoreCase)))
                     throw new Exception("Rol inválido");
@@ -122,7 +127,8 @@ namespace CNMWebApp.Controllers
                 
             if (filtrarPor.Equals("directoradministrativo", StringComparison.OrdinalIgnoreCase))
             {
-                if (!(user.Role.Name.Equals("director", StringComparison.OrdinalIgnoreCase) ||
+                if (!(user.Role.Name.Equals("funcionario", StringComparison.OrdinalIgnoreCase) && user.EsSuperusuario) && 
+                    !(user.Role.Name.Equals("director", StringComparison.OrdinalIgnoreCase) ||
                     user.Role.Name.Equals("recursos humanos", StringComparison.OrdinalIgnoreCase) ||
                     user.Role.Name.Equals("manager", StringComparison.OrdinalIgnoreCase)))
                     throw new Exception("Rol inválido");
