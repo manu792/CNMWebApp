@@ -1,4 +1,4 @@
-﻿@model PagedList.IPagedList<CNMWebApp.Models.SolicitudVacaciones>
+﻿@model PagedList.IPagedList<CNMWebApp.Models.SolicitudViewModel>
 @using PagedList.Mvc;
 
 @{
@@ -53,6 +53,9 @@
     <table class="table table-bordered table-striped">
         <tr>
             <th>
+                @Html.Label("Número Solicitud")
+            </th>
+            <th>
                 @Html.Label("Estado Actual")
             </th>
             <th>
@@ -85,19 +88,22 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Estado.Nombre)
+                    @Html.DisplayFor(modelItem => item.SolicitudNumero)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.UsuarioId)
+                    @Html.DisplayFor(modelItem => item.Estado)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Usuario.Nombre)
+                    @Html.DisplayFor(modelItem => item.Id)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Usuario.PrimerApellido)
+                    @Html.DisplayFor(modelItem => item.Nombre)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Usuario.SegundoApellido)
+                    @Html.DisplayFor(modelItem => item.PrimerApellido)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SegundoApellido)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Comentario)
@@ -109,7 +115,7 @@
                     @Html.DisplayFor(modelItem => item.FechaSolicitud)
                 </td>
                 <td>
-                    @Html.ActionLink("Revisar", "Revisar", new { id = item.SolicitudVacacionesId })
+                    @Html.ActionLink("Revisar", "Revisar", new { id = item.SolicitudId })
                 </td>
             </tr>
         }

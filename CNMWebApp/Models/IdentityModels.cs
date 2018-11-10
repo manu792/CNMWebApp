@@ -21,7 +21,7 @@ namespace CNMWebApp.Models
     [Table("SolicitudesVacaciones")]
     public class SolicitudVacaciones
     {
-        public Guid SolicitudVacacionesId { get; set; }
+        public int SolicitudVacacionesId { get; set; }
         [Required]
         public string UsuarioId { get; set; }
         public int CantidadDiasSolicitados { get; set; }
@@ -43,7 +43,7 @@ namespace CNMWebApp.Models
     {
         [Key]
         [Column(Order = 0)]
-        public Guid SolicitudVacacionesId { get; set; }
+        public int SolicitudVacacionesId { get; set; }
         [Key]
         [Column(Order = 1)]
         public string UsuarioId { get; set; }

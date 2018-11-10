@@ -100,7 +100,16 @@ namespace CNMWebApp.Models
 
     public class SolicitudViewModel : UserViewModel
     {
-        public Guid SolicitudId { get; set; }
+        public int SolicitudId { get; set; }
+        [DisplayName("Número Solicitud")]
+        public string SolicitudNumero
+        {
+            get
+            {
+                return $"CNM{SolicitudId}";
+            }
+        }
+        public string Estado { get; set; }
         [DisplayName("Cédula")]
         public string UsuarioId { get; set; }
         [DisplayName("Días a solicitar")]

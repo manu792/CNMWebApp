@@ -51,7 +51,7 @@ namespace CNMWebApp.Services
                 .ToList();
         }
 
-        public SolicitudVacaciones ObtenerSolicitudPorId(Guid id)
+        public SolicitudVacaciones ObtenerSolicitudPorId(int id)
         {
             return context.SolicitudesVacaciones.FirstOrDefault(x => x.SolicitudVacacionesId == id);
         }
@@ -279,7 +279,7 @@ namespace CNMWebApp.Services
             .ToList();
         }
 
-        public async Task<int> CrearSolicitudVacaciones(SolicitudViewModel solicitud, Guid guid)
+        public async Task<int> CrearSolicitudVacaciones(SolicitudViewModel solicitud)
         {
             var solicitante = userService.ObtenerUsuarioPorId(solicitud.Id);
             var fechaSolicitud = DateTime.Now;
@@ -288,7 +288,6 @@ namespace CNMWebApp.Services
 
             var solicitudVacaciones = new SolicitudVacaciones()
             {
-                SolicitudVacacionesId = guid,
                 UsuarioId = solicitud.Id,
                 CantidadDiasSolicitados = solicitud.CantidadDiasSolicitados,
                 EstadoId = 1,
@@ -306,18 +305,18 @@ namespace CNMWebApp.Services
             {
                 // A continuacion se envia la notificacion por correo al jefe correspondiente segun el usuario
                 var urlHelper = new UrlHelper(HttpContext.Current.Request.RequestContext);
-                var callbackUrl = urlHelper.Action("Revisar", "Solicitud", new { id = guid }, protocol: HttpContext.Current.Request.Url.Scheme);
+                var callbackUrl = urlHelper.Action("Revisar", "Solicitud", new { id = solicitudVacaciones.SolicitudVacacionesId }, protocol: HttpContext.Current.Request.Url.Scheme);
                 
                 if (aprobadorId == solicitud.Id)
-                    return ProcesarSolicitud(guid, solicitante);
+                    return ProcesarSolicitud(solicitudVacaciones.SolicitudVacacionesId, solicitante);
 
                 await userManager.SendEmailAsync(ObtenerAprobadorId(solicitud.Id), "Solicitud de Vacaciones para " + solicitud.Nombre + " " + solicitud.PrimerApellido + " " + solicitud.SegundoApellido, solicitud.Comentario + " <br /> Para aprobar o rechazar la solicitud de vacaciones haga click en el siguiente link: <a href=\"" + callbackUrl + "\">Aquí</a>");
             }
-            
-            return affectedRows;
+
+            return solicitudVacaciones.SolicitudVacacionesId;
         }
 
-        public int Aprobar(Guid solicitudId, string comentarioJefatura, UserViewModel aprobador, string solicitanteId)
+        public int Aprobar(int solicitudId, string comentarioJefatura, UserViewModel aprobador, string solicitanteId)
         {
             var solicitante = userService.ObtenerUsuarioPorId(solicitanteId);
             var saldoDiasInfo = saldoDiasService.ObtenerSaldoDiasPorEmpleadoId(solicitanteId);
@@ -337,11 +336,13 @@ namespace CNMWebApp.Services
             context.Entry(solicitud).State = System.Data.Entity.EntityState.Modified;
 
             var rowsAffected = context.SaveChanges();
+            if (rowsAffected <= 0)
+                return 0;
 
-            return rowsAffected;
+            return solicitud.SolicitudVacacionesId;
         }
 
-        public int Rechazar(Guid solicitudId, string comentarioJefatura, UserViewModel aprobador, string solicitanteId)
+        public int Rechazar(int solicitudId, string comentarioJefatura, UserViewModel aprobador, string solicitanteId)
         {
             var solicitante = userService.ObtenerUsuarioPorId(solicitanteId);
             var jefe = new UserViewModel();
@@ -370,9 +371,11 @@ namespace CNMWebApp.Services
                     emailNotification.SendEmailAsync(solicitante.Email, $"{jefe.Email}", $"Vacaciones Denegadas para {nombreSolicitante}", $"La solicitud de vacaciones: {solicitudId} para el colaborador {nombreSolicitante} fue <strong>denegada</strong>. <br /> Observaciones: {comentarioJefatura}");
                 else
                     emailNotification.SendEmailAsync(solicitante.Email, $"{jefe.Email},{aprobador.Email}", $"Vacaciones Denegadas para {nombreSolicitante}", $"La solicitud de vacaciones: {solicitudId} para el colaborador {nombreSolicitante} fue <strong>denegada</strong>. <br /> Observaciones: {comentarioJefatura}");
+
+                return 0;
             }
 
-            return rowsAffected;
+            return solicitud.SolicitudVacacionesId;
         }
 
         public int ObtenerCantidadDiasDisfrutadosPeriodoPorEmpleado(string empleadoId)
@@ -439,7 +442,7 @@ namespace CNMWebApp.Services
             return diasPorSolicitud;
         }
 
-        private int ProcesarSolicitud(Guid guid, UserViewModel solicitante)
+        private int ProcesarSolicitud(int guid, UserViewModel solicitante)
         {
             var solicitud = context.SolicitudesVacaciones.FirstOrDefault(x => x.SolicitudVacacionesId == guid);
             if (solicitud == null)

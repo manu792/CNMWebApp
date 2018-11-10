@@ -51,10 +51,23 @@ namespace CNMWebApp.Controllers
                     solicitudes = FiltrarSolicitudes(solicitudes, filtro);
                 }
 
+                var solicitudesMostrar = solicitudes.Select(x => new SolicitudViewModel()
+                {
+                    CantidadDiasSolicitados = x.CantidadDiasSolicitados,
+                    Comentario = x.Comentario,
+                    FechaSolicitud = x.FechaSolicitud,
+                    Id = x.UsuarioId,
+                    SolicitudId = x.SolicitudVacacionesId,
+                    Nombre = x.Usuario.Nombre,
+                    PrimerApellido = x.Usuario.PrimerApellido,
+                    SegundoApellido = x.Usuario.SegundoApellido,
+                    Estado = x.Estado.Nombre
+                }).ToList();
+
                 int tamanoPagina = 10;
                 int numeroPagina = (pagina ?? 1);
 
-                return View(solicitudes.ToPagedList(numeroPagina, tamanoPagina));
+                return View(solicitudesMostrar.ToPagedList(numeroPagina, tamanoPagina));
             }
             catch(Exception ex)
             {
@@ -143,7 +156,7 @@ namespace CNMWebApp.Controllers
         }
 
         // GET Solicitud/Detalle/1
-        public ActionResult Detalle(Guid id)
+        public ActionResult Detalle(int id)
         {
             var solicitud = solicitudService.ObtenerSolicitudPorId(id);
             if (solicitud == null)
@@ -252,10 +265,9 @@ namespace CNMWebApp.Controllers
 
             try
             {
-                var guid = Guid.NewGuid();
-                var rowsAffected = await solicitudService.CrearSolicitudVacaciones(solicitudVacaciones, guid);
+                var solicitudId = await solicitudService.CrearSolicitudVacaciones(solicitudVacaciones);
 
-                if (rowsAffected <= 0)
+                if (solicitudId <= 0)
                 {
                     ModelState.AddModelError("", "Hubo un problema al tratar de agregar la solicitud. Favor intente de nuevo más tarde.");
                     return View(solicitudVacaciones);
@@ -264,7 +276,7 @@ namespace CNMWebApp.Controllers
                 var role = roleService.ObtenerRolPorNombre("Director");
                 if(role.Id == solicitante.Role.Id)
                 {
-                    solicitudVacaciones.SolicitudId = guid;
+                    solicitudVacaciones.SolicitudId = solicitudId;
                     await EnviarCorreo(solicitudVacaciones, solicitante);
                 }
 
@@ -298,26 +310,28 @@ namespace CNMWebApp.Controllers
             var empleados = userService.GetUsers();
             solicitudVacaciones.Colaboradores = empleados.ToList();
 
+            var solicitante = userService.ObtenerUsuarioPorId(solicitudVacaciones.Id);
+
             if (!ModelState.IsValid)
             {
                 return View(solicitudVacaciones);
             }
 
-            //if (solicitudVacaciones.CantidadDiasSolicitados > solicitudVacaciones.SaldoDiasDisponibles)
-            //{
-            //    ModelState.AddModelError("", "La cantidad de días solicitados no puede ser mayor al saldo de días disponibles.");
-            //    return View(solicitudVacaciones);
-            //}
-
             try
             {
-                var guid = Guid.NewGuid();
-                var rowsAffected = await solicitudService.CrearSolicitudVacaciones(solicitudVacaciones, guid);
+                var solicitudId = await solicitudService.CrearSolicitudVacaciones(solicitudVacaciones);
 
-                if (rowsAffected <= 0)
+                if (solicitudId <= 0)
                 {
                     ModelState.AddModelError("", "Hubo un problema al tratar de agregar la solicitud. Favor intente de nuevo más tarde.");
                     return View(solicitudVacaciones);
+                }
+
+                var role = roleService.ObtenerRolPorNombre("Director");
+                if (role.Id == solicitante.Role.Id)
+                {
+                    solicitudVacaciones.SolicitudId = solicitudId;
+                    await EnviarCorreo(solicitudVacaciones, solicitante);
                 }
 
                 return RedirectToAction("Index", "Solicitud");
@@ -346,25 +360,33 @@ namespace CNMWebApp.Controllers
                 solicitudes = FiltrarSolicitudes(solicitudes, filtro);
             }
 
+            var solicitudesMostrar = solicitudes.Select(x => new SolicitudViewModel()
+            {
+                CantidadDiasSolicitados = x.CantidadDiasSolicitados,
+                Comentario = x.Comentario,
+                FechaSolicitud = x.FechaSolicitud,
+                Id = x.UsuarioId,
+                SolicitudId = x.SolicitudVacacionesId,
+                Nombre = x.Usuario.Nombre,
+                PrimerApellido = x.Usuario.PrimerApellido,
+                SegundoApellido = x.Usuario.SegundoApellido,
+                Estado = x.Estado.Nombre
+            }).ToList();
+
             int tamanoPagina = 10;
             int numeroPagina = (pagina ?? 1);
 
-            return View(solicitudes.ToPagedList(numeroPagina, tamanoPagina));
+            return View(solicitudesMostrar.ToPagedList(numeroPagina, tamanoPagina));
         }
 
         [Auth(Roles = "Jefatura, Director")]
         public async Task<ActionResult> Revisar(string id)
         {
-            Guid guid;
-
             var usuario = await userService.GetLoggedInUser();
             if (usuario == null)
                 return RedirectToAction("LogOut", "Account");
 
-            if (!Guid.TryParse(id, out guid))
-                return RedirectToAction("SolicitudesEmpleados");
-
-            var solicitudId = guid;
+            var solicitudId = Convert.ToInt32(id);
 
             var solicitud = solicitudService.ObtenerSolicitudPorId(solicitudId);
 
@@ -444,6 +466,7 @@ namespace CNMWebApp.Controllers
                 CantidadDiasSolicitados = solicitudAprobada.CantidadDiasSolicitados,
                 Categoria = solicitudAprobada.Usuario.Categoria,
                 Comentario = solicitudAprobada.Comentario,
+                ComentarioJefatura = solicitudVacaciones.ComentarioJefatura,
                 FechaSolicitud = solicitudAprobada.FechaSolicitud,
                 Nombre = solicitudAprobada.Usuario.Nombre,
                 PrimerApellido = solicitudAprobada.Usuario.PrimerApellido,
@@ -456,7 +479,7 @@ namespace CNMWebApp.Controllers
             };
 
             var pdf = GeneratePDF(solicitudViewModel);
-            await EnviarCorreoAprobacion(solicitudVacaciones.UsuarioId, aprobador, solicitudViewModel, pdf);
+            await EnviarCorreoAprobacion(solicitudVacaciones.UsuarioId ?? solicitudVacaciones.Id, aprobador, solicitudViewModel, pdf);
         }
 
         private async Task EnviarCorreoAprobacion(string solicitanteId, UserViewModel aprobador, SolicitudViewModel solicitud, string fileName)
@@ -474,9 +497,9 @@ namespace CNMWebApp.Controllers
             // var jefe = userService.ObtenerJefePorUnidadTecnica(solicitante.UnidadTecnica.UnidadTecnicaId);
 
             if (aprobador.Id == jefe.Id)
-                await emailNotification.SendEmailAsync(solicitante.Email, $"{jefe.Email},{ConfigurationManager.AppSettings["MailRH"]}", $"Vacaciones Aprobadas para {nombreSolicitante}", $"La solicitud de vacaciones: {solicitud.SolicitudId} para el colaborador {nombreSolicitante} fue <strong>aprobada</strong>. <br /> <br /> Observaciones: {solicitud.ComentarioJefatura}", Server.MapPath("~/PDFs/" + fileName));
+                await emailNotification.SendEmailAsync(solicitante.Email, $"{jefe.Email},{ConfigurationManager.AppSettings["MailRH"]}", $"Vacaciones Aprobadas para {nombreSolicitante}", $"La solicitud de vacaciones: {solicitud.SolicitudNumero} para el colaborador {nombreSolicitante} fue <strong>aprobada</strong>. <br /> <br /> Observaciones: {solicitud.ComentarioJefatura}", Server.MapPath("~/PDFs/" + fileName));
             else
-                await emailNotification.SendEmailAsync(solicitante.Email, $"{jefe.Email},{aprobador.Email},{ConfigurationManager.AppSettings["MailRH"]}", $"Vacaciones Aprobadas para {nombreSolicitante}", $"La solicitud de vacaciones: {solicitud.SolicitudId} para el colaborador {nombreSolicitante} fue <strong>aprobada</strong>. <br /> <br /> Observaciones: {solicitud.ComentarioJefatura}", Server.MapPath("~/PDFs/" + fileName));
+                await emailNotification.SendEmailAsync(solicitante.Email, $"{jefe.Email},{aprobador.Email},{ConfigurationManager.AppSettings["MailRH"]}", $"Vacaciones Aprobadas para {nombreSolicitante}", $"La solicitud de vacaciones: {solicitud.SolicitudNumero} para el colaborador {nombreSolicitante} fue <strong>aprobada</strong>. <br /> <br /> Observaciones: {solicitud.ComentarioJefatura}", Server.MapPath("~/PDFs/" + fileName));
         }
 
         [HttpPost]
@@ -513,6 +536,7 @@ namespace CNMWebApp.Controllers
 
             var solicitudesFiltradas = solicitudes
                 .Where(x => (string.IsNullOrEmpty(x.Comentario) ? false : x.Comentario.ToLower().Contains(filtro)) ||
+                 x.SolicitudVacacionesId.ToString().Contains(filtro) ||
                  x.UsuarioId.ToLower().Contains(filtro) ||
                  x.Estado.Nombre.ToLower().Contains(filtro) ||
                  x.Usuario.Nombre.ToLower().Contains(filtro) ||
