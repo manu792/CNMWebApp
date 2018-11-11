@@ -1911,7 +1911,7 @@
     <Content Include="admin-lte\plugins\fastclick\bower.json" />
     <Content Include="admin-lte\plugins\fastclick\LICENSE" />
     <Content Include="admin-lte\plugins\fastclick\README.md" />
-    <Content Include="PDFs\File.pdf" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -2059,6 +2059,7 @@
     <Folder Include="admin-lte\plugins\fastclick\lib\" />
     <Folder Include="App_Data\" />
     <Folder Include="Helpers\" />
+    <Folder Include="PDFs\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
