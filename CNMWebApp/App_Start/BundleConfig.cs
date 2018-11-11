@@ -23,7 +23,7 @@ namespace CNMWebApp
                       "~/Scripts/bootstrap.js"));
 
             // For AdminLTE
-            bundles.Add(new ScriptBundle("~/admin-lte/js").Include(
+            bundles.Add(new ScriptBundle("~/bundles/admin-lte").Include(
              "~/admin-lte/js/adminlte.js",
              "~/admin-lte/plugins/fastclick/fastclick.js",
              "~/admin-lte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js",

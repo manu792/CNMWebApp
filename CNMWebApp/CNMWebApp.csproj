@@ -1826,11 +1826,16 @@
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Fotos\CNM.JPG" />
+    <Content Include="Fotos\CNM.png" />
+    <Content Include="Fotos\cnmheaderlogo.gif" />
+    <Content Include="Fotos\csn.jpg" />
     <Content Include="Fotos\favicon.ico" />
     <Content Include="Fotos\god-of-war-4-2018-oo-1920x1080.jpg" />
     <Content Include="Fotos\godofwar.jpg" />
     <Content Include="Fotos\icon.png" />
     <Content Include="Fotos\image.jpg" />
+    <Content Include="Fotos\penta.png" />
+    <Content Include="Fotos\To-do.png" />
     <Content Include="Fotos\Uncharted.jpg" />
     <Content Include="Fotos\watermark.png" />
     <Content Include="Global.asax" />
