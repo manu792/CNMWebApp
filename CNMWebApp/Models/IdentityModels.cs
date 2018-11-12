@@ -135,6 +135,7 @@ namespace CNMWebApp.Models
         }
     }
 
+    // Se inicializa la base de datos con la informacion necesaria
     public class Initializer : CreateDatabaseIfNotExists<ApplicationDbContext>
     {
         public Initializer()
@@ -342,6 +343,7 @@ namespace CNMWebApp.Models
         }
     }
 
+    // Contexto de la base de datos. Representa la conexion con la base de datos al usar Entity Framework
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public DbSet<Categoria> Categorias { get; set; }
@@ -352,7 +354,7 @@ namespace CNMWebApp.Models
         public DbSet<SaldoDiasPorEmpleado> SaldoDiasEmpleados { get; set; }
 
         public ApplicationDbContext()
-            : base("CNMDBDev", throwIfV1Schema: false)
+            : base("DefaultConnection", throwIfV1Schema: false)
         {
             Database.SetInitializer(new Initializer());
         }
@@ -363,20 +365,12 @@ namespace CNMWebApp.Models
             
             modelBuilder.Entity<ApplicationUser>().ToTable("Empleados");
             modelBuilder.Entity<ApplicationUser>().Property(p => p.Id).HasColumnName("Cedula");
-            // modelBuilder.Entity<ApplicationUser>().Property(p => p.AccessFailedCount).HasColumnName("AccesoFallidoCantidad");
             modelBuilder.Entity<ApplicationUser>().Property(p => p.Email).HasColumnName("Correo").IsRequired();
-            // modelBuilder.Entity<ApplicationUser>().Property(p => p.EmailConfirmed).HasColumnName("CorreoConfirmado");
-            // modelBuilder.Entity<ApplicationUser>().Property(p => p.LockoutEnabled).HasColumnName("BloqueoActivado");
-            // modelBuilder.Entity<ApplicationUser>().Property(p => p.LockoutEndDateUtc).HasColumnName("FechaFinBloqueoUtc");
             modelBuilder.Entity<ApplicationUser>().Property(p => p.PasswordHash).HasColumnName("ContrasenaHash");
             modelBuilder.Entity<ApplicationUser>().Property(p => p.PhoneNumber).HasColumnName("Telefono");
-            // modelBuilder.Entity<ApplicationUser>().Property(p => p.PhoneNumberConfirmed).HasColumnName("TelefonoConfirmado");
             modelBuilder.Entity<ApplicationUser>().Property(p => p.SecurityStamp).HasColumnName("SelloSeguridad");
-            // modelBuilder.Entity<ApplicationUser>().Property(p => p.TwoFactorEnabled).HasColumnName("AutenticacionDosFactoresActivada");
             modelBuilder.Entity<ApplicationUser>().Property(p => p.UserName).HasColumnName("NombreUsuario");
-
-            // modelBuilder.Entity<ApplicationUser>().Ignore(p => p.Logins);
-            // modelBuilder.Entity<ApplicationUser>().Ignore(p => p.Claims);
+            
             modelBuilder.Entity<ApplicationUser>()
                 .Ignore(c => c.AccessFailedCount)
                 .Ignore(c => c.EmailConfirmed)
@@ -387,20 +381,9 @@ namespace CNMWebApp.Models
 
 
             modelBuilder.Entity<SolicitudVacaciones>().Property(p => p.UsuarioId).HasColumnName("Cedula");
-
             modelBuilder.Entity<IdentityUserRole>().ToTable("UsuarioRoles");
-
-            //modelBuilder.Entity<IdentityUserRole>().ToTable("UsuarioRoles");
-            //modelBuilder.Entity<IdentityUserRole>().Property(r => r.UserId)
-            //    .IsRequired()
-            //    .HasMaxLength(256);
-            //modelBuilder.Entity<IdentityUserRole>().HasKey(t => new { t.RoleId, t.UserId });
-
             modelBuilder.Entity<IdentityUserLogin>().ToTable("UsuarioLogins");
-            // modelBuilder.Ignore<IdentityUserLogin>();
-
             modelBuilder.Entity<IdentityUserClaim>().ToTable("UsuarioClaims");
-            // modelBuilder.Ignore<IdentityUserClaim>();
 
             modelBuilder.Entity<IdentityRole>().ToTable("Roles");
 

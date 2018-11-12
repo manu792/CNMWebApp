@@ -11,6 +11,8 @@ using System.Web;
 
 namespace CNMWebApp.Services
 {
+    // Servicio utilizado para el envio de correos y archivos adjuntos
+
     public class EmailNotificationService
     {
         public EmailNotificationService()

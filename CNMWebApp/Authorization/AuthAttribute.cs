@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace CNMWebApp.Authorization
 {
+    // Clase que se utiliza para autorizar usuario, se muestra pantalla de error si no posee roles necesarios
     public class AuthAttribute : AuthorizeAttribute
     {
         protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext)
