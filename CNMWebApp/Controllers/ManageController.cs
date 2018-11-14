@@ -364,9 +364,17 @@ namespace CNMWebApp.Controllers
 
         private void AddErrors(IdentityResult result)
         {
+            var errorMessage = "";
+
             foreach (var error in result.Errors)
             {
-                ModelState.AddModelError("", error);
+                if (error.Equals("Passwords must have at least one non letter or digit character."))
+                    errorMessage = "Las contraseñas deben tener, al menos, un número y un caracter especial.";
+                else
+                    errorMessage = "Las contraseñas deben tener, al menos, un número, un caracter especial y una letra en mayúscula ('A'-'Z').";
+
+
+                ModelState.AddModelError("", errorMessage);
             }
         }
 
