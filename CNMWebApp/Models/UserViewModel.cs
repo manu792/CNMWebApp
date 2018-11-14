@@ -25,13 +25,11 @@ namespace CNMWebApp.Models
         [Required(ErrorMessage = "El campo Correo es requerido")]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
-        [DisplayName("Celular")]
-        //[DataType(DataType.PhoneNumber)]
-        [Phone]
+        [DisplayName("Número Celular")]
+        [Phone(ErrorMessage = "El campo Celular debe ser numérico")]
         public string PhoneNumber { get; set; }
         [DisplayName("Fecha Ingreso")]
         [Required(ErrorMessage = "El campo Fecha Ingreso es requerido")]
-        //[DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
         public DateTime FechaIngreso { get; set; }
         [DisplayName("Fecha Creación Empleado")]
@@ -50,7 +48,6 @@ namespace CNMWebApp.Models
         [Range(0, 1000, ErrorMessage = "Debe ser un número entre 0 y 1000")]
         [Required(ErrorMessage = "El campo Saldo Días Disponibles es requerido")]
         [DefaultValue(0)]
-        //[DisplayFormat(DataFormatString = "{0:n2}", ApplyFormatInEditMode = true)]
         public decimal SaldoDiasDisponibles { get; set; }
         [DisplayName("Jefe")]
         public string JefeId { get; set; }
