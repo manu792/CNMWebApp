@@ -248,7 +248,7 @@ namespace CNMWebApp.Controllers
         // POST: Solicitud/Crear
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Crear(SolicitudViewModel solicitudVacaciones)
+        public ActionResult Crear(SolicitudViewModel solicitudVacaciones)
         {
             var solicitante = userService.ObtenerUsuarioPorId(solicitudVacaciones.Id);
 
@@ -265,7 +265,7 @@ namespace CNMWebApp.Controllers
 
             try
             {
-                var solicitudId = await solicitudService.CrearSolicitudVacaciones(solicitudVacaciones);
+                var solicitudId = solicitudService.CrearSolicitudVacaciones(solicitudVacaciones);
 
                 if (solicitudId <= 0)
                 {
@@ -277,7 +277,7 @@ namespace CNMWebApp.Controllers
                 if(role.Id == solicitante.Role.Id)
                 {
                     solicitudVacaciones.SolicitudId = solicitudId;
-                    await EnviarCorreo(solicitudVacaciones, solicitante);
+                    EnviarCorreo(solicitudVacaciones, solicitante);
                 }
 
                 return RedirectToAction("Index", "Solicitud");
@@ -305,7 +305,7 @@ namespace CNMWebApp.Controllers
         [HttpPost]
         [Auth(Roles = "Manager, Recursos Humanos")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> CrearParaEmpleado(SolicitudParaEmpleado solicitudVacaciones)
+        public ActionResult CrearParaEmpleado(SolicitudParaEmpleado solicitudVacaciones)
         {
             var empleados = userService.GetUsers();
             solicitudVacaciones.Colaboradores = empleados.ToList();
@@ -319,7 +319,7 @@ namespace CNMWebApp.Controllers
 
             try
             {
-                var solicitudId = await solicitudService.CrearSolicitudVacaciones(solicitudVacaciones);
+                var solicitudId = solicitudService.CrearSolicitudVacaciones(solicitudVacaciones);
 
                 if (solicitudId <= 0)
                 {
@@ -331,7 +331,7 @@ namespace CNMWebApp.Controllers
                 if (role.Id == solicitante.Role.Id)
                 {
                     solicitudVacaciones.SolicitudId = solicitudId;
-                    await EnviarCorreo(solicitudVacaciones, solicitante);
+                    EnviarCorreo(solicitudVacaciones, solicitante);
                 }
 
                 return RedirectToAction("Index", "Solicitud");
@@ -440,7 +440,7 @@ namespace CNMWebApp.Controllers
                 var rowsAffected = solicitudService.Aprobar(solicitud.SolicitudId, solicitud.ComentarioJefatura, usuario, solicitud.UsuarioId);
                 if(rowsAffected > 0)
                 {
-                    await EnviarCorreo(solicitud, usuario);
+                    EnviarCorreo(solicitud, usuario);
 
                     return RedirectToAction("SolicitudesEmpleados");
                 }

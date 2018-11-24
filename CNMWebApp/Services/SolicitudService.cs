@@ -279,7 +279,7 @@ namespace CNMWebApp.Services
             .ToList();
         }
 
-        public async Task<int> CrearSolicitudVacaciones(SolicitudViewModel solicitud)
+        public int CrearSolicitudVacaciones(SolicitudViewModel solicitud)
         {
             var solicitante = userService.ObtenerUsuarioPorId(solicitud.Id);
             var fechaSolicitud = DateTime.Now;
@@ -310,7 +310,7 @@ namespace CNMWebApp.Services
                 if (aprobadorId == solicitud.Id)
                     return ProcesarSolicitud(solicitudVacaciones.SolicitudVacacionesId, solicitante);
 
-                await userManager.SendEmailAsync(ObtenerAprobadorId(solicitud.Id), "Solicitud de Vacaciones para " + solicitud.Nombre + " " + solicitud.PrimerApellido + " " + solicitud.SegundoApellido, solicitud.Comentario + " <br /> Para aprobar o rechazar la solicitud de vacaciones haga click en el siguiente link: <a href=\"" + callbackUrl + "\">Aquí</a>");
+                userManager.SendEmailAsync(ObtenerAprobadorId(solicitud.Id), "Solicitud de Vacaciones para " + solicitud.Nombre + " " + solicitud.PrimerApellido + " " + solicitud.SegundoApellido, solicitud.Comentario + " <br /> Para aprobar o rechazar la solicitud de vacaciones haga click en el siguiente link: <a href=\"" + callbackUrl + "\">Aquí</a>");
             }
 
             return solicitudVacaciones.SolicitudVacacionesId;
@@ -371,8 +371,6 @@ namespace CNMWebApp.Services
                     emailNotification.SendEmailAsync(solicitante.Email, $"{jefe.Email}", $"Vacaciones Denegadas para {nombreSolicitante}", $"La solicitud de vacaciones: {solicitudId} para el colaborador {nombreSolicitante} fue <strong>denegada</strong>. <br /> Observaciones: {comentarioJefatura}");
                 else
                     emailNotification.SendEmailAsync(solicitante.Email, $"{jefe.Email},{aprobador.Email}", $"Vacaciones Denegadas para {nombreSolicitante}", $"La solicitud de vacaciones: {solicitudId} para el colaborador {nombreSolicitante} fue <strong>denegada</strong>. <br /> Observaciones: {comentarioJefatura}");
-
-                return 0;
             }
 
             return solicitud.SolicitudVacacionesId;

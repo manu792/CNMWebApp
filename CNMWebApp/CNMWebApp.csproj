@@ -2066,6 +2066,7 @@
     <Folder Include="admin-lte\plugins\fastclick\lib\" />
     <Folder Include="App_Data\" />
     <Folder Include="Helpers\" />
+    <Folder Include="Logs\" />
     <Folder Include="PDFs\" />
   </ItemGroup>
   <ItemGroup>

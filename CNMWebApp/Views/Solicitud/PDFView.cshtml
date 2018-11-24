@@ -3,7 +3,7 @@
     Layout = null;
     var unidad = Model.UnidadTecnica != null ? Model.UnidadTecnica.Nombre : "";
     var categoria = Model.Categoria != null ? Model.Categoria.Nombre : "";
-    var fecha = $"{Model.FechaSolicitud.Year} - {Model.FechaSolicitud.Year + 1}";
+    var fecha = string.Concat(Model.FechaSolicitud.Year, " - ", Model.FechaSolicitud.Year + 1);
 }
 
 <!DOCTYPE html>
