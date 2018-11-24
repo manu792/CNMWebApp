@@ -192,13 +192,17 @@
         var checkbox = '';
 
         $('#submit-btn').click(function () {
-            var roleId = $('#SelectedRoleId').val();
+            var id = $('#Id').val();
+            var nombre = $('#Nombre').val();
+            var primerApellido = $('#PrimerApellido').val();
+            var obj = { Id: id, NombreCompleto: `${nombre} ${primerApellido}` };
 
-            if (roleId == 4) { // Director
-                var id = $('#Id').val();
-
-                $("#SelectedJefeId").val(id);
-            }
+            $('#SelectedJefeId').append($('<option>', {
+                value: obj.Id,
+                text: obj.NombreCompleto
+            }));
+            $('#SelectedJefeId').selectpicker('refresh');
+            $("#SelectedJefeId").val(id);
         });
 
 
@@ -328,18 +332,19 @@
         var GetSelectedRoleId = function (role) {
             var roleId = role;
             var url = '@Url.Action("ObtenerUnidadesCategoriasPorRoleId", "User")';
+            $('#jefes').show();
 
             if (roleId == 4) { // Director
                 $('#SelectedJefeId').html('');
 
-                var id = $('#Id').val();
-                var nombre = $('#Nombre').val();
-                var primerApellido = $('#PrimerApellido').val();
-                var obj = { Id: id, NombreCompleto: `${nombre} ${primerApellido}` };
-                var markup = '';
+                //var id = $('#Id').val();
+                //var nombre = $('#Nombre').val();
+                //var primerApellido = $('#PrimerApellido').val();
+                //var obj = { Id: id, NombreCompleto: `${nombre} ${primerApellido}` };
+                //var markup = '';
 
-                markup += "<option value=" + obj.Id + ">" + obj.NombreCompleto + "</option>";
-                $("#SelectedJefeId").append(markup);
+                //markup += "<option value=" + obj.Id + ">" + obj.NombreCompleto + "</option>";
+                //$("#SelectedJefeId").append(markup);
                 $('#jefes').hide();
             }
 
@@ -353,11 +358,20 @@
                     cache: false,
                     type: "GET",
                     success: function (data) {
-                        var markup = "";
+                        $('#SelectedJefeId').append($('<option>', {
+                            value: data.Jefe.Id,
+                            text: data.Jefe.NombreCompleto
+                        }));
+                        if (!data) {
+                            $('#SelectedJefeId option').remove();
+                        }
+                        $('#SelectedJefeId').selectpicker('refresh');
 
-                        markup += "<option value=" + data.Jefe.Id + ">" + data.Jefe.NombreCompleto + "</option>";
-                        $("#SelectedJefeId").append(markup);
-                        $('#jefes').hide();
+                        //var markup = "";
+
+                        //markup += "<option value=" + data.Jefe.Id + ">" + data.Jefe.NombreCompleto + "</option>";
+                        //$("#SelectedJefeId").append(markup);
+                        //$('#jefes').hide();
                     },
                     error: function (response) {
                         console.log(response.responseText);

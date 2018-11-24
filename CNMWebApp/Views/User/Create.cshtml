@@ -172,7 +172,15 @@
 
             if (roleId == 4) { // Director
                 var id = $('#Id').val();
+                var nombre = $('#Nombre').val();
+                var primerApellido = $('#PrimerApellido').val();
+                var obj = { Id: id, NombreCompleto: `${nombre} ${primerApellido}` };
 
+                $('#SelectedJefeId').append($('<option>', {
+                    value: obj.Id,
+                    text: obj.NombreCompleto
+                }));
+                $('#SelectedJefeId').selectpicker('refresh');
                 $("#SelectedJefeId").val(id);
             }
         });
@@ -214,7 +222,6 @@
                     data: { unidadTecnicaId: unidadTecnicaId },
                     type: "GET",
                     success: function (data) {
-                        console.log(data);
                         for (var i = 0; i < data.Jefes.length; i++) {
                             $('#SelectedJefeId').append($('<option>', {
                                 value: data.Jefes[i].Id,
@@ -240,14 +247,11 @@
             $('#SelectedJefeId').html('');
 
             if (roleId == 4) { // Director
-                var id = $('#Id').val();
-                var nombre = $('#Nombre').val();
-                var primerApellido = $('#PrimerApellido').val();
-                var obj = { Id: id, NombreCompleto: `${nombre} ${primerApellido}` };
-                var markup = '';
+                $('#SelectedJefeId').html('');
+                //var markup = '';
 
-                markup += "<option value=" + obj.Id + ">" + obj.NombreCompleto + "</option>";
-                $("#SelectedJefeId").append(markup);
+                //markup += "<option value=" + obj.Id + ">" + obj.NombreCompleto + "</option>";
+                //$("#SelectedJefeId").append(markup);
                 $('#jefes').hide();
             }
 
@@ -259,11 +263,19 @@
                     cache: false,
                     type: "GET",
                     success: function (data) {
-                        var markup = "";
+                        $('#SelectedJefeId').append($('<option>', {
+                            value: data.Jefe.Id,
+                            text: data.Jefe.NombreCompleto
+                        }));
+                        if (!data) {
+                            $('#SelectedJefeId option').remove();
+                        }
+                        $('#SelectedJefeId').selectpicker('refresh');
+                        //var markup = "";
 
-                        markup += "<option value=" + data.Jefe.Id + ">" + data.Jefe.NombreCompleto + "</option>";
-                        $("#SelectedJefeId").append(markup);
-                        $('#jefes').hide();
+                        //markup += "<option value=" + data.Jefe.Id + ">" + data.Jefe.NombreCompleto + "</option>";
+                        //$("#SelectedJefeId").append(markup);
+                        //// $('#jefes').hide();
                     },
                     error: function (response) {
                         console.log(response.responseText);
