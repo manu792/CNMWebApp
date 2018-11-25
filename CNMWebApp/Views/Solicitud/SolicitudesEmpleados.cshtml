@@ -14,8 +14,8 @@
 {
     <div class="row">
         <div class="col-md-6">
-            @Html.Label("Fecha Inicio", htmlAttributes: new { @class = "control-label col-md-3" })
-            <div class="col-md-9">
+            @Html.Label("Fecha Inicio", htmlAttributes: new { @class = "control-label" })
+            <div>
                 <div class='input-group date fecha-inicio'>
                     <input id="FechaInicio" name="FechaInicio" autocomplete="off" placeholder="yyyy/mm/dd" type="text" class="form-control" />
                     <span class="input-group-addon">
@@ -25,8 +25,8 @@
             </div>
         </div>
         <div class="col-md-6">
-            @Html.Label("Fecha Final", htmlAttributes: new { @class = "control-label col-md-3" })
-            <div class="col-md-9">
+            @Html.Label("Fecha Final", htmlAttributes: new { @class = "control-label" })
+            <div>
                 <div class='input-group date fecha-final'>
                     <input id="FechaFinal" name="FechaFinal" autocomplete="off" placeholder="yyyy/mm/dd" type="text" class="form-control" />
                     <span class="input-group-addon">
@@ -39,10 +39,10 @@
     <br />
 
     <div class="row">
-        <div class="col-md-11">
+        <div class="col-lg-11">
             @Html.TextBox("Filtro", "", new { @class = "form-control", placeholder = "Buscar..." })
         </div>
-        <div class="col-md-1">
+        <div class="col-lg-1">
             <input type="submit" value="Buscar" class="btn btn-default btn-block" />
         </div>
     </div>
