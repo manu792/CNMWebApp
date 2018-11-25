@@ -192,17 +192,21 @@
         var checkbox = '';
 
         $('#submit-btn').click(function () {
-            var id = $('#Id').val();
-            var nombre = $('#Nombre').val();
-            var primerApellido = $('#PrimerApellido').val();
-            var obj = { Id: id, NombreCompleto: `${nombre} ${primerApellido}` };
+            var roleId = $('#SelectedRoleId').val();
 
-            $('#SelectedJefeId').append($('<option>', {
-                value: obj.Id,
-                text: obj.NombreCompleto
-            }));
-            $('#SelectedJefeId').selectpicker('refresh');
-            $("#SelectedJefeId").val(id);
+            if (roleId == 4) { // Director
+                var id = $('#Id').val();
+                var nombre = $('#Nombre').val();
+                var primerApellido = $('#PrimerApellido').val();
+                var obj = { Id: id, NombreCompleto: `${nombre} ${primerApellido}` };
+
+                $('#SelectedJefeId').append($('<option>', {
+                    value: obj.Id,
+                    text: obj.NombreCompleto
+                }));
+                $('#SelectedJefeId').selectpicker('refresh');
+                $("#SelectedJefeId").val(id);
+            }
         });
 
 
@@ -289,11 +293,12 @@
         });
 
         $('#SelectedUnidadTecnicaId').change(function (e) {
-            if (!e.target.value) { return; }
+            var roleId = $('#SelectedRoleId').val();
+
+            if (!e.target.value || roleId == 2) { return; }
 
             $('#SelectedJefeId').html('');
-
-            var roleId = $('#SelectedRoleId').val();
+            
             var unidadTecnicaId = $('#SelectedUnidadTecnicaId').val();
 
             if (roleId == 1) { // Funcionario

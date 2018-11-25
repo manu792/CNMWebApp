@@ -248,7 +248,7 @@ namespace CNMWebApp.Controllers
         // POST: Solicitud/Crear
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Crear(SolicitudViewModel solicitudVacaciones)
+        public async Task<ActionResult> Crear(SolicitudViewModel solicitudVacaciones)
         {
             var solicitante = userService.ObtenerUsuarioPorId(solicitudVacaciones.Id);
 
@@ -265,7 +265,7 @@ namespace CNMWebApp.Controllers
 
             try
             {
-                var solicitudId = solicitudService.CrearSolicitudVacaciones(solicitudVacaciones);
+                var solicitudId = await solicitudService.CrearSolicitudVacaciones(solicitudVacaciones);
 
                 if (solicitudId <= 0)
                 {
@@ -305,7 +305,7 @@ namespace CNMWebApp.Controllers
         [HttpPost]
         [Auth(Roles = "Manager, Recursos Humanos")]
         [ValidateAntiForgeryToken]
-        public ActionResult CrearParaEmpleado(SolicitudParaEmpleado solicitudVacaciones)
+        public async Task<ActionResult> CrearParaEmpleado(SolicitudParaEmpleado solicitudVacaciones)
         {
             var empleados = userService.GetUsers();
             solicitudVacaciones.Colaboradores = empleados.ToList();
@@ -319,7 +319,7 @@ namespace CNMWebApp.Controllers
 
             try
             {
-                var solicitudId = solicitudService.CrearSolicitudVacaciones(solicitudVacaciones);
+                var solicitudId = await solicitudService.CrearSolicitudVacaciones(solicitudVacaciones);
 
                 if (solicitudId <= 0)
                 {

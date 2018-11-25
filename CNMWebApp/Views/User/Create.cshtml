@@ -145,7 +145,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.Foto, htmlAttributes: new { @class = "control-label col-lg-3" })
                     <div class="col-lg-9">
-                        @Html.TextBoxFor(model => model.Foto, new { type = "file", accept = ".png, .jpg, .jpeg", @class = "btn btn-info" })
+                        @Html.TextBoxFor(model => model.Foto, new { type = "file", accept = ".png, .jpg, .jpeg" })
                         @Html.ValidationMessageFor(model => model.Foto)
                     </div>
                 </div>
@@ -206,11 +206,12 @@
         });
 
         $('#SelectedUnidadTecnicaId').change(function (e) {
-            if (!e.target.value) { return; }
+            var roleId = $('#SelectedRoleId').val();
+
+            if (!e.target.value || roleId == 2) { return; }
 
             $('#SelectedJefeId').html('');
-
-            var roleId = $('#SelectedRoleId').val();
+            
             var unidadTecnicaId = $('#SelectedUnidadTecnicaId').val();
 
             if (roleId == 1) { // Funcionario

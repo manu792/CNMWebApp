@@ -279,7 +279,7 @@ namespace CNMWebApp.Services
             .ToList();
         }
 
-        public int CrearSolicitudVacaciones(SolicitudViewModel solicitud)
+        public async Task<int> CrearSolicitudVacaciones(SolicitudViewModel solicitud)
         {
             var solicitante = userService.ObtenerUsuarioPorId(solicitud.Id);
             var fechaSolicitud = DateTime.Now;
@@ -310,7 +310,7 @@ namespace CNMWebApp.Services
                 if (aprobadorId == solicitud.Id)
                     return ProcesarSolicitud(solicitudVacaciones.SolicitudVacacionesId, solicitante);
 
-                userManager.SendEmailAsync(ObtenerAprobadorId(solicitud.Id), "Solicitud de Vacaciones para " + solicitud.Nombre + " " + solicitud.PrimerApellido + " " + solicitud.SegundoApellido, solicitud.Comentario + " <br /> Para aprobar o rechazar la solicitud de vacaciones haga click en el siguiente link: <a href=\"" + callbackUrl + "\">Aquí</a>");
+                await userManager.SendEmailAsync(ObtenerAprobadorId(solicitud.Id), "Solicitud de Vacaciones para " + solicitud.Nombre + " " + solicitud.PrimerApellido + " " + solicitud.SegundoApellido, solicitud.Comentario + " <br /> Para aprobar o rechazar la solicitud de vacaciones haga click en el siguiente link: <a href=\"" + callbackUrl + "\">Aquí</a>");
             }
 
             return solicitudVacaciones.SolicitudVacacionesId;
