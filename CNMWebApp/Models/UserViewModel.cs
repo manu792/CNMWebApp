@@ -44,7 +44,7 @@ namespace CNMWebApp.Models
         [DisplayName("Superusuario")]
         public bool EsSuperusuario { get; set; }
         [DisplayName("Saldo Días Disponibles")]
-        [RegularExpression(@"^-?[0-9]\d*(\,\d+)?$", ErrorMessage = "Debe ser un valor numérico")]
+        [RegularExpression(@"^-?[0-9]\d*(\.\d+)?$", ErrorMessage = "Debe ser un valor numérico")]
         // [Range(0, 1000, ErrorMessage = "Debe ser un número entre 0 y 1000")]
         [Required(ErrorMessage = "El campo Saldo Días Disponibles es requerido")]
         [DefaultValue(0)]
