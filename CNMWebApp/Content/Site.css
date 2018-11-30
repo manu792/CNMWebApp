@@ -151,7 +151,6 @@ label {
 #watermark {
     /* the image you want to 'watermark' */
     height: 200px; /* or whatever, equal to the image you want 'watermarked' */
-    width: 200px; /* as above */
     /*background-image: url(../Fotos/cnmheaderlogo.gif);*/
     background-position: 0 0;
     background-repeat: no-repeat;
@@ -166,6 +165,7 @@ label {
         opacity: 0.5; /* Firefox, Chrome, Safari, Opera, IE >= 9 (preview) */
         filter: alpha(opacity=50); /* for <= IE 8 */
         height: 120%;
+        margin-left: 10%;
     }
 
 /* For required fields */

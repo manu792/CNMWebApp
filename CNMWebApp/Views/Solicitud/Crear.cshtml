@@ -171,6 +171,8 @@
             $('.select-dates').datepicker().on('changeDate', function (e) {
                 var saldoDias = $('#SaldoDiasDisponibles').val();
 
+                saldoDias = saldoDias.replace(/,/g, '.');
+
                 if (e.dates.length <= saldoDias) {
                     selectedDates = e.dates;
                     var dias = $('#selected-days').val();

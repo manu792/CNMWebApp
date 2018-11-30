@@ -198,7 +198,7 @@
                 var id = $('#Id').val();
                 var nombre = $('#Nombre').val();
                 var primerApellido = $('#PrimerApellido').val();
-                var obj = { Id: id, NombreCompleto: `${nombre} ${primerApellido}` };
+                var obj = { Id: id, NombreCompleto: nombre + " " + primerApellido };
 
                 $('#SelectedJefeId').append($('<option>', {
                     value: obj.Id,
@@ -217,7 +217,7 @@
             noneSelectedText: 'No se encontraron jefes para la unidad técnica'
         });
 
-        if (role.toLowerCase() === 'director') {
+        if (role.toLowerCase() === 'director' || role.toLocaleLowerCase() === 'recursos humanos') {
             var url = '@Url.Action("ObtenerUnidadesCategoriasPorRoleId", "User")';
 
                     $.ajax({
