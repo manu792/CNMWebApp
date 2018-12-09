@@ -497,9 +497,9 @@ namespace CNMWebApp.Controllers
             // var jefe = userService.ObtenerJefePorUnidadTecnica(solicitante.UnidadTecnica.UnidadTecnicaId);
 
             if (aprobador.Id == jefe.Id)
-                await emailNotification.SendEmailAsync(solicitante.Email, $"{jefe.Email},{ConfigurationManager.AppSettings["MailRH"]}", $"Vacaciones Aprobadas para {nombreSolicitante}", $"La solicitud de vacaciones: {solicitud.SolicitudNumero} para el colaborador {nombreSolicitante} fue <strong>aprobada</strong>. <br /> <br /> Observaciones: {solicitud.ComentarioJefatura}", Server.MapPath("~/PDFs/" + fileName));
+                await emailNotification.SendEmailAsync(solicitante.Email, $"{jefe.Email};{ConfigurationManager.AppSettings["MailRH"]}", $"Vacaciones Aprobadas para {nombreSolicitante}", $"La solicitud de vacaciones: {solicitud.SolicitudNumero} para el colaborador {nombreSolicitante} fue <strong>aprobada</strong>. <br /> <br /> Observaciones: {solicitud.ComentarioJefatura}", Server.MapPath("~/PDFs/" + fileName));
             else
-                await emailNotification.SendEmailAsync(solicitante.Email, $"{jefe.Email},{aprobador.Email},{ConfigurationManager.AppSettings["MailRH"]}", $"Vacaciones Aprobadas para {nombreSolicitante}", $"La solicitud de vacaciones: {solicitud.SolicitudNumero} para el colaborador {nombreSolicitante} fue <strong>aprobada</strong>. <br /> <br /> Observaciones: {solicitud.ComentarioJefatura}", Server.MapPath("~/PDFs/" + fileName));
+                await emailNotification.SendEmailAsync(solicitante.Email, $"{jefe.Email};{aprobador.Email},{ConfigurationManager.AppSettings["MailRH"]}", $"Vacaciones Aprobadas para {nombreSolicitante}", $"La solicitud de vacaciones: {solicitud.SolicitudNumero} para el colaborador {nombreSolicitante} fue <strong>aprobada</strong>. <br /> <br /> Observaciones: {solicitud.ComentarioJefatura}", Server.MapPath("~/PDFs/" + fileName));
         }
 
         [HttpPost]
